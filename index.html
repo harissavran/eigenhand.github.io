@@ -230,16 +230,13 @@ footer a{color:#fff}
   <div class="calc">
     <div class="in">
       <div class="full"><label>Erwarteter Verkaufspreis (CHF)</label><input id="f_price" type="number" step="any" value="1200000"></div>
-      <div><label>Damaliger Kaufpreis (CHF)</label><input id="f_buy" type="number" step="any" value="750000"></div>
-      <div><label>Wertvermehrende Investitionen</label><input id="f_invest" type="number" step="any" value="50000"></div>
-      <div><label>Besitzdauer (Jahre)</label><input id="f_years" type="number" step="any" value="10"></div>
-      <div><label>Maklerprovision (%)</label><input id="f_rate" type="number" step="any" value="2.5"></div>
       <div><label>Offene Hypothek (CHF)</label><input id="f_mort" type="number" step="any" value="500000"></div>
-      <div><label>Vorfälligkeitsentschädigung</label><input id="f_pen" type="number" step="any" value="0"></div>
+      <div><label>Damaliger Kaufpreis (CHF)</label><input id="f_buy" type="number" step="any" value="750000"></div>
+      <div class="full"><label>Besitzdauer (Jahre)</label><input id="f_years" type="number" step="any" value="10"></div>
     </div>
     <div class="out">
       <div class="outcard">
-        <div style="font-weight:700;margin-bottom:6px">Mit Makler (<span id="o_rate">2.5</span> %)</div>
+        <div style="font-weight:700;margin-bottom:6px">Mit Makler (2.5 % Provision)</div>
         <div class="outrow"><span class="m">Provision</span><span id="o_mCost"></span></div>
         <div class="outrow"><span class="m">Grundstückgewinnsteuer</span><span id="o_mTax"></span></div>
         <div class="outrow"><span class="m">Notar &amp; Grundbuch</span><span id="o_notar"></span></div>
@@ -255,7 +252,7 @@ footer a{color:#fff}
         <div class="outtot"><span>Nettoerlös</span><b id="o_oNet"></b></div>
       </div>
       <div class="save"><div><div style="color:#B9CFC5;font-weight:600">Sie behalten mehr</div><div class="big" id="o_save"></div></div><a href="#kontakt" class="btn mint">Zahlen besprechen</a></div>
-      <p style="font-size:13px;color:var(--muted2)">Unverbindliche Schätzung, keine Steuer- oder Rechtsberatung. Grundstückgewinnsteuer vereinfacht nach Zürcher Tarif inkl. Besitzdauer. Notar und Grundbuch: je 1 ‰ des Kaufpreises, hälftig geteilt. Massgebend ist die Veranlagung der Gemeinde.</p>
+      <p style="font-size:13px;color:var(--muted2)">Unverbindliche Schätzung, keine Steuer- oder Rechtsberatung. Vergleich mit einer üblichen Maklerprovision von 2.5 %. Grundstückgewinnsteuer vereinfacht nach Zürcher Tarif inkl. Besitzdauer. Notar und Grundbuch: je 1 ‰ des Kaufpreises, hälftig geteilt. Massgebend ist die Veranlagung der Gemeinde.</p>
     </div>
   </div>
 </section>
@@ -355,15 +352,16 @@ footer a{color:#fff}
     if(y<1)tax*=1.5;else if(y<2)tax*=1.25;else if(y>=5)tax*=1-Math.min(50,5+(y-5)*3)/100;
     return tax;
   }
-  var ids=["f_price","f_buy","f_invest","f_years","f_rate","f_mort","f_pen"];
-  function g(id){return n(document.getElementById(id).value);}
+  var RATE=2.5;
+  var ids=["f_price","f_buy","f_years","f_mort"];
+  function g(id){var e=document.getElementById(id);return e?n(e.value):0;}
   function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
   function calc(){
-    var price=g("f_price"),buy=g("f_buy"),invest=g("f_invest"),years=g("f_years"),rate=g("f_rate"),mort=g("f_mort"),pen=g("f_pen");
-    var notar=price*(0.001*1.081+0.001)/2, debt=mort+pen, mCost=price*rate/100, oCost=1990;
-    var mTax=taxZH(price-buy-invest-mCost,years), oTax=taxZH(price-buy-invest-oCost,years);
+    var price=g("f_price"),buy=g("f_buy"),years=g("f_years"),mort=g("f_mort");
+    var notar=price*(0.001*1.081+0.001)/2, debt=mort, mCost=price*RATE/100, oCost=1990;
+    var mTax=taxZH(price-buy-mCost,years), oTax=taxZH(price-buy-oCost,years);
     var mNet=price-debt-notar-mCost-mTax, oNet=price-debt-notar-oCost-oTax;
-    set("o_rate",String(rate).replace(".",".")); set("o_mCost",chf(mCost)); set("o_mTax",chf(mTax));
+    set("o_mCost",chf(mCost)); set("o_mTax",chf(mTax));
     set("o_notar",chf(notar)); set("o_notar2",chf(notar)); set("o_debt",chf(debt)); set("o_debt2",chf(debt));
     set("o_mNet",chf(mNet)); set("o_oTax",chf(oTax)); set("o_oNet",chf(oNet)); set("o_save",chf(oNet-mNet));
   }
