@@ -9,58 +9,52 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F5F4EF;--surface:#FFFFFF;--ink:#14211C;--muted:#3E4C46;--muted2:#5A675F;--line:#DBD8CF;--green:#1D5B46;--green-d:#123D2F;--mint:#9FE0C3;--mint-bg:#E4EEE8;--amber-bg:#F1E6D6;--amber-ink:#6B4310;}
+:root{--bg:#F5F4EF;--surface:#FFFFFF;--ink:#14211C;--muted:#3E4C46;--muted2:#5A675F;--line:#DBD8CF;--green:#1D5B46;--green-d:#123D2F;--mint:#9FE0C3;--mint-bg:#E4EEE8;}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font-family:'Schibsted Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-text-size-adjust:100%}
-h1,h2,h3{margin:0;font-weight:800;letter-spacing:-0.02em;line-height:1.1}
+body{background:var(--bg);color:var(--ink);font-family:'Schibsted Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-text-size-adjust:100%}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-0.02em;line-height:1.12}
 p{margin:0}
 a{color:var(--green);text-decoration:none}
-.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-.btn{display:inline-block;background:var(--green);color:#fff;border:0;border-radius:10px;padding:15px 22px;font:inherit;font-weight:700;font-size:16px;cursor:pointer}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.btn{display:inline-block;background:var(--green);color:#fff;border:0;border-radius:11px;padding:16px 24px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;text-align:center}
 .btn.sec{background:#fff;color:var(--ink);border:1px solid var(--line);font-weight:600}
 .btn.mint{background:var(--mint);color:var(--green-d)}
+.btn.block{display:block;width:100%}
 header{position:sticky;top:0;z-index:30;background:rgba(245,244,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:800;letter-spacing:-0.02em;color:var(--ink)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 0}
+.brand{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:800;color:var(--ink)}
 .brand svg{width:27px;height:27px;flex:none}
-nav.links{display:flex;gap:22px;align-items:center;font-size:15px;font-weight:500;flex-wrap:wrap}
+nav.links{display:flex;gap:24px;align-items:center;font-size:15px;font-weight:500}
 nav.links a{color:var(--ink)}
-.hero{padding:76px 0 56px;display:flex;gap:56px;flex-wrap:wrap;align-items:center}
-.hero .l{flex:999 1 500px;min-width:0;display:flex;flex-direction:column;gap:22px}
-.tag{align-self:flex-start;background:var(--mint-bg);color:var(--green-d);font-size:14px;font-weight:600;padding:6px 13px;border-radius:999px}
-.hero h1{font-size:clamp(38px,6vw,68px)}
-.hero p.sub{font-size:20px;color:var(--muted);max-width:560px}
-.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
-.ticks{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:15px;color:var(--muted)}
+.hero{text-align:center;padding:80px 0 60px;display:flex;flex-direction:column;align-items:center;gap:24px}
+.tag{background:var(--mint-bg);color:var(--green-d);font-size:14px;font-weight:600;padding:7px 15px;border-radius:999px}
+.hero h1{font-size:clamp(36px,6.5vw,66px);max-width:820px}
+.hero p.sub{font-size:21px;color:var(--muted);max-width:620px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+.ticks{display:flex;gap:10px 26px;flex-wrap:wrap;justify-content:center;font-size:15px;color:var(--muted)}
 .ticks span{display:flex;align-items:center;gap:7px}
-.herocard{flex:1 1 340px;min-width:0;background:var(--green-d);color:#fff;border-radius:20px;padding:30px;display:flex;flex-direction:column;gap:16px}
-.herocard .k{font-size:13px;font-weight:600;color:var(--mint);text-transform:uppercase;letter-spacing:.08em}
-.herocard .r{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(255,255,255,.14);padding-bottom:13px}
-.herocard .big{font-size:34px;font-weight:800;color:var(--mint);letter-spacing:-.02em}
-.herocard small{color:#B9CFC5;font-size:13px}
 section{padding:72px 0}
 .band{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.dark{background:var(--green-d);color:#fff}
-.h2{font-size:clamp(30px,4vw,40px);margin-bottom:12px}
-.lead{font-size:18px;color:var(--muted);max-width:680px;margin-bottom:40px}
-.dark .lead{color:#C7D6CE}
-.grid{display:grid;gap:18px}
-.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-.step{background:var(--bg);border-radius:16px;padding:26px}
-.step .no{color:var(--green);font-weight:700;font-size:15px;margin-bottom:8px}
-.step h3{font-size:20px;margin-bottom:8px}
+.center{text-align:center}
+.h2{font-size:clamp(28px,4vw,38px)}
+.lead{font-size:18px;color:var(--muted);max-width:620px;margin:12px auto 0}
+.steps{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:44px;counter-reset:s}
+.step{background:var(--bg);border-radius:16px;padding:28px;text-align:left}
+.band .step{background:var(--surface);border:1px solid var(--line)}
+.step .no{width:36px;height:36px;border-radius:10px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:14px}
+.step h3{font-size:19px;margin-bottom:7px}
 .step p{color:var(--muted);font-size:15px}
-.feat{border:1px solid var(--line);border-radius:16px;padding:26px;background:#fff}
+.grid3{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:44px}
+.feat{border:1px solid var(--line);border-radius:16px;padding:28px;background:#fff;text-align:left}
 .feat svg{width:30px;height:30px;margin-bottom:12px}
-.feat h3{font-size:20px;margin-bottom:8px}
+.feat h3{font-size:19px;margin-bottom:7px}
 .feat p{color:var(--muted);font-size:15px}
-.price{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));align-items:stretch}
-.plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;display:flex;flex-direction:column;gap:16px}
+.price{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:stretch;margin-top:44px}
+.plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;display:flex;flex-direction:column;gap:16px;text-align:left}
 .plan.hot{background:var(--green-d);color:#fff}
-.plan .amt{font-size:38px;font-weight:800;letter-spacing:-.02em}
+.plan .amt{font-size:38px;font-weight:800}
 .plan h3{font-size:22px}
 .plan .d{color:var(--muted);font-size:15px}
 .plan.hot .d{color:#C7D6CE}
@@ -68,14 +62,13 @@ section{padding:72px 0}
 .plan li{display:flex;gap:10px}
 .plan li svg{flex:none;margin-top:2px}
 .badge{align-self:flex-start;background:var(--mint);color:var(--green-d);font-size:13px;font-weight:700;padding:4px 11px;border-radius:999px}
-.extras{margin-top:22px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 26px;display:flex;gap:12px 30px;flex-wrap:wrap;align-items:center;font-size:15px;color:var(--muted)}
-.calc{display:flex;gap:24px;flex-wrap:wrap;align-items:stretch}
-.calc .in{flex:1 1 360px;min-width:0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;display:grid;gap:16px;grid-template-columns:1fr 1fr}
-.calc .in .full{grid-column:1/-1}
+.extras{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 26px;display:flex;gap:12px 28px;flex-wrap:wrap;align-items:center;justify-content:center;font-size:15px;color:var(--muted)}
+.calc{display:grid;gap:22px;grid-template-columns:1fr 1fr;align-items:start;margin-top:40px}
+.calc .in{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;display:grid;gap:16px}
 .calc label{display:block;font-size:14px;font-weight:600;color:var(--muted);margin-bottom:6px}
-.calc input{width:100%;font:inherit;font-size:17px;padding:12px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.calc input{width:100%;font:inherit;font-size:17px;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
 .calc input:focus{outline:2px solid var(--green);outline-offset:1px}
-.out{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.out{display:flex;flex-direction:column;gap:14px}
 .outcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}
 .outcard.hi{background:var(--mint-bg);border-color:var(--mint)}
 .outrow{display:flex;justify-content:space-between;gap:8px;font-size:15px;padding:5px 0}
@@ -83,22 +76,19 @@ section{padding:72px 0}
 .outtot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);margin-top:8px;padding-top:10px}
 .outtot b{font-size:22px}
 .save{background:var(--green-d);color:#fff;border-radius:16px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-.save .big{font-size:34px;font-weight:800;color:var(--mint);letter-spacing:-.02em}
-.about{display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start}
-.about .t{flex:999 1 420px;min-width:0;display:flex;flex-direction:column;gap:16px}
-.about p{color:var(--muted);font-size:17px}
-.about .side{flex:1 1 280px;min-width:0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px}
-.about .side .k{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2)}
+.save .big{font-size:34px;font-weight:800;color:var(--mint)}
+.about{max-width:760px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:16px}
+.about p{color:var(--muted);font-size:18px}
+.faq{max-width:760px;margin:0 auto}
 .faq details{border-bottom:1px solid var(--line);padding:18px 0}
 .faq summary{font-size:18px;font-weight:600;cursor:pointer;list-style:none}
 .faq summary::-webkit-details-marker{display:none}
 .faq p{color:var(--muted);margin-top:10px;font-size:16px}
-.contact{display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start}
-.contact .t{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:14px}
-.contact .big{font-size:20px;font-weight:700}
-.form{flex:1 1 420px;min-width:0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.contact{display:grid;gap:40px;grid-template-columns:1fr 1fr;align-items:start;margin-top:40px}
+.contact .big{font-size:22px;font-weight:700}
+.form{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:14px}
 .form label{font-size:14px;font-weight:600;color:var(--muted);margin-bottom:5px;display:block}
-.form input,.form textarea{width:100%;font:inherit;padding:12px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.form input,.form textarea{width:100%;font:inherit;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
 .form input:focus,.form textarea:focus{outline:2px solid var(--green);outline-offset:1px}
 .legal{background:#fff;border-top:1px solid var(--line)}
 .legal h2{font-size:24px;margin-bottom:12px}
@@ -107,7 +97,7 @@ section{padding:72px 0}
 footer{background:var(--green-d);color:#C7D6CE;font-size:14px}
 footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:30px 0}
 footer a{color:#fff}
-@media(max-width:640px){nav.links{display:none}.hero{padding:48px 0 36px}section{padding:52px 0}.calc .in{grid-template-columns:1fr}}
+@media(max-width:720px){nav.links{display:none}.calc{grid-template-columns:1fr}.contact{grid-template-columns:1fr}section{padding:54px 0}.hero{padding:52px 0 40px}}
 </style>
 </head>
 <body>
@@ -119,120 +109,108 @@ footer a{color:#fff}
       Eigenhand
     </a>
     <nav class="links">
-      <a href="#ablauf">So funktioniert's</a>
+      <a href="#ablauf">Ablauf</a>
       <a href="#preise">Preise</a>
-      <a href="#rechner">Nettoerlös-Rechner</a>
-      <a href="#ueber">Über uns</a>
-      <a href="#kontakt" class="btn" style="padding:11px 16px">Erstgespräch</a>
+      <a href="#rechner">Rechner</a>
+      <a href="#kontakt" class="btn" style="padding:11px 18px">Erstgespräch</a>
     </nav>
   </div>
 </header>
 
 <a id="top"></a>
 <section class="hero wrap">
-  <div class="l">
-    <span class="tag">Für Wohnungen und Häuser im Kanton Zürich</span>
-    <h1>Selbst verkaufen.<br>Mit Profi im Rücken.</h1>
-    <p class="sub">Verkaufen Sie Ihre Immobilie grösstenteils selbst – und holen sich Unterstützung genau dort, wo Sie sie brauchen. Festpreis statt 2–3 % Provision.</p>
-    <div class="cta">
-      <a href="#rechner" class="btn">Nettoerlös berechnen</a>
-      <a href="#preise" class="btn sec">Pakete ab CHF 990</a>
-    </div>
-    <div class="ticks">
-      <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Keine Provision</span>
-      <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Alle Preise offen</span>
-      <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wechsel-Garantie</span>
-    </div>
+  <span class="tag">Für Wohnungen und Häuser im Kanton Zürich</span>
+  <h1>Verkaufen Sie Ihre Immobilie selbst – und sparen Sie die Provision.</h1>
+  <p class="sub">Sie verkaufen selbst und behalten die Kontrolle. Einen Profi holen Sie nur dazu, wo Sie ihn wirklich brauchen. Zum Festpreis, ohne 2–3 % Maklerprovision.</p>
+  <div class="cta">
+    <a href="#kontakt" class="btn">Kostenloses Erstgespräch</a>
+    <a href="#rechner" class="btn sec">Was spare ich?</a>
   </div>
-  <div class="herocard">
-    <div class="k">Rechenbeispiel Wohnung CHF 1.2 Mio.</div>
-    <div class="r"><span>Makler mit 2.5 % Provision</span><strong>CHF 30'000</strong></div>
-    <div class="r"><span>Eigenhand «Selbst Plus»</span><strong>CHF 1'990</strong></div>
-    <div><div>Sie behalten mehr</div><div class="big">CHF 28'010</div></div>
-    <small>Vor Steuern. Ihren persönlichen Nettoerlös zeigt der Rechner unten.</small>
+  <div class="ticks">
+    <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Keine Provision</span>
+    <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Feste, offene Preise</span>
+    <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Profi-Hilfe, wenn nötig</span>
   </div>
 </section>
 
 <section class="band" id="ablauf">
-  <div class="wrap">
-    <h2 class="h2">So funktioniert's</h2>
-    <p class="lead">Die App führt Sie durch jeden Schritt. Wo es Erfahrung braucht, unterstützt Sie ein Immobilien-Profi persönlich.</p>
-    <div class="grid g4">
-      <div class="step"><div class="no">01</div><h3>Objekt erfassen</h3><p>Geführte Eingabe in 15 Minuten. Die App zeigt, welche Angaben und Unterlagen noch fehlen.</p></div>
-      <div class="step"><div class="no">02</div><h3>Preis prüfen lassen</h3><p>Online-Schätzung plus Preis-Check vor Ort – damit Sie nicht zu tief oder zu hoch starten.</p></div>
-      <div class="step"><div class="no">03</div><h3>Inserieren &amp; besichtigen</h3><p>Inserat und Exposé auf den grossen Schweizer Portalen. Interessenten buchen Besichtigungen selbst.</p></div>
-      <div class="step"><div class="no">04</div><h3>Bestes Angebot wählen</h3><p>Alle Angebote übersichtlich, Käufer mit geprüfter Finanzierung, Vorbereitung bis zum Notar.</p></div>
+  <div class="wrap center">
+    <h2 class="h2">In vier Schritten verkauft</h2>
+    <p class="lead">Einfach, klar und in Ihrem Tempo. Die App führt Sie durch alles.</p>
+    <div class="steps">
+      <div class="step"><div class="no">1</div><h3>Preis festlegen</h3><p>Sie erhalten eine Schätzung und auf Wunsch einen Preis-Check vor Ort durch einen Profi.</p></div>
+      <div class="step"><div class="no">2</div><h3>Online stellen</h3><p>Inserat und Exposé entstehen aus Ihren Angaben und erscheinen auf Homegate, ImmoScout24 und newhome.</p></div>
+      <div class="step"><div class="no">3</div><h3>Besichtigen</h3><p>Interessenten buchen Termine selbst. Sie sehen alle Anfragen übersichtlich an einem Ort.</p></div>
+      <div class="step"><div class="no">4</div><h3>Verkaufen</h3><p>Angebote vergleichen, bestes wählen, Notartermin vorbereiten. Auf Wunsch übernimmt der Profi die Verhandlung.</p></div>
     </div>
   </div>
 </section>
 
-<section class="wrap">
-  <h2 class="h2">Mehr als ein Inserat. Weniger als eine Provision.</h2>
-  <p class="lead">Ein Inserat ist schnell online. Danach kommen die Anfragen, Besichtigungen und Angebote – dafür ist Eigenhand gebaut.</p>
-  <div class="grid g3">
-    <div class="feat"><svg viewBox="0 0 32 32" fill="none" stroke="#1D5B46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 24h20"/><path d="M9 24V14"/><path d="M16 24V8"/><path d="M23 24V11"/></svg><h3>Bieterverfahren</h3><p>Bei gefragten Objekten sammeln wir alle Angebote bis zu einer festen Frist. Interessenten können nachbessern – fair für alle.</p></div>
-    <div class="feat"><svg viewBox="0 0 32 32" fill="none" stroke="#1D5B46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 6 8v7c0 6.5 4.3 11 10 13 5.7-2 10-6.5 10-13V8z"/><path d="m11.5 16 3.2 3.2 6-6.4"/></svg><h3>Käufer mit geprüfter Finanzierung</h3><p>Interessenten zeigen ihre Finanzierungsbestätigung, bevor sie Ihre Wohnung betreten. Keine verlorenen Samstage.</p></div>
-    <div class="feat"><svg viewBox="0 0 32 32" fill="none" stroke="#1D5B46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11a9 9 0 0 1 15.5-2.5L26 11"/><path d="M26 5v6h-6"/><path d="M24 21a9 9 0 0 1-15.5 2.5L6 21"/><path d="M6 27v-6h6"/></svg><h3>Wechsel-Garantie</h3><p>Klappt der Selbstverkauf nach 90 Tagen nicht, übernehmen wir zum Festpreis. Bezahlte Gebühren werden angerechnet.</p></div>
+<section class="wrap center">
+  <h2 class="h2">Sie sind nie allein</h2>
+  <p class="lead">Ein Inserat ist schnell gemacht. Beim Rest unterstützt Sie Eigenhand.</p>
+  <div class="grid3">
+    <div class="feat"><svg viewBox="0 0 32 32" fill="none" stroke="#1D5B46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 24h20"/><path d="M9 24V14"/><path d="M16 24V8"/><path d="M23 24V11"/></svg><h3>Richtiger Preis</h3><p>Ein Profi prüft Ihren Preis vor Ort, damit Sie nicht zu tief oder zu hoch starten.</p></div>
+    <div class="feat"><svg viewBox="0 0 32 32" fill="none" stroke="#1D5B46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 6 8v7c0 6.5 4.3 11 10 13 5.7-2 10-6.5 10-13V8z"/><path d="m11.5 16 3.2 3.2 6-6.4"/></svg><h3>Nur ernsthafte Käufer</h3><p>Interessenten zeigen ihre Finanzierung, bevor sie zur Besichtigung kommen.</p></div>
+    <div class="feat"><svg viewBox="0 0 32 32" fill="none" stroke="#1D5B46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11a9 9 0 0 1 15.5-2.5L26 11"/><path d="M26 5v6h-6"/><path d="M24 21a9 9 0 0 1-15.5 2.5L6 21"/><path d="M6 27v-6h6"/></svg><h3>Kein Risiko</h3><p>Klappt es nach 90 Tagen nicht, übernehmen wir zum Festpreis. Bezahltes wird angerechnet.</p></div>
   </div>
 </section>
 
 <section class="band" id="preise">
-  <div class="wrap">
-    <h2 class="h2">Pakete zum Festpreis</h2>
-    <p class="lead">Einmal bezahlen, kein Abo, keine Provision. Alle Preise inkl. MWST und Portalkosten für 90 Tage.</p>
+  <div class="wrap center">
+    <h2 class="h2">Ein Festpreis. Keine Provision.</h2>
+    <p class="lead">Einmal bezahlen, kein Abo. Inklusive Portalkosten für 90 Tage und MWST.</p>
     <div class="price">
       <div class="plan">
-        <div><h3>Selbst</h3><p class="d">Für alle, die den Verkauf selbst in die Hand nehmen.</p></div>
+        <div><h3>Selbst</h3><p class="d">Sie machen alles selbst.</p></div>
         <div class="amt">CHF 990</div>
         <ul>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Inserat und Exposé aus Ihren Angaben</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Homegate, ImmoScout24, newhome, 90 Tage</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>App: Anfragen, Besichtigungen, Angebote</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Bieterverfahren und Unterlagen-Raum</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Inserat und Exposé</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Auf allen grossen Portalen</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>App für Anfragen und Termine</li>
         </ul>
-        <a href="#kontakt" class="btn sec" style="text-align:center">Selbst wählen</a>
+        <a href="#kontakt" class="btn sec block">Wählen</a>
       </div>
       <div class="plan hot">
-        <span class="badge">Empfohlen</span>
-        <div><h3>Selbst Plus</h3><p class="d">Selbst verkaufen – mit Profi-Preis und Profi-Auftritt.</p></div>
+        <span class="badge">Beliebteste Wahl</span>
+        <div><h3>Selbst Plus</h3><p class="d">Selbst verkaufen, mit Profi-Preis und Profi-Fotos.</p></div>
         <div class="amt">CHF 1'990</div>
         <ul>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Selbst»</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Preis-Check vor Ort</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Professionelle Fotos und Grundriss</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Telefon-Support während des Verkaufs</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wechsel-Garantie nach 90 Tagen</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Profi-Fotos und Grundriss</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wechsel-Garantie</li>
         </ul>
-        <a href="#kontakt" class="btn mint" style="text-align:center">Selbst Plus wählen</a>
+        <a href="#kontakt" class="btn mint block">Wählen</a>
       </div>
       <div class="plan">
-        <div><h3>Begleitet</h3><p class="d">Sie behalten die Kontrolle, der Profi übernimmt die heiklen Schritte.</p></div>
+        <div><h3>Begleitet</h3><p class="d">Der Profi übernimmt die heiklen Schritte.</p></div>
         <div class="amt">CHF 4'900</div>
         <ul>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Selbst Plus»</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Zwei Besichtigungstage durch den Profi</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Verhandlung mit den Kaufinteressenten</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Unterlagen und Notartermin vorbereiten</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Besichtigungen durch den Profi</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Verhandlung mit den Käufern</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Notartermin vorbereitet</li>
         </ul>
-        <a href="#kontakt" class="btn sec" style="text-align:center">Begleitet wählen</a>
+        <a href="#kontakt" class="btn sec block">Wählen</a>
       </div>
     </div>
     <div class="extras">
-      <strong style="color:var(--ink)">Extras dazubuchen:</strong>
-      <span>Preis-Check CHF 390</span><span>Besichtigungstag CHF 490</span><span>Verhandlung CHF 990</span><span>Unterlagen-Service CHF 190</span>
+      <strong style="color:var(--ink)">Einzeln dazubuchen:</strong>
+      <span>Preis-Check CHF 390</span><span>Besichtigungstag CHF 490</span><span>Verhandlung CHF 990</span>
     </div>
   </div>
 </section>
 
-<section class="wrap" id="rechner">
-  <h2 class="h2">Was bleibt Ihnen nach dem Verkauf?</h2>
-  <p class="lead">Nettoerlös-Rechner für den Kanton Zürich: Hypothek, Grundstückgewinnsteuer, Notar und Verkaufskosten – mit und ohne Makler.</p>
-  <div class="calc">
+<section class="wrap center" id="rechner">
+  <h2 class="h2">Was bleibt Ihnen am Ende?</h2>
+  <p class="lead">Rechnen Sie in 30 Sekunden aus, wie viel Sie mit Eigenhand gegenüber einem Makler sparen.</p>
+  <div class="calc" style="text-align:left">
     <div class="in">
-      <div class="full"><label>Erwarteter Verkaufspreis (CHF)</label><input id="f_price" type="number" step="any" value="1200000"></div>
+      <div><label>Erwarteter Verkaufspreis (CHF)</label><input id="f_price" type="number" step="any" value="1200000"></div>
       <div><label>Offene Hypothek (CHF)</label><input id="f_mort" type="number" step="any" value="500000"></div>
       <div><label>Damaliger Kaufpreis (CHF)</label><input id="f_buy" type="number" step="any" value="750000"></div>
-      <div class="full"><label>Besitzdauer (Jahre)</label><input id="f_years" type="number" step="any" value="10"></div>
+      <div><label>Besitzdauer (Jahre)</label><input id="f_years" type="number" step="any" value="10"></div>
     </div>
     <div class="out">
       <div class="outcard">
@@ -240,7 +218,7 @@ footer a{color:#fff}
         <div class="outrow"><span class="m">Provision</span><span id="o_mCost"></span></div>
         <div class="outrow"><span class="m">Grundstückgewinnsteuer</span><span id="o_mTax"></span></div>
         <div class="outrow"><span class="m">Notar &amp; Grundbuch</span><span id="o_notar"></span></div>
-        <div class="outrow"><span class="m">Hypothek + Entschädigung</span><span id="o_debt"></span></div>
+        <div class="outrow"><span class="m">Hypothek</span><span id="o_debt"></span></div>
         <div class="outtot"><span>Nettoerlös</span><b id="o_mNet"></b></div>
       </div>
       <div class="outcard hi">
@@ -248,57 +226,48 @@ footer a{color:#fff}
         <div class="outrow"><span class="m">Festpreis</span><span>CHF 1'990</span></div>
         <div class="outrow"><span class="m">Grundstückgewinnsteuer</span><span id="o_oTax"></span></div>
         <div class="outrow"><span class="m">Notar &amp; Grundbuch</span><span id="o_notar2"></span></div>
-        <div class="outrow"><span class="m">Hypothek + Entschädigung</span><span id="o_debt2"></span></div>
+        <div class="outrow"><span class="m">Hypothek</span><span id="o_debt2"></span></div>
         <div class="outtot"><span>Nettoerlös</span><b id="o_oNet"></b></div>
       </div>
-      <div class="save"><div><div style="color:#B9CFC5;font-weight:600">Sie behalten mehr</div><div class="big" id="o_save"></div></div><a href="#kontakt" class="btn mint">Zahlen besprechen</a></div>
-      <p style="font-size:13px;color:var(--muted2)">Unverbindliche Schätzung, keine Steuer- oder Rechtsberatung. Vergleich mit einer üblichen Maklerprovision von 2.5 %. Grundstückgewinnsteuer vereinfacht nach Zürcher Tarif inkl. Besitzdauer. Notar und Grundbuch: je 1 ‰ des Kaufpreises, hälftig geteilt. Massgebend ist die Veranlagung der Gemeinde.</p>
+      <div class="save"><div><div style="color:#B9CFC5;font-weight:600">Sie behalten mehr</div><div class="big" id="o_save"></div></div><a href="#kontakt" class="btn mint">Besprechen</a></div>
+      <p style="font-size:13px;color:var(--muted2)">Unverbindliche Schätzung, keine Steuer- oder Rechtsberatung. Vergleich mit 2.5 % Maklerprovision. Grundstückgewinnsteuer vereinfacht nach Zürcher Tarif. Notar und Grundbuch je 1 ‰, hälftig geteilt.</p>
     </div>
   </div>
 </section>
 
-<section class="band" id="ueber">
+<section class="band">
   <div class="wrap about">
-    <div class="t">
-      <h2 class="h2">Über Eigenhand</h2>
-      <p>Eigenhand wurde in Kloten gegründet, aus einer einfachen Überzeugung: Beim Verkauf einer Immobilie zahlen Eigentümer oft zehntausende Franken Provision für Arbeit, die sie zu einem grossen Teil selbst erledigen könnten – wenn sie an den richtigen Stellen Unterstützung hätten.</p>
-      <p>Genau das bietet Eigenhand. Sie verkaufen selbst und behalten die Kontrolle. Wo es heikel wird – beim Preis, bei Besichtigungen, bei der Verhandlung – ist ein Immobilien-Profi persönlich für Sie da. Zu klaren Festpreisen, ohne Provision und ohne Kleingedrucktes.</p>
-      <p>Wir arbeiten zuerst im Kanton Zürich, damit wir für den Preis-Check und Besichtigungen auch wirklich persönlich vor Ort sein können.</p>
-    </div>
-    <div class="side">
-      <div><div class="k">Gegründet von</div><div style="font-weight:600">Haris Ata Savran</div></div>
-      <div><div class="k">Region</div><div style="font-weight:600">Kanton Zürich</div></div>
-      <div><div class="k">Direkt erreichbar</div><div style="font-weight:600">078 752 81 77</div></div>
-      <div><div class="k">E-Mail</div><div style="font-weight:600">hallo@eigenhand.ch</div></div>
-    </div>
+    <h2 class="h2">Warum Eigenhand?</h2>
+    <p>Beim Verkauf einer Immobilie zahlen Eigentümer oft zehntausende Franken Provision für Arbeit, die sie zu einem grossen Teil selbst erledigen könnten – wenn sie an den richtigen Stellen Unterstützung hätten.</p>
+    <p>Genau das bietet Eigenhand. Sie verkaufen selbst und behalten die Kontrolle. Wo es heikel wird, ist ein Immobilien-Profi persönlich für Sie da. Gegründet in Kloten, für den Kanton Zürich.</p>
   </div>
 </section>
 
 <section class="wrap faq">
-  <h2 class="h2">Häufige Fragen</h2>
-  <details><summary>Ist ein Verkauf ohne Makler in der Schweiz erlaubt?</summary><p>Ja. Eigentümer dürfen ihre Immobilie selbst verkaufen. Der Kaufvertrag wird in jedem Fall öffentlich beurkundet – wir bereiten Sie darauf vor.</p></details>
-  <details><summary>Wer unterstützt mich bei Eigenhand?</summary><p>Sie werden von einem Immobilien-Profi begleitet, der den Markt im Raum Zürich kennt. Preis-Check, Besichtigungen und Verhandlung übernimmt er persönlich, wenn Sie das möchten.</p></details>
-  <details><summary>Muss ich die Besichtigungen selbst machen?</summary><p>Nur wenn Sie möchten. Die App organisiert die Termine. Einzelne Besichtigungstage können Sie jederzeit abgeben.</p></details>
-  <details><summary>Was passiert, wenn ich nicht verkaufe?</summary><p>Mit der Wechsel-Garantie wechseln Sie nach 90 Tagen zum Festpreis-Modell. Bereits bezahlte Gebühren werden angerechnet.</p></details>
-  <details><summary>Wann bezahle ich?</summary><p>Das Paket bezahlen Sie bei Start der Vermarktung. Es gibt kein Abo und keine Provision beim Verkauf.</p></details>
+  <h2 class="h2 center" style="margin-bottom:8px">Häufige Fragen</h2>
+  <details><summary>Ist ein Verkauf ohne Makler erlaubt?</summary><p>Ja. Eigentümer dürfen selbst verkaufen. Der Kaufvertrag wird in jedem Fall beim Notar beurkundet – wir bereiten Sie darauf vor.</p></details>
+  <details><summary>Wer unterstützt mich?</summary><p>Ein Immobilien-Profi, der den Markt im Raum Zürich kennt. Preis-Check, Besichtigungen und Verhandlung übernimmt er persönlich, wenn Sie möchten.</p></details>
+  <details><summary>Was passiert, wenn ich nicht verkaufe?</summary><p>Mit der Wechsel-Garantie wechseln Sie nach 90 Tagen zum Festpreis-Modell. Bereits Bezahltes wird angerechnet.</p></details>
+  <details><summary>Wann bezahle ich?</summary><p>Das Paket bezahlen Sie bei Start. Kein Abo, keine Provision beim Verkauf.</p></details>
 </section>
 
 <section class="band" id="kontakt">
-  <div class="wrap contact">
-    <div class="t">
-      <h2 class="h2">Kostenloses Erstgespräch</h2>
-      <p style="color:var(--muted);font-size:18px">20 Minuten am Telefon: Wir schauen Ihr Objekt und Ihre Zahlen an und sagen ehrlich, ob sich der Selbstverkauf für Sie lohnt.</p>
-      <p class="big">078 752 81 77</p>
-      <p style="color:var(--muted)">hallo@eigenhand.ch · Kanton Zürich</p>
+  <div class="wrap">
+    <div class="center"><h2 class="h2">Kostenloses Erstgespräch</h2><p class="lead">20 Minuten am Telefon. Wir sagen Ihnen ehrlich, ob sich der Selbstverkauf für Sie lohnt.</p></div>
+    <div class="contact">
+      <div>
+        <p class="big">078 752 81 77</p>
+        <p style="color:var(--muted);margin-top:6px">hallo@eigenhand.ch</p>
+        <p style="color:var(--muted);margin-top:16px">Rufen Sie an oder lassen Sie sich zurückrufen. Wir melden uns am selben oder nächsten Tag.</p>
+      </div>
+      <form class="form" action="https://formspree.io/f/DEINE-FORMSPREE-ID" method="POST">
+        <div><label>Name</label><input type="text" name="name" required></div>
+        <div><label>Telefon</label><input type="tel" name="telefon" required></div>
+        <div><label>Gemeinde des Objekts</label><input type="text" name="gemeinde"></div>
+        <button class="btn block" type="submit">Rückruf anfordern</button>
+        <p style="font-size:13px;color:var(--muted2);margin:0">Ihre Angaben verwenden wir nur für dieses Gespräch.</p>
+      </form>
     </div>
-    <form class="form" action="https://formspree.io/f/DEINE-FORMSPREE-ID" method="POST">
-      <div><label>Name</label><input type="text" name="name" required></div>
-      <div><label>Telefon</label><input type="tel" name="telefon" required></div>
-      <div><label>Gemeinde des Objekts</label><input type="text" name="gemeinde"></div>
-      <div><label>Nachricht (optional)</label><textarea name="nachricht" rows="3"></textarea></div>
-      <button class="btn" type="submit">Rückruf anfordern</button>
-      <p style="font-size:13px;color:var(--muted2);margin:0">Ihre Angaben verwenden wir nur für dieses Gespräch.</p>
-    </form>
   </div>
 </section>
 
@@ -323,7 +292,7 @@ footer a{color:#fff}
       <h3>Zweck</h3>
       <p>Bearbeitung Ihrer Anfrage, Kommunikation mit Ihnen und Erfüllung gesetzlicher Pflichten.</p>
       <h3>Weitergabe an Dritte</h3>
-      <p>Nur soweit für die Leistung nötig (z. B. Immobilienportale, beauftragte Dienstleister) oder mit Ihrer Einwilligung. Diese sind zur Vertraulichkeit verpflichtet.</p>
+      <p>Nur soweit für die Leistung nötig (z. B. Immobilienportale, beauftragte Dienstleister) oder mit Ihrer Einwilligung.</p>
       <h3>Ihre Rechte</h3>
       <p>Sie haben das Recht auf Auskunft, Berichtigung und Löschung Ihrer Daten. Wenden Sie sich an hallo@eigenhand.ch.</p>
       <p style="margin-top:14px">Stand: Oktober 2026</p>
@@ -342,7 +311,7 @@ footer a{color:#fff}
 "use strict";
 (function(){
   function n(v){var x=parseFloat(v);return isNaN(x)?0:x;}
-  function chf(v){var r=Math.round(v),neg=r<0,s=Math.abs(r).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"'");return (neg?"\u2013 CHF ":"CHF ")+s;}
+  function chf(v){var r=Math.round(v),neg=r<0,s=Math.abs(r).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"'");return (neg?"– CHF ":"CHF ")+s;}
   function taxZH(gain,years){
     if(gain<=0)return 0;
     var steps=[[4000,.10],[6000,.15],[8000,.20],[12000,.25],[20000,.30],[50000,.35],[Infinity,.40]];
@@ -358,11 +327,11 @@ footer a{color:#fff}
   function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
   function calc(){
     var price=g("f_price"),buy=g("f_buy"),years=g("f_years"),mort=g("f_mort");
-    var notar=price*(0.001*1.081+0.001)/2, debt=mort, mCost=price*RATE/100, oCost=1990;
+    var notar=price*(0.001*1.081+0.001)/2, mCost=price*RATE/100, oCost=1990;
     var mTax=taxZH(price-buy-mCost,years), oTax=taxZH(price-buy-oCost,years);
-    var mNet=price-debt-notar-mCost-mTax, oNet=price-debt-notar-oCost-oTax;
+    var mNet=price-mort-notar-mCost-mTax, oNet=price-mort-notar-oCost-oTax;
     set("o_mCost",chf(mCost)); set("o_mTax",chf(mTax));
-    set("o_notar",chf(notar)); set("o_notar2",chf(notar)); set("o_debt",chf(debt)); set("o_debt2",chf(debt));
+    set("o_notar",chf(notar)); set("o_notar2",chf(notar)); set("o_debt",chf(mort)); set("o_debt2",chf(mort));
     set("o_mNet",chf(mNet)); set("o_oTax",chf(oTax)); set("o_oNet",chf(oNet)); set("o_save",chf(oNet-mNet));
   }
   ids.forEach(function(id){var e=document.getElementById(id);if(e)e.addEventListener("input",calc);});
