@@ -111,8 +111,57 @@ section{padding:72px 0}
 footer{background:var(--green-d);color:#C7D6CE;font-size:14px}
 footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:30px 0}
 footer a{color:#fff}
+/* Modal booking */
+.modalbg{position:fixed;inset:0;background:rgba(20,33,28,.72);backdrop-filter:blur(6px);display:none;align-items:flex-start;justify-content:center;z-index:100;padding:40px 20px;overflow-y:auto}
+.modalbg.open{display:flex}
+.modal{background:var(--bg);border-radius:24px;width:100%;max-width:600px;padding:40px;position:relative;animation:modalIn .25s ease}
+@keyframes modalIn{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal .close{position:absolute;top:18px;right:18px;background:#fff;border:1px solid var(--line);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;line-height:1;color:var(--muted);padding:0}
+.modal .close:hover{background:#fff;color:var(--ink)}
+.modal .mhead{margin-bottom:26px;padding-right:40px}
+.modal .mctx{font-size:12px;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.modal h3{font-size:26px;margin-bottom:8px;line-height:1.2}
+.modal .msub{color:var(--muted);font-size:15px;line-height:1.5}
+.steps2{display:flex;gap:6px;margin-bottom:30px}
+.steps2 .s{flex:1;height:4px;background:var(--line);border-radius:2px;transition:background .2s ease}
+.steps2 .s.done,.steps2 .s.active{background:var(--green)}
+.step2{display:none;flex-direction:column;gap:18px}
+.step2.active{display:flex}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fld label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px}
+.fld input,.fld select,.fld textarea{width:100%;font:inherit;font-size:15px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);transition:border-color .15s ease,box-shadow .15s ease}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(29,91,70,.12)}
+.fld textarea{resize:vertical;min-height:90px;font-family:inherit}
+.fld .err{color:#B45233;font-size:13px;margin-top:5px;display:none}
+.fld.e input,.fld.e select,.fld.e textarea{border-color:#B45233}
+.fld.e .err{display:block}
+.radgroup{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rad{display:block;cursor:pointer;position:relative}
+.rad input{position:absolute;opacity:0;pointer-events:none}
+.rad span{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:14px;font-weight:500;text-align:center;transition:all .15s ease;line-height:1.3}
+.rad input:checked + span{border-color:var(--green);background:var(--mint-bg);color:var(--green-d);font-weight:600}
+.rad:hover span{border-color:var(--muted2)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);line-height:1.5;padding-top:4px}
+.consent input{margin-top:3px;flex:none;width:auto}
+.consent a{text-decoration:underline}
+.mctrl{display:flex;gap:12px;margin-top:28px;align-items:center}
+.mctrl .back{background:none;border:0;color:var(--muted);font:inherit;font-weight:600;font-size:15px;cursor:pointer;padding:12px 4px}
+.mctrl .back:hover{color:var(--ink)}
+.mctrl .back.hidden{visibility:hidden}
+.mctrl .btn{margin-left:auto}
+.msuccess{display:none;text-align:center;padding:12px 0}
+.msuccess.show{display:block}
+.msuccess .ic{width:68px;height:68px;background:var(--mint-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 22px}
+.msuccess h3{margin-bottom:12px;font-size:24px}
+.msuccess p{color:var(--muted);font-size:16px;line-height:1.6;max-width:420px;margin:0 auto}
+.extras{cursor:default}
+.extrabtn{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 16px;font:inherit;font-size:14px;font-weight:500;color:var(--ink);cursor:pointer;transition:all .15s ease;display:inline-flex;align-items:center;gap:6px}
+.extrabtn:hover{border-color:var(--green);color:var(--green-d);background:var(--mint-bg)}
+.extrabtn b{color:var(--green);font-weight:700}
+.extras-wrap{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:16px}
 @media(max-width:900px){.price{grid-template-columns:1fr;gap:28px}.plan.hot{transform:none}.plan.hot:hover{transform:translateY(-2px)}.badge{top:-13px}}
 @media(max-width:720px){nav.links{display:none}.calc{grid-template-columns:1fr}.contact{grid-template-columns:1fr}section{padding:54px 0}.hero{padding:52px 0 40px}.vsrow{grid-template-columns:1fr !important;gap:18px !important}.vsrow>div{border:0 !important;padding:14px 0 !important}.plan .phead{min-height:0}.plan .pcost{min-height:0}}
+@media(max-width:640px){.modal{padding:28px 22px;border-radius:20px}.fgrid{grid-template-columns:1fr}.radgroup{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -214,7 +263,7 @@ footer a{color:#fff}
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Anfragen, Termine und Angebote an einem Ort</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Checkliste für den Immobilienverkauf</li>
         </ul>
-        <a href="#kontakt" class="btn sec block">Paket wählen</a>
+        <button type="button" class="btn sec block" onclick="openBooking('selbst')">Paket wählen</button>
       </div>
       <div class="plan hot">
         <span class="badge">Beliebteste Wahl</span>
@@ -232,7 +281,7 @@ footer a{color:#fff}
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Beratung bei Kaufangeboten und Verhandlungen</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wechsel-Garantie: Upgrade jederzeit möglich</li>
         </ul>
-        <a href="#kontakt" class="btn mint block">Paket wählen</a>
+        <button type="button" class="btn mint block" onclick="openBooking('pro')">Paket wählen</button>
       </div>
       <div class="plan">
         <div class="phead">
@@ -250,12 +299,18 @@ footer a{color:#fff}
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Käufer-Qualifizierung mit Finanzierungsnachweis</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Verhandlung &amp; Unterlagen bis zum Notar</li>
         </ul>
-        <a href="#kontakt" class="btn sec block">Paket wählen</a>
+        <button type="button" class="btn sec block" onclick="openBooking('begleitet')">Paket wählen</button>
       </div>
     </div>
-    <div class="extras">
-      <strong style="color:var(--ink);width:100%;text-align:center;margin-bottom:4px">Einzeln dazubuchen – nur was Sie brauchen</strong>
-      <span>Nur Bewertung · CHF 290</span><span>Besichtigungstag · CHF 490</span><span>Verhandlung · CHF 990</span><span>Unterlagen-Service · CHF 190</span><span>Inserat-Verlängerung · 30 Tage</span>
+    <div style="margin-top:40px">
+      <p style="font-size:15px;font-weight:600;color:var(--ink);text-align:center;margin-bottom:14px">Einzeln dazubuchen – nur was Sie brauchen</p>
+      <div class="extras-wrap">
+        <button type="button" class="extrabtn" onclick="openBooking('bewertung')">Nur Bewertung · <b>CHF 290</b></button>
+        <button type="button" class="extrabtn" onclick="openBooking('besichtigung')">Besichtigungstag · <b>CHF 490</b></button>
+        <button type="button" class="extrabtn" onclick="openBooking('verhandlung')">Verhandlung · <b>CHF 990</b></button>
+        <button type="button" class="extrabtn" onclick="openBooking('unterlagen')">Unterlagen-Service · <b>CHF 190</b></button>
+        <button type="button" class="extrabtn" onclick="openBooking('inserat')">Inserat-Verlängerung · <b>30 Tage</b></button>
+      </div>
     </div>
   </div>
 </section>
@@ -287,7 +342,7 @@ footer a{color:#fff}
         <div class="outrow"><span class="m">Hypothek</span><span id="o_debt2"></span></div>
         <div class="outtot"><span>Nettoerlös</span><b id="o_oNet"></b></div>
       </div>
-      <div class="save"><div><div style="color:#B9CFC5;font-weight:600">Sie behalten mehr</div><div class="big" id="o_save"></div></div><a href="#kontakt" class="btn mint">Besprechen</a></div>
+      <div class="save"><div><div style="color:#B9CFC5;font-weight:600">Sie behalten mehr</div><div class="big" id="o_save"></div></div><button type="button" class="btn mint" onclick="openBooking('pro')">Pro buchen</button></div>
       <p style="font-size:13px;color:var(--muted2)">Unverbindliche Schätzung, keine Steuer- oder Rechtsberatung. Vergleich mit 2.5 % Maklerprovision. Grundstückgewinnsteuer vereinfacht nach Zürcher Tarif. Notar und Grundbuch je 1 ‰, hälftig geteilt.</p>
     </div>
   </div>
@@ -367,6 +422,145 @@ footer a{color:#fff}
   </div>
 </footer>
 
+<div class="modalbg" id="booking" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="booktitle">
+  <div class="modal">
+    <button type="button" class="close" aria-label="Schliessen" onclick="closeBooking()">×</button>
+    <div id="bform">
+      <div class="mhead">
+        <div class="mctx" id="bctx">Paket</div>
+        <h3 id="booktitle">Angebot anfordern</h3>
+        <p class="msub" id="bsub">In 3 kurzen Schritten. Wir melden uns innert 24 Stunden zurück.</p>
+      </div>
+      <div class="steps2">
+        <div class="s" data-step="1"></div>
+        <div class="s" data-step="2"></div>
+        <div class="s" data-step="3"></div>
+      </div>
+      <form id="bookingform" action="https://formspree.io/f/DEINE-FORMSPREE-ID" method="POST" novalidate>
+        <input type="hidden" name="_subject" id="h_subject" value="Neue Eigenhand-Anfrage">
+        <input type="hidden" name="paket" id="h_paket" value="">
+        <input type="hidden" name="buchungstyp" id="h_typ" value="">
+
+        <div class="step2 active" data-step="1">
+          <div class="fld">
+            <label>Um was für ein Objekt handelt es sich?</label>
+            <div class="radgroup">
+              <label class="rad"><input type="radio" name="objektart" value="Wohnung" required><span>Wohnung</span></label>
+              <label class="rad"><input type="radio" name="objektart" value="Einfamilienhaus"><span>Einfamilienhaus</span></label>
+              <label class="rad"><input type="radio" name="objektart" value="Mehrfamilienhaus"><span>Mehrfamilienhaus</span></label>
+              <label class="rad"><input type="radio" name="objektart" value="Anderes"><span>Anderes</span></label>
+            </div>
+            <p class="err">Bitte Objektart wählen</p>
+          </div>
+          <div class="fgrid">
+            <div class="fld">
+              <label>PLZ</label>
+              <input type="text" name="plz" pattern="[0-9]{4}" inputmode="numeric" maxlength="4" placeholder="8302" required>
+              <p class="err">4-stellige PLZ eingeben</p>
+            </div>
+            <div class="fld">
+              <label>Gemeinde</label>
+              <input type="text" name="gemeinde" placeholder="Kloten" required>
+              <p class="err">Gemeinde eingeben</p>
+            </div>
+          </div>
+          <div class="fgrid">
+            <div class="fld">
+              <label>Zimmer</label>
+              <input type="number" name="zimmer" step="0.5" min="1" max="20" placeholder="4.5" required>
+              <p class="err">Zimmer eingeben</p>
+            </div>
+            <div class="fld">
+              <label>Wohnfläche (m²)</label>
+              <input type="number" name="flaeche" min="20" max="2000" placeholder="110" required>
+              <p class="err">Fläche eingeben</p>
+            </div>
+          </div>
+          <div class="fld">
+            <label>Baujahr (optional)</label>
+            <input type="number" name="baujahr" min="1800" max="2030" placeholder="1998">
+          </div>
+        </div>
+
+        <div class="step2" data-step="2">
+          <div class="fld">
+            <label>Was erwarten Sie für Ihre Immobilie? (CHF)</label>
+            <input type="number" name="erwarteter_preis" min="100000" step="10000" placeholder="950000" required>
+            <p class="err">Preis eingeben</p>
+          </div>
+          <div class="fld">
+            <label>Wann möchten Sie verkaufen?</label>
+            <div class="radgroup">
+              <label class="rad"><input type="radio" name="zeithorizont" value="So bald wie möglich" required><span>So bald wie möglich</span></label>
+              <label class="rad"><input type="radio" name="zeithorizont" value="In 1–3 Monaten"><span>In 1–3 Monaten</span></label>
+              <label class="rad"><input type="radio" name="zeithorizont" value="In 3–6 Monaten"><span>In 3–6 Monaten</span></label>
+              <label class="rad"><input type="radio" name="zeithorizont" value="Noch unentschlossen"><span>Noch unentschlossen</span></label>
+            </div>
+            <p class="err">Zeithorizont wählen</p>
+          </div>
+          <div class="fld">
+            <label>Offene Hypothek (CHF, optional)</label>
+            <input type="number" name="hypothek" min="0" step="10000" placeholder="500000">
+          </div>
+          <div class="fld">
+            <label>Weitere Angaben (optional)</label>
+            <textarea name="bemerkungen" placeholder="Besonderheiten des Objekts, offene Fragen, bevorzugter Rückruftermin ..."></textarea>
+          </div>
+        </div>
+
+        <div class="step2" data-step="3">
+          <div class="fld">
+            <label>Vor- und Nachname</label>
+            <input type="text" name="name" placeholder="Max Muster" required>
+            <p class="err">Name eingeben</p>
+          </div>
+          <div class="fgrid">
+            <div class="fld">
+              <label>Telefon</label>
+              <input type="tel" name="telefon" placeholder="078 752 81 77" required>
+              <p class="err">Telefonnummer eingeben</p>
+            </div>
+            <div class="fld">
+              <label>E-Mail</label>
+              <input type="email" name="email" placeholder="max@muster.ch" required>
+              <p class="err">Gültige E-Mail eingeben</p>
+            </div>
+          </div>
+          <div class="fld">
+            <label>Wann sind Sie am besten erreichbar?</label>
+            <div class="radgroup">
+              <label class="rad"><input type="radio" name="erreichbar" value="Vormittag" required><span>Vormittag</span></label>
+              <label class="rad"><input type="radio" name="erreichbar" value="Nachmittag"><span>Nachmittag</span></label>
+              <label class="rad"><input type="radio" name="erreichbar" value="Abend"><span>Abend</span></label>
+              <label class="rad"><input type="radio" name="erreichbar" value="Egal"><span>Egal</span></label>
+            </div>
+            <p class="err">Zeitfenster wählen</p>
+          </div>
+          <label class="consent" id="consentbox">
+            <input type="checkbox" required id="consent">
+            <span>Ich habe die <a href="#datenschutz">Datenschutzerklärung</a> gelesen und bin damit einverstanden, dass Eigenhand mich zum Zweck dieser Anfrage kontaktiert.</span>
+          </label>
+        </div>
+
+        <div class="mctrl">
+          <button type="button" class="back hidden" id="backBtn">← Zurück</button>
+          <button type="button" class="btn" id="nextBtn">Weiter</button>
+          <button type="submit" class="btn" id="submitBtn" style="display:none">Anfrage senden</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="msuccess" id="msuccess">
+      <div class="ic">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1D5B46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5 11-11"/></svg>
+      </div>
+      <h3>Danke! Ihre Anfrage ist bei uns.</h3>
+      <p>Wir melden uns innert 24 Stunden telefonisch bei Ihnen. Falls dringend, erreichen Sie uns direkt unter 078 752 81 77.</p>
+      <button type="button" class="btn sec" style="margin-top:24px" onclick="closeBooking()">Schliessen</button>
+    </div>
+  </div>
+</div>
+
 <script>
 "use strict";
 (function(){
@@ -396,6 +590,101 @@ footer a{color:#fff}
   }
   ids.forEach(function(id){var e=document.getElementById(id);if(e)e.addEventListener("input",calc);});
   calc();
+})();
+
+(function(){
+  var packs={
+    "selbst":{ctx:"Paket",title:"Selbst – CHF 990",sub:"In 3 kurzen Schritten. Wir melden uns innert 24 Stunden zurück.",typ:"Paket Selbst"},
+    "pro":{ctx:"Paket",title:"Pro – CHF 1'990",sub:"In 3 kurzen Schritten. Wir melden uns innert 24 Stunden zurück.",typ:"Paket Pro"},
+    "begleitet":{ctx:"Paket",title:"Begleitet – CHF 5'900",sub:"In 3 kurzen Schritten. CHF 2'900 bei Start, CHF 3'000 beim Verkauf.",typ:"Paket Begleitet"},
+    "bewertung":{ctx:"Einzelleistung",title:"Nur Bewertung – CHF 290",sub:"Wir erstellen eine fundierte Marktpreiseinschätzung mit Vergleichsobjekten.",typ:"Nur Bewertung"},
+    "besichtigung":{ctx:"Einzelleistung",title:"Besichtigungstag – CHF 490",sub:"Wir übernehmen einen Besichtigungstag für Sie – inkl. Käufergespräche vor Ort.",typ:"Besichtigungstag"},
+    "verhandlung":{ctx:"Einzelleistung",title:"Verhandlung – CHF 990",sub:"Wir übernehmen die Preisverhandlung mit dem konkreten Käufer.",typ:"Verhandlung"},
+    "unterlagen":{ctx:"Einzelleistung",title:"Unterlagen-Service – CHF 190",sub:"Wir beschaffen und organisieren sämtliche Verkaufsunterlagen für Sie.",typ:"Unterlagen-Service"},
+    "inserat":{ctx:"Einzelleistung",title:"Inserat-Verlängerung · 30 Tage",sub:"Verlängerung Ihrer bestehenden Inserate auf allen Portalen um 30 Tage.",typ:"Inserat-Verlängerung"}
+  };
+  var modal=document.getElementById("booking"),form=document.getElementById("bookingform"),ctxEl=document.getElementById("bctx"),titleEl=document.getElementById("booktitle"),subEl=document.getElementById("bsub");
+  var hPaket=document.getElementById("h_paket"),hTyp=document.getElementById("h_typ"),hSub=document.getElementById("h_subject");
+  var backBtn=document.getElementById("backBtn"),nextBtn=document.getElementById("nextBtn"),submitBtn=document.getElementById("submitBtn");
+  var successEl=document.getElementById("msuccess"),formEl=document.getElementById("bform"),consentBox=document.getElementById("consentbox");
+  var cur=1,total=3;
+
+  window.openBooking=function(key){
+    var p=packs[key]||packs["selbst"];
+    ctxEl.textContent=p.ctx; titleEl.textContent=p.title; subEl.textContent=p.sub;
+    hPaket.value=p.title; hTyp.value=p.typ; hSub.value="Eigenhand-Anfrage: "+p.typ;
+    cur=1; show(1);
+    form.reset();
+    Array.prototype.forEach.call(document.querySelectorAll(".fld.e"),function(el){el.classList.remove("e");});
+    consentBox.style.color="";
+    submitBtn.disabled=false; submitBtn.textContent="Anfrage senden";
+    formEl.style.display="block"; successEl.classList.remove("show");
+    modal.classList.add("open"); modal.setAttribute("aria-hidden","false");
+    document.body.style.overflow="hidden";
+  };
+  window.closeBooking=function(){
+    modal.classList.remove("open"); modal.setAttribute("aria-hidden","true");
+    document.body.style.overflow="";
+  };
+  modal.addEventListener("click",function(e){ if(e.target===modal) closeBooking(); });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&modal.classList.contains("open")) closeBooking(); });
+
+  function show(n){
+    Array.prototype.forEach.call(document.querySelectorAll(".step2"),function(el){ el.classList.toggle("active",+el.dataset.step===n); });
+    Array.prototype.forEach.call(document.querySelectorAll(".steps2 .s"),function(el){
+      var s=+el.dataset.step;
+      el.classList.toggle("done",s<n); el.classList.toggle("active",s===n);
+    });
+    backBtn.classList.toggle("hidden",n===1);
+    nextBtn.style.display=n<total?"":"none";
+    submitBtn.style.display=n===total?"":"none";
+    setTimeout(function(){
+      var first=document.querySelector('.step2.active input:not([type=hidden]):not([type=radio]):not([type=checkbox])');
+      if(first) try{first.focus();}catch(e){}
+    },60);
+  }
+  function validate(n){
+    var step=document.querySelector('.step2[data-step="'+n+'"]');
+    var ok=true;
+    Array.prototype.forEach.call(step.querySelectorAll("input[required]:not([type=radio]), select[required], textarea[required]"),function(el){
+      var fld=el.closest(".fld");
+      var v=el.value.trim(), bad=false;
+      if(!v) bad=true;
+      else if(el.type==="email"&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) bad=true;
+      else if(el.pattern&&!new RegExp("^"+el.pattern+"$").test(v)) bad=true;
+      if(fld){ fld.classList.toggle("e",bad); if(bad) ok=false; }
+    });
+    Array.prototype.forEach.call(step.querySelectorAll(".fld"),function(fld){
+      var radios=fld.querySelectorAll("input[type=radio][required]");
+      if(radios.length){
+        var picked=Array.prototype.some.call(radios,function(r){return r.checked;});
+        fld.classList.toggle("e",!picked); if(!picked) ok=false;
+      }
+    });
+    return ok;
+  }
+  nextBtn.addEventListener("click",function(){ if(!validate(cur)) return; cur++; show(cur); });
+  backBtn.addEventListener("click",function(){ cur--; show(cur); });
+  form.addEventListener("input",function(e){ var f=e.target.closest(".fld"); if(f) f.classList.remove("e"); });
+  form.addEventListener("change",function(e){ var f=e.target.closest(".fld"); if(f) f.classList.remove("e"); });
+
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    if(!validate(cur)) return;
+    var consent=document.getElementById("consent");
+    if(!consent.checked){ consentBox.style.color="#B45233"; return; }
+    submitBtn.disabled=true; submitBtn.textContent="Sende ...";
+    var data=new FormData(form);
+    fetch(form.action,{method:"POST",body:data,headers:{"Accept":"application/json"}})
+      .then(function(r){
+        if(r.ok){ formEl.style.display="none"; successEl.classList.add("show"); }
+        else { throw new Error("send"); }
+      })
+      .catch(function(){
+        submitBtn.disabled=false; submitBtn.textContent="Nochmals versuchen";
+        alert("Ihre Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es nochmals oder rufen Sie uns direkt an: 078 752 81 77");
+      });
+  });
 })();
 </script>
 </body>
