@@ -55,17 +55,27 @@ section{padding:72px 0}
 .feat svg{width:30px;height:30px;margin-bottom:12px}
 .feat h3{font-size:19px;margin-bottom:7px}
 .feat p{color:var(--muted);font-size:15px}
-.price{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:stretch;margin-top:44px}
-.plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;display:flex;flex-direction:column;gap:16px;text-align:left}
-.plan.hot{background:var(--green-d);color:#fff}
-.plan .amt{font-size:38px;font-weight:800}
-.plan h3{font-size:22px}
-.plan .d{color:var(--muted);font-size:15px}
+.price{display:grid;gap:20px;grid-template-columns:repeat(3,1fr);align-items:stretch;margin-top:44px}
+.plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;text-align:left;position:relative;transition:transform .2s ease,box-shadow .2s ease}
+.plan:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(20,33,28,.08)}
+.plan.hot{background:var(--green-d);color:#fff;box-shadow:0 20px 50px rgba(20,33,28,.18);transform:translateY(-8px)}
+.plan.hot:hover{transform:translateY(-10px)}
+.plan .phead{min-height:84px}
+.plan h3{font-size:22px;margin-bottom:6px}
+.plan .d{color:var(--muted);font-size:15px;line-height:1.5}
 .plan.hot .d{color:#C7D6CE}
-.plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:15px}
-.plan li{display:flex;gap:10px}
-.plan li svg{flex:none;margin-top:2px}
-.badge{align-self:flex-start;background:var(--mint);color:var(--green-d);font-size:13px;font-weight:700;padding:4px 11px;border-radius:999px}
+.plan .pcost{padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:20px 0 22px;min-height:112px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.plan.hot .pcost{border-color:rgba(255,255,255,.15)}
+.plan .amt{font-size:40px;font-weight:800;line-height:1}
+.plan .amt small{font-size:15px;font-weight:600;color:var(--muted);letter-spacing:0}
+.plan.hot .amt small{color:#C7D6CE}
+.plan .split{font-size:13px;font-weight:600;color:var(--green);margin-top:4px}
+.plan.hot .split{color:var(--mint)}
+.plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:15px;flex-grow:1}
+.plan li{display:flex;gap:10px;line-height:1.45}
+.plan li svg{flex:none;margin-top:3px}
+.plan .btn{margin-top:24px}
+.badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--mint);color:var(--green-d);font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;box-shadow:0 4px 12px rgba(20,33,28,.15);white-space:nowrap}
 .extras{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 26px;display:flex;gap:12px 28px;flex-wrap:wrap;align-items:center;justify-content:center;font-size:15px;color:var(--muted)}
 .calc{display:grid;gap:22px;grid-template-columns:1fr 1fr;align-items:start;margin-top:40px}
 .calc .in{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;display:grid;gap:16px}
@@ -101,7 +111,8 @@ section{padding:72px 0}
 footer{background:var(--green-d);color:#C7D6CE;font-size:14px}
 footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:30px 0}
 footer a{color:#fff}
-@media(max-width:720px){nav.links{display:none}.calc{grid-template-columns:1fr}.contact{grid-template-columns:1fr}section{padding:54px 0}.hero{padding:52px 0 40px}.vsrow{grid-template-columns:1fr !important;gap:18px !important}.vsrow>div{border:0 !important;padding:14px 0 !important}}
+@media(max-width:900px){.price{grid-template-columns:1fr;gap:28px}.plan.hot{transform:none}.plan.hot:hover{transform:translateY(-2px)}.badge{top:-13px}}
+@media(max-width:720px){nav.links{display:none}.calc{grid-template-columns:1fr}.contact{grid-template-columns:1fr}section{padding:54px 0}.hero{padding:52px 0 40px}.vsrow{grid-template-columns:1fr !important;gap:18px !important}.vsrow>div{border:0 !important;padding:14px 0 !important}.plan .phead{min-height:0}.plan .pcost{min-height:0}}
 </style>
 </head>
 <body>
@@ -170,7 +181,7 @@ footer a{color:#fff}
       <div style="font-size:14px;color:#C7D6CE;margin-top:4px">2.5 % Provision</div>
     </div>
     <div style="border-left:1px solid rgba(255,255,255,0.15);border-right:1px solid rgba(255,255,255,0.15);padding:8px 0">
-      <div style="font-size:13px;color:#C7D6CE;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">NEHO &amp; Co.</div>
+      <div style="font-size:13px;color:#C7D6CE;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Online-Makler</div>
       <div style="font-size:30px;font-weight:800;margin-top:6px;color:#fff">CHF 22'500</div>
       <div style="font-size:14px;color:#C7D6CE;margin-top:4px">1.5 % Provision</div>
     </div>
@@ -180,7 +191,7 @@ footer a{color:#fff}
       <div style="font-size:14px;color:#C7D6CE;margin-top:4px">Festpreis. Fertig.</div>
     </div>
   </div>
-  <p style="font-size:13px;color:#B9CFC5;text-align:center;margin-top:20px;max-width:620px;margin-left:auto;margin-right:auto">Rechenbeispiel bei einer Immobilie für CHF 1'500'000. Prozentuale Provisionen variieren je nach Anbieter und Objekt. Der Eigenhand-Preis bleibt gleich – egal wie teuer Ihre Immobilie ist.</p>
+  <p style="font-size:13px;color:#B9CFC5;text-align:center;margin-top:20px;max-width:620px;margin-left:auto;margin-right:auto">Rechenbeispiel bei einer Immobilie für CHF 1'500'000. Provisionssätze von Mitbewerbern variieren je nach Anbieter und Objekt. Der Eigenhand-Preis bleibt gleich – egal wie teuer Ihre Immobilie ist.</p>
 </section>
 
 <section class="band" id="preise">
@@ -189,43 +200,57 @@ footer a{color:#fff}
     <p class="lead">Je mehr Sie selbst machen, desto mehr sparen Sie. Je mehr wir übernehmen, desto entspannter für Sie. Alle Preise inkl. Portalkosten und MWST.</p>
     <div class="price">
       <div class="plan">
-        <div><h3>Selbst</h3><p class="d">Für alle, die selbst verkaufen und maximal sparen wollen.</p></div>
-        <div class="amt">CHF 990</div>
+        <div class="phead">
+          <h3>Selbst</h3>
+          <p class="d">Für alle, die selbst verkaufen und maximal sparen wollen.</p>
+        </div>
+        <div class="pcost">
+          <div class="amt">CHF 990 <small>einmalig</small></div>
+        </div>
         <ul>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Ihre Fotos aufbereitet &amp; professionelles Exposé</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Auf Homegate, ImmoScout24, newhome und mehr – 90 Tage online</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Preisschätzung mit Vergleichsobjekten</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Anfragen, Termine und Angebote an einem Ort</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Checkliste für den Immobilienverkauf</li>
         </ul>
-        <a href="#kontakt" class="btn sec block">Wählen</a>
+        <a href="#kontakt" class="btn sec block">Paket wählen</a>
       </div>
       <div class="plan hot">
         <span class="badge">Beliebteste Wahl</span>
-        <div><h3>Pro</h3><p class="d">Selbst verkaufen, aber nie allein. Das beste Verhältnis aus Preis und Sicherheit.</p></div>
-        <div class="amt">CHF 1'990</div>
+        <div class="phead">
+          <h3>Pro</h3>
+          <p class="d">Selbst verkaufen, aber nie allein. Das beste Verhältnis aus Preis und Sicherheit.</p>
+        </div>
+        <div class="pcost">
+          <div class="amt">CHF 1'990 <small>einmalig</small></div>
+        </div>
         <ul>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Selbst»</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Genaue Preiseinschätzung durch uns</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Professionelle Fotos vor Ort durch uns</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Persönlicher Ansprechpartner während des Verkaufs</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Beratung bei konkreten Kaufangeboten und Verhandlungen</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wechsel-Garantie: Beim Upgrade auf «Begleitet» wird Bezahltes angerechnet</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Beratung bei Kaufangeboten und Verhandlungen</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wechsel-Garantie: Upgrade jederzeit möglich</li>
         </ul>
-        <a href="#kontakt" class="btn mint block">Wählen</a>
+        <a href="#kontakt" class="btn mint block">Paket wählen</a>
       </div>
       <div class="plan">
-        <div><h3>Begleitet</h3><p class="d">Für alle, die verkaufen wollen, ohne sich um etwas zu kümmern.</p></div>
-        <div class="amt">CHF 5'900</div>
-        <p class="d" style="margin-top:-8px;font-weight:600;color:var(--green)">CHF 2'900 bei Start · CHF 3'000 beim Verkauf</p>
+        <div class="phead">
+          <h3>Begleitet</h3>
+          <p class="d">Für alle, die verkaufen wollen, ohne sich um etwas zu kümmern.</p>
+        </div>
+        <div class="pcost">
+          <div class="amt">CHF 5'900 <small>total</small></div>
+          <div class="split">CHF 2'900 bei Start · CHF 3'000 beim Verkauf</div>
+        </div>
         <ul>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Pro»</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Bewertung mit unserem Bankpartner</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wir führen die Besichtigungen durch (bis 2 Besichtigungstage, max. 4 Interessenten pro Tag)</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Qualifizierung der Käufer (inkl. Finanzierungsnachweis)</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wir verhandeln für Sie den besten Preis</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Von den Unterlagen bis zum Notar: wir regeln alles</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wir führen Besichtigungen durch (2 Tage inkl.)</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Käufer-Qualifizierung mit Finanzierungsnachweis</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Verhandlung &amp; Unterlagen bis zum Notar</li>
         </ul>
-        <a href="#kontakt" class="btn sec block">Wählen</a>
+        <a href="#kontakt" class="btn sec block">Paket wählen</a>
       </div>
     </div>
     <div class="extras">
