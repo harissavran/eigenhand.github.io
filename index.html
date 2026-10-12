@@ -101,7 +101,7 @@ section{padding:72px 0}
 footer{background:var(--green-d);color:#C7D6CE;font-size:14px}
 footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:30px 0}
 footer a{color:#fff}
-@media(max-width:720px){nav.links{display:none}.calc{grid-template-columns:1fr}.contact{grid-template-columns:1fr}section{padding:54px 0}.hero{padding:52px 0 40px}}
+@media(max-width:720px){nav.links{display:none}.calc{grid-template-columns:1fr}.contact{grid-template-columns:1fr}section{padding:54px 0}.hero{padding:52px 0 40px}.vsrow{grid-template-columns:1fr !important;gap:18px !important}.vsrow>div{border:0 !important;padding:14px 0 !important}}
 </style>
 </head>
 <body>
@@ -125,8 +125,8 @@ footer a{color:#fff}
 <div class="herowrap">
 <section class="hero wrap">
   <span class="tag">Für Wohnungen und Häuser im Kanton Zürich</span>
-  <h1>Verkaufen Sie Ihre Immobilie selbst – und sparen Sie die Provision.</h1>
-  <p class="sub">Sie verkaufen selbst und behalten die Kontrolle. Einen Profi holen Sie nur dazu, wo Sie ihn wirklich brauchen. Zum Festpreis, ohne 2–3 % Maklerprovision.</p>
+  <h1>Verkaufen Sie Ihre Immobilie zum Festpreis. Ohne Provision.</h1>
+  <p class="sub">Sie bestimmen, wie viel Sie selbst machen und wo ein Profi übernimmt. Zum Festpreis ab CHF 990. Kein Prozent, kein Kleingedrucktes, keine Kompromisse bei der Qualität.</p>
   <div class="cta">
     <a href="#kontakt" class="btn">Kostenloses Erstgespräch</a>
     <a href="#rechner" class="btn sec">Was spare ich?</a>
@@ -162,6 +162,27 @@ footer a{color:#fff}
   </div>
 </section>
 
+<section style="padding:48px 0;background:var(--green-d);color:#fff">
+  <div class="wrap vsrow" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:center;text-align:center">
+    <div>
+      <div style="font-size:13px;color:#C7D6CE;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Klassischer Makler</div>
+      <div style="font-size:30px;font-weight:800;margin-top:6px;color:#fff">CHF 37'500</div>
+      <div style="font-size:14px;color:#C7D6CE;margin-top:4px">2.5 % Provision</div>
+    </div>
+    <div style="border-left:1px solid rgba(255,255,255,0.15);border-right:1px solid rgba(255,255,255,0.15);padding:8px 0">
+      <div style="font-size:13px;color:#C7D6CE;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">NEHO &amp; Co.</div>
+      <div style="font-size:30px;font-weight:800;margin-top:6px;color:#fff">CHF 22'500</div>
+      <div style="font-size:14px;color:#C7D6CE;margin-top:4px">1.5 % Provision</div>
+    </div>
+    <div>
+      <div style="font-size:13px;color:#9FE0C3;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Eigenhand «Begleitet»</div>
+      <div style="font-size:30px;font-weight:800;margin-top:6px;color:#9FE0C3">CHF 5'900</div>
+      <div style="font-size:14px;color:#C7D6CE;margin-top:4px">Festpreis. Fertig.</div>
+    </div>
+  </div>
+  <p style="font-size:13px;color:#B9CFC5;text-align:center;margin-top:20px;max-width:620px;margin-left:auto;margin-right:auto">Rechenbeispiel bei einer Immobilie für CHF 1'500'000. Prozentuale Provisionen variieren je nach Anbieter und Objekt. Der Eigenhand-Preis bleibt gleich – egal wie teuer Ihre Immobilie ist.</p>
+</section>
+
 <section class="band" id="preise">
   <div class="wrap center">
     <h2 class="h2">Ein Festpreis. Keine Provision.</h2>
@@ -180,24 +201,27 @@ footer a{color:#fff}
       </div>
       <div class="plan hot">
         <span class="badge">Beliebteste Wahl</span>
-        <div><h3>Selbst Plus</h3><p class="d">Selbst verkaufen, aber nie allein. Das beste Verhältnis aus Preis und Sicherheit.</p></div>
+        <div><h3>Pro</h3><p class="d">Selbst verkaufen, aber nie allein. Das beste Verhältnis aus Preis und Sicherheit.</p></div>
         <div class="amt">CHF 1'990</div>
         <ul>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Selbst»</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Genaue Preiseinschätzung durch uns</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Professionelle Fotos vor Ort durch uns</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wir sind während des Verkaufs für Sie da</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wechsel-Garantie: Bei Nichtverkauf zu «Begleitet» wechseln – Bezahltes wird angerechnet</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Persönlicher Ansprechpartner während des Verkaufs</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Beratung bei konkreten Kaufangeboten und Verhandlungen</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wechsel-Garantie: Beim Upgrade auf «Begleitet» wird Bezahltes angerechnet</li>
         </ul>
         <a href="#kontakt" class="btn mint block">Wählen</a>
       </div>
       <div class="plan">
         <div><h3>Begleitet</h3><p class="d">Für alle, die verkaufen wollen, ohne sich um etwas zu kümmern.</p></div>
-        <div class="amt">CHF 4'900</div>
+        <div class="amt">CHF 5'900</div>
+        <p class="d" style="margin-top:-8px;font-weight:600;color:var(--green)">CHF 2'900 bei Start · CHF 3'000 beim Verkauf</p>
         <ul>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Selbst Plus»</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Pro»</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Bewertung mit unserem Bankpartner</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wir führen die Besichtigungen durch</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wir führen die Besichtigungen durch (bis 2 Besichtigungstage, max. 4 Interessenten pro Tag)</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Qualifizierung der Käufer (inkl. Finanzierungsnachweis)</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wir verhandeln für Sie den besten Preis</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Von den Unterlagen bis zum Notar: wir regeln alles</li>
         </ul>
@@ -206,7 +230,7 @@ footer a{color:#fff}
     </div>
     <div class="extras">
       <strong style="color:var(--ink);width:100%;text-align:center;margin-bottom:4px">Einzeln dazubuchen – nur was Sie brauchen</strong>
-      <span>Besichtigungstag · CHF 490</span><span>Verhandlung · CHF 990</span><span>Unterlagen-Service · CHF 190</span><span>Inserat-Verlängerung · 30 Tage</span>
+      <span>Nur Bewertung · CHF 290</span><span>Besichtigungstag · CHF 490</span><span>Verhandlung · CHF 990</span><span>Unterlagen-Service · CHF 190</span><span>Inserat-Verlängerung · 30 Tage</span>
     </div>
   </div>
 </section>
@@ -231,7 +255,7 @@ footer a{color:#fff}
         <div class="outtot"><span>Nettoerlös</span><b id="o_mNet"></b></div>
       </div>
       <div class="outcard hi">
-        <div style="font-weight:700;margin-bottom:6px;color:var(--green-d)">Mit Eigenhand «Selbst Plus»</div>
+        <div style="font-weight:700;margin-bottom:6px;color:var(--green-d)">Mit Eigenhand «Pro»</div>
         <div class="outrow"><span class="m">Festpreis</span><span>CHF 1'990</span></div>
         <div class="outrow"><span class="m">Grundstückgewinnsteuer</span><span id="o_oTax"></span></div>
         <div class="outrow"><span class="m">Notar &amp; Grundbuch</span><span id="o_notar2"></span></div>
@@ -256,8 +280,10 @@ footer a{color:#fff}
   <h2 class="h2 center" style="margin-bottom:8px">Häufige Fragen</h2>
   <details><summary>Ist ein Verkauf ohne Makler erlaubt?</summary><p>Ja. Eigentümer dürfen selbst verkaufen. Der Kaufvertrag wird in jedem Fall beim Notar beurkundet – wir bereiten Sie darauf vor.</p></details>
   <details><summary>Wer unterstützt mich?</summary><p>Ein Immobilien-Profi, der den Markt im Raum Zürich kennt. Preis-Check, Besichtigungen und Verhandlung übernimmt er persönlich, wenn Sie möchten.</p></details>
-  <details><summary>Was passiert, wenn ich nicht verkaufe?</summary><p>Mit der Wechsel-Garantie wechseln Sie nach 90 Tagen zum Festpreis-Modell. Bereits Bezahltes wird angerechnet.</p></details>
-  <details><summary>Wann bezahle ich?</summary><p>Das Paket bezahlen Sie bei Start. Kein Abo, keine Provision beim Verkauf.</p></details>
+  <details><summary>Was passiert, wenn ich nicht verkaufe?</summary><p>Mit der Wechsel-Garantie wechseln Sie nach 90 Tagen vom «Selbst»- oder «Pro»-Paket zu «Begleitet». Bereits Bezahltes wird vollständig angerechnet.</p></details>
+  <details><summary>Wann bezahle ich?</summary><p>«Selbst» und «Pro» bezahlen Sie bei Start. Bei «Begleitet» teilen Sie: CHF 2'900 bei Start, CHF 3'000 beim erfolgreichen Verkauf. Keine prozentuale Provision.</p></details>
+  <details><summary>Ich will erst wissen, was meine Immobilie wert ist.</summary><p>Buchen Sie unsere «Nur Bewertung» für CHF 290. Sie erhalten eine fundierte Marktpreiseinschätzung mit Vergleichsobjekten – ohne Verpflichtung. Entscheiden Sie sich später für ein Paket, rechnen wir die CHF 290 an.</p></details>
+  <details><summary>Für welche Objekte ist Eigenhand gedacht?</summary><p>Wohnungen und Häuser im Kanton Zürich, in der Regel zwischen CHF 600'000 und CHF 2'000'000. Für Luxusobjekte und Mehrfamilienhäuser erstellen wir Ihnen gerne ein individuelles Angebot.</p></details>
 </section>
 
 <section class="band" id="kontakt">
