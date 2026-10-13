@@ -804,7 +804,28 @@ var AUTORESPONSE = "Vielen Dank für Ihre Anfrage bei Eigenhand.\n\n"
   + "Falls Sie uns zwischendurch erreichen möchten, schreiben Sie an info@eigenhand.ch.\n\n"
   + "Freundliche Grüsse\nHaris Savran\nEigenhand – Festpreis statt Provision\nhttps://eigenhand.ch";
 
-function sendLead(fields, subject){
+/* Supabase (Datenbank). Publishable Key ist für den Website-Einsatz gedacht und öffentlich.
+   Zugriffsregeln: anonym darf nur einfügen, nicht lesen. */
+var SB_URL = "https://mljsvtgzbkvqcnxcrdir.supabase.co";
+var SB_KEY = "sb_publishable_8lxy-lRs0zM1kZ3_qVESLw_Zidi1Q5w";
+
+function sbInsert(fields){
+  var row = {
+    name: fields.name||null, tel: fields.telefon||null, email: fields.email||null,
+    art: fields.objektart||null, plz: fields.plz||null, gemeinde: fields.gemeinde||null,
+    zi: fields.zimmer||null, fl: fields.flaeche||null, bj: fields.baujahr||null,
+    preis: fields.preisvorstellung||null, zeit: fields.zeithorizont||null, err: fields.erreichbar||null,
+    paket: fields.paket||fields.buchungstyp||null, notes: fields.bemerkungen||null,
+    status: "neu", quelle: "website"
+  };
+  return fetch(SB_URL + "/rest/v1/leads", {
+    method: "POST",
+    headers: { "apikey": SB_KEY, "Authorization": "Bearer " + SB_KEY, "Content-Type": "application/json", "Prefer": "return=minimal" },
+    body: JSON.stringify(row)
+  }).then(function(r){ if(!r.ok) throw new Error("db"); return "db"; });
+}
+
+function sbMail(fields, subject){
   var payload = {};
   Object.keys(fields).forEach(function(k){ if(fields[k]) payload[k] = fields[k]; });
   payload._subject = subject;
@@ -815,7 +836,20 @@ function sendLead(fields, subject){
     method: "POST",
     headers: {"Content-Type": "application/json", "Accept": "application/json"},
     body: JSON.stringify(payload)
-  }).then(function(r){ if(!r.ok) throw new Error("send"); return "sent"; });
+  }).then(function(r){ if(!r.ok) throw new Error("send"); return "mail"; });
+}
+
+function sendLead(fields, subject){
+  /* Doppelt absichern: in die Datenbank schreiben UND per FormSubmit benachrichtigen.
+     Erfolg, sobald mindestens einer der beiden Wege klappt. */
+  var tasks = [
+    sbInsert(fields).then(function(){ return "db"; }, function(){ return null; }),
+    sbMail(fields, subject).then(function(){ return "mail"; }, function(){ return null; })
+  ];
+  return Promise.all(tasks).then(function(res){
+    if(res.indexOf("db") < 0 && res.indexOf("mail") < 0) throw new Error("all failed");
+    return "sent";
+  });
 }
 
 /* Mobile navigation */
