@@ -3,107 +3,236 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Eigenhand – Immobilie selbst verkaufen, mit Profi im Rücken</title>
-<meta name="description" content="Verkaufen Sie Ihre Wohnung oder Ihr Haus im Kanton Zürich selbst – mit professioneller Unterstützung, wo Sie sie brauchen. Festpreis statt Provision.">
+<title>Eigenhand | Immobilie zum Festpreis verkaufen im Kanton Zürich</title>
+<meta name="description" content="Verkaufen Sie Ihre Wohnung oder Ihr Haus im Kanton Zürich zum Festpreis statt mit Provision. Ab CHF 990, mit persönlichem Ansprechpartner. Kostenlose Ersteinschätzung.">
+<link rel="canonical" href="https://eigenhand.ch/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://eigenhand.ch/">
+<meta property="og:title" content="Eigenhand | Immobilie zum Festpreis verkaufen">
+<meta property="og:description" content="Festpreis statt Provision. Sie entscheiden, was Sie selbst machen und wo wir übernehmen. Ab CHF 990.">
+<meta property="og:image" content="https://eigenhand.ch/img/hero.jpg">
+<meta name="theme-color" content="#123D2F">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' rx='7' fill='%23123D2F'/%3E%3Cpath d='M6 14.5 14 7.5l8 7M8.5 13.5v7h11v-7M12.5 20.5v-3.5h3v3.5' fill='none' stroke='%239FE0C3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Eigenhand","url":"https://eigenhand.ch/","telephone":"+41787528177","email":"info@eigenhand.ch","areaServed":"Kanton Zürich","address":{"@type":"PostalAddress","streetAddress":"Bramenring 7","postalCode":"8302","addressLocality":"Kloten","addressCountry":"CH"},"priceRange":"CHF 990 bis CHF 5'900"}
+</script>
 <style>
-:root{--bg:#F5F4EF;--surface:#FFFFFF;--ink:#14211C;--muted:#3E4C46;--muted2:#5A675F;--line:#DBD8CF;--green:#1D5B46;--green-d:#123D2F;--mint:#9FE0C3;--mint-bg:#E4EEE8;}
+:root{--bg:#F5F4EF;--surface:#FFFFFF;--ink:#14211C;--muted:#3E4C46;--muted2:#5A675F;--line:#DBD8CF;--green:#1D5B46;--green-d:#123D2F;--mint:#9FE0C3;--mint-bg:#E4EEE8;--warn:#B45233}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
 html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font-family:'Schibsted Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Schibsted Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden}
 h1,h2,h3{margin:0;font-weight:800;letter-spacing:-0.02em;line-height:1.12}
 p{margin:0}
 a{color:var(--green);text-decoration:none}
+button{font-family:inherit}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-.btn{display:inline-block;background:var(--green);color:#fff;border:0;border-radius:11px;padding:16px 24px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;text-align:center}
+.btn{display:inline-block;background:var(--green);color:#fff;border:0;border-radius:11px;padding:16px 24px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;text-align:center;transition:background .15s ease,transform .15s ease}
+.btn:hover{background:var(--green-d)}
 .btn.sec{background:#fff;color:var(--ink);border:1px solid var(--line);font-weight:600}
+.btn.sec:hover{border-color:var(--green)}
 .btn.mint{background:var(--mint);color:var(--green-d)}
+.btn.mint:hover{background:#b6ead3}
 .btn.block{display:block;width:100%}
-header{position:sticky;top:0;z-index:30;background:rgba(245,244,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 0}
+.btn:focus-visible,.navtoggle:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--mint);outline-offset:2px}
+
+/* Header */
+header{position:sticky;top:0;z-index:30;background:rgba(245,244,239,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 0}
 .brand{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:800;color:var(--ink)}
 .brand svg{width:27px;height:27px;flex:none}
-nav.links{display:flex;gap:24px;align-items:center;font-size:15px;font-weight:500}
+nav.links{display:flex;gap:26px;align-items:center;font-size:15px;font-weight:500}
 nav.links a{color:var(--ink)}
-.herowrap{position:relative;background:#14211C}
-.herowrap::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,33,28,.42) 0%,rgba(20,33,28,.5) 55%,rgba(20,33,28,.82) 100%),url('img/hero.jpg');background-size:cover;background-position:center}
-.hero{position:relative;text-align:center;padding:110px 0 96px;display:flex;flex-direction:column;align-items:center;gap:24px;color:#fff}
-.hero .tag{background:rgba(255,255,255,.15);color:#fff;font-size:14px;font-weight:600;padding:7px 15px;border-radius:999px;backdrop-filter:blur(4px)}
-.hero h1{font-size:clamp(36px,6.5vw,66px);max-width:840px;color:#fff}
-.hero p.sub{font-size:21px;color:#E7EEEA;max-width:620px}
-.hero .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:4px}
-.hero .btn.sec{background:rgba(255,255,255,.95);color:var(--ink);border:0}
-.ticks{display:flex;gap:10px 26px;flex-wrap:wrap;justify-content:center;font-size:15px;color:#E7EEEA}
+nav.links a:hover{color:var(--green)}
+nav.links .btn{padding:11px 18px;color:#fff;font-size:15px}
+.navtoggle{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:44px;height:44px;align-items:center;justify-content:center;cursor:pointer;color:var(--ink)}
+
+/* Hero */
+.herowrap{position:relative;background:#14211C;overflow:hidden}
+.herowrap::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,33,28,.55) 0%,rgba(20,33,28,.62) 50%,rgba(20,33,28,.9) 100%),url('img/hero.jpg');background-size:cover;background-position:center}
+.hero{position:relative;padding:92px 24px 80px;display:grid;grid-template-columns:1.25fr .9fr;gap:48px;align-items:center;color:#fff}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.14);color:#fff;font-size:14px;font-weight:600;padding:7px 15px;border-radius:999px;margin-bottom:22px}
+.hero h1{font-size:clamp(34px,5.4vw,58px);color:#fff}
+.hero p.sub{font-size:20px;color:#E7EEEA;max-width:560px;margin-top:20px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.hero .btn.sec{background:rgba(255,255,255,.96);color:var(--ink);border:0}
+.ticks{display:flex;gap:10px 24px;flex-wrap:wrap;font-size:15px;color:#E7EEEA;margin-top:26px}
 .ticks span{display:flex;align-items:center;gap:7px}
-.ticks svg{stroke:var(--mint)}
-section{padding:72px 0}
+.excard{background:#fff;color:var(--ink);border-radius:20px;padding:28px;box-shadow:0 24px 60px rgba(0,0,0,.28)}
+.excard .lbl{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
+.excard .obj{font-size:15px;color:var(--muted);margin-top:4px}
+.exrow{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:13px 0;border-bottom:1px solid var(--line);font-size:15px}
+.exrow b{font-size:18px}
+.exrow .strike{color:var(--muted2)}
+.exsave{margin-top:16px;background:var(--mint-bg);border-radius:14px;padding:16px 18px}
+.exsave .t{font-size:14px;color:var(--green-d);font-weight:600}
+.exsave .v{font-size:32px;font-weight:800;color:var(--green-d);line-height:1.1;margin-top:2px}
+.excard .fine{font-size:12px;color:var(--muted2);margin-top:12px;line-height:1.5}
+
+/* Sections */
+section{padding:84px 0}
 .band{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .center{text-align:center}
-.h2{font-size:clamp(28px,4vw,38px)}
-.lead{font-size:18px;color:var(--muted);max-width:620px;margin:12px auto 0}
-.steps{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:44px;counter-reset:s}
-.step{background:var(--bg);border-radius:16px;padding:28px;text-align:left}
-.band .step{background:var(--surface);border:1px solid var(--line)}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.h2{font-size:clamp(28px,4vw,40px)}
+.lead{font-size:18px;color:var(--muted);max-width:640px;margin:14px auto 0}
+.lead.left{margin-left:0}
+
+/* Problem */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.split p.body{color:var(--muted);font-size:17px;margin-top:14px}
+.costbars{background:var(--bg);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:20px}
+.cb .top{display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px;gap:10px}
+.cb .top b{white-space:nowrap}
+.cb .track{height:14px;background:#E8E5DC;border-radius:7px;overflow:hidden}
+.cb .fill{height:100%;border-radius:7px;background:var(--muted2)}
+.cb.us .fill{background:var(--green)}
+.costbars .fine{font-size:12px;color:var(--muted2);line-height:1.5}
+
+/* Steps */
+.steps{display:grid;gap:18px;grid-template-columns:repeat(4,1fr);margin-top:48px}
+.step{background:var(--bg);border-radius:16px;padding:26px;text-align:left}
+.band .step{background:var(--bg)}
 .step .no{width:36px;height:36px;border-radius:10px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:14px}
-.step h3{font-size:19px;margin-bottom:7px}
+.step h3{font-size:18px;margin-bottom:7px}
 .step p{color:var(--muted);font-size:15px}
-.grid3{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:44px}
-.feat{border:1px solid var(--line);border-radius:16px;padding:28px;background:#fff;text-align:left}
-.feat svg{width:30px;height:30px;margin-bottom:12px}
-.feat h3{font-size:19px;margin-bottom:7px}
-.feat p{color:var(--muted);font-size:15px}
-.price{display:grid;gap:20px;grid-template-columns:repeat(3,1fr);align-items:stretch;margin-top:44px}
+.step .meta{font-size:13px;font-weight:600;color:var(--green);margin-top:10px}
+
+/* Calculator */
+.calc{display:grid;gap:24px;grid-template-columns:1fr 1.05fr;align-items:start;margin-top:44px;text-align:left}
+.calc .in{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;display:grid;gap:18px}
+.calc label,.calc .lab{display:block;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:7px}
+.calc input,.calc select{width:100%;font:inherit;font-size:17px;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.calc input:focus,.calc select:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(29,91,70,.12)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.seg button{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 6px;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;line-height:1.25}
+.seg button small{display:block;font-weight:500;color:var(--muted2);font-size:12px;margin-top:2px}
+.seg button[aria-pressed="true"]{border-color:var(--green);background:var(--mint-bg);color:var(--green-d)}
+.calc details{border-top:1px solid var(--line);padding-top:14px}
+.calc summary{cursor:pointer;font-weight:600;font-size:15px;color:var(--green);list-style:none}
+.calc summary::-webkit-details-marker{display:none}
+.calc summary::after{content:" +"}
+.calc details[open] summary::after{content:" −"}
+.calc .adv{display:grid;gap:14px;margin-top:14px}
+.out{display:flex;flex-direction:column;gap:14px}
+.savebig{background:var(--green-d);color:#fff;border-radius:20px;padding:28px}
+.savebig .t{color:#B9CFC5;font-weight:600;font-size:15px}
+.savebig .v{font-size:clamp(36px,5vw,48px);font-weight:800;color:var(--mint);line-height:1.1;margin-top:4px}
+.savebig .s{color:#C7D6CE;font-size:14px;margin-top:8px}
+.savebig .btn{margin-top:20px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.outcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+.outcard.hi{background:var(--mint-bg);border-color:var(--mint)}
+.outcard .h{font-weight:700;margin-bottom:6px;font-size:15px}
+.outrow{display:flex;justify-content:space-between;gap:8px;font-size:14px;padding:4px 0}
+.outrow span:last-child,.outtot b,.exrow b,.cb .top b{white-space:nowrap}
+.nw{white-space:nowrap}
+.outrow .m{color:var(--muted)}
+.outtot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);margin-top:8px;padding-top:10px;font-size:14px;gap:8px}
+.outtot b{font-size:18px}
+.fineprint{font-size:13px;color:var(--muted2);line-height:1.55}
+
+/* Pricing */
+.price{display:grid;gap:20px;grid-template-columns:repeat(3,1fr);align-items:stretch;margin-top:52px}
 .plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;text-align:left;position:relative;transition:transform .2s ease,box-shadow .2s ease}
 .plan:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(20,33,28,.08)}
 .plan.hot{background:var(--green-d);color:#fff;box-shadow:0 20px 50px rgba(20,33,28,.18);transform:translateY(-8px)}
 .plan.hot:hover{transform:translateY(-10px)}
-.plan .phead{min-height:84px}
+.plan .phead{min-height:96px}
 .plan h3{font-size:22px;margin-bottom:6px}
 .plan .d{color:var(--muted);font-size:15px;line-height:1.5}
 .plan.hot .d{color:#C7D6CE}
-.plan .pcost{padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:20px 0 22px;min-height:112px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.plan .pcost{padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:18px 0 22px;min-height:104px;display:flex;flex-direction:column;justify-content:center;gap:4px}
 .plan.hot .pcost{border-color:rgba(255,255,255,.15)}
-.plan .amt{font-size:40px;font-weight:800;line-height:1}
+.plan .amt{font-size:36px;font-weight:800;line-height:1;white-space:nowrap}
 .plan .amt small{font-size:15px;font-weight:600;color:var(--muted);letter-spacing:0}
 .plan.hot .amt small{color:#C7D6CE}
-.plan .split{font-size:13px;font-weight:600;color:var(--green);margin-top:4px}
-.plan.hot .split{color:var(--mint)}
+.plan .note{font-size:13px;font-weight:600;color:var(--green);margin-top:4px}
+.plan.hot .note{color:var(--mint)}
+.plan .who{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted2);margin-bottom:10px}
+.plan.hot .who{color:#9DB8AC}
 .plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:15px;flex-grow:1}
 .plan li{display:flex;gap:10px;line-height:1.45}
 .plan li svg{flex:none;margin-top:3px}
 .plan .btn{margin-top:24px}
 .badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--mint);color:var(--green-d);font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;box-shadow:0 4px 12px rgba(20,33,28,.15);white-space:nowrap}
-.extras{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 26px;display:flex;gap:12px 28px;flex-wrap:wrap;align-items:center;justify-content:center;font-size:15px;color:var(--muted)}
-.calc{display:grid;gap:22px;grid-template-columns:1fr 1fr;align-items:start;margin-top:40px}
-.calc .in{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;display:grid;gap:16px}
-.calc label{display:block;font-size:14px;font-weight:600;color:var(--muted);margin-bottom:6px}
-.calc input{width:100%;font:inherit;font-size:17px;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
-.calc input:focus{outline:2px solid var(--green);outline-offset:1px}
-.out{display:flex;flex-direction:column;gap:14px}
-.outcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}
-.outcard.hi{background:var(--mint-bg);border-color:var(--mint)}
-.outrow{display:flex;justify-content:space-between;gap:8px;font-size:15px;padding:5px 0}
-.outrow .m{color:var(--muted)}
-.outtot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);margin-top:8px;padding-top:10px}
-.outtot b{font-size:22px}
-.save{background:var(--green-d);color:#fff;border-radius:16px;padding:24px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-.save .big{font-size:34px;font-weight:800;color:var(--mint)}
-.about{max-width:760px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:16px}
-.about p{color:var(--muted);font-size:18px}
-.faq{max-width:760px;margin:0 auto}
+.guarantee{margin-top:28px;display:flex;gap:16px;align-items:flex-start;background:var(--mint-bg);border:1px solid var(--mint);border-radius:16px;padding:20px 24px;text-align:left}
+.guarantee svg{flex:none;margin-top:2px}
+.guarantee p{font-size:15px;color:var(--green-d)}
+.extras-wrap{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:16px}
+.extrabtn{background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 16px;font:inherit;font-size:14px;font-weight:500;color:var(--ink);cursor:pointer;transition:all .15s ease;display:inline-flex;align-items:center;gap:6px}
+.extrabtn:hover{border-color:var(--green);color:var(--green-d);background:var(--mint-bg)}
+.extrabtn b{color:var(--green);font-weight:700}
+.compare{margin-top:36px;text-align:left}
+.compare summary{cursor:pointer;font-weight:700;font-size:16px;color:var(--green);list-style:none;text-align:center;padding:12px}
+.compare summary::-webkit-details-marker{display:none}
+.compare summary::after{content:" ↓"}
+.compare[open] summary::after{content:" ↑"}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:16px;background:#fff;margin-top:8px}
+table.who{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+table.who th,table.who td{padding:13px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+table.who thead th{background:var(--bg);font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+table.who tbody tr:last-child td{border-bottom:0}
+table.who td.c{text-align:center;white-space:nowrap}
+.tg{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px}
+.tg.you{background:#EFEDE6;color:var(--muted)}
+.tg.we{background:var(--green);color:#fff}
+.tg.both{background:var(--mint-bg);color:var(--green-d)}
+.notincl{margin-top:22px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;text-align:left}
+.notincl h3{font-size:16px;margin-bottom:6px}
+.notincl p{font-size:14px;color:var(--muted)}
+
+/* Concerns */
+.grid2{display:grid;gap:18px;grid-template-columns:1fr 1fr;margin-top:44px}
+.concern{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px;text-align:left}
+.band .concern{background:var(--bg);border-color:transparent}
+.concern h3{font-size:18px;margin-bottom:8px}
+.concern p{color:var(--muted);font-size:15px}
+
+/* About */
+.about{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:start;max-width:860px;margin:0 auto}
+.avatar{width:120px;height:120px;border-radius:50%;background:var(--green-d);color:var(--mint);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:800;letter-spacing:-.02em}
+.about p{color:var(--muted);font-size:17px;margin-top:12px}
+.about .sig{margin-top:18px;font-weight:700;color:var(--ink)}
+.about .sig span{display:block;font-weight:500;color:var(--muted2);font-size:14px}
+
+/* Guides */
+.guides{display:grid;gap:18px;grid-template-columns:repeat(3,1fr);margin-top:40px}
+.guide{display:block;background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;text-align:left;color:var(--ink);transition:border-color .15s ease,transform .15s ease}
+.guide:hover{border-color:var(--green);transform:translateY(-2px)}
+.guide .k{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
+.guide h3{font-size:18px;margin:8px 0 6px}
+.guide p{font-size:14px;color:var(--muted)}
+.guide .go{font-size:14px;font-weight:700;color:var(--green);margin-top:12px;display:block}
+
+/* FAQ */
+.faq{max-width:780px;margin:0 auto}
 .faq details{border-bottom:1px solid var(--line);padding:18px 0}
-.faq summary{font-size:18px;font-weight:600;cursor:pointer;list-style:none}
+.faq summary{font-size:18px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
 .faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:22px;color:var(--green);line-height:1;flex:none}
+.faq details[open] summary::after{content:"−"}
 .faq p{color:var(--muted);margin-top:10px;font-size:16px}
-.contact{display:grid;gap:40px;grid-template-columns:1fr 1fr;align-items:start;margin-top:40px}
-.contact .big{font-size:22px;font-weight:700}
+
+/* Contact */
+.contact{display:grid;gap:40px;grid-template-columns:1fr 1fr;align-items:start;margin-top:44px}
+.next{display:flex;flex-direction:column;gap:18px}
+.next .n{display:flex;gap:14px;align-items:flex-start}
+.next .n .no{width:32px;height:32px;border-radius:50%;background:var(--mint-bg);color:var(--green-d);font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.next .n b{display:block;font-size:16px}
+.next .n span{color:var(--muted);font-size:15px}
+.direct{margin-top:10px;border-top:1px solid var(--line);padding-top:20px}
+.direct .big{font-size:22px;font-weight:700;color:var(--ink)}
 .form{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:14px}
-.form label{font-size:14px;font-weight:600;color:var(--muted);margin-bottom:5px;display:block}
+.form label{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;display:block}
 .form input,.form textarea{width:100%;font:inherit;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
-.form input:focus,.form textarea:focus{outline:2px solid var(--green);outline-offset:1px}
+.form input:focus,.form textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(29,91,70,.12)}
+.form .opt{font-weight:500;color:var(--muted2)}
+
+/* Legal + footer */
 .legal{background:#fff;border-top:1px solid var(--line)}
 .legal h2{font-size:24px;margin-bottom:12px}
 .legal h3{font-size:16px;margin:18px 0 6px}
@@ -111,42 +240,44 @@ section{padding:72px 0}
 footer{background:var(--green-d);color:#C7D6CE;font-size:14px}
 footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:30px 0}
 footer a{color:#fff}
-/* Modal booking */
+
+/* Modal */
 .modalbg{position:fixed;inset:0;background:rgba(20,33,28,.72);backdrop-filter:blur(6px);display:none;align-items:flex-start;justify-content:center;z-index:100;padding:40px 20px;overflow-y:auto}
 .modalbg.open{display:flex}
 .modal{background:var(--bg);border-radius:24px;width:100%;max-width:600px;padding:40px;position:relative;animation:modalIn .25s ease}
 @keyframes modalIn{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal .close{position:absolute;top:18px;right:18px;background:#fff;border:1px solid var(--line);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;line-height:1;color:var(--muted);padding:0}
-.modal .close:hover{background:#fff;color:var(--ink)}
-.modal .mhead{margin-bottom:26px;padding-right:40px}
-.modal .mctx{font-size:12px;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.modal .close{position:absolute;top:18px;right:18px;background:#fff;border:1px solid var(--line);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;line-height:1;color:var(--muted);padding:0}
+.modal .mhead{margin-bottom:24px;padding-right:44px}
+.modal .mctx{font-size:12px;font-weight:700;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
 .modal h3{font-size:26px;margin-bottom:8px;line-height:1.2}
 .modal .msub{color:var(--muted);font-size:15px;line-height:1.5}
-.steps2{display:flex;gap:6px;margin-bottom:30px}
+.steps2{display:flex;gap:6px;margin-bottom:8px}
 .steps2 .s{flex:1;height:4px;background:var(--line);border-radius:2px;transition:background .2s ease}
 .steps2 .s.done,.steps2 .s.active{background:var(--green)}
+.steplabel{font-size:13px;color:var(--muted2);margin-bottom:22px}
 .step2{display:none;flex-direction:column;gap:18px}
 .step2.active{display:flex}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.fld label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px}
-.fld input,.fld select,.fld textarea{width:100%;font:inherit;font-size:15px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);transition:border-color .15s ease,box-shadow .15s ease}
+.fld label{display:block;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:7px}
+.fld label .opt{font-weight:500;color:var(--muted2)}
+.fld input,.fld select,.fld textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
 .fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(29,91,70,.12)}
-.fld textarea{resize:vertical;min-height:90px;font-family:inherit}
-.fld .err{color:#B45233;font-size:13px;margin-top:5px;display:none}
-.fld.e input,.fld.e select,.fld.e textarea{border-color:#B45233}
+.fld textarea{resize:vertical;min-height:90px}
+.fld .err{color:var(--warn);font-size:13px;margin-top:5px;display:none}
+.fld.e input,.fld.e select,.fld.e textarea{border-color:var(--warn)}
 .fld.e .err{display:block}
 .radgroup{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .rad{display:block;cursor:pointer;position:relative}
 .rad input{position:absolute;opacity:0;pointer-events:none}
 .rad span{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:14px;font-weight:500;text-align:center;transition:all .15s ease;line-height:1.3}
 .rad input:checked + span{border-color:var(--green);background:var(--mint-bg);color:var(--green-d);font-weight:600}
-.rad:hover span{border-color:var(--muted2)}
-.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);line-height:1.5;padding-top:4px}
+.rad input:focus-visible + span{outline:3px solid var(--mint);outline-offset:1px}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);line-height:1.5;padding-top:4px;cursor:pointer}
 .consent input{margin-top:3px;flex:none;width:auto}
 .consent a{text-decoration:underline}
+.consent.e{color:var(--warn)}
 .mctrl{display:flex;gap:12px;margin-top:28px;align-items:center}
 .mctrl .back{background:none;border:0;color:var(--muted);font:inherit;font-weight:600;font-size:15px;cursor:pointer;padding:12px 4px}
-.mctrl .back:hover{color:var(--ink)}
 .mctrl .back.hidden{visibility:hidden}
 .mctrl .btn{margin-left:auto}
 .msuccess{display:none;text-align:center;padding:12px 0}
@@ -154,233 +285,376 @@ footer a{color:#fff}
 .msuccess .ic{width:68px;height:68px;background:var(--mint-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 22px}
 .msuccess h3{margin-bottom:12px;font-size:24px}
 .msuccess p{color:var(--muted);font-size:16px;line-height:1.6;max-width:420px;margin:0 auto}
-.extras{cursor:default}
-.extrabtn{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 16px;font:inherit;font-size:14px;font-weight:500;color:var(--ink);cursor:pointer;transition:all .15s ease;display:inline-flex;align-items:center;gap:6px}
-.extrabtn:hover{border-color:var(--green);color:var(--green-d);background:var(--mint-bg)}
-.extrabtn b{color:var(--green);font-weight:700}
-.extras-wrap{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:16px}
-@media(max-width:900px){.price{grid-template-columns:1fr;gap:28px}.plan.hot{transform:none}.plan.hot:hover{transform:translateY(-2px)}.badge{top:-13px}}
-@media(max-width:720px){nav.links{display:none}.calc{grid-template-columns:1fr}.contact{grid-template-columns:1fr}section{padding:54px 0}.hero{padding:52px 0 40px}.vsrow{grid-template-columns:1fr !important;gap:18px !important}.vsrow>div{border:0 !important;padding:14px 0 !important}.plan .phead{min-height:0}.plan .pcost{min-height:0}}
-@media(max-width:640px){.modal{padding:28px 22px;border-radius:20px}.fgrid{grid-template-columns:1fr}.radgroup{grid-template-columns:1fr}}
+
+/* Responsive */
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr;gap:36px;padding:64px 24px 56px}
+  .steps{grid-template-columns:1fr 1fr}
+  .price{grid-template-columns:1fr;gap:28px;max-width:520px;margin-left:auto;margin-right:auto}
+  .plan.hot{transform:none}.plan.hot:hover{transform:translateY(-2px)}
+  .plan .phead,.plan .pcost{min-height:0}
+  .calc{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr;gap:32px}
+  .guides{grid-template-columns:1fr}
+}
+@media(max-width:860px){
+  .navtoggle{display:flex}
+  nav.links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0;padding:8px 24px 20px}
+  nav.links.open{display:flex}
+  nav.links a{padding:14px 0;border-bottom:1px solid var(--line);font-size:17px}
+  nav.links .btn{margin-top:14px;border:0;text-align:center;padding:15px}
+}
+@media(max-width:720px){
+  section{padding:60px 0}
+  .wrap{padding:0 16px}
+  .wrap.hero{padding:36px 16px 48px}
+  .hero p.sub{font-size:18px}
+  .hero .cta .btn{flex:1 1 100%}
+  .steps{grid-template-columns:1fr}
+  .grid2{grid-template-columns:1fr}
+  .cmp{grid-template-columns:1fr}
+  .contact{grid-template-columns:1fr}
+  .about{grid-template-columns:1fr;text-align:left;gap:20px}
+  .avatar{width:84px;height:84px;font-size:28px}
+  .guarantee{flex-direction:column;gap:10px}
+}
+@media(max-width:640px){
+  .modalbg{padding:16px 10px}
+  .modal{padding:28px 20px;border-radius:20px}
+  .fgrid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap bar">
-    <a class="brand" href="#top">
-      <svg viewBox="0 0 28 28" fill="none" stroke="#1D5B46" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14 14 6l9 8"/><path d="M8 13v8h12v-8"/><path d="M12 21v-4h4v4"/></svg>
+    <a class="brand" href="#top" aria-label="Eigenhand Startseite">
+      <svg viewBox="0 0 28 28" fill="none" stroke="#1D5B46" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 14 14 6l9 8"/><path d="M8 13v8h12v-8"/><path d="M12 21v-4h4v4"/></svg>
       Eigenhand
     </a>
-    <nav class="links">
-      <a href="#ablauf">Ablauf</a>
+    <button type="button" class="navtoggle" id="navtoggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainnav">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="links" id="mainnav" aria-label="Hauptnavigation">
+      <a href="#ablauf">So funktioniert's</a>
+      <a href="#rechner">Ersparnis berechnen</a>
       <a href="#preise">Preise</a>
-      <a href="#rechner">Rechner</a>
-      <a href="#kontakt" class="btn" style="padding:11px 18px">Erstgespräch</a>
+      <a href="ratgeber.html">Ratgeber</a>
+      <a href="#faq">Fragen</a>
+      <button type="button" class="btn" onclick="openBooking('erst')">Kostenlose Ersteinschätzung</button>
     </nav>
   </div>
 </header>
 
 <a id="top"></a>
 <div class="herowrap">
-<section class="hero wrap">
-  <span class="tag">Für Wohnungen und Häuser im Kanton Zürich</span>
-  <h1>Verkaufen Sie Ihre Immobilie zum Festpreis. Ohne Provision.</h1>
-  <p class="sub">Sie bestimmen, wie viel Sie selbst machen und wo ein Profi übernimmt. Zum Festpreis ab CHF 990. Kein Prozent, kein Kleingedrucktes, keine Kompromisse bei der Qualität.</p>
-  <div class="cta">
-    <a href="#kontakt" class="btn">Kostenloses Erstgespräch</a>
-    <a href="#rechner" class="btn sec">Was spare ich?</a>
+  <div class="wrap hero">
+    <div>
+      <span class="tag">Für Wohnungen und Häuser im Kanton Zürich</span>
+      <h1>Verkaufen Sie Ihre Immobilie zum Festpreis statt mit Provision.</h1>
+      <p class="sub">Sie entscheiden, was Sie selbst machen und wo wir übernehmen. Ab CHF 990, ohne Prozente vom Verkaufspreis.</p>
+      <div class="cta">
+        <button type="button" class="btn" onclick="openBooking('erst')">Kostenlose Ersteinschätzung</button>
+        <a href="#rechner" class="btn sec">Meine Ersparnis berechnen</a>
+      </div>
+      <div class="ticks">
+        <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Keine Provision</span>
+        <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Portalkosten inklusive</span>
+        <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Ein fester Ansprechpartner</span>
+      </div>
+    </div>
+    <aside class="excard" aria-label="Rechenbeispiel">
+      <div class="lbl">Rechenbeispiel</div>
+      <div class="obj">Haus im Kanton Zürich, Verkaufspreis <span class="nw">CHF 1'500'000</span></div>
+      <div class="exrow"><span>Makler, 2.5 % Provision</span><b class="strike">CHF 37'500</b></div>
+      <div class="exrow"><span>Eigenhand «Begleitet»</span><b>CHF 5'900</b></div>
+      <div class="exrow" style="border-bottom:0"><span>Eigenhand «Pro»</span><b>CHF 1'990</b></div>
+      <div class="exsave"><div class="t">Sie behalten mit «Begleitet»</div><div class="v">CHF 31'600 mehr</div></div>
+      <p class="fine">Übliche Maklerprovisionen in der Schweiz liegen bei 2 bis 3 % des Verkaufspreises. Rechnen Sie mit Ihren eigenen Zahlen weiter unten.</p>
+    </aside>
   </div>
-  <div class="ticks">
-    <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Keine Provision</span>
-    <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Feste, offene Preise</span>
-    <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Profi-Hilfe, wenn nötig</span>
+</div>
+
+<section id="warum">
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow">Warum Eigenhand</div>
+      <h2 class="h2">Sie zahlen für die Arbeit, nicht für den Preis Ihres Hauses.</h2>
+      <p class="body">Eine Provision steigt mit dem Verkaufspreis. Die Arbeit dahinter nicht: Ein Haus für CHF 1.5 Millionen braucht kaum mehr Inserate, Besichtigungen und Gespräche als eines für CHF 900'000.</p>
+      <p class="body">Ein guter Makler leistet viel. Vieles davon können Sie aber selbst, wenn an den heiklen Stellen jemand mit Erfahrung an Ihrer Seite ist. Genau dort setzt Eigenhand an: Sie bezahlen einen festen Preis für die Unterstützung, die Sie wirklich brauchen.</p>
+    </div>
+    <div class="costbars" aria-label="Kostenvergleich bei CHF 1'500'000">
+      <div class="cb"><div class="top"><span>Makler 3 %</span><b>CHF 45'000</b></div><div class="track"><div class="fill" style="width:100%"></div></div></div>
+      <div class="cb"><div class="top"><span>Makler 2 %</span><b>CHF 30'000</b></div><div class="track"><div class="fill" style="width:66.7%"></div></div></div>
+      <div class="cb us"><div class="top"><span>Eigenhand «Begleitet»</span><b>CHF 5'900</b></div><div class="track"><div class="fill" style="width:13.1%"></div></div></div>
+      <div class="cb us"><div class="top"><span>Eigenhand «Pro»</span><b>CHF 1'990</b></div><div class="track"><div class="fill" style="width:4.4%"></div></div></div>
+      <p class="fine">Beispiel bei einem Verkaufspreis von CHF 1'500'000. Der Eigenhand-Preis bleibt gleich, egal wie teuer Ihre Immobilie ist.</p>
+    </div>
   </div>
 </section>
-</div>
 
 <section class="band" id="ablauf">
   <div class="wrap center">
-    <h2 class="h2">In vier Schritten verkauft</h2>
-    <p class="lead">Einfach, klar und in Ihrem Tempo. Wir führen Sie durch jeden Schritt.</p>
+    <div class="eyebrow">So funktioniert's</div>
+    <h2 class="h2">In vier Schritten zum Verkauf</h2>
+    <p class="lead">Sie behalten die Kontrolle über jeden Schritt. Wie viel wir übernehmen, bestimmen Sie mit der Wahl Ihres Pakets.</p>
     <div class="steps">
-      <div class="step"><div class="no">1</div><h3>Preis festlegen</h3><p>Sie erhalten eine Schätzung und auf Wunsch einen Preis-Check vor Ort durch einen Profi.</p></div>
-      <div class="step"><div class="no">2</div><h3>Online stellen</h3><p>Inserat und Exposé entstehen aus Ihren Angaben und erscheinen auf Homegate, ImmoScout24 und newhome.</p></div>
-      <div class="step"><div class="no">3</div><h3>Besichtigen</h3><p>Interessenten buchen Termine selbst. Sie sehen alle Anfragen übersichtlich an einem Ort.</p></div>
-      <div class="step"><div class="no">4</div><h3>Verkaufen</h3><p>Angebote vergleichen, bestes wählen, Notartermin vorbereiten. Auf Wunsch übernimmt der Profi die Verhandlung.</p></div>
+      <div class="step"><div class="no">1</div><h3>Ersteinschätzung</h3><p>Ein kurzes Telefongespräch. Wir schätzen Ihre Immobilie grob ein und sagen ehrlich, ob sich ein Verkauf mit Eigenhand für Sie lohnt.</p><div class="meta">Kostenlos, ca. 20 Minuten</div></div>
+      <div class="step"><div class="no">2</div><h3>Preis und Paket</h3><p>Sie wählen das Paket, das zu Ihnen passt. Gemeinsam legen wir einen realistischen Angebotspreis fest.</p><div class="meta">Festpreis ab CHF 990</div></div>
+      <div class="step"><div class="no">3</div><h3>Inserieren und besichtigen</h3><p>Exposé und Inserate gehen auf Homegate, ImmoScout24 und newhome online. Anfragen und Termine sehen Sie an einem Ort.</p><div class="meta">90 Tage online inklusive</div></div>
+      <div class="step"><div class="no">4</div><h3>Verhandeln und abschliessen</h3><p>Sie vergleichen die Angebote und wählen den Käufer. Der Kaufvertrag wird beim Notar beurkundet, wir bereiten Sie darauf vor.</p><div class="meta">Bis zum Notartermin</div></div>
     </div>
   </div>
 </section>
 
-<section class="wrap center">
-  <h2 class="h2">Sie sind nie allein</h2>
-  <p class="lead">Ein Inserat ist schnell gemacht. Beim Rest unterstützt Sie Eigenhand.</p>
-  <div class="grid3">
-    <div class="feat"><svg viewBox="0 0 32 32" fill="none" stroke="#1D5B46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 24h20"/><path d="M9 24V14"/><path d="M16 24V8"/><path d="M23 24V11"/></svg><h3>Richtiger Preis</h3><p>Ein Profi prüft Ihren Preis vor Ort, damit Sie nicht zu tief oder zu hoch starten.</p></div>
-    <div class="feat"><svg viewBox="0 0 32 32" fill="none" stroke="#1D5B46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 6 8v7c0 6.5 4.3 11 10 13 5.7-2 10-6.5 10-13V8z"/><path d="m11.5 16 3.2 3.2 6-6.4"/></svg><h3>Nur ernsthafte Käufer</h3><p>Interessenten zeigen ihre Finanzierung, bevor sie zur Besichtigung kommen.</p></div>
-    <div class="feat"><svg viewBox="0 0 32 32" fill="none" stroke="#1D5B46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11a9 9 0 0 1 15.5-2.5L26 11"/><path d="M26 5v6h-6"/><path d="M24 21a9 9 0 0 1-15.5 2.5L6 21"/><path d="M6 27v-6h6"/></svg><h3>Kein Risiko</h3><p>Klappt es nach 90 Tagen nicht, übernehmen wir zum Festpreis. Bezahltes wird angerechnet.</p></div>
+<section id="rechner">
+  <div class="wrap center">
+    <div class="eyebrow">Ersparnis berechnen</div>
+    <h2 class="h2">Was bleibt Ihnen am Ende?</h2>
+    <p class="lead">Geben Sie Ihren erwarteten Verkaufspreis ein. Alle Annahmen stehen offen unter dem Ergebnis.</p>
+    <div class="calc">
+      <div class="in">
+        <div><label for="f_price">Erwarteter Verkaufspreis (CHF)</label><input id="f_price" type="number" inputmode="numeric" step="10000" min="0" value="1500000"></div>
+        <div>
+          <span class="lab" id="lab_rate">Maklerprovision zum Vergleich</span>
+          <div class="seg" role="group" aria-labelledby="lab_rate" id="seg_rate">
+            <button type="button" data-v="2" aria-pressed="false">2 %</button>
+            <button type="button" data-v="2.5" aria-pressed="true">2.5 %</button>
+            <button type="button" data-v="3" aria-pressed="false">3 %</button>
+          </div>
+        </div>
+        <div>
+          <span class="lab" id="lab_pack">Eigenhand-Paket</span>
+          <div class="seg" role="group" aria-labelledby="lab_pack" id="seg_pack">
+            <button type="button" data-v="990" data-n="Selbst" aria-pressed="false">Selbst<small>CHF 990</small></button>
+            <button type="button" data-v="1990" data-n="Pro" aria-pressed="true">Pro<small>CHF 1'990</small></button>
+            <button type="button" data-v="5900" data-n="Begleitet" aria-pressed="false">Begleitet<small>CHF 5'900</small></button>
+          </div>
+        </div>
+        <details>
+          <summary>Nettoerlös genauer berechnen</summary>
+          <div class="adv">
+            <div><label for="f_mort">Offene Hypothek (CHF)</label><input id="f_mort" type="number" inputmode="numeric" step="10000" min="0" value="0"></div>
+            <div><label for="f_buy">Damaliger Kaufpreis (CHF), für die Steuer</label><input id="f_buy" type="number" inputmode="numeric" step="10000" min="0" placeholder="z. B. 900000"></div>
+            <div><label for="f_years">Besitzdauer (Jahre)</label><input id="f_years" type="number" inputmode="numeric" step="1" min="0" value="10"></div>
+          </div>
+        </details>
+      </div>
+      <div class="out">
+        <div class="savebig">
+          <div class="t">Ersparnis gegenüber dem Makler</div>
+          <div class="v" id="o_save">CHF 0</div>
+          <div class="s" id="o_saveNote">vor Steuern</div>
+          <button type="button" class="btn mint" id="calcCta" onclick="openBooking(window.__calcPack||'pro')">Kostenlose Ersteinschätzung</button>
+        </div>
+        <div class="cmp">
+          <div class="outcard">
+            <div class="h" id="o_mHead">Mit Makler (2.5 %)</div>
+            <div class="outrow"><span class="m">Provision</span><span id="o_mCost"></span></div>
+            <div class="outrow"><span class="m">Grundstückgewinnsteuer</span><span id="o_mTax"></span></div>
+            <div class="outrow"><span class="m">Notar &amp; Grundbuch</span><span id="o_notar"></span></div>
+            <div class="outrow"><span class="m">Hypothek</span><span id="o_debt"></span></div>
+            <div class="outtot"><span>Nettoerlös</span><b id="o_mNet"></b></div>
+          </div>
+          <div class="outcard hi">
+            <div class="h" id="o_oHead">Mit Eigenhand «Pro»</div>
+            <div class="outrow"><span class="m">Festpreis</span><span id="o_oCost"></span></div>
+            <div class="outrow"><span class="m">Grundstückgewinnsteuer</span><span id="o_oTax"></span></div>
+            <div class="outrow"><span class="m">Notar &amp; Grundbuch</span><span id="o_notar2"></span></div>
+            <div class="outrow"><span class="m">Hypothek</span><span id="o_debt2"></span></div>
+            <div class="outtot"><span>Nettoerlös</span><b id="o_oNet"></b></div>
+          </div>
+        </div>
+        <p class="fineprint">Unverbindliche Schätzung, keine Steuer- oder Rechtsberatung. Grundstückgewinnsteuer vereinfacht nach dem Zürcher Tarif mit Besitzdauer-Abzug; die Provision ist als Kosten abziehbar, deshalb ist die Ersparnis nach Steuern etwas kleiner als vor Steuern. Notar- und Grundbuchgebühren geschätzt mit je 1 ‰, hälftig zwischen Käufer und Verkäufer geteilt.</p>
+      </div>
+    </div>
   </div>
-</section>
-
-<section style="padding:48px 0;background:var(--green-d);color:#fff">
-  <div class="wrap vsrow" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:center;text-align:center">
-    <div>
-      <div style="font-size:13px;color:#C7D6CE;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Klassischer Makler</div>
-      <div style="font-size:30px;font-weight:800;margin-top:6px;color:#fff">CHF 37'500</div>
-      <div style="font-size:14px;color:#C7D6CE;margin-top:4px">2.5 % Provision</div>
-    </div>
-    <div style="border-left:1px solid rgba(255,255,255,0.15);border-right:1px solid rgba(255,255,255,0.15);padding:8px 0">
-      <div style="font-size:13px;color:#C7D6CE;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Online-Makler</div>
-      <div style="font-size:30px;font-weight:800;margin-top:6px;color:#fff">CHF 22'500</div>
-      <div style="font-size:14px;color:#C7D6CE;margin-top:4px">1.5 % Provision</div>
-    </div>
-    <div>
-      <div style="font-size:13px;color:#9FE0C3;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Eigenhand «Begleitet»</div>
-      <div style="font-size:30px;font-weight:800;margin-top:6px;color:#9FE0C3">CHF 5'900</div>
-      <div style="font-size:14px;color:#C7D6CE;margin-top:4px">Festpreis. Fertig.</div>
-    </div>
-  </div>
-  <p style="font-size:13px;color:#B9CFC5;text-align:center;margin-top:20px;max-width:620px;margin-left:auto;margin-right:auto">Rechenbeispiel bei einer Immobilie für CHF 1'500'000. Provisionssätze von Mitbewerbern variieren je nach Anbieter und Objekt. Der Eigenhand-Preis bleibt gleich – egal wie teuer Ihre Immobilie ist.</p>
 </section>
 
 <section class="band" id="preise">
   <div class="wrap center">
+    <div class="eyebrow">Preise und Pakete</div>
     <h2 class="h2">Ein Festpreis. Keine Provision.</h2>
-    <p class="lead">Je mehr Sie selbst machen, desto mehr sparen Sie. Je mehr wir übernehmen, desto entspannter für Sie. Alle Preise inkl. Portalkosten und MWST.</p>
+    <p class="lead">Je mehr Sie selbst machen, desto mehr sparen Sie. Je mehr wir übernehmen, desto weniger Aufwand haben Sie. Alle Preise inklusive Portalkosten und MWST.</p>
     <div class="price">
       <div class="plan">
         <div class="phead">
+          <div class="who">Sie verkaufen selbst</div>
           <h3>Selbst</h3>
-          <p class="d">Für alle, die selbst verkaufen und maximal sparen wollen.</p>
+          <p class="d">Für alle, die den Verkauf selbst in die Hand nehmen und maximal sparen wollen.</p>
         </div>
-        <div class="pcost">
-          <div class="amt">CHF 990 <small>einmalig</small></div>
-        </div>
+        <div class="pcost"><div class="amt">CHF 990 <small>einmalig</small></div></div>
         <ul>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Ihre Fotos aufbereitet &amp; professionelles Exposé</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Auf Homegate, ImmoScout24, newhome und mehr – 90 Tage online</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Preisschätzung mit Vergleichsobjekten</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Anfragen, Termine und Angebote an einem Ort</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Checkliste für den Immobilienverkauf</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Ihre Fotos aufbereitet und professionelles Exposé</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Inserate auf Homegate, ImmoScout24 und newhome, 90 Tage</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Preisschätzung mit Vergleichsobjekten</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Anfragen, Termine und Angebote an einem Ort</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Checkliste und Interessenten-Fragebogen</li>
         </ul>
-        <button type="button" class="btn sec block" onclick="openBooking('selbst')">Paket wählen</button>
+        <button type="button" class="btn sec block" onclick="openBooking('selbst')">«Selbst» anfragen</button>
       </div>
       <div class="plan hot">
         <span class="badge">Beliebteste Wahl</span>
         <div class="phead">
+          <div class="who">Sie verkaufen, wir beraten</div>
           <h3>Pro</h3>
-          <p class="d">Selbst verkaufen, aber nie allein. Das beste Verhältnis aus Preis und Sicherheit.</p>
+          <p class="d">Selbst verkaufen, aber mit Profi-Fotos und einer erfahrenen Person, die Sie bei jeder Entscheidung berät.</p>
         </div>
-        <div class="pcost">
-          <div class="amt">CHF 1'990 <small>einmalig</small></div>
-        </div>
+        <div class="pcost"><div class="amt">CHF 1'990 <small>einmalig</small></div></div>
         <ul>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Selbst»</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Professionelle Fotos vor Ort durch uns</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Persönlicher Ansprechpartner während des Verkaufs</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Beratung bei Kaufangeboten und Verhandlungen</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wechsel-Garantie: Upgrade jederzeit möglich</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Selbst»</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Professionelle Fotos vor Ort</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Preiseinschätzung mit Besichtigung vor Ort</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Persönlicher Ansprechpartner während des ganzen Verkaufs</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Beratung bei Kaufangeboten und Verhandlung</li>
         </ul>
-        <button type="button" class="btn mint block" onclick="openBooking('pro')">Paket wählen</button>
+        <button type="button" class="btn mint block" onclick="openBooking('pro')">«Pro» anfragen</button>
       </div>
       <div class="plan">
         <div class="phead">
+          <div class="who">Wir verkaufen für Sie</div>
           <h3>Begleitet</h3>
-          <p class="d">Für alle, die verkaufen wollen, ohne sich um etwas zu kümmern.</p>
+          <p class="d">Für alle, die verkaufen wollen, ohne sich um Besichtigungen und Verhandlungen zu kümmern.</p>
         </div>
         <div class="pcost">
           <div class="amt">CHF 5'900 <small>total</small></div>
-          <div class="split">CHF 2'900 bei Start · CHF 3'000 beim Verkauf</div>
+          <div class="note">CHF 2'900 bei Start, CHF 3'000 erst beim Verkauf</div>
         </div>
         <ul>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Pro»</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Bewertung mit unserem Bankpartner</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Wir führen Besichtigungen durch (2 Tage inkl.)</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Käufer-Qualifizierung mit Finanzierungsnachweis</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg>Verhandlung &amp; Unterlagen bis zum Notar</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Pro»</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Wir führen die Besichtigungen durch (2 Tage inklusive)</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Prüfung der Käufer inklusive Finanzierungsnachweis</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Wir verhandeln den Preis in Ihrem Auftrag</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Unterlagen und Koordination bis zum Notartermin</li>
         </ul>
-        <button type="button" class="btn sec block" onclick="openBooking('begleitet')">Paket wählen</button>
+        <button type="button" class="btn sec block" onclick="openBooking('begleitet')">«Begleitet» anfragen</button>
       </div>
     </div>
-    <div style="margin-top:40px">
-      <p style="font-size:15px;font-weight:600;color:var(--ink);text-align:center;margin-bottom:14px">Einzeln dazubuchen – nur was Sie brauchen</p>
+
+    <div class="guarantee">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#123D2F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4 6 8v7c0 6.5 4.3 11 10 13 5.7-2 10-6.5 10-13V8z"/><path d="m11.5 16 3.2 3.2 6-6.4"/></svg>
+      <p><strong>Wechsel-Garantie.</strong> Sie merken unterwegs, dass Sie doch mehr Unterstützung möchten? Wechseln Sie jederzeit von «Selbst» oder «Pro» zu «Begleitet». Was Sie bereits bezahlt haben, rechnen wir vollständig an.</p>
+    </div>
+
+    <details class="compare">
+      <summary>Wer macht was? Alle Leistungen im Vergleich</summary>
+      <div class="tablewrap">
+        <table class="who">
+          <thead><tr><th scope="col">Aufgabe</th><th scope="col" class="c">Selbst</th><th scope="col" class="c">Pro</th><th scope="col" class="c">Begleitet</th></tr></thead>
+          <tbody>
+            <tr><td>Angebotspreis festlegen</td><td class="c"><span class="tg both">Schätzung</span></td><td class="c"><span class="tg both">Gemeinsam</span></td><td class="c"><span class="tg both">Gemeinsam</span></td></tr>
+            <tr><td>Fotos</td><td class="c"><span class="tg you">Sie</span></td><td class="c"><span class="tg we">Wir</span></td><td class="c"><span class="tg we">Wir</span></td></tr>
+            <tr><td>Exposé und Inserate</td><td class="c"><span class="tg we">Wir</span></td><td class="c"><span class="tg we">Wir</span></td><td class="c"><span class="tg we">Wir</span></td></tr>
+            <tr><td>Anfragen beantworten</td><td class="c"><span class="tg you">Sie</span></td><td class="c"><span class="tg you">Sie</span></td><td class="c"><span class="tg we">Wir</span></td></tr>
+            <tr><td>Besichtigungen</td><td class="c"><span class="tg you">Sie</span></td><td class="c"><span class="tg you">Sie</span></td><td class="c"><span class="tg we">Wir</span></td></tr>
+            <tr><td>Käufer und Finanzierung prüfen</td><td class="c"><span class="tg you">Sie, mit Fragebogen</span></td><td class="c"><span class="tg both">Gemeinsam</span></td><td class="c"><span class="tg we">Wir</span></td></tr>
+            <tr><td>Preisverhandlung</td><td class="c"><span class="tg you">Sie</span></td><td class="c"><span class="tg both">Wir beraten</span></td><td class="c"><span class="tg we">Wir</span></td></tr>
+            <tr><td>Unterlagen für den Notar</td><td class="c"><span class="tg you">Sie, mit Checkliste</span></td><td class="c"><span class="tg you">Sie, mit Checkliste</span></td><td class="c"><span class="tg we">Wir</span></td></tr>
+            <tr><td>Persönlicher Ansprechpartner</td><td class="c">–</td><td class="c"><span class="tg we">Ja</span></td><td class="c"><span class="tg we">Ja</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <div style="margin-top:44px">
+      <p style="font-size:16px;font-weight:700;color:var(--ink)">Einzeln dazubuchen</p>
+      <p style="font-size:15px;color:var(--muted);margin-top:4px">Nur was Sie brauchen, auch ohne Paket.</p>
       <div class="extras-wrap">
         <button type="button" class="extrabtn" onclick="openBooking('bewertung')">Nur Bewertung · <b>CHF 290</b></button>
         <button type="button" class="extrabtn" onclick="openBooking('besichtigung')">Besichtigungstag · <b>CHF 490</b></button>
         <button type="button" class="extrabtn" onclick="openBooking('verhandlung')">Verhandlung · <b>CHF 990</b></button>
         <button type="button" class="extrabtn" onclick="openBooking('unterlagen')">Unterlagen-Service · <b>CHF 190</b></button>
-        <button type="button" class="extrabtn" onclick="openBooking('inserat')">Inserat-Verlängerung · <b>30 Tage</b></button>
+        <button type="button" class="extrabtn" onclick="openBooking('inserat')">Inserat-Verlängerung · <b>CHF 190 / 30 Tage</b></button>
       </div>
+    </div>
+
+    <div class="notincl">
+      <h3>Was nicht im Preis enthalten ist</h3>
+      <p>Notar- und Grundbuchgebühren sowie die Grundstückgewinnsteuer fallen bei jedem Immobilienverkauf an, auch mit einem Makler. Diese Kosten bezahlen Sie direkt an Notariat und Gemeinde. Wir zeigen Ihnen vorab, mit welchen Beträgen Sie rechnen müssen.</p>
     </div>
   </div>
 </section>
 
-<section class="wrap center" id="rechner">
-  <h2 class="h2">Was bleibt Ihnen am Ende?</h2>
-  <p class="lead">Rechnen Sie in 30 Sekunden aus, wie viel Sie mit Eigenhand gegenüber einem Makler sparen.</p>
-  <div class="calc" style="text-align:left">
-    <div class="in">
-      <div><label>Erwarteter Verkaufspreis (CHF)</label><input id="f_price" type="number" step="any" value="1200000"></div>
-      <div><label>Offene Hypothek (CHF)</label><input id="f_mort" type="number" step="any" value="500000"></div>
-      <div><label>Damaliger Kaufpreis (CHF)</label><input id="f_buy" type="number" step="any" value="750000"></div>
-      <div><label>Besitzdauer (Jahre)</label><input id="f_years" type="number" step="any" value="10"></div>
-    </div>
-    <div class="out">
-      <div class="outcard">
-        <div style="font-weight:700;margin-bottom:6px">Mit Makler (2.5 % Provision)</div>
-        <div class="outrow"><span class="m">Provision</span><span id="o_mCost"></span></div>
-        <div class="outrow"><span class="m">Grundstückgewinnsteuer</span><span id="o_mTax"></span></div>
-        <div class="outrow"><span class="m">Notar &amp; Grundbuch</span><span id="o_notar"></span></div>
-        <div class="outrow"><span class="m">Hypothek</span><span id="o_debt"></span></div>
-        <div class="outtot"><span>Nettoerlös</span><b id="o_mNet"></b></div>
-      </div>
-      <div class="outcard hi">
-        <div style="font-weight:700;margin-bottom:6px;color:var(--green-d)">Mit Eigenhand «Pro»</div>
-        <div class="outrow"><span class="m">Festpreis</span><span>CHF 1'990</span></div>
-        <div class="outrow"><span class="m">Grundstückgewinnsteuer</span><span id="o_oTax"></span></div>
-        <div class="outrow"><span class="m">Notar &amp; Grundbuch</span><span id="o_notar2"></span></div>
-        <div class="outrow"><span class="m">Hypothek</span><span id="o_debt2"></span></div>
-        <div class="outtot"><span>Nettoerlös</span><b id="o_oNet"></b></div>
-      </div>
-      <div class="save"><div><div style="color:#B9CFC5;font-weight:600">Sie behalten mehr</div><div class="big" id="o_save"></div></div><button type="button" class="btn mint" onclick="openBooking('pro')">Pro buchen</button></div>
-      <p style="font-size:13px;color:var(--muted2)">Unverbindliche Schätzung, keine Steuer- oder Rechtsberatung. Vergleich mit 2.5 % Maklerprovision. Grundstückgewinnsteuer vereinfacht nach Zürcher Tarif. Notar und Grundbuch je 1 ‰, hälftig geteilt.</p>
+<section id="bedenken">
+  <div class="wrap center">
+    <div class="eyebrow">Ihre Bedenken</div>
+    <h2 class="h2">Was Eigentümer vor dem Selbstverkauf beschäftigt</h2>
+    <p class="lead">Diese vier Fragen hören wir am häufigsten. Hier sind unsere ehrlichen Antworten.</p>
+    <div class="grid2">
+      <div class="concern"><h3>«Verkaufe ich unter Wert?»</h3><p>Der Preis wird nicht am Verhandlungstisch verloren, sondern beim Start. Deshalb beginnt jedes Paket mit einer Preisschätzung auf Basis vergleichbarer Verkäufe. Ab «Pro» schauen wir uns Ihr Objekt vor Ort an.</p></div>
+      <div class="concern"><h3>«Mache ich rechtlich etwas falsch?»</h3><p>Den Kaufvertrag setzt in der Schweiz immer ein Notariat auf und beurkundet ihn, auch wenn ein Makler beteiligt ist. Sie erhalten von uns eine Checkliste mit allen Unterlagen und wissen vor dem Termin, worauf Sie achten müssen.</p></div>
+      <div class="concern"><h3>«Wie viel Zeit kostet mich das?»</h3><p>Bei «Selbst» und «Pro» übernehmen Sie Anfragen und Besichtigungen, meist einige Stunden pro Woche während der Vermarktung. Ist das zu viel, übernehmen wir mit «Begleitet» oder einzelnen Besichtigungstagen.</p></div>
+      <div class="concern"><h3>«Was, wenn sich nichts tut?»</h3><p>Wir besprechen mit Ihnen, ob Preis, Fotos oder Inserat angepasst werden sollten. Mit der Wechsel-Garantie können Sie jederzeit zu «Begleitet» wechseln, ohne doppelt zu bezahlen.</p></div>
     </div>
   </div>
 </section>
 
-<section class="band">
-  <div class="wrap about">
-    <h2 class="h2">Warum Eigenhand?</h2>
-    <p>Beim Verkauf einer Immobilie zahlen Eigentümer oft zehntausende Franken Provision für Arbeit, die sie zu einem grossen Teil selbst erledigen könnten – wenn sie an den richtigen Stellen Unterstützung hätten.</p>
-    <p>Genau das bietet Eigenhand. Sie verkaufen selbst und behalten die Kontrolle. Wo es heikel wird, ist ein Immobilien-Profi persönlich für Sie da. Gegründet in Kloten, für den Kanton Zürich.</p>
-  </div>
-</section>
-
-<section class="wrap faq">
-  <h2 class="h2 center" style="margin-bottom:8px">Häufige Fragen</h2>
-  <details><summary>Ist ein Verkauf ohne Makler erlaubt?</summary><p>Ja. Eigentümer dürfen selbst verkaufen. Der Kaufvertrag wird in jedem Fall beim Notar beurkundet – wir bereiten Sie darauf vor.</p></details>
-  <details><summary>Wer unterstützt mich?</summary><p>Ein Immobilien-Profi, der den Markt im Raum Zürich kennt. Preis-Check, Besichtigungen und Verhandlung übernimmt er persönlich, wenn Sie möchten.</p></details>
-  <details><summary>Was passiert, wenn ich nicht verkaufe?</summary><p>Mit der Wechsel-Garantie wechseln Sie nach 90 Tagen vom «Selbst»- oder «Pro»-Paket zu «Begleitet». Bereits Bezahltes wird vollständig angerechnet.</p></details>
-  <details><summary>Wann bezahle ich?</summary><p>«Selbst» und «Pro» bezahlen Sie bei Start. Bei «Begleitet» teilen Sie: CHF 2'900 bei Start, CHF 3'000 beim erfolgreichen Verkauf. Keine prozentuale Provision.</p></details>
-  <details><summary>Ich will erst wissen, was meine Immobilie wert ist.</summary><p>Buchen Sie unsere «Nur Bewertung» für CHF 290. Sie erhalten eine fundierte Marktpreiseinschätzung mit Vergleichsobjekten – ohne Verpflichtung. Entscheiden Sie sich später für ein Paket, rechnen wir die CHF 290 an.</p></details>
-  <details><summary>Für welche Objekte ist Eigenhand gedacht?</summary><p>Wohnungen und Häuser im Kanton Zürich, in der Regel zwischen CHF 600'000 und CHF 2'000'000. Für Luxusobjekte und Mehrfamilienhäuser erstellen wir Ihnen gerne ein individuelles Angebot.</p></details>
-</section>
-
-<section class="band" id="kontakt">
+<section class="band" id="ueber-uns">
   <div class="wrap">
-    <div class="center"><h2 class="h2">Kostenloses Erstgespräch</h2><p class="lead">20 Minuten am Telefon. Wir sagen Ihnen ehrlich, ob sich der Selbstverkauf für Sie lohnt.</p></div>
-    <div class="contact">
+    <div class="about">
+      <div class="avatar" aria-hidden="true">HS</div>
       <div>
-        <p class="big">078 752 81 77</p>
-        <p style="color:var(--muted);margin-top:6px">info@eigenhand.ch</p>
-        <p style="color:var(--muted);margin-top:16px">Rufen Sie an oder lassen Sie sich zurückrufen. Wir melden uns am selben oder nächsten Tag.</p>
+        <div class="eyebrow">Wer hinter Eigenhand steht</div>
+        <h2 class="h2">Ein Ansprechpartner. Kein Callcenter.</h2>
+        <p>Eigenhand ist ein junges Unternehmen aus Kloten, gegründet 2026. Ich habe in der Immobilienvermittlung im Raum Zürich gearbeitet und kenne die Abläufe vom ersten Gespräch bis zum Notartermin. Dabei habe ich oft gesehen, wie viel Provision Eigentümer für Arbeit bezahlen, die sie mit etwas Unterstützung selbst erledigen könnten.</p>
+        <p>Wir sind neu und sagen das offen. Kundenbewertungen haben wir deshalb noch keine. Was wir Ihnen bieten können: feste Preise, klar beschriebene Leistungen, eine Wechsel-Garantie und eine Person, die Sie direkt erreichen.</p>
+        <div class="sig">Haris Savran<span>Gründer, Eigenhand · Kloten</span></div>
       </div>
-      <form class="form" action="https://formspree.io/f/DEINE-FORMSPREE-ID" method="POST">
-        <div><label>Name</label><input type="text" name="name" required></div>
-        <div><label>Telefon</label><input type="tel" name="telefon" required></div>
-        <div><label>Gemeinde des Objekts</label><input type="text" name="gemeinde"></div>
-        <button class="btn block" type="submit">Rückruf anfordern</button>
-        <p style="font-size:13px;color:var(--muted2);margin:0">Ihre Angaben verwenden wir nur für dieses Gespräch.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ratgeber">
+  <div class="wrap center">
+    <div class="eyebrow">Ratgeber</div>
+    <h2 class="h2">Gut vorbereitet verkaufen</h2>
+    <p class="lead">Kostenloses Wissen rund um den privaten Immobilienverkauf im Kanton Zürich.</p>
+    <div class="guides">
+      <a class="guide" href="ratgeber.html#unterlagen"><span class="k">Checkliste</span><h3>Diese Unterlagen brauchen Sie</h3><p>Vom Grundbuchauszug bis zum Gebäudeversicherungsausweis: was Käufer, Bank und Notariat sehen wollen.</p><span class="go">Zur Checkliste →</span></a>
+      <a class="guide" href="ratgeber.html#ablauf"><span class="k">Ablauf</span><h3>Vom Inserat bis zum Notar</h3><p>Die Schritte eines Immobilienverkaufs in der Schweiz und wie lange sie ungefähr dauern.</p><span class="go">Zum Ablauf →</span></a>
+      <a class="guide" href="ratgeber.html#kosten"><span class="k">Kosten</span><h3>Was beim Verkauf anfällt</h3><p>Grundstückgewinnsteuer, Notar und Grundbuch: womit Sie rechnen müssen, mit oder ohne Makler.</p><span class="go">Zu den Kosten →</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="faq">
+  <div class="wrap faq">
+    <div class="center" style="margin-bottom:12px"><div class="eyebrow">Fragen</div><h2 class="h2">Häufige Fragen</h2></div>
+    <details><summary>Ist ein Verkauf ohne Makler in der Schweiz erlaubt?</summary><p>Ja. Eigentümer dürfen ihre Immobilie selbst verkaufen. Der Kaufvertrag wird in jedem Fall von einem Notariat öffentlich beurkundet, mit oder ohne Makler.</p></details>
+    <details><summary>Für welche Objekte ist Eigenhand gedacht?</summary><p>Für Eigentumswohnungen und Einfamilienhäuser im Kanton Zürich, meist zwischen CHF 600'000 und CHF 2'000'000. Für Mehrfamilienhäuser oder besondere Objekte besprechen wir im Erstgespräch, ob und wie wir helfen können.</p></details>
+    <details><summary>Welche Kosten kommen zum Paketpreis dazu?</summary><p>Von Eigenhand keine. Portalkosten für 90 Tage und MWST sind enthalten. Unabhängig von uns fallen bei jedem Verkauf Notar- und Grundbuchgebühren sowie die Grundstückgewinnsteuer an.</p></details>
+    <details><summary>Wann und wie bezahle ich?</summary><p>«Selbst» und «Pro» bezahlen Sie bei Start. Bei «Begleitet» bezahlen Sie CHF 2'900 bei Start und CHF 3'000 erst, wenn der Kaufvertrag beurkundet ist. Es gibt kein Abo und keine Provision.</p></details>
+    <details><summary>Was passiert, wenn ich nach 90 Tagen noch nicht verkauft habe?</summary><p>Wir analysieren mit Ihnen, woran es liegt, und passen bei Bedarf Preis oder Inserat an. Eine Verlängerung der Inserate kostet CHF 190 pro 30 Tage. Mit der Wechsel-Garantie können Sie zu «Begleitet» wechseln und bekommen Bezahltes angerechnet.</p></details>
+    <details><summary>Wer führt die Besichtigungen durch?</summary><p>Bei «Selbst» und «Pro» Sie selbst, mit unserem Leitfaden und Interessenten-Fragebogen. Bei «Begleitet» übernehmen wir zwei Besichtigungstage. Weitere Tage oder einzelne Termine buchen Sie für CHF 490 pro Tag dazu.</p></details>
+    <details><summary>Was ist der Unterschied zwischen «Nur Bewertung» und der kostenlosen Ersteinschätzung?</summary><p>Die Ersteinschätzung ist ein kostenloses Telefongespräch mit einer groben Preisspanne. «Nur Bewertung» für CHF 290 ist eine schriftliche Preiseinschätzung mit Vergleichsobjekten. Buchen Sie danach ein Paket, rechnen wir die CHF 290 an.</p></details>
+    <details><summary>Was passiert nach meiner Anfrage?</summary><p>Wir rufen Sie innert 24 Stunden an (Montag bis Samstag), zum Zeitpunkt, den Sie angeben. Die Anfrage ist unverbindlich. Erst wenn Sie sich für ein Paket entscheiden, erhalten Sie einen schriftlichen Auftrag zur Unterschrift.</p></details>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="wrap">
+    <div class="center"><div class="eyebrow">Kostenlose Ersteinschätzung</div><h2 class="h2">Finden Sie heraus, ob sich der Selbstverkauf für Sie lohnt</h2><p class="lead">Ein kurzes Gespräch, unverbindlich und kostenlos. Wenn ein klassischer Makler für Ihre Situation besser passt, sagen wir Ihnen das auch.</p></div>
+    <div class="contact">
+      <div class="next">
+        <div class="n"><div class="no">1</div><div><b>Sie senden uns ein paar Angaben</b><span>Dauert etwa eine Minute.</span></div></div>
+        <div class="n"><div class="no">2</div><div><b>Wir rufen Sie innert 24 Stunden an</b><span>Zum Zeitpunkt, der Ihnen passt.</span></div></div>
+        <div class="n"><div class="no">3</div><div><b>Sie erhalten eine erste Einschätzung</b><span>Eine grobe Preisspanne und eine ehrliche Empfehlung, welches Paket zu Ihnen passt.</span></div></div>
+        <div class="direct">
+          <p style="color:var(--muted)">Lieber direkt sprechen?</p>
+          <a class="big" href="tel:+41787528177">078 752 81 77</a>
+          <p style="margin-top:4px"><a href="mailto:info@eigenhand.ch">info@eigenhand.ch</a></p>
+        </div>
+      </div>
+      <form class="form" id="quickform" novalidate>
+        <input type="hidden" name="buchungstyp" value="Kostenlose Ersteinschätzung (Kurzformular)">
+        <div class="fld"><label for="q_name">Name</label><input id="q_name" type="text" name="name" autocomplete="name" required><p class="err">Bitte Namen eingeben</p></div>
+        <div class="fld"><label for="q_tel">Telefon</label><input id="q_tel" type="tel" name="telefon" autocomplete="tel" required><p class="err">Bitte Telefonnummer eingeben</p></div>
+        <div class="fld"><label for="q_gem">Gemeinde des Objekts <span class="opt">(optional)</span></label><input id="q_gem" type="text" name="gemeinde"></div>
+        <label class="consent" id="q_consentbox"><input type="checkbox" id="q_consent"><span>Ich bin einverstanden, dass Eigenhand mich zu dieser Anfrage kontaktiert. Mehr in der <a href="#datenschutz">Datenschutzerklärung</a>.</span></label>
+        <button class="btn block" type="submit" id="q_submit">Rückruf anfordern</button>
+        <p class="fineprint" id="q_msg" role="status" style="margin:0">Unverbindlich. Ihre Angaben verwenden wir nur für diese Anfrage.</p>
       </form>
     </div>
   </div>
@@ -395,19 +669,21 @@ footer a{color:#fff}
       <h3>Kontakt</h3>
       <p>E-Mail: info@eigenhand.ch · Telefon: 078 752 81 77</p>
       <h3>Handelsregister</h3>
-      <p>Noch nicht im Handelsregister eingetragen (Einzelunternehmen unter CHF 100'000 Umsatz). UID folgt bei Eintragung.</p>
+      <p>Noch nicht im Handelsregister eingetragen. UID folgt bei Eintragung.</p>
       <h3>Haftungsausschluss</h3>
-      <p>Die Inhalte dieser Website werden mit Sorgfalt erstellt. Für Richtigkeit, Vollständigkeit und Aktualität wird keine Gewähr übernommen. Für Inhalte externer Links sind deren Betreiber verantwortlich.</p>
+      <p>Die Inhalte dieser Website werden mit Sorgfalt erstellt. Für Richtigkeit, Vollständigkeit und Aktualität wird keine Gewähr übernommen. Rechenbeispiele und der Ersparnisrechner sind unverbindliche Schätzungen und ersetzen keine Steuer- oder Rechtsberatung. Für Inhalte externer Links sind deren Betreiber verantwortlich.</p>
     </div>
     <div id="datenschutz">
       <h2>Datenschutzerklärung</h2>
       <p>Verantwortlicher: Haris Ata Savran (Eigenhand), Bramenring 7, 8302 Kloten, info@eigenhand.ch.</p>
       <h3>Welche Daten wir bearbeiten</h3>
-      <p>Kontaktdaten, die Sie uns übermitteln (Name, Telefon, E-Mail, Angaben zum Objekt), sowie technisch notwendige Nutzungsdaten der Website.</p>
+      <p>Kontaktdaten und Angaben zum Objekt, die Sie uns über Formulare, per E-Mail oder Telefon übermitteln, sowie technisch notwendige Nutzungsdaten der Website.</p>
       <h3>Zweck</h3>
-      <p>Bearbeitung Ihrer Anfrage, Kommunikation mit Ihnen und Erfüllung gesetzlicher Pflichten.</p>
+      <p>Bearbeitung Ihrer Anfrage, Kommunikation mit Ihnen, Erbringung unserer Leistungen und Erfüllung gesetzlicher Pflichten.</p>
+      <h3>Dienste Dritter</h3>
+      <p>Die Website wird über GitHub Pages (GitHub Inc., USA) ausgeliefert. Schriftarten werden von Google Fonts (Google LLC, USA) geladen. Formularanfragen können über den Dienst Formspree (USA) an uns übermittelt werden. Dabei können Daten in die USA übertragen werden.</p>
       <h3>Weitergabe an Dritte</h3>
-      <p>Nur soweit für die Leistung nötig (z. B. Immobilienportale, beauftragte Dienstleister) oder mit Ihrer Einwilligung.</p>
+      <p>Nur soweit für die Leistung nötig, zum Beispiel an Immobilienportale oder beauftragte Fotografen, oder mit Ihrer Einwilligung.</p>
       <h3>Ihre Rechte</h3>
       <p>Sie haben das Recht auf Auskunft, Berichtigung und Löschung Ihrer Daten. Wenden Sie sich an info@eigenhand.ch.</p>
       <p style="margin-top:14px">Stand: Oktober 2026</p>
@@ -417,8 +693,8 @@ footer a{color:#fff}
 
 <footer>
   <div class="wrap row">
-    <span><strong style="color:#fff">Eigenhand</strong> · Selbst verkaufen. Mit Profi im Rücken.</span>
-    <span><a href="#impressum">Impressum</a> · <a href="#datenschutz">Datenschutz</a> · 078 752 81 77</span>
+    <span><strong style="color:#fff">Eigenhand</strong> · Festpreis statt Provision. Kanton Zürich.</span>
+    <span><a href="ratgeber.html">Ratgeber</a> · <a href="#impressum">Impressum</a> · <a href="#datenschutz">Datenschutz</a> · <a href="tel:+41787528177">078 752 81 77</a></span>
   </div>
 </footer>
 
@@ -427,119 +703,69 @@ footer a{color:#fff}
     <button type="button" class="close" aria-label="Schliessen" onclick="closeBooking()">×</button>
     <div id="bform">
       <div class="mhead">
-        <div class="mctx" id="bctx">Paket</div>
-        <h3 id="booktitle">Angebot anfordern</h3>
-        <p class="msub" id="bsub">In 3 kurzen Schritten. Wir melden uns innert 24 Stunden zurück.</p>
+        <div class="mctx" id="bctx">Anfrage</div>
+        <h3 id="booktitle">Kostenlose Ersteinschätzung</h3>
+        <p class="msub" id="bsub">Drei kurze Schritte. Wir melden uns innert 24 Stunden.</p>
       </div>
-      <div class="steps2">
-        <div class="s" data-step="1"></div>
-        <div class="s" data-step="2"></div>
-        <div class="s" data-step="3"></div>
-      </div>
-      <form id="bookingform" action="https://formspree.io/f/DEINE-FORMSPREE-ID" method="POST" novalidate>
-        <input type="hidden" name="_subject" id="h_subject" value="Neue Eigenhand-Anfrage">
+      <div class="steps2" aria-hidden="true"><div class="s" data-step="1"></div><div class="s" data-step="2"></div><div class="s" data-step="3"></div></div>
+      <div class="steplabel" id="steplabel">Schritt 1 von 3: Ihre Immobilie</div>
+      <form id="bookingform" novalidate>
         <input type="hidden" name="paket" id="h_paket" value="">
         <input type="hidden" name="buchungstyp" id="h_typ" value="">
 
         <div class="step2 active" data-step="1">
           <div class="fld">
-            <label>Um was für ein Objekt handelt es sich?</label>
-            <div class="radgroup">
+            <label id="l_art">Was möchten Sie verkaufen?</label>
+            <div class="radgroup" role="radiogroup" aria-labelledby="l_art">
               <label class="rad"><input type="radio" name="objektart" value="Wohnung" required><span>Wohnung</span></label>
               <label class="rad"><input type="radio" name="objektart" value="Einfamilienhaus"><span>Einfamilienhaus</span></label>
               <label class="rad"><input type="radio" name="objektart" value="Mehrfamilienhaus"><span>Mehrfamilienhaus</span></label>
               <label class="rad"><input type="radio" name="objektart" value="Anderes"><span>Anderes</span></label>
             </div>
-            <p class="err">Bitte Objektart wählen</p>
+            <p class="err">Bitte eine Objektart wählen</p>
           </div>
           <div class="fgrid">
-            <div class="fld">
-              <label>PLZ</label>
-              <input type="text" name="plz" pattern="[0-9]{4}" inputmode="numeric" maxlength="4" placeholder="8302" required>
-              <p class="err">4-stellige PLZ eingeben</p>
-            </div>
-            <div class="fld">
-              <label>Gemeinde</label>
-              <input type="text" name="gemeinde" placeholder="Kloten" required>
-              <p class="err">Gemeinde eingeben</p>
-            </div>
+            <div class="fld"><label for="b_plz">PLZ</label><input id="b_plz" type="text" name="plz" pattern="[0-9]{4}" inputmode="numeric" maxlength="4" placeholder="8302" required><p class="err">4-stellige PLZ eingeben</p></div>
+            <div class="fld"><label for="b_gem">Gemeinde</label><input id="b_gem" type="text" name="gemeinde" placeholder="Kloten" required><p class="err">Gemeinde eingeben</p></div>
           </div>
           <div class="fgrid">
-            <div class="fld">
-              <label>Zimmer</label>
-              <input type="number" name="zimmer" step="0.5" min="1" max="20" placeholder="4.5" required>
-              <p class="err">Zimmer eingeben</p>
-            </div>
-            <div class="fld">
-              <label>Wohnfläche (m²)</label>
-              <input type="number" name="flaeche" min="20" max="2000" placeholder="110" required>
-              <p class="err">Fläche eingeben</p>
-            </div>
-          </div>
-          <div class="fld">
-            <label>Baujahr (optional)</label>
-            <input type="number" name="baujahr" min="1800" max="2030" placeholder="1998">
+            <div class="fld"><label for="b_zi">Zimmer <span class="opt">(optional)</span></label><input id="b_zi" type="number" name="zimmer" step="0.5" min="1" max="30" placeholder="4.5"></div>
+            <div class="fld"><label for="b_fl">Wohnfläche m² <span class="opt">(optional)</span></label><input id="b_fl" type="number" name="flaeche" min="10" max="3000" placeholder="110"></div>
           </div>
         </div>
 
         <div class="step2" data-step="2">
           <div class="fld">
-            <label>Was erwarten Sie für Ihre Immobilie? (CHF)</label>
-            <input type="number" name="erwarteter_preis" min="100000" step="10000" placeholder="950000" required>
-            <p class="err">Preis eingeben</p>
-          </div>
-          <div class="fld">
-            <label>Wann möchten Sie verkaufen?</label>
-            <div class="radgroup">
+            <label id="l_zeit">Wann möchten Sie verkaufen?</label>
+            <div class="radgroup" role="radiogroup" aria-labelledby="l_zeit">
               <label class="rad"><input type="radio" name="zeithorizont" value="So bald wie möglich" required><span>So bald wie möglich</span></label>
-              <label class="rad"><input type="radio" name="zeithorizont" value="In 1–3 Monaten"><span>In 1–3 Monaten</span></label>
-              <label class="rad"><input type="radio" name="zeithorizont" value="In 3–6 Monaten"><span>In 3–6 Monaten</span></label>
-              <label class="rad"><input type="radio" name="zeithorizont" value="Noch unentschlossen"><span>Noch unentschlossen</span></label>
+              <label class="rad"><input type="radio" name="zeithorizont" value="In 1 bis 3 Monaten"><span>In 1 bis 3 Monaten</span></label>
+              <label class="rad"><input type="radio" name="zeithorizont" value="In 3 bis 12 Monaten"><span>In 3 bis 12 Monaten</span></label>
+              <label class="rad"><input type="radio" name="zeithorizont" value="Ich informiere mich erst"><span>Ich informiere mich erst</span></label>
             </div>
-            <p class="err">Zeithorizont wählen</p>
+            <p class="err">Bitte einen Zeitraum wählen</p>
           </div>
-          <div class="fld">
-            <label>Offene Hypothek (CHF, optional)</label>
-            <input type="number" name="hypothek" min="0" step="10000" placeholder="500000">
-          </div>
-          <div class="fld">
-            <label>Weitere Angaben (optional)</label>
-            <textarea name="bemerkungen" placeholder="Besonderheiten des Objekts, offene Fragen, bevorzugter Rückruftermin ..."></textarea>
-          </div>
+          <div class="fld"><label for="b_preis">Ihre Preisvorstellung in CHF <span class="opt">(optional)</span></label><input id="b_preis" type="number" name="preisvorstellung" min="0" step="10000" placeholder="950000"></div>
+          <div class="fld"><label for="b_bem">Was sollten wir noch wissen? <span class="opt">(optional)</span></label><textarea id="b_bem" name="bemerkungen" placeholder="Besonderheiten, Fragen, bewohnt oder leer ..."></textarea></div>
         </div>
 
         <div class="step2" data-step="3">
-          <div class="fld">
-            <label>Vor- und Nachname</label>
-            <input type="text" name="name" placeholder="Max Muster" required>
-            <p class="err">Name eingeben</p>
-          </div>
+          <div class="fld"><label for="b_name">Vor- und Nachname</label><input id="b_name" type="text" name="name" autocomplete="name" required><p class="err">Bitte Namen eingeben</p></div>
           <div class="fgrid">
-            <div class="fld">
-              <label>Telefon</label>
-              <input type="tel" name="telefon" placeholder="078 752 81 77" required>
-              <p class="err">Telefonnummer eingeben</p>
-            </div>
-            <div class="fld">
-              <label>E-Mail</label>
-              <input type="email" name="email" placeholder="max@muster.ch" required>
-              <p class="err">Gültige E-Mail eingeben</p>
-            </div>
+            <div class="fld"><label for="b_tel">Telefon</label><input id="b_tel" type="tel" name="telefon" autocomplete="tel" required><p class="err">Bitte Telefonnummer eingeben</p></div>
+            <div class="fld"><label for="b_mail">E-Mail <span class="opt">(optional)</span></label><input id="b_mail" type="email" name="email" autocomplete="email"><p class="err">Bitte gültige E-Mail eingeben</p></div>
           </div>
           <div class="fld">
-            <label>Wann sind Sie am besten erreichbar?</label>
-            <div class="radgroup">
+            <label id="l_err">Wann erreichen wir Sie am besten?</label>
+            <div class="radgroup" role="radiogroup" aria-labelledby="l_err">
               <label class="rad"><input type="radio" name="erreichbar" value="Vormittag" required><span>Vormittag</span></label>
               <label class="rad"><input type="radio" name="erreichbar" value="Nachmittag"><span>Nachmittag</span></label>
               <label class="rad"><input type="radio" name="erreichbar" value="Abend"><span>Abend</span></label>
               <label class="rad"><input type="radio" name="erreichbar" value="Egal"><span>Egal</span></label>
             </div>
-            <p class="err">Zeitfenster wählen</p>
+            <p class="err">Bitte ein Zeitfenster wählen</p>
           </div>
-          <label class="consent" id="consentbox">
-            <input type="checkbox" required id="consent">
-            <span>Ich habe die <a href="#datenschutz">Datenschutzerklärung</a> gelesen und bin damit einverstanden, dass Eigenhand mich zum Zweck dieser Anfrage kontaktiert.</span>
-          </label>
+          <label class="consent" id="consentbox"><input type="checkbox" id="consent"><span>Ich bin einverstanden, dass Eigenhand mich zu dieser Anfrage kontaktiert. Mehr in der <a href="#datenschutz" onclick="closeBooking()">Datenschutzerklärung</a>.</span></label>
         </div>
 
         <div class="mctrl">
@@ -549,13 +775,10 @@ footer a{color:#fff}
         </div>
       </form>
     </div>
-
-    <div class="msuccess" id="msuccess">
-      <div class="ic">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1D5B46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5 11-11"/></svg>
-      </div>
-      <h3>Danke! Ihre Anfrage ist bei uns.</h3>
-      <p>Wir melden uns innert 24 Stunden telefonisch bei Ihnen. Falls dringend, erreichen Sie uns direkt unter 078 752 81 77.</p>
+    <div class="msuccess" id="msuccess" role="status">
+      <div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1D5B46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5 11-11"/></svg></div>
+      <h3 id="succTitle">Danke, Ihre Anfrage ist bei uns.</h3>
+      <p id="succText">Wir rufen Sie innert 24 Stunden an. Falls es dringend ist, erreichen Sie uns direkt unter 078 752 81 77.</p>
       <button type="button" class="btn sec" style="margin-top:24px" onclick="closeBooking()">Schliessen</button>
     </div>
   </div>
@@ -563,127 +786,193 @@ footer a{color:#fff}
 
 <script>
 "use strict";
+/* Formspree-ID hier eintragen, sobald vorhanden (z. B. "xdkobylw").
+   Solange sie leer ist, werden Anfragen als vorbereitete E-Mail an info@eigenhand.ch geöffnet. */
+var FORMSPREE_ID = "";
+var CONTACT_MAIL = "info@eigenhand.ch";
+
+function sendLead(fields, subject){
+  if(FORMSPREE_ID){
+    var fd = new FormData();
+    Object.keys(fields).forEach(function(k){ if(fields[k]) fd.append(k, fields[k]); });
+    fd.append("_subject", subject);
+    return fetch("https://formspree.io/f/" + FORMSPREE_ID, {method:"POST", body:fd, headers:{"Accept":"application/json"}})
+      .then(function(r){ if(!r.ok) throw new Error("send"); return "sent"; });
+  }
+  var body = Object.keys(fields).filter(function(k){ return fields[k]; }).map(function(k){ return k + ": " + fields[k]; }).join("\n");
+  window.location.href = "mailto:" + CONTACT_MAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  return Promise.resolve("mail");
+}
+
+/* Mobile navigation */
 (function(){
-  function n(v){var x=parseFloat(v);return isNaN(x)?0:x;}
-  function chf(v){var r=Math.round(v),neg=r<0,s=Math.abs(r).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"'");return (neg?"– CHF ":"CHF ")+s;}
-  function taxZH(gain,years){
-    if(gain<=0)return 0;
-    var steps=[[4000,.10],[6000,.15],[8000,.20],[12000,.25],[20000,.30],[50000,.35],[Infinity,.40]];
-    var rest=gain,tax=0;
-    for(var i=0;i<steps.length&&rest>0;i++){var part=Math.min(rest,steps[i][0]);tax+=part*steps[i][1];rest-=part;}
-    var y=Math.floor(years);
-    if(y<1)tax*=1.5;else if(y<2)tax*=1.25;else if(y>=5)tax*=1-Math.min(50,5+(y-5)*3)/100;
+  var t = document.getElementById("navtoggle"), n = document.getElementById("mainnav");
+  t.addEventListener("click", function(){ var o = n.classList.toggle("open"); t.setAttribute("aria-expanded", o ? "true" : "false"); });
+  Array.prototype.forEach.call(n.querySelectorAll("a,button"), function(a){ a.addEventListener("click", function(){ n.classList.remove("open"); t.setAttribute("aria-expanded","false"); }); });
+})();
+
+/* Calculator */
+(function(){
+  function n(v){ var x = parseFloat(v); return isNaN(x) ? 0 : x; }
+  function chf(v){ var r = Math.round(v), neg = r < 0, s = Math.abs(r).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'"); return (neg ? "– CHF " : "CHF ") + s; }
+  function taxZH(gain, years){
+    if(gain <= 0) return 0;
+    var steps = [[4000,.10],[6000,.15],[8000,.20],[12000,.25],[20000,.30],[50000,.35],[Infinity,.40]];
+    var rest = gain, tax = 0;
+    for(var i = 0; i < steps.length && rest > 0; i++){ var part = Math.min(rest, steps[i][0]); tax += part * steps[i][1]; rest -= part; }
+    var y = Math.floor(years);
+    if(y < 1) tax *= 1.5; else if(y < 2) tax *= 1.25; else if(y >= 5) tax *= 1 - Math.min(50, 5 + (y - 5) * 3) / 100;
     return tax;
   }
-  var RATE=2.5;
-  var ids=["f_price","f_buy","f_years","f_mort"];
-  function g(id){var e=document.getElementById(id);return e?n(e.value):0;}
-  function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+  var rate = 2.5, pack = 1990, packName = "Pro", packKey = "pro";
+  function g(id){ var e = document.getElementById(id); return e ? n(e.value) : 0; }
+  function set(id, v){ var e = document.getElementById(id); if(e) e.textContent = v; }
   function calc(){
-    var price=g("f_price"),buy=g("f_buy"),years=g("f_years"),mort=g("f_mort");
-    var notar=price*(0.001*1.081+0.001)/2, mCost=price*RATE/100, oCost=1990;
-    var mTax=taxZH(price-buy-mCost,years), oTax=taxZH(price-buy-oCost,years);
-    var mNet=price-mort-notar-mCost-mTax, oNet=price-mort-notar-oCost-oTax;
-    set("o_mCost",chf(mCost)); set("o_mTax",chf(mTax));
-    set("o_notar",chf(notar)); set("o_notar2",chf(notar)); set("o_debt",chf(mort)); set("o_debt2",chf(mort));
-    set("o_mNet",chf(mNet)); set("o_oTax",chf(oTax)); set("o_oNet",chf(oNet)); set("o_save",chf(oNet-mNet));
+    var price = g("f_price"), years = g("f_years"), mort = g("f_mort");
+    var buyEl = document.getElementById("f_buy"), hasBuy = buyEl && buyEl.value.trim() !== "", buy = g("f_buy");
+    var notar = price * 0.002 / 2, mCost = price * rate / 100, oCost = pack;
+    var mTax = hasBuy ? taxZH(price - buy - mCost, years) : 0, oTax = hasBuy ? taxZH(price - buy - oCost, years) : 0;
+    var mNet = price - mort - notar - mCost - mTax, oNet = price - mort - notar - oCost - oTax;
+    set("o_mHead", "Mit Makler (" + rate + " %)");
+    set("o_oHead", "Mit Eigenhand «" + packName + "»");
+    set("o_mCost", chf(mCost)); set("o_oCost", chf(oCost));
+    set("o_mTax", hasBuy ? chf(mTax) : "nicht berechnet"); set("o_oTax", hasBuy ? chf(oTax) : "nicht berechnet");
+    set("o_notar", chf(notar)); set("o_notar2", chf(notar)); set("o_debt", chf(mort)); set("o_debt2", chf(mort));
+    set("o_mNet", chf(mNet)); set("o_oNet", chf(oNet));
+    set("o_save", chf(Math.max(0, mCost - oCost)));
+    set("o_saveNote", hasBuy ? "vor Steuern · nach Grundstückgewinnsteuer ca. " + chf(Math.max(0, oNet - mNet)) : "vor Steuern · Kaufpreis eingeben, um die Steuer einzurechnen");
+    window.__calcPack = packKey;
   }
-  ids.forEach(function(id){var e=document.getElementById(id);if(e)e.addEventListener("input",calc);});
+  function seg(id, cb){
+    var wrap = document.getElementById(id);
+    Array.prototype.forEach.call(wrap.querySelectorAll("button"), function(b){
+      b.addEventListener("click", function(){
+        Array.prototype.forEach.call(wrap.querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed","false"); });
+        b.setAttribute("aria-pressed","true"); cb(b); calc();
+      });
+    });
+  }
+  seg("seg_rate", function(b){ rate = parseFloat(b.dataset.v); });
+  seg("seg_pack", function(b){ pack = parseFloat(b.dataset.v); packName = b.dataset.n; packKey = b.dataset.n.toLowerCase(); });
+  ["f_price","f_buy","f_years","f_mort"].forEach(function(id){ var e = document.getElementById(id); if(e) e.addEventListener("input", calc); });
   calc();
 })();
 
+/* Booking modal */
 (function(){
-  var packs={
-    "selbst":{ctx:"Paket",title:"Selbst – CHF 990",sub:"In 3 kurzen Schritten. Wir melden uns innert 24 Stunden zurück.",typ:"Paket Selbst"},
-    "pro":{ctx:"Paket",title:"Pro – CHF 1'990",sub:"In 3 kurzen Schritten. Wir melden uns innert 24 Stunden zurück.",typ:"Paket Pro"},
-    "begleitet":{ctx:"Paket",title:"Begleitet – CHF 5'900",sub:"In 3 kurzen Schritten. CHF 2'900 bei Start, CHF 3'000 beim Verkauf.",typ:"Paket Begleitet"},
-    "bewertung":{ctx:"Einzelleistung",title:"Nur Bewertung – CHF 290",sub:"Wir erstellen eine fundierte Marktpreiseinschätzung mit Vergleichsobjekten.",typ:"Nur Bewertung"},
-    "besichtigung":{ctx:"Einzelleistung",title:"Besichtigungstag – CHF 490",sub:"Wir übernehmen einen Besichtigungstag für Sie – inkl. Käufergespräche vor Ort.",typ:"Besichtigungstag"},
-    "verhandlung":{ctx:"Einzelleistung",title:"Verhandlung – CHF 990",sub:"Wir übernehmen die Preisverhandlung mit dem konkreten Käufer.",typ:"Verhandlung"},
-    "unterlagen":{ctx:"Einzelleistung",title:"Unterlagen-Service – CHF 190",sub:"Wir beschaffen und organisieren sämtliche Verkaufsunterlagen für Sie.",typ:"Unterlagen-Service"},
-    "inserat":{ctx:"Einzelleistung",title:"Inserat-Verlängerung · 30 Tage",sub:"Verlängerung Ihrer bestehenden Inserate auf allen Portalen um 30 Tage.",typ:"Inserat-Verlängerung"}
+  var packs = {
+    "erst":{ctx:"Kostenlos und unverbindlich",title:"Kostenlose Ersteinschätzung",sub:"Drei kurze Schritte. Wir rufen Sie innert 24 Stunden an.",typ:"Kostenlose Ersteinschätzung"},
+    "selbst":{ctx:"Paket",title:"«Selbst» für CHF 990",sub:"Drei kurze Schritte. Wir rufen Sie innert 24 Stunden an und klären alles Weitere. Unverbindlich.",typ:"Paket Selbst"},
+    "pro":{ctx:"Paket",title:"«Pro» für CHF 1'990",sub:"Drei kurze Schritte. Wir rufen Sie innert 24 Stunden an und vereinbaren den Termin vor Ort. Unverbindlich.",typ:"Paket Pro"},
+    "begleitet":{ctx:"Paket",title:"«Begleitet» für CHF 5'900",sub:"CHF 2'900 bei Start, CHF 3'000 beim Verkauf. Wir rufen Sie innert 24 Stunden an. Unverbindlich.",typ:"Paket Begleitet"},
+    "bewertung":{ctx:"Einzelleistung",title:"Nur Bewertung für CHF 290",sub:"Schriftliche Preiseinschätzung mit Vergleichsobjekten. Wird bei späterer Paketbuchung angerechnet.",typ:"Nur Bewertung"},
+    "besichtigung":{ctx:"Einzelleistung",title:"Besichtigungstag für CHF 490",sub:"Wir übernehmen einen Besichtigungstag mit Interessenten für Sie.",typ:"Besichtigungstag"},
+    "verhandlung":{ctx:"Einzelleistung",title:"Verhandlung für CHF 990",sub:"Wir führen die Preisverhandlung mit Ihrem Kaufinteressenten.",typ:"Verhandlung"},
+    "unterlagen":{ctx:"Einzelleistung",title:"Unterlagen-Service für CHF 190",sub:"Wir beschaffen und ordnen die Verkaufsunterlagen für Sie.",typ:"Unterlagen-Service"},
+    "inserat":{ctx:"Einzelleistung",title:"Inserat-Verlängerung",sub:"CHF 190 pro 30 Tage auf allen Portalen.",typ:"Inserat-Verlängerung"}
   };
-  var modal=document.getElementById("booking"),form=document.getElementById("bookingform"),ctxEl=document.getElementById("bctx"),titleEl=document.getElementById("booktitle"),subEl=document.getElementById("bsub");
-  var hPaket=document.getElementById("h_paket"),hTyp=document.getElementById("h_typ"),hSub=document.getElementById("h_subject");
-  var backBtn=document.getElementById("backBtn"),nextBtn=document.getElementById("nextBtn"),submitBtn=document.getElementById("submitBtn");
-  var successEl=document.getElementById("msuccess"),formEl=document.getElementById("bform"),consentBox=document.getElementById("consentbox");
-  var cur=1,total=3;
+  var labels = ["Ihre Immobilie","Ihr Verkauf","Ihre Kontaktdaten"];
+  var modal = document.getElementById("booking"), form = document.getElementById("bookingform");
+  var backBtn = document.getElementById("backBtn"), nextBtn = document.getElementById("nextBtn"), submitBtn = document.getElementById("submitBtn");
+  var successEl = document.getElementById("msuccess"), formEl = document.getElementById("bform"), consentBox = document.getElementById("consentbox");
+  var cur = 1, total = 3, lastFocus = null;
 
-  window.openBooking=function(key){
-    var p=packs[key]||packs["selbst"];
-    ctxEl.textContent=p.ctx; titleEl.textContent=p.title; subEl.textContent=p.sub;
-    hPaket.value=p.title; hTyp.value=p.typ; hSub.value="Eigenhand-Anfrage: "+p.typ;
-    cur=1; show(1);
-    form.reset();
-    Array.prototype.forEach.call(document.querySelectorAll(".fld.e"),function(el){el.classList.remove("e");});
-    consentBox.style.color="";
-    submitBtn.disabled=false; submitBtn.textContent="Anfrage senden";
-    formEl.style.display="block"; successEl.classList.remove("show");
+  window.openBooking = function(key){
+    var p = packs[key] || packs["erst"];
+    lastFocus = document.activeElement;
+    document.getElementById("bctx").textContent = p.ctx;
+    document.getElementById("booktitle").textContent = p.title;
+    document.getElementById("bsub").textContent = p.sub;
+    document.getElementById("h_paket").value = p.title;
+    document.getElementById("h_typ").value = p.typ;
+    form.reset(); cur = 1; show(1);
+    Array.prototype.forEach.call(form.querySelectorAll(".fld.e"), function(el){ el.classList.remove("e"); });
+    consentBox.classList.remove("e");
+    submitBtn.disabled = false; submitBtn.textContent = "Anfrage senden";
+    formEl.style.display = "block"; successEl.classList.remove("show");
     modal.classList.add("open"); modal.setAttribute("aria-hidden","false");
-    document.body.style.overflow="hidden";
+    document.body.style.overflow = "hidden";
   };
-  window.closeBooking=function(){
+  window.closeBooking = function(){
     modal.classList.remove("open"); modal.setAttribute("aria-hidden","true");
-    document.body.style.overflow="";
+    document.body.style.overflow = "";
+    if(lastFocus && lastFocus.focus) try{ lastFocus.focus(); }catch(e){}
   };
-  modal.addEventListener("click",function(e){ if(e.target===modal) closeBooking(); });
-  document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&modal.classList.contains("open")) closeBooking(); });
+  modal.addEventListener("click", function(e){ if(e.target === modal) closeBooking(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && modal.classList.contains("open")) closeBooking(); });
 
-  function show(n){
-    Array.prototype.forEach.call(document.querySelectorAll(".step2"),function(el){ el.classList.toggle("active",+el.dataset.step===n); });
-    Array.prototype.forEach.call(document.querySelectorAll(".steps2 .s"),function(el){
-      var s=+el.dataset.step;
-      el.classList.toggle("done",s<n); el.classList.toggle("active",s===n);
-    });
-    backBtn.classList.toggle("hidden",n===1);
-    nextBtn.style.display=n<total?"":"none";
-    submitBtn.style.display=n===total?"":"none";
-    setTimeout(function(){
-      var first=document.querySelector('.step2.active input:not([type=hidden]):not([type=radio]):not([type=checkbox])');
-      if(first) try{first.focus();}catch(e){}
-    },60);
+  function show(nr){
+    Array.prototype.forEach.call(form.querySelectorAll(".step2"), function(el){ el.classList.toggle("active", +el.dataset.step === nr); });
+    Array.prototype.forEach.call(modal.querySelectorAll(".steps2 .s"), function(el){ var s = +el.dataset.step; el.classList.toggle("done", s < nr); el.classList.toggle("active", s === nr); });
+    document.getElementById("steplabel").textContent = "Schritt " + nr + " von " + total + ": " + labels[nr-1];
+    backBtn.classList.toggle("hidden", nr === 1);
+    nextBtn.style.display = nr < total ? "" : "none";
+    submitBtn.style.display = nr === total ? "" : "none";
+    setTimeout(function(){ var f = form.querySelector('.step2.active input:not([type=hidden]):not([type=radio]):not([type=checkbox])'); if(f && window.innerWidth > 640) try{ f.focus(); }catch(e){} }, 60);
   }
-  function validate(n){
-    var step=document.querySelector('.step2[data-step="'+n+'"]');
-    var ok=true;
-    Array.prototype.forEach.call(step.querySelectorAll("input[required]:not([type=radio]), select[required], textarea[required]"),function(el){
-      var fld=el.closest(".fld");
-      var v=el.value.trim(), bad=false;
-      if(!v) bad=true;
-      else if(el.type==="email"&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) bad=true;
-      else if(el.pattern&&!new RegExp("^"+el.pattern+"$").test(v)) bad=true;
-      if(fld){ fld.classList.toggle("e",bad); if(bad) ok=false; }
+  function validate(nr){
+    var step = form.querySelector('.step2[data-step="' + nr + '"]'), ok = true;
+    Array.prototype.forEach.call(step.querySelectorAll("input:not([type=radio]):not([type=checkbox]):not([type=hidden]), textarea"), function(el){
+      var fld = el.closest(".fld"), v = el.value.trim(), bad = false;
+      if(el.required && !v) bad = true;
+      else if(v && el.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) bad = true;
+      else if(v && el.pattern && !new RegExp("^" + el.pattern + "$").test(v)) bad = true;
+      if(fld){ fld.classList.toggle("e", bad); } if(bad) ok = false;
     });
-    Array.prototype.forEach.call(step.querySelectorAll(".fld"),function(fld){
-      var radios=fld.querySelectorAll("input[type=radio][required]");
-      if(radios.length){
-        var picked=Array.prototype.some.call(radios,function(r){return r.checked;});
-        fld.classList.toggle("e",!picked); if(!picked) ok=false;
-      }
+    Array.prototype.forEach.call(step.querySelectorAll(".fld"), function(fld){
+      var radios = fld.querySelectorAll("input[type=radio][required]");
+      if(radios.length){ var picked = Array.prototype.some.call(fld.querySelectorAll("input[type=radio]"), function(r){ return r.checked; }); fld.classList.toggle("e", !picked); if(!picked) ok = false; }
     });
     return ok;
   }
-  nextBtn.addEventListener("click",function(){ if(!validate(cur)) return; cur++; show(cur); });
-  backBtn.addEventListener("click",function(){ cur--; show(cur); });
-  form.addEventListener("input",function(e){ var f=e.target.closest(".fld"); if(f) f.classList.remove("e"); });
-  form.addEventListener("change",function(e){ var f=e.target.closest(".fld"); if(f) f.classList.remove("e"); });
+  nextBtn.addEventListener("click", function(){ if(!validate(cur)) return; cur++; show(cur); });
+  backBtn.addEventListener("click", function(){ cur--; show(cur); });
+  form.addEventListener("input", function(e){ var f = e.target.closest(".fld"); if(f) f.classList.remove("e"); });
+  form.addEventListener("change", function(e){ var f = e.target.closest(".fld"); if(f) f.classList.remove("e"); if(e.target.id === "consent") consentBox.classList.remove("e"); });
 
-  form.addEventListener("submit",function(e){
+  form.addEventListener("submit", function(e){
     e.preventDefault();
     if(!validate(cur)) return;
-    var consent=document.getElementById("consent");
-    if(!consent.checked){ consentBox.style.color="#B45233"; return; }
-    submitBtn.disabled=true; submitBtn.textContent="Sende ...";
-    var data=new FormData(form);
-    fetch(form.action,{method:"POST",body:data,headers:{"Accept":"application/json"}})
-      .then(function(r){
-        if(r.ok){ formEl.style.display="none"; successEl.classList.add("show"); }
-        else { throw new Error("send"); }
-      })
-      .catch(function(){
-        submitBtn.disabled=false; submitBtn.textContent="Nochmals versuchen";
-        alert("Ihre Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es nochmals oder rufen Sie uns direkt an: 078 752 81 77");
-      });
+    if(!document.getElementById("consent").checked){ consentBox.classList.add("e"); return; }
+    submitBtn.disabled = true; submitBtn.textContent = "Wird gesendet ...";
+    var fields = {}; new FormData(form).forEach(function(v, k){ fields[k] = v; });
+    sendLead(fields, "Eigenhand-Anfrage: " + fields.buchungstyp).then(function(mode){
+      if(mode === "mail"){
+        document.getElementById("succTitle").textContent = "Fast geschafft";
+        document.getElementById("succText").textContent = "Ihr E-Mail-Programm öffnet sich mit Ihrer vorbereiteten Anfrage. Bitte senden Sie die E-Mail ab. Öffnet sich nichts, rufen Sie uns an: 078 752 81 77.";
+      } else {
+        document.getElementById("succTitle").textContent = "Danke, Ihre Anfrage ist bei uns.";
+        document.getElementById("succText").textContent = "Wir rufen Sie innert 24 Stunden an. Falls es dringend ist, erreichen Sie uns direkt unter 078 752 81 77.";
+      }
+      formEl.style.display = "none"; successEl.classList.add("show");
+    }).catch(function(){
+      submitBtn.disabled = false; submitBtn.textContent = "Nochmals versuchen";
+      document.getElementById("steplabel").textContent = "Senden hat nicht geklappt. Bitte nochmals versuchen oder anrufen: 078 752 81 77.";
+    });
+  });
+})();
+
+/* Quick contact form */
+(function(){
+  var f = document.getElementById("quickform"), msg = document.getElementById("q_msg"), btn = document.getElementById("q_submit"), cb = document.getElementById("q_consentbox");
+  f.addEventListener("input", function(e){ var x = e.target.closest(".fld"); if(x) x.classList.remove("e"); });
+  f.addEventListener("change", function(e){ if(e.target.id === "q_consent") cb.classList.remove("e"); });
+  f.addEventListener("submit", function(e){
+    e.preventDefault();
+    var ok = true;
+    ["q_name","q_tel"].forEach(function(id){ var el = document.getElementById(id), bad = !el.value.trim(); el.closest(".fld").classList.toggle("e", bad); if(bad) ok = false; });
+    if(!document.getElementById("q_consent").checked){ cb.classList.add("e"); ok = false; }
+    if(!ok) return;
+    btn.disabled = true; btn.textContent = "Wird gesendet ...";
+    var fields = {}; new FormData(f).forEach(function(v, k){ fields[k] = v; });
+    sendLead(fields, "Eigenhand-Anfrage: Rückruf").then(function(mode){
+      btn.textContent = mode === "mail" ? "E-Mail vorbereitet" : "Gesendet";
+      msg.textContent = mode === "mail" ? "Ihr E-Mail-Programm öffnet sich. Bitte senden Sie die vorbereitete E-Mail ab." : "Danke. Wir rufen Sie innert 24 Stunden an.";
+      msg.style.color = "var(--green)";
+    }).catch(function(){
+      btn.disabled = false; btn.textContent = "Nochmals versuchen";
+      msg.textContent = "Senden hat nicht geklappt. Bitte rufen Sie uns an: 078 752 81 77."; msg.style.color = "var(--warn)";
+    });
   });
 })();
 </script>
