@@ -791,10 +791,10 @@ footer a{color:#fff}
 /* Anfragen gehen über FormSubmit (kostenlos, ohne eigenen Server) direkt an diese Adresse.
    Beim allerersten Absenden schickt FormSubmit einen einmaligen Bestätigungslink an diese
    Adresse; dieser muss einmal angeklickt werden, danach läuft alles automatisch. */
-/* Zustelladresse für Anfragen. Vorerst das zuverlässige Gmail, bis info@eigenhand.ch
-   voll eingerichtet ist. Nach der einmaligen FormSubmit-Aktivierung kann hier auch der
-   anonyme FormSubmit-Code stehen (https://formsubmit.co/ajax/el/<code>), der die Adresse verbirgt. */
-var LEAD_EMAIL = "savranecom@gmail.com";
+/* Zustelladresse für Anfragen. Nach der einmaligen FormSubmit-Aktivierung kann hier auch
+   der anonyme FormSubmit-Code stehen (https://formsubmit.co/ajax/el/<code>), der die Adresse
+   im Quelltext verbirgt. */
+var LEAD_EMAIL = "info@eigenhand.ch";
 var LEAD_ENDPOINT = "https://formsubmit.co/ajax/" + LEAD_EMAIL;
 var CONTACT_MAIL = "info@eigenhand.ch";
 var AUTORESPONSE = "Vielen Dank für Ihre Anfrage bei Eigenhand.\n\n"
