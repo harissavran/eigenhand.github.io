@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Eigenhand Cockpit</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%23123D2F'/%3E%3Cpath d='M7.5 26.5c0-1.5 1.2-2.7 2.7-2.7.7 0 1.3.3 1.8.7 2.6 2.1 7.3 3.6 12 3.6s9.4-1.5 12-3.6c.5-.4 1.1-.7 1.8-.7 1.5 0 2.7 1.2 2.7 2.7 0 .6-.2 1.2-.5 1.7C37.2 32.6 31 35.3 24 35.3S10.8 32.6 8 28.2c-.3-.5-.5-1.1-.5-1.7Z' fill='%239FE0C3'/%3E%3Cpath d='M14.5 18.8 24 11l9.5 7.8V24a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1v-5.2Z' fill='%239FE0C3'/%3E%3Crect x='21' y='18.5' width='6' height='6.5' rx='1' fill='%23123D2F'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F4EF;--surface:#FFFFFF;--ink:#14211C;--muted:#3E4C46;--muted2:#5A675F;--line:#DBD8CF;--green:#1D5B46;--green-d:#123D2F;--mint:#9FE0C3;--mint-bg:#E4EEE8;--warn:#B45233;--amber:#B5881F}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Schibsted Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.5;-webkit-text-size-adjust:100%}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+p{margin:0}
+a{color:var(--green)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+button{font-family:inherit;cursor:pointer}
+.btn{display:inline-flex;align-items:center;gap:7px;background:var(--green);color:#fff;border:0;border-radius:10px;padding:11px 16px;font-weight:700;font-size:14px}
+.btn:hover{background:var(--green-d)}
+.btn.sec{background:#fff;color:var(--ink);border:1px solid var(--line);font-weight:600}
+.btn.sec:hover{border-color:var(--green)}
+.btn.sm{padding:7px 11px;font-size:13px;border-radius:8px}
+.btn.danger{background:#fff;color:var(--warn);border:1px solid #E7C4B8}
+.btn.danger:hover{background:#FBEEE9}
+.btn.block{width:100%;justify-content:center}
+input,select,textarea{width:100%;font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(29,91,70,.12)}
+textarea{resize:vertical;min-height:80px}
+label.fl{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink)}
+.fld{margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px}
+.muted{color:var(--muted);font-size:14px}
+.tiny{font-size:12px;color:var(--muted2)}
+
+/* Header */
+header{position:sticky;top:0;z-index:20;background:var(--green-d);color:#fff}
+.hbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+.brand{display:flex;align-items:center;gap:9px;font-size:18px;font-weight:800;color:#fff}
+.brand svg{width:26px;height:26px}
+.brand .sub{font-weight:500;color:#9DB8AC;font-size:13px}
+nav.tabs{display:flex;gap:4px;flex-wrap:wrap;padding:0 0 10px}
+nav.tabs button{background:rgba(255,255,255,.08);color:#DCE7E1;border:0;border-radius:9px;padding:9px 14px;font-weight:600;font-size:14px}
+nav.tabs button.active{background:var(--mint);color:var(--green-d)}
+main{padding:26px 0 80px}
+.view{display:none}
+.view.active{display:block}
+.vhead{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.vhead h2{font-size:24px}
+.vhead p{margin-top:4px}
+
+/* CRM */
+.pipeline{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;color:var(--muted);display:inline-flex;gap:7px;align-items:center}
+.pill.active{border-color:var(--green);background:var(--mint-bg);color:var(--green-d)}
+.pill .n{background:var(--line);color:var(--ink);border-radius:999px;padding:0 7px;font-size:12px}
+.pill.active .n{background:var(--green);color:#fff}
+.leadrow{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:10px}
+.leadrow:hover{border-color:var(--green)}
+.leadrow .main{min-width:0}
+.leadrow .nm{font-weight:700;font-size:16px}
+.leadrow .meta{font-size:13px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.leadrow .right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.stat{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.s-neu{background:#E7EEF6;color:#2C5C8A}
+.s-kontaktiert{background:#F3EEDA;color:#8A6D1F}
+.s-termin{background:#EDE6F3;color:#6B4C8A}
+.s-offerte{background:#F3E8DD;color:#9A5B2A}
+.s-gebucht{background:var(--mint-bg);color:var(--green-d)}
+.s-verkauft{background:#123D2F;color:#fff}
+.s-verloren{background:#EFECEA;color:#79716B}
+.empty{text-align:center;padding:50px 20px;color:var(--muted)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.toolbar input{max-width:260px}
+.toolbar .spacer{flex:1}
+
+/* Modal */
+.ovl{position:fixed;inset:0;background:rgba(20,33,28,.6);backdrop-filter:blur(4px);display:none;align-items:flex-start;justify-content:center;z-index:50;padding:30px 16px;overflow-y:auto}
+.ovl.open{display:flex}
+.modal{background:var(--bg);border-radius:18px;width:100%;max-width:620px;padding:26px;position:relative}
+.modal h3{font-size:20px;margin-bottom:16px;padding-right:40px}
+.modal .x{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid var(--line);font-size:20px;color:var(--muted)}
+
+/* Result box */
+.result{background:var(--green-d);color:#fff;border-radius:14px;padding:22px;margin-top:16px}
+.result .lbl{color:#B9CFC5;font-size:13px;font-weight:600}
+.result .big{font-size:34px;font-weight:800;color:var(--mint);line-height:1.1;margin:4px 0}
+.result .rng{color:#DCE7E1;font-size:14px}
+.out{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;max-height:420px;overflow:auto}
+
+/* Checklist */
+.chk{list-style:none;padding:0;margin:0}
+.chk li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)}
+.chk li:last-child{border-bottom:0}
+.chk input{width:auto;margin-top:3px;flex:none}
+.chk .t{font-weight:600}
+.chk .d{font-size:13px;color:var(--muted)}
+.subhead{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--green);margin:20px 0 8px}
+
+/* rate table */
+table.rates{width:100%;border-collapse:collapse;font-size:14px}
+table.rates th,table.rates td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left}
+table.rates th{font-size:12px;text-transform:uppercase;color:var(--muted);letter-spacing:.04em}
+table.rates input{padding:7px 9px;font-size:14px}
+table.rates td.num{width:130px}
+.banner{background:var(--mint-bg);border:1px solid var(--mint);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--green-d);margin-bottom:18px}
+
+/* Gate */
+.gate{position:fixed;inset:0;background:var(--green-d);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
+.gate .box{background:var(--bg);border-radius:18px;padding:34px;max-width:360px;width:100%;text-align:center}
+.gate h1{font-size:22px;margin-bottom:8px}
+.gate p{font-size:14px;color:var(--muted);margin-bottom:18px}
+.gate input{text-align:center;font-size:18px;letter-spacing:.1em;margin-bottom:12px}
+.hidden{display:none !important}
+
+@media(max-width:720px){
+  .grid2,.grid3{grid-template-columns:1fr}
+  .vhead{align-items:flex-start}
+  .leadrow{grid-template-columns:1fr}
+  .leadrow .right{justify-content:flex-start}
+}
+@media print{
+  header,nav.tabs,.vhead .btn,.toolbar,.noprint{display:none !important}
+  body{background:#fff}
+  .card{border:0;padding:0}
+  .out{border:0;padding:0;max-height:none;font-family:inherit;font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<!-- Passcode-Gate (leichter Schutz, kein echter Login) -->
+<div class="gate" id="gate">
+  <div class="box">
+    <h1>Eigenhand Cockpit</h1>
+    <p>Bitte Zugangscode eingeben.</p>
+    <input type="password" id="gatecode" inputmode="numeric" placeholder="Code" autocomplete="off">
+    <button class="btn block" id="gatebtn">Öffnen</button>
+    <p class="tiny" style="margin-top:14px">Leichter Schutz. Deine Daten liegen nur in diesem Browser.</p>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+<header>
+  <div class="wrap hbar">
+    <div class="brand">
+      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M7.5 26.5c0-1.5 1.2-2.7 2.7-2.7.7 0 1.3.3 1.8.7 2.6 2.1 7.3 3.6 12 3.6s9.4-1.5 12-3.6c.5-.4 1.1-.7 1.8-.7 1.5 0 2.7 1.2 2.7 2.7 0 .6-.2 1.2-.5 1.7C37.2 32.6 31 35.3 24 35.3S10.8 32.6 8 28.2c-.3-.5-.5-1.1-.5-1.7Z" fill="#9FE0C3"/><path d="M14.5 18.8 24 11l9.5 7.8V24a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1v-5.2Z" fill="#9FE0C3"/><rect x="21" y="18.5" width="6" height="6.5" rx="1" fill="#123D2F"/></svg>
+      Cockpit <span class="sub">Eigenhand</span>
+    </div>
+    <button class="btn sec sm" id="lockbtn">Sperren</button>
+  </div>
+  <div class="wrap">
+    <nav class="tabs" id="tabs">
+      <button data-v="crm" class="active">CRM</button>
+      <button data-v="calc">Preisrechner</button>
+      <button data-v="expose">Exposé</button>
+      <button data-v="check">Checkliste</button>
+      <button data-v="settings">Einstellungen</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- CRM -->
+  <section class="view active" id="v-crm">
+    <div class="vhead">
+      <div><h2>Lead-Pipeline</h2><p class="muted">Alle Anfragen an einem Ort. Vom ersten Kontakt bis zum Verkauf.</p></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn sec sm" id="pasteBtn">Aus E-Mail einfügen</button>
+        <button class="btn sm" id="addLeadBtn">+ Neuer Lead</button>
+      </div>
+    </div>
+    <div class="pipeline" id="pipeline"></div>
+    <div class="toolbar">
+      <input type="search" id="search" placeholder="Suche nach Name, Gemeinde, E-Mail ...">
+      <div class="spacer"></div>
+      <button class="btn sec sm" id="exportCsv">CSV-Export</button>
+    </div>
+    <div id="leadList"></div>
+  </section>
+
+  <!-- Preisrechner -->
+  <section class="view" id="v-calc">
+    <div class="vhead"><div><h2>Preisrechner</h2><p class="muted">Schnelle Grobeinschätzung auf Basis von Quadratmeterpreisen. Keine verbindliche Bewertung.</p></div></div>
+    <div class="grid2">
+      <div class="card">
+        <div class="fld"><label class="fl">Gemeinde</label><select id="c_gem"></select></div>
+        <div class="grid2">
+          <div class="fld"><label class="fl">Objektart</label><select id="c_art"><option value="w">Wohnung</option><option value="h">Haus</option></select></div>
+          <div class="fld"><label class="fl">Wohnfläche (m²)</label><input id="c_fl" type="number" inputmode="numeric" value="110"></div>
+        </div>
+        <div class="grid2">
+          <div class="fld"><label class="fl">Zustand</label><select id="c_zu"><option value="1.08">Neuwertig / renoviert</option><option value="1" selected>Gut / gepflegt</option><option value="0.92">Mittel</option><option value="0.82">Renovationsbedürftig</option></select></div>
+          <div class="fld"><label class="fl">Baujahr (optional)</label><input id="c_bj" type="number" inputmode="numeric" placeholder="1998"></div>
+        </div>
+        <div class="fld"><label class="fl">CHF pro m² <span class="tiny">(wird aus der Gemeinde gesetzt, überschreibbar)</span></label><input id="c_rate" type="number" inputmode="numeric"></div>
+        <button class="btn block" id="calcBtn">Berechnen</button>
+      </div>
+      <div>
+        <div class="result">
+          <div class="lbl">Geschätzter Marktwert</div>
+          <div class="big" id="c_val">–</div>
+          <div class="rng" id="c_rng"></div>
+        </div>
+        <p class="tiny" style="margin-top:12px">Richtwert auf Basis von Flächen- und Gemeindepreisen, angepasst nach Zustand und Baujahr. Ersetzt keine Vor-Ort-Bewertung. m²-Preise bearbeitbar unter Einstellungen.</p>
+        <button class="btn sec sm" id="calcToExpose" style="margin-top:10px">Werte ins Exposé übernehmen</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Exposé -->
+  <section class="view" id="v-expose">
+    <div class="vhead"><div><h2>Exposé-Generator</h2><p class="muted">Aus den Eckdaten einen fertigen Inseratstext erzeugen.</p></div></div>
+    <div class="grid2">
+      <div class="card noprint">
+        <div class="fld"><label class="fl">Objekttitel</label><input id="e_titel" placeholder="Helle 4.5-Zimmer-Wohnung mit Balkon"></div>
+        <div class="grid2">
+          <div class="fld"><label class="fl">Objektart</label><input id="e_art" placeholder="Eigentumswohnung"></div>
+          <div class="fld"><label class="fl">Ort</label><input id="e_ort" placeholder="8302 Kloten"></div>
+        </div>
+        <div class="grid3">
+          <div class="fld"><label class="fl">Zimmer</label><input id="e_zi" placeholder="4.5"></div>
+          <div class="fld"><label class="fl">Fläche m²</label><input id="e_fl" placeholder="110"></div>
+          <div class="fld"><label class="fl">Baujahr</label><input id="e_bj" placeholder="1998"></div>
+        </div>
+        <div class="grid3">
+          <div class="fld"><label class="fl">Stockwerk</label><input id="e_sw" placeholder="3. OG"></div>
+          <div class="fld"><label class="fl">Parkplatz</label><input id="e_pp" placeholder="1 TG-Platz"></div>
+          <div class="fld"><label class="fl">Preis CHF</label><input id="e_preis" placeholder="950000"></div>
+        </div>
+        <div class="fld"><label class="fl">Highlights (eine pro Zeile)</label><textarea id="e_hl" placeholder="Moderne Küche&#10;Sonniger Balkon nach Süden&#10;Ruhige Lage, 5 Min. zum Bahnhof"></textarea></div>
+        <div class="fld"><label class="fl">Freitext / Beschreibung (optional)</label><textarea id="e_txt" placeholder="Ergänzende Beschreibung ..."></textarea></div>
+        <button class="btn block" id="expBtn">Exposé erzeugen</button>
+      </div>
+      <div>
+        <div class="out" id="e_out">Füllen Sie die Felder links aus und klicken Sie «Exposé erzeugen».</div>
+        <div style="display:flex;gap:8px;margin-top:12px" class="noprint">
+          <button class="btn sec sm" id="e_copy">Text kopieren</button>
+          <button class="btn sec sm" id="e_print">Drucken / als PDF</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Checkliste -->
+  <section class="view" id="v-check">
+    <div class="vhead"><div><h2>Unterlagen-Checkliste</h2><p class="muted">Welche Dokumente für den Verkauf gebraucht werden, je nach Objektart.</p></div>
+      <div class="noprint" style="display:flex;gap:8px;flex-wrap:wrap">
+        <select id="ck_art" style="width:auto"><option value="w">Wohnung (Stockwerkeigentum)</option><option value="h">Einfamilienhaus</option></select>
+        <button class="btn sec sm" id="ck_copy">Als Text kopieren</button>
+        <button class="btn sec sm" id="ck_print">Drucken / als PDF</button>
+      </div>
+    </div>
+    <div class="card"><div id="ck_body"></div></div>
+  </section>
+
+  <!-- Einstellungen -->
+  <section class="view" id="v-settings">
+    <div class="vhead"><div><h2>Einstellungen</h2><p class="muted">m²-Preise, Zugangscode und Datensicherung.</p></div></div>
+
+    <div class="banner">Alle Daten liegen nur in diesem Browser auf diesem Gerät. Mach regelmässig ein Backup, damit nichts verloren geht.</div>
+
+    <div class="card" style="margin-bottom:18px">
+      <h3 style="font-size:17px;margin-bottom:6px">Datensicherung</h3>
+      <p class="muted" style="margin-bottom:14px">Backup exportieren und bei Bedarf wieder einlesen. Enthält alle Leads und deine m²-Tabelle.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn sec sm" id="backupBtn">Backup herunterladen</button>
+        <label class="btn sec sm" style="margin:0">Backup einlesen<input type="file" id="restoreInp" accept="application/json" class="hidden"></label>
+        <button class="btn danger sm" id="wipeBtn">Alle Daten löschen</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:18px">
+      <h3 style="font-size:17px;margin-bottom:6px">Quadratmeterpreise (CHF/m²)</h3>
+      <p class="muted" style="margin-bottom:14px">Startwerte Raum Zürich, Stand Okt. 2026. Passe sie an deine Erfahrung an. Diese Tabelle speist den Preisrechner.</p>
+      <div style="overflow-x:auto"><table class="rates"><thead><tr><th>Gemeinde</th><th>Wohnung</th><th>Haus</th><th></th></tr></thead><tbody id="rateBody"></tbody></table></div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn sec sm" id="addRate">+ Gemeinde</button>
+        <button class="btn sm" id="saveRates">Speichern</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:17px;margin-bottom:6px">Zugangscode</h3>
+      <p class="muted" style="margin-bottom:14px">Leichter Schutz vor zufälligen Besuchern. Kein echter Login, da die Seite öffentlich erreichbar ist.</p>
+      <div class="grid2">
+        <div class="fld"><label class="fl">Neuer Code</label><input id="newcode" type="text"></div>
+        <div class="fld" style="display:flex;align-items:flex-end"><button class="btn sm" id="saveCode">Code ändern</button></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<!-- Lead-Modal -->
+<div class="ovl" id="leadOvl">
+  <div class="modal">
+    <button class="x" id="leadX">×</button>
+    <h3 id="leadTitle">Neuer Lead</h3>
+    <input type="hidden" id="l_id">
+    <div class="grid2">
+      <div class="fld"><label class="fl">Name</label><input id="l_name"></div>
+      <div class="fld"><label class="fl">Status</label><select id="l_status"></select></div>
+    </div>
+    <div class="grid2">
+      <div class="fld"><label class="fl">Telefon</label><input id="l_tel"></div>
+      <div class="fld"><label class="fl">E-Mail</label><input id="l_email"></div>
+    </div>
+    <div class="grid3">
+      <div class="fld"><label class="fl">Objektart</label><input id="l_art" placeholder="Wohnung"></div>
+      <div class="fld"><label class="fl">PLZ</label><input id="l_plz"></div>
+      <div class="fld"><label class="fl">Gemeinde</label><input id="l_gem"></div>
+    </div>
+    <div class="grid3">
+      <div class="fld"><label class="fl">Zimmer</label><input id="l_zi"></div>
+      <div class="fld"><label class="fl">Fläche m²</label><input id="l_fl"></div>
+      <div class="fld"><label class="fl">Baujahr</label><input id="l_bj"></div>
+    </div>
+    <div class="grid2">
+      <div class="fld"><label class="fl">Preisvorstellung CHF</label><input id="l_preis"></div>
+      <div class="fld"><label class="fl">Zeithorizont</label><input id="l_zeit"></div>
+    </div>
+    <div class="grid2">
+      <div class="fld"><label class="fl">Erreichbar</label><input id="l_err"></div>
+      <div class="fld"><label class="fl">Paket / Interesse</label><input id="l_paket"></div>
+    </div>
+    <div class="fld"><label class="fl">Notizen</label><textarea id="l_notes"></textarea></div>
+    <div style="display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap">
+      <button class="btn danger sm" id="l_del">Löschen</button>
+      <div style="display:flex;gap:8px"><button class="btn sec sm" id="l_cancel">Abbrechen</button><button class="btn sm" id="l_save">Speichern</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Paste-Modal -->
+<div class="ovl" id="pasteOvl">
+  <div class="modal">
+    <button class="x" id="pasteX">×</button>
+    <h3>Lead aus E-Mail einfügen</h3>
+    <p class="muted" style="margin-bottom:12px">Kopiere den Inhalt der FormSubmit-Anfrage-Mail hier rein. Die Felder werden automatisch erkannt.</p>
+    <textarea id="pasteArea" style="min-height:180px" placeholder="name: Max Muster&#10;telefon: 079 ...&#10;email: max@...&#10;objektart: Wohnung&#10;..."></textarea>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><button class="btn sec sm" id="pasteCancel">Abbrechen</button><button class="btn sm" id="pasteDo">Erkennen &amp; öffnen</button></div>
+  </div>
+</div>
+
+<script>
+"use strict";
+(function(){
+  var LS = {
+    get:function(k,d){ try{ var v=localStorage.getItem(k); return v==null?d:JSON.parse(v);}catch(e){return d;} },
+    set:function(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); return true;}catch(e){ alert("Speichern fehlgeschlagen (Speicher voll?)."); return false;} }
+  };
+  var K_LEADS="eh_leads", K_RATES="eh_rates", K_CODE="eh_code";
+  var DEFAULT_CODE="1842";
+  var DEFAULT_RATES=[
+    {g:"Zürich Stadt", w:17800, h:17000},
+    {g:"Küsnacht", w:18400, h:19000},
+    {g:"Meilen", w:18200, h:17500},
+    {g:"Uster", w:11400, h:11300},
+    {g:"Kloten", w:11100, h:11000},
+    {g:"Winterthur", w:10500, h:10100},
+    {g:"Dietikon", w:10400, h:11100},
+    {g:"Kanton ZH (Durchschnitt)", w:12000, h:11100}
+  ];
+  var STATUSES=[
+    {k:"neu",label:"Neu"},{k:"kontaktiert",label:"Kontaktiert"},{k:"termin",label:"Termin vereinbart"},
+    {k:"offerte",label:"Offerte / Angebot"},{k:"gebucht",label:"Paket gebucht"},{k:"verkauft",label:"Verkauft"},{k:"verloren",label:"Verloren"}
+  ];
+  function statLabel(k){ for(var i=0;i<STATUSES.length;i++) if(STATUSES[i].k===k) return STATUSES[i].label; return k; }
+  function chf(v){ v=Math.round(v); var neg=v<0; return (neg?"-":"")+"CHF "+Math.abs(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"'"); }
+  function esc(s){ return (s==null?"":String(s)).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];}); }
+  function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+  function $(id){ return document.getElementById(id); }
+
+  /* ---------- Gate ---------- */
+  function currentCode(){ return LS.get(K_CODE, DEFAULT_CODE); }
+  function openApp(){ $("gate").classList.add("hidden"); $("app").classList.remove("hidden"); renderAll(); }
+  $("gatebtn").addEventListener("click", function(){
+    if($("gatecode").value === String(currentCode())){ sessionStorage.setItem("eh_ok","1"); openApp(); }
+    else { $("gatecode").value=""; $("gatecode").placeholder="Falscher Code"; }
+  });
+  $("gatecode").addEventListener("keydown", function(e){ if(e.key==="Enter") $("gatebtn").click(); });
+  $("lockbtn").addEventListener("click", function(){ sessionStorage.removeItem("eh_ok"); location.reload(); });
+
+  /* ---------- Tabs ---------- */
+  $("tabs").addEventListener("click", function(e){
+    var b=e.target.closest("button"); if(!b) return;
+    Array.prototype.forEach.call($("tabs").children, function(x){ x.classList.toggle("active", x===b); });
+    Array.prototype.forEach.call(document.querySelectorAll(".view"), function(v){ v.classList.toggle("active", v.id==="v-"+b.dataset.v); });
+    window.scrollTo(0,0);
+  });
+
+  /* ---------- Data ---------- */
+  function leads(){ return LS.get(K_LEADS, []); }
+  function saveLeads(a){ LS.set(K_LEADS, a); }
+  function rates(){ var r=LS.get(K_RATES,null); return (r&&r.length)?r:DEFAULT_RATES.slice(); }
+
+  /* ---------- CRM render ---------- */
+  var filterStatus="alle", searchQ="";
+  function renderPipeline(){
+    var all=leads(), counts={alle:all.length};
+    STATUSES.forEach(function(s){ counts[s.k]=0; });
+    all.forEach(function(l){ counts[l.status]=(counts[l.status]||0)+1; });
+    var html='<span class="pill '+(filterStatus==="alle"?"active":"")+'" data-f="alle">Alle <span class="n">'+counts.alle+'</span></span>';
+    STATUSES.forEach(function(s){ html+='<span class="pill '+(filterStatus===s.k?"active":"")+'" data-f="'+s.k+'">'+s.label+' <span class="n">'+(counts[s.k]||0)+'</span></span>'; });
+    $("pipeline").innerHTML=html;
+  }
+  $("pipeline").addEventListener("click", function(e){ var p=e.target.closest(".pill"); if(!p) return; filterStatus=p.dataset.f; renderPipeline(); renderLeads(); });
+
+  function renderLeads(){
+    var all=leads().slice().sort(function(a,b){ return (b.created||0)-(a.created||0); });
+    var q=searchQ.toLowerCase();
+    var list=all.filter(function(l){
+      if(filterStatus!=="alle" && l.status!==filterStatus) return false;
+      if(q){ var hay=(l.name+" "+l.gemeinde+" "+l.email+" "+l.plz+" "+l.art).toLowerCase(); return hay.indexOf(q)>=0; }
+      return true;
+    });
+    if(!list.length){ $("leadList").innerHTML='<div class="empty">Keine Leads'+(all.length?" in dieser Ansicht.":" vorhanden. Füge den ersten mit «+ Neuer Lead» hinzu.")+'</div>'; return; }
+    $("leadList").innerHTML=list.map(function(l){
+      var meta=[l.art,l.gemeinde,(l.zi?l.zi+" Zi":""),(l.fl?l.fl+" m²":""),l.tel].filter(Boolean).join(" · ");
+      return '<div class="leadrow" data-id="'+l.id+'"><div class="main"><div class="nm">'+esc(l.name||"Ohne Namen")+'</div><div class="meta">'+esc(meta)+'</div></div>'+
+        '<div class="right"><span class="stat s-'+l.status+'">'+statLabel(l.status)+'</span><button class="btn sec sm" data-open="'+l.id+'">Öffnen</button></div></div>';
+    }).join("");
+  }
+  $("leadList").addEventListener("click", function(e){ var b=e.target.closest("[data-open]")||e.target.closest(".leadrow"); if(b){ var id=b.getAttribute("data-open")||b.getAttribute("data-id"); openLead(id); } });
+  $("search").addEventListener("input", function(){ searchQ=this.value; renderLeads(); });
+
+  /* ---------- Lead modal ---------- */
+  function fillStatusSelect(){ $("l_status").innerHTML=STATUSES.map(function(s){return '<option value="'+s.k+'">'+s.label+'</option>';}).join(""); }
+  function openLead(id){
+    fillStatusSelect();
+    var l = id ? leads().filter(function(x){return x.id===id;})[0] : null;
+    $("leadTitle").textContent = l ? "Lead bearbeiten" : "Neuer Lead";
+    $("l_id").value = l?l.id:"";
+    [["l_name","name"],["l_tel","tel"],["l_email","email"],["l_art","art"],["l_plz","plz"],["l_gem","gemeinde"],["l_zi","zi"],["l_fl","fl"],["l_bj","bj"],["l_preis","preis"],["l_zeit","zeit"],["l_err","err"],["l_paket","paket"],["l_notes","notes"]].forEach(function(p){ $(p[0]).value = l?(l[p[1]]||""):""; });
+    $("l_status").value = l?l.status:"neu";
+    $("l_del").style.display = l?"":"none";
+    $("leadOvl").classList.add("open");
+  }
+  function closeLead(){ $("leadOvl").classList.remove("open"); }
+  $("addLeadBtn").addEventListener("click", function(){ openLead(null); });
+  $("leadX").addEventListener("click", closeLead);
+  $("l_cancel").addEventListener("click", closeLead);
+  $("leadOvl").addEventListener("click", function(e){ if(e.target===this) closeLead(); });
+  $("l_save").addEventListener("click", function(){
+    var all=leads(), id=$("l_id").value;
+    var obj={ id:id||uid(), status:$("l_status").value,
+      name:$("l_name").value.trim(), tel:$("l_tel").value.trim(), email:$("l_email").value.trim(),
+      art:$("l_art").value.trim(), plz:$("l_plz").value.trim(), gemeinde:$("l_gem").value.trim(),
+      zi:$("l_zi").value.trim(), fl:$("l_fl").value.trim(), bj:$("l_bj").value.trim(),
+      preis:$("l_preis").value.trim(), zeit:$("l_zeit").value.trim(), err:$("l_err").value.trim(),
+      paket:$("l_paket").value.trim(), notes:$("l_notes").value.trim() };
+    if(id){ for(var i=0;i<all.length;i++) if(all[i].id===id){ obj.created=all[i].created; all[i]=obj; } }
+    else { obj.created=Date.now(); all.push(obj); }
+    saveLeads(all); closeLead(); renderPipeline(); renderLeads();
+  });
+  $("l_del").addEventListener("click", function(){
+    var id=$("l_id").value; if(!id) return;
+    if(!confirm("Diesen Lead wirklich löschen?")) return;
+    saveLeads(leads().filter(function(x){return x.id!==id;})); closeLead(); renderPipeline(); renderLeads();
+  });
+
+  /* ---------- Paste parser ---------- */
+  $("pasteBtn").addEventListener("click", function(){ $("pasteArea").value=""; $("pasteOvl").classList.add("open"); });
+  $("pasteX").addEventListener("click", function(){ $("pasteOvl").classList.remove("open"); });
+  $("pasteCancel").addEventListener("click", function(){ $("pasteOvl").classList.remove("open"); });
+  $("pasteOvl").addEventListener("click", function(e){ if(e.target===this) this.classList.remove("open"); });
+  $("pasteDo").addEventListener("click", function(){
+    var map=parseLead($("pasteArea").value);
+    $("pasteOvl").classList.remove("open");
+    fillStatusSelect();
+    $("leadTitle").textContent="Neuer Lead (erkannt)"; $("l_id").value="";
+    $("l_name").value=map.name||""; $("l_tel").value=map.telefon||""; $("l_email").value=map.email||"";
+    $("l_art").value=map.objektart||""; $("l_plz").value=map.plz||""; $("l_gem").value=map.gemeinde||"";
+    $("l_zi").value=map.zimmer||""; $("l_fl").value=map.flaeche||map["wohnfläche"]||map.wohnflaeche||"";
+    $("l_bj").value=map.baujahr||""; $("l_preis").value=map.preisvorstellung||map.preis||"";
+    $("l_zeit").value=map.zeithorizont||""; $("l_err").value=map.erreichbar||"";
+    $("l_paket").value=map.paket||map.buchungstyp||""; $("l_notes").value=map.bemerkungen||"";
+    $("l_status").value="neu"; $("l_del").style.display="none"; $("leadOvl").classList.add("open");
+  });
+  function parseLead(text){
+    var map={};
+    text.split(/\r?\n/).forEach(function(line){
+      var m=line.match(/^\s*([A-Za-zäöüÄÖÜ_\/ ]{2,30}?)\s*[:\t|]\s*(.+?)\s*$/);
+      if(m){ var key=m[1].trim().toLowerCase().replace(/\s+/g," "); if(!map[key]) map[key]=m[2].trim(); }
+    });
+    return map;
+  }
+
+  /* ---------- Preisrechner ---------- */
+  function fillGemeindeSelect(){
+    var r=rates();
+    $("c_gem").innerHTML=r.map(function(x,i){return '<option value="'+i+'">'+esc(x.g)+'</option>';}).join("")+'<option value="-1">Eigener Wert</option>';
+    setRateFromGem();
+  }
+  function setRateFromGem(){
+    var r=rates(), i=parseInt($("c_gem").value,10);
+    if(i>=0 && r[i]){ $("c_rate").value = $("c_art").value==="h" ? r[i].h : r[i].w; }
+  }
+  $("c_gem").addEventListener("change", setRateFromGem);
+  $("c_art").addEventListener("change", setRateFromGem);
+  function ageFactor(bj){ bj=parseInt(bj,10); if(!bj) return 1; var y=new Date().getFullYear(); var age=y-bj; if(age<5) return 1.05; if(age<15) return 1.02; if(age<30) return 1; if(age<50) return .96; return .91; }
+  $("calcBtn").addEventListener("click", function(){
+    var fl=parseFloat($("c_fl").value)||0, rate=parseFloat($("c_rate").value)||0, zu=parseFloat($("c_zu").value)||1, af=ageFactor($("c_bj").value);
+    var val=fl*rate*zu*af;
+    if(!val){ $("c_val").textContent="–"; $("c_rng").textContent="Bitte Fläche und m²-Preis eingeben."; return; }
+    var round=function(x){ return Math.round(x/10000)*10000; };
+    $("c_val").textContent=chf(round(val));
+    $("c_rng").textContent="Spanne "+chf(round(val*0.91))+" bis "+chf(round(val*1.09));
+    window.__lastCalc={ fl:fl, val:round(val) };
+  });
+  $("calcToExpose").addEventListener("click", function(){
+    if(window.__lastCalc){ $("e_fl").value=window.__lastCalc.fl||""; $("e_preis").value=window.__lastCalc.val||""; }
+    document.querySelector('#tabs button[data-v="expose"]').click();
+  });
+
+  /* ---------- Exposé ---------- */
+  $("expBtn").addEventListener("click", function(){
+    var g=function(id){return $(id).value.trim();};
+    var titel=g("e_titel")||"Objektbeschrieb";
+    var eck=[];
+    if(g("e_art")) eck.push("Objektart: "+g("e_art"));
+    if(g("e_zi")) eck.push("Zimmer: "+g("e_zi"));
+    if(g("e_fl")) eck.push("Wohnfläche: "+g("e_fl")+" m²");
+    if(g("e_bj")) eck.push("Baujahr: "+g("e_bj"));
+    if(g("e_sw")) eck.push("Stockwerk: "+g("e_sw"));
+    if(g("e_pp")) eck.push("Parkplatz: "+g("e_pp"));
+    if(g("e_ort")) eck.push("Lage: "+g("e_ort"));
+    if(g("e_preis")){ var p=parseFloat(g("e_preis").replace(/[^0-9.]/g,"")); eck.push("Verkaufspreis: "+(p?chf(p):g("e_preis"))); }
+    var hl=g("e_hl").split(/\n/).map(function(s){return s.trim();}).filter(Boolean);
+    var intro=g("e_txt") || ("Diese Immobilie"+(g("e_ort")?" in "+g("e_ort"):"")+" überzeugt mit "+(g("e_fl")?g("e_fl")+" m² Wohnfläche":"durchdachten Räumen")+(g("e_zi")?" auf "+g("e_zi")+" Zimmern":"")+". Vereinbaren Sie jetzt eine Besichtigung.");
+    var out="";
+    out+=titel.toUpperCase()+"\n"+"=".repeat(Math.min(titel.length,60))+"\n\n";
+    out+=intro+"\n\n";
+    out+="ECKDATEN\n"+eck.map(function(e){return "• "+e;}).join("\n")+"\n";
+    if(hl.length){ out+="\nHIGHLIGHTS\n"+hl.map(function(h){return "• "+h;}).join("\n")+"\n"; }
+    out+="\nINTERESSE?\nEigenhand · info@eigenhand.ch · https://eigenhand.ch\nVerkauf ohne Maklerprovision, zum Festpreis.";
+    $("e_out").textContent=out;
+  });
+  $("e_copy").addEventListener("click", function(){ copyText($("e_out").textContent, this); });
+  $("e_print").addEventListener("click", function(){ document.querySelector('#tabs button[data-v="expose"]').click(); window.print(); });
+
+  /* ---------- Checkliste ---------- */
+  var CHECK={
+    base:[
+      ["Grundbuchauszug","aktuell, vom zuständigen Notariat"],
+      ["Katasterplan / Situationsplan","mit Grundstücksgrenzen"],
+      ["Gebäudeversicherungsausweis","GVZ"],
+      ["Grundrisspläne","mit Flächenangaben, wenn vorhanden Schnitte und Baubeschrieb"],
+      ["Liste der Renovationen","Jahr, Kosten, Rechnungen (senkt Grundstückgewinnsteuer)"],
+      ["Angaben Heizung / Energie","Heizungsart, Baujahr Anlage, Nebenkosten"],
+      ["Baubewilligungen","für Um- und Anbauten"],
+      ["Hypothekarvertrag","Laufzeit, Vorfälligkeit prüfen"]
+    ],
+    w:[
+      ["Begründungsakt & Reglement","der Stockwerkeigentümergemeinschaft"],
+      ["Protokolle Eigentümerversammlungen","letzte 2–3 Jahre"],
+      ["Stand Erneuerungsfonds","plus Jahresrechnung und Budget"],
+      ["Beschlossene Sanierungen","offen kommunizieren"]
+    ],
+    h:[
+      ["Grundstücksfläche / Parzelle","aus Katasterplan"],
+      ["Versicherungsnachweise","Gebäude, evtl. Umgebung"],
+      ["Unterhalts- und Servicebelege","Heizung, Dach, Fassade"]
+    ]
+  };
+  function renderCheck(){
+    var art=$("ck_art").value;
+    var html='<div class="subhead">Für jede Immobilie</div><ul class="chk">'+CHECK.base.map(ckItem).join("")+'</ul>';
+    if(art==="w") html+='<div class="subhead">Zusätzlich bei Stockwerkeigentum</div><ul class="chk">'+CHECK.w.map(ckItem).join("")+'</ul>';
+    else html+='<div class="subhead">Zusätzlich beim Einfamilienhaus</div><ul class="chk">'+CHECK.h.map(ckItem).join("")+'</ul>';
+    $("ck_body").innerHTML=html;
+  }
+  function ckItem(it){ return '<li><input type="checkbox"><div><div class="t">'+esc(it[0])+'</div><div class="d">'+esc(it[1])+'</div></div></li>'; }
+  $("ck_art").addEventListener("change", renderCheck);
+  $("ck_copy").addEventListener("click", function(){
+    var art=$("ck_art").value, lines=["Unterlagen-Checkliste Immobilienverkauf","","Für jede Immobilie:"];
+    CHECK.base.forEach(function(i){ lines.push("[ ] "+i[0]+" — "+i[1]); });
+    lines.push(""); lines.push(art==="w"?"Zusätzlich bei Stockwerkeigentum:":"Zusätzlich beim Einfamilienhaus:");
+    (art==="w"?CHECK.w:CHECK.h).forEach(function(i){ lines.push("[ ] "+i[0]+" — "+i[1]); });
+    lines.push(""); lines.push("Eigenhand · info@eigenhand.ch");
+    copyText(lines.join("\n"), this);
+  });
+  $("ck_print").addEventListener("click", function(){ window.print(); });
+
+  /* ---------- Settings: rates ---------- */
+  function renderRates(){
+    var r=rates();
+    $("rateBody").innerHTML=r.map(function(x,i){
+      return '<tr data-i="'+i+'"><td><input class="r-g" value="'+esc(x.g)+'"></td><td class="num"><input class="r-w" type="number" value="'+x.w+'"></td><td class="num"><input class="r-h" type="number" value="'+x.h+'"></td><td><button class="btn danger sm r-del">×</button></td></tr>';
+    }).join("");
+  }
+  $("rateBody").addEventListener("click", function(e){ if(e.target.classList.contains("r-del")){ e.target.closest("tr").remove(); } });
+  $("addRate").addEventListener("click", function(){
+    var tr=document.createElement("tr");
+    tr.innerHTML='<td><input class="r-g" value=""></td><td class="num"><input class="r-w" type="number" value="11000"></td><td class="num"><input class="r-h" type="number" value="11000"></td><td><button class="btn danger sm r-del">×</button></td>';
+    $("rateBody").appendChild(tr);
+  });
+  $("saveRates").addEventListener("click", function(){
+    var out=[];
+    Array.prototype.forEach.call($("rateBody").children, function(tr){
+      var g=tr.querySelector(".r-g").value.trim(), w=parseFloat(tr.querySelector(".r-w").value)||0, h=parseFloat(tr.querySelector(".r-h").value)||0;
+      if(g) out.push({g:g,w:w,h:h});
+    });
+    LS.set(K_RATES,out); fillGemeindeSelect(); alert("m²-Preise gespeichert.");
+  });
+
+  /* ---------- Settings: code + backup ---------- */
+  $("saveCode").addEventListener("click", function(){
+    var c=$("newcode").value.trim(); if(!c){ alert("Bitte einen Code eingeben."); return; }
+    LS.set(K_CODE,c); $("newcode").value=""; alert("Zugangscode geändert.");
+  });
+  $("backupBtn").addEventListener("click", function(){
+    var data={ leads:leads(), rates:rates(), exported:new Date().toISOString() };
+    var blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+    a.download="eigenhand-cockpit-backup-"+new Date().toISOString().slice(0,10)+".json"; a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);},2000);
+  });
+  $("restoreInp").addEventListener("change", function(){
+    var f=this.files[0]; if(!f) return; var rd=new FileReader();
+    rd.onload=function(){ try{ var d=JSON.parse(rd.result);
+      if(d.leads){ saveLeads(d.leads); } if(d.rates){ LS.set(K_RATES,d.rates); }
+      alert("Backup eingelesen."); renderAll();
+    }catch(e){ alert("Datei konnte nicht gelesen werden."); } };
+    rd.readAsText(f); this.value="";
+  });
+  $("wipeBtn").addEventListener("click", function(){
+    if(!confirm("Wirklich ALLE Leads und Einstellungen löschen? Das kann nicht rückgängig gemacht werden.")) return;
+    if(!confirm("Letzte Warnung: Hast du ein Backup? Ohne Backup ist alles weg.")) return;
+    localStorage.removeItem(K_LEADS); localStorage.removeItem(K_RATES); renderAll(); alert("Alle Daten gelöscht.");
+  });
+
+  /* ---------- Helpers ---------- */
+  function copyText(t, btn){
+    var done=function(){ var o=btn.textContent; btn.textContent="Kopiert ✓"; setTimeout(function(){btn.textContent=o;},1500); };
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(function(){ fallbackCopy(t); done(); }); }
+    else { fallbackCopy(t); done(); }
+  }
+  function fallbackCopy(t){ var ta=document.createElement("textarea"); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy");}catch(e){} document.body.removeChild(ta); }
+
+  function renderAll(){ renderPipeline(); renderLeads(); fillGemeindeSelect(); renderCheck(); renderRates(); }
+
+  /* ---------- Boot ---------- */
+  if(sessionStorage.getItem("eh_ok")==="1"){ openApp(); } else { setTimeout(function(){ $("gatecode").focus(); },100); }
+})();
+</script>
+</body>
+</html>
