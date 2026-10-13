@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Eigenhand","url":"https://eigenhand.ch/","telephone":"+41787528177","email":"info@eigenhand.ch","areaServed":"Kanton Zürich","address":{"@type":"PostalAddress","streetAddress":"Bramenring 7","postalCode":"8302","addressLocality":"Kloten","addressCountry":"CH"},"priceRange":"CHF 990 bis CHF 5'900"}
+{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Eigenhand","url":"https://eigenhand.ch/","email":"info@eigenhand.ch","areaServed":"Kanton Zürich","address":{"@type":"PostalAddress","streetAddress":"Bramenring 7","postalCode":"8302","addressLocality":"Kloten","addressCountry":"CH"},"priceRange":"CHF 990 bis CHF 5'900"}
 </script>
 <style>
 :root{--bg:#F5F4EF;--surface:#FFFFFF;--ink:#14211C;--muted:#3E4C46;--muted2:#5A675F;--line:#DBD8CF;--green:#1D5B46;--green-d:#123D2F;--mint:#9FE0C3;--mint-bg:#E4EEE8;--warn:#B45233}
@@ -602,7 +602,7 @@ footer a{color:#fff}
         <h2 class="h2">Eine feste Ansprechperson. Kein Callcenter.</h2>
         <p>Eigenhand ist ein junges Unternehmen aus Kloten, gegründet 2026. Ich habe in der Immobilienvermittlung im Raum Zürich gearbeitet und kenne die Abläufe vom ersten Gespräch bis zum Notartermin. Dabei habe ich oft gesehen, wie viel Provision Eigentümer für Arbeit bezahlen, die sie mit etwas Unterstützung selbst erledigen könnten.</p>
         <p>Wir sind neu und sagen das offen. Kundenbewertungen haben wir deshalb noch keine. Was wir Ihnen bieten können: feste Preise, klar beschriebene Leistungen, eine Wechsel-Garantie und eine Person, die Sie direkt erreichen.</p>
-        <div class="sig">Haris<span>Ihr Ansprechpartner bei Eigenhand · Kloten</span></div>
+        <div class="sig">Haris Savran<span>Ihr Ansprechpartner bei Eigenhand · Kloten</span></div>
       </div>
     </div>
   </div>
@@ -644,9 +644,8 @@ footer a{color:#fff}
         <div class="n"><div class="no">2</div><div><b>Wir rufen Sie innert 24 Stunden an</b><span>Zum Zeitpunkt, der Ihnen passt.</span></div></div>
         <div class="n"><div class="no">3</div><div><b>Sie erhalten eine erste Einschätzung</b><span>Eine grobe Preisspanne und eine ehrliche Empfehlung, welches Paket zu Ihnen passt.</span></div></div>
         <div class="direct">
-          <p style="color:var(--muted)">Lieber direkt sprechen?</p>
-          <a class="big" href="tel:+41787528177">078 752 81 77</a>
-          <p style="margin-top:4px"><a href="mailto:info@eigenhand.ch">info@eigenhand.ch</a></p>
+          <p style="color:var(--muted)">Lieber schreiben?</p>
+          <a class="big" href="mailto:info@eigenhand.ch">info@eigenhand.ch</a>
         </div>
       </div>
       <form class="form" id="quickform" novalidate>
@@ -669,7 +668,7 @@ footer a{color:#fff}
       <p>Verantwortlich für diese Website:</p>
       <p>Haris Ata Savran · Einzelunternehmen (Eigenhand)<br>Bramenring 7<br>8302 Kloten<br>Schweiz</p>
       <h3>Kontakt</h3>
-      <p>E-Mail: info@eigenhand.ch · Telefon: 078 752 81 77</p>
+      <p>E-Mail: info@eigenhand.ch</p>
       <h3>Handelsregister</h3>
       <p>Noch nicht im Handelsregister eingetragen. UID folgt bei Eintragung.</p>
       <h3>Haftungsausschluss</h3>
@@ -696,7 +695,7 @@ footer a{color:#fff}
 <footer>
   <div class="wrap row">
     <span><strong style="color:#fff">Eigenhand</strong> · Festpreis statt Provision. Kanton Zürich.</span>
-    <span><a href="ratgeber.html">Ratgeber</a> · <a href="#impressum">Impressum</a> · <a href="#datenschutz">Datenschutz</a> · <a href="tel:+41787528177">078 752 81 77</a></span>
+    <span><a href="ratgeber.html">Ratgeber</a> · <a href="#impressum">Impressum</a> · <a href="#datenschutz">Datenschutz</a> · <a href="mailto:info@eigenhand.ch">info@eigenhand.ch</a></span>
   </div>
 </footer>
 
@@ -780,7 +779,7 @@ footer a{color:#fff}
     <div class="msuccess" id="msuccess" role="status">
       <div class="ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1D5B46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5 11-11"/></svg></div>
       <h3 id="succTitle">Danke, Ihre Anfrage ist bei uns.</h3>
-      <p id="succText">Wir rufen Sie innert 24 Stunden an. Falls es dringend ist, erreichen Sie uns direkt unter 078 752 81 77.</p>
+      <p id="succText">Wir rufen Sie innert 24 Stunden an. Falls es dringend ist, erreichen Sie uns direkt unter info@eigenhand.ch.</p>
       <button type="button" class="btn sec" style="margin-top:24px" onclick="closeBooking()">Schliessen</button>
     </div>
   </div>
@@ -941,15 +940,15 @@ function sendLead(fields, subject){
     sendLead(fields, "Eigenhand-Anfrage: " + fields.buchungstyp).then(function(mode){
       if(mode === "mail"){
         document.getElementById("succTitle").textContent = "Fast geschafft";
-        document.getElementById("succText").textContent = "Ihr E-Mail-Programm öffnet sich mit Ihrer vorbereiteten Anfrage. Bitte senden Sie die E-Mail ab. Öffnet sich nichts, rufen Sie uns an: 078 752 81 77.";
+        document.getElementById("succText").textContent = "Ihr E-Mail-Programm öffnet sich mit Ihrer vorbereiteten Anfrage. Bitte senden Sie die E-Mail ab. Öffnet sich nichts, schreiben Sie uns an info@eigenhand.ch.";
       } else {
         document.getElementById("succTitle").textContent = "Danke, Ihre Anfrage ist bei uns.";
-        document.getElementById("succText").textContent = "Wir rufen Sie innert 24 Stunden an. Falls es dringend ist, erreichen Sie uns direkt unter 078 752 81 77.";
+        document.getElementById("succText").textContent = "Wir rufen Sie innert 24 Stunden an. Falls es dringend ist, erreichen Sie uns direkt unter info@eigenhand.ch.";
       }
       formEl.style.display = "none"; successEl.classList.add("show");
     }).catch(function(){
       submitBtn.disabled = false; submitBtn.textContent = "Nochmals versuchen";
-      document.getElementById("steplabel").textContent = "Senden hat nicht geklappt. Bitte nochmals versuchen oder anrufen: 078 752 81 77.";
+      document.getElementById("steplabel").textContent = "Senden hat nicht geklappt. Bitte nochmals versuchen oder schreiben Sie an info@eigenhand.ch.";
     });
   });
 })();
@@ -973,7 +972,7 @@ function sendLead(fields, subject){
       msg.style.color = "var(--green)";
     }).catch(function(){
       btn.disabled = false; btn.textContent = "Nochmals versuchen";
-      msg.textContent = "Senden hat nicht geklappt. Bitte rufen Sie uns an: 078 752 81 77."; msg.style.color = "var(--warn)";
+      msg.textContent = "Senden hat nicht geklappt. Bitte schreiben Sie uns an info@eigenhand.ch."; msg.style.color = "var(--warn)";
     });
   });
 })();
