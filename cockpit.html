@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 <style>
 :root{--bg:#F5F4EF;--surface:#FFFFFF;--ink:#14211C;--muted:#3E4C46;--muted2:#5A675F;--line:#DBD8CF;--green:#1D5B46;--green-d:#123D2F;--mint:#9FE0C3;--mint-bg:#E4EEE8;--warn:#B45233;--amber:#B5881F}
 *{box-sizing:border-box}
@@ -129,6 +130,65 @@ table.rates td.num{width:130px}
   .card{border:0;padding:0}
   .out{border:0;padding:0;max-height:none;font-family:inherit;font-size:14px}
 }
+
+/* ---- Rechnung: Bildschirm-Vorschau ---- */
+#inv_prevwrap{overflow:hidden;background:#EDEBE4;border:1px solid var(--line);border-radius:14px;padding:16px}
+#inv_doc{transform-origin:top left;box-shadow:0 4px 24px rgba(0,0,0,.14)}
+.inv-placeholder{color:var(--muted);text-align:center;padding:40px 16px;font-size:14px}
+.itemrow{display:grid;grid-template-columns:1fr 120px 36px;gap:8px;align-items:center;margin-bottom:8px}
+.itemrow input{font-size:14px;padding:8px 10px}
+.itemrow .del{background:#fff;color:var(--warn);border:1px solid #E7C4B8;border-radius:8px;height:38px;font-size:17px;padding:0}
+
+/* ---- Rechnung: A4-Dokument ---- */
+.inv-page{width:210mm;min-height:297mm;background:#fff;color:#1a1a1a;font-family:'Schibsted Grotesk',Arial,Helvetica,sans-serif;padding:18mm 18mm 0;position:relative;box-sizing:border-box;line-height:1.5}
+.inv-page .ih{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.inv-page .ibrand{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:800;color:#123D2F;letter-spacing:-.02em}
+.inv-page .ibrand svg{width:34px;height:34px}
+.inv-page .ifrom{font-size:11.5px;color:#444;text-align:right;line-height:1.5}
+.inv-page .imeta{margin-top:16mm;display:flex;justify-content:space-between;gap:20px}
+.inv-page .ito{font-size:13px;line-height:1.55}
+.inv-page .ito .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#8a8a8a;margin-bottom:4px}
+.inv-page .ifacts{font-size:12px;color:#444;text-align:right;white-space:nowrap}
+.inv-page .ifacts b{color:#1a1a1a}
+.inv-page .ititle{font-size:23px;font-weight:800;color:#123D2F;margin:11mm 0 2mm;letter-spacing:-.02em}
+.inv-page .iintro{font-size:12.5px;color:#444;margin-bottom:6mm;max-width:150mm}
+table.iitems{width:100%;border-collapse:collapse;font-size:12.5px}
+table.iitems th{text-align:left;border-bottom:2px solid #123D2F;padding:7px 2px;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:#123D2F}
+table.iitems td{padding:9px 2px;border-bottom:1px solid #e3e3e3;vertical-align:top;color:#1a1a1a}
+table.iitems .r{text-align:right;white-space:nowrap}
+.inv-page .itot{margin:6mm 0 0 auto;width:72mm;font-size:13px}
+.inv-page .itot .r1{display:flex;justify-content:space-between;padding:5px 0;color:#444}
+.inv-page .itot .grand{border-top:2px solid #123D2F;margin-top:4px;padding-top:9px;font-weight:800;font-size:16.5px;color:#123D2F}
+.inv-page .inote{margin-top:9mm;font-size:11.5px;color:#444;line-height:1.55;max-width:150mm}
+.inv-page .ifoot{position:absolute;left:18mm;right:18mm;bottom:110mm;font-size:10px;color:#999;border-top:1px solid #e3e3e3;padding-top:5px;display:flex;justify-content:space-between}
+
+/* ---- Swiss QR-Bill Zahlteil (105mm) ---- */
+.qrbill{position:absolute;left:0;bottom:0;width:210mm;height:105mm;border-top:.75pt solid #000;display:flex;font-family:'Schibsted Grotesk',Arial,Helvetica,sans-serif;color:#000;box-sizing:border-box}
+.qrbill *{box-sizing:border-box}
+.qr-rcpt{width:62mm;height:105mm;border-right:.75pt dashed #000;padding:5mm;display:flex;flex-direction:column}
+.qr-pay{width:148mm;height:105mm;padding:5mm 5mm 5mm 5mm;display:flex;gap:5mm}
+.qr-pay .qpL{width:51mm;display:flex;flex-direction:column}
+.qr-pay .qpR{flex:1;display:flex;flex-direction:column}
+.qb-title{font-size:11pt;font-weight:700;margin-bottom:12px;line-height:1}
+.qr-pay .qb-title{margin-bottom:0}
+.qb-h{font-weight:700;line-height:1.1;margin-top:9px}
+.qb-v{line-height:1.25;white-space:pre-line}
+.qr-rcpt .qb-h{font-size:6pt}
+.qr-rcpt .qb-v{font-size:8pt}
+.qr-pay .qb-h{font-size:8pt}
+.qr-pay .qb-v{font-size:10pt}
+.qb-amt{display:flex;gap:12px;margin-top:auto}
+.qr-rcpt .qb-amt{padding-top:8px}
+.qb-accept{font-size:6pt;font-weight:700;text-align:right;margin-top:8px}
+.qp-qr{width:46mm;height:46mm;margin:5mm 0}
+.qp-qr svg{display:block;width:46mm;height:46mm}
+.qr-pay .qpL .qb-amt{margin-top:0}
+.qp-further{font-size:7pt;font-weight:700;margin-top:6px}
+body.inv-print{background:#fff}
+body.inv-print *{visibility:hidden !important}
+body.inv-print #inv_doc,body.inv-print #inv_doc *{visibility:visible !important}
+body.inv-print #inv_doc{position:absolute !important;left:0;top:0;transform:none !important;box-shadow:none}
+@media print{ @page{size:A4;margin:0} }
 </style>
 </head>
 <body>
@@ -161,6 +221,7 @@ table.rates td.num{width:130px}
       <button data-v="crm" class="active">CRM</button>
       <button data-v="calc">Preisrechner</button>
       <button data-v="expose">Exposé</button>
+      <button data-v="invoice">Rechnung</button>
       <button data-v="check">Checkliste</button>
       <button data-v="settings">Einstellungen</button>
     </nav>
@@ -252,6 +313,58 @@ table.rates td.num{width:130px}
     </div>
   </section>
 
+  <!-- Rechnung -->
+  <section class="view" id="v-invoice">
+    <div class="vhead">
+      <div><h2>QR-Rechnung</h2><p class="muted">Erstellt eine Rechnung mit Schweizer QR-Zahlteil. Kunde scannt den Code mit seiner Banking- oder TWINT-App – fertig.</p></div>
+      <div class="noprint" style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn sec sm" id="inv_print" disabled>Drucken / als PDF</button>
+      </div>
+    </div>
+    <div id="inv_warn" class="banner hidden" style="background:#FBEEE9;border-color:#E7C4B8;color:var(--warn)"></div>
+    <div class="grid2">
+      <div class="card noprint">
+        <div class="grid2">
+          <div class="fld"><label class="fl">Rechnungsnummer</label><input id="inv_no"></div>
+          <div class="fld"><label class="fl">Datum</label><input id="inv_date" type="date"></div>
+        </div>
+
+        <div class="subhead" style="margin-top:4px">Kunde (Rechnungsempfänger)</div>
+        <div class="fld"><label class="fl">Name</label><input id="inv_dName" placeholder="Max Muster"></div>
+        <div class="grid2">
+          <div class="fld"><label class="fl">Strasse & Nr.</label><input id="inv_dStreet" placeholder="Musterstrasse 12"></div>
+          <div class="fld"><label class="fl">PLZ & Ort</label><input id="inv_dCity" placeholder="8302 Kloten"></div>
+        </div>
+        <div class="fld"><label class="fl">E-Mail (optional, für Versand)</label><input id="inv_dMail" placeholder="max@example.ch"></div>
+
+        <div class="subhead">Leistungen</div>
+        <div id="inv_items"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+          <select id="inv_preset" style="width:auto;flex:1;min-width:180px">
+            <option value="">+ Leistung hinzufügen …</option>
+            <option value="Immobilienbewertung|290">Immobilienbewertung – CHF 290</option>
+            <option value="Paket «Selbst» – Verkauf zum Festpreis|990">Paket «Selbst» – CHF 990</option>
+            <option value="Paket «Pro» – Verkauf zum Festpreis|1990">Paket «Pro» – CHF 1'990</option>
+            <option value="Paket «Begleitet» – Verkauf zum Festpreis|5900">Paket «Begleitet» – CHF 5'900</option>
+            <option value="Virtual Staging (pro Bild)|45">Virtual Staging / Bild – CHF 45</option>
+            <option value="|">Eigene Position …</option>
+          </select>
+        </div>
+
+        <div class="fld" style="margin-top:16px"><label class="fl">Einleitungstext (optional)</label><textarea id="inv_intro" placeholder="Besten Dank für Ihren Auftrag. Wir erlauben uns, folgende Leistungen in Rechnung zu stellen:"></textarea></div>
+        <div class="grid2">
+          <div class="fld"><label class="fl">Zahlungsfrist</label><input id="inv_term" value="30 Tage"></div>
+          <div class="fld"><label class="fl">Referenz / Zweck</label><input id="inv_ref" placeholder="Verkauf Musterstrasse 12"></div>
+        </div>
+        <button class="btn block" id="inv_gen">Rechnung erstellen</button>
+        <p class="tiny" style="margin-top:10px">Absender/Konto werden aus den <b>Einstellungen</b> übernommen. Als Einzelunternehmen unter CHF 100'000 Umsatz ohne MWST.</p>
+      </div>
+      <div>
+        <div id="inv_prevwrap"><div class="inv-placeholder">Die Vorschau erscheint hier, sobald du «Rechnung erstellen» klickst.</div></div>
+      </div>
+    </div>
+  </section>
+
   <!-- Checkliste -->
   <section class="view" id="v-check">
     <div class="vhead"><div><h2>Unterlagen-Checkliste</h2><p class="muted">Welche Dokumente für den Verkauf gebraucht werden, je nach Objektart.</p></div>
@@ -277,6 +390,22 @@ table.rates td.num{width:130px}
         <button class="btn sec sm" id="exportCsv2">CSV herunterladen</button>
         <button class="btn sec sm" id="exportJson">JSON-Backup</button>
       </div>
+    </div>
+
+    <div class="card" style="margin-bottom:18px">
+      <h3 style="font-size:17px;margin-bottom:6px">Absender & Konto für Rechnungen</h3>
+      <p class="muted" style="margin-bottom:14px">Diese Angaben erscheinen auf der QR-Rechnung und im Zahlteil. Die IBAN muss dein Schweizer Geschäfts- oder Privatkonto sein (CHF). Lokal auf diesem Gerät gespeichert.</p>
+      <div class="grid2">
+        <div class="fld"><label class="fl">Firma / Name</label><input id="biz_name" placeholder="Eigenhand, Haris Savran"></div>
+        <div class="fld"><label class="fl">IBAN</label><input id="biz_iban" placeholder="CH00 0000 0000 0000 0000 0"></div>
+      </div>
+      <div class="grid3">
+        <div class="fld"><label class="fl">Strasse & Nr.</label><input id="biz_street" placeholder="Bramenring 7"></div>
+        <div class="fld"><label class="fl">PLZ</label><input id="biz_plz" placeholder="8302"></div>
+        <div class="fld"><label class="fl">Ort</label><input id="biz_ort" placeholder="Kloten"></div>
+      </div>
+      <p class="tiny" id="biz_ibanmsg" style="margin:0 0 12px"></p>
+      <button class="btn sm" id="biz_save">Speichern</button>
     </div>
 
     <div class="card" style="margin-bottom:18px">
@@ -652,7 +781,232 @@ table.rates td.num{width:130px}
   }
   function fallbackCopy(t){ var ta=document.createElement("textarea"); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy");}catch(e){} document.body.removeChild(ta); }
 
-  function renderStatic(){ fillGemeindeSelect(); renderCheck(); renderRates(); }
+  /* ====================================================================
+     QR-RECHNUNG
+  ==================================================================== */
+  var K_BIZ="eh_biz", K_INVNO="eh_invno";
+  var biz=LS.get(K_BIZ,{name:"Eigenhand, Haris Savran",iban:"",street:"Bramenring 7",plz:"8302",ort:"Kloten"});
+  var invItems=[];
+
+  function stripIban(s){ return (s||"").replace(/\s+/g,"").toUpperCase(); }
+  function fmtIban(s){ s=stripIban(s); return s.replace(/(.{4})/g,"$1 ").trim(); }
+  function ibanValid(s){
+    s=stripIban(s);
+    if(!/^(CH|LI)\d{19}$/.test(s)) return false;
+    var re=s.slice(4)+s.slice(0,4), n="";
+    for(var i=0;i<re.length;i++){ var c=re[i]; n+= (c>="A"&&c<="Z") ? (c.charCodeAt(0)-55).toString() : c; }
+    var rem=0; for(var j=0;j<n.length;j++){ rem=(rem*10+parseInt(n[j],10))%97; }
+    return rem===1;
+  }
+  function isQrIban(s){ s=stripIban(s); if(s.length<9) return false; var iid=parseInt(s.slice(4,9),10); return iid>=30000 && iid<=31999; }
+  function mod10rec(input){ var t=[0,9,4,6,8,2,7,1,3,5],c=0; for(var i=0;i<input.length;i++){ c=t[(c+parseInt(input[i],10))%10]; } return (10-c)%10; }
+  function qrrRef(invno){ var d=(invno||"").replace(/\D/g,""); d=("00000000000000000000000000"+d).slice(-26); return d+mod10rec(d); }
+  function grp5(s){ return s.replace(/(.{5})/g,"$1 ").trim(); }
+
+  function chfDec(v){ return (Math.round(v*100)/100).toFixed(2); }
+
+  function spcPayload(d){
+    var L=["SPC","0200","1",d.iban,"S",d.cName,d.cStreet,d.cNo,d.cPlz,d.cOrt,"CH",
+           "","","","","","","", d.amount, "CHF"];
+    if(d.dName){ L.push("S",d.dName,d.dStreet,d.dNo,d.dPlz,d.dOrt,"CH"); }
+    else { L.push("","","","","","",""); }
+    L.push(d.refType, d.ref, d.msg, "EPD");
+    return L.join("\r\n");
+  }
+
+  function qrSvg(payload, mm){
+    var qr=qrcode(0,"M");
+    qr.addData(unescape(encodeURIComponent(payload)),"Byte");
+    qr.make();
+    var n=qr.getModuleCount(), px=1000, cell=px/n, d="";
+    for(var r=0;r<n;r++){ for(var c=0;c<n;c++){ if(qr.isDark(r,c)){ d+="M"+(c*cell).toFixed(2)+" "+(r*cell).toFixed(2)+"h"+cell.toFixed(2)+"v"+cell.toFixed(2)+"h-"+cell.toFixed(2)+"z"; } } }
+    var cs=px*7/46, b=px*0.6/46, x0=(px-cs)/2, cxp=px/2, barT=cs*0.26, barL=cs*0.60;
+    var s='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+px+' '+px+'" width="'+mm+'mm" height="'+mm+'mm" shape-rendering="crispEdges">';
+    s+='<rect width="'+px+'" height="'+px+'" fill="#fff"/>';
+    s+='<path d="'+d+'" fill="#000"/>';
+    s+='<rect x="'+(x0-b)+'" y="'+(x0-b)+'" width="'+(cs+2*b)+'" height="'+(cs+2*b)+'" fill="#fff"/>';
+    s+='<rect x="'+x0+'" y="'+x0+'" width="'+cs+'" height="'+cs+'" fill="#000"/>';
+    s+='<rect x="'+(cxp-barL/2)+'" y="'+(cxp-barT/2)+'" width="'+barL+'" height="'+barT+'" fill="#fff"/>';
+    s+='<rect x="'+(cxp-barT/2)+'" y="'+(cxp-barL/2)+'" width="'+barT+'" height="'+barL+'" fill="#fff"/>';
+    s+='</svg>';
+    return s;
+  }
+
+  var LOGO_SVG='<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M7.5 26.5c0-1.5 1.2-2.7 2.7-2.7.7 0 1.3.3 1.8.7 2.6 2.1 7.3 3.6 12 3.6s9.4-1.5 12-3.6c.5-.4 1.1-.7 1.8-.7 1.5 0 2.7 1.2 2.7 2.7 0 .6-.2 1.2-.5 1.7C37.2 32.6 31 35.3 24 35.3S10.8 32.6 8 28.2c-.3-.5-.5-1.1-.5-1.7Z" fill="#1D5B46"/><path d="M14.5 18.8 24 11l9.5 7.8V24a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1v-5.2Z" fill="#1D5B46"/><rect x="21" y="18.5" width="6" height="6.5" rx="1" fill="#9FE0C3"/></svg>';
+
+  /* ---- biz settings ---- */
+  function loadBiz(){
+    $("biz_name").value=biz.name||""; $("biz_iban").value=biz.iban?fmtIban(biz.iban):"";
+    $("biz_street").value=biz.street||""; $("biz_plz").value=biz.plz||""; $("biz_ort").value=biz.ort||"";
+    checkBizIban();
+  }
+  function checkBizIban(){
+    var v=$("biz_iban").value, m=$("biz_ibanmsg");
+    if(!stripIban(v)){ m.textContent=""; return; }
+    if(ibanValid(v)){ m.textContent="✓ Gültige IBAN"+(isQrIban(v)?" (QR-IBAN – Referenz wird automatisch erzeugt)":""); m.style.color="var(--green)"; }
+    else { m.textContent="⚠ IBAN scheint ungültig – bitte prüfen."; m.style.color="var(--warn)"; }
+  }
+  $("biz_iban").addEventListener("input", checkBizIban);
+  $("biz_save").addEventListener("click", function(){
+    biz={ name:$("biz_name").value.trim(), iban:stripIban($("biz_iban").value),
+          street:$("biz_street").value.trim(), plz:$("biz_plz").value.trim(), ort:$("biz_ort").value.trim() };
+    LS.set(K_BIZ,biz); $("biz_iban").value=biz.iban?fmtIban(biz.iban):""; checkBizIban();
+    var b=$("biz_save"); b.textContent="Gespeichert ✓"; setTimeout(function(){b.textContent="Speichern";},1500);
+  });
+
+  /* ---- invoice number ---- */
+  function nextInvNo(){
+    var y=new Date().getFullYear();
+    var st=LS.get(K_INVNO,{y:y,n:0});
+    if(st.y!==y){ st={y:y,n:0}; }
+    return y+"-"+String(st.n+1).padStart(3,"0");
+  }
+  function bumpInvNo(no){
+    var m=/^(\d{4})-(\d+)$/.exec(no||""); if(!m) return;
+    LS.set(K_INVNO,{y:parseInt(m[1],10),n:parseInt(m[2],10)});
+  }
+
+  /* ---- items ---- */
+  function renderItems(){
+    $("inv_items").innerHTML = invItems.map(function(it,i){
+      return '<div class="itemrow"><input data-i="'+i+'" data-k="desc" value="'+esc(it.desc)+'" placeholder="Leistung"><input data-i="'+i+'" data-k="amount" type="number" inputmode="decimal" value="'+(it.amount||"")+'" placeholder="CHF"><button class="del" data-del="'+i+'">×</button></div>';
+    }).join("") || '<p class="tiny" style="margin:4px 0 0">Noch keine Position. Oben auswählen.</p>';
+  }
+  $("inv_items").addEventListener("input", function(e){
+    var i=e.target.getAttribute("data-i"), k=e.target.getAttribute("data-k"); if(i==null) return;
+    invItems[+i][k] = k==="amount" ? parseFloat(e.target.value)||0 : e.target.value;
+  });
+  $("inv_items").addEventListener("click", function(e){
+    var d=e.target.getAttribute("data-del"); if(d==null) return;
+    invItems.splice(+d,1); renderItems();
+  });
+  $("inv_preset").addEventListener("change", function(){
+    if(!this.value){ return; }
+    var p=this.value.split("|");
+    invItems.push({desc:p[0]||"", amount:parseFloat(p[1])||0});
+    this.value=""; renderItems();
+  });
+
+  /* ---- generate ---- */
+  function invView(){ return document.getElementById("v-invoice"); }
+  function warn(msg){ var w=$("inv_warn"); if(msg){ w.textContent=msg; w.classList.remove("hidden"); } else { w.classList.add("hidden"); } }
+
+  $("inv_gen").addEventListener("click", function(){
+    warn("");
+    if(!biz.iban || !ibanValid(biz.iban)){ warn("Bitte zuerst unter «Einstellungen» eine gültige IBAN und den Absender erfassen."); document.querySelector('#tabs button[data-v="settings"]').click(); return; }
+    if(!biz.name){ warn("Bitte unter «Einstellungen» den Firmen-/Namen erfassen."); return; }
+    var total=invItems.reduce(function(s,it){ return s+(parseFloat(it.amount)||0); },0);
+    if(!invItems.length || total<=0){ warn("Bitte mindestens eine Leistung mit Betrag erfassen."); return; }
+
+    var no=$("inv_no").value.trim()||nextInvNo();
+    var dateVal=$("inv_date").value, dateTxt = dateVal ? new Date(dateVal+"T00:00").toLocaleDateString("de-CH") : new Date().toLocaleDateString("de-CH");
+    var dName=$("inv_dName").value.trim();
+    var dStreetFull=$("inv_dStreet").value.trim();
+    var dCity=$("inv_dCity").value.trim();
+    var dcm=/^\s*(\d{4})\s+(.+)$/.exec(dCity);
+    var dPlz=dcm?dcm[1]:"", dOrt=dcm?dcm[2]:dCity;
+    var term=$("inv_term").value.trim();
+    var refTxt=$("inv_ref").value.trim();
+    var intro=$("inv_intro").value.trim();
+
+    // creditor street split (Strasse + Nr.)
+    var cm=/^(.*?)(\s+\d+\w*)?$/.exec(biz.street||""); var cStreet=(cm&&cm[1]?cm[1]:biz.street||"").trim(), cNo=(cm&&cm[2]?cm[2]:"").trim();
+
+    // reference
+    var refType="NON", ref="", msg=("Rechnung "+no+(refTxt?" · "+refTxt:"")).slice(0,140), refDisplay="";
+    if(isQrIban(biz.iban)){ refType="QRR"; ref=qrrRef(no.replace(/\D/g,"")); refDisplay=grp5(ref); msg=refTxt?refTxt.slice(0,140):""; }
+
+    var payload=spcPayload({ iban:biz.iban, cName:biz.name, cStreet:cStreet, cNo:cNo, cPlz:biz.plz, cOrt:biz.ort,
+      amount:chfDec(total),
+      dName:dName, dStreet: (function(){ var m2=/^(.*?)(\s+\d+\w*)?$/.exec(dStreetFull); return (m2&&m2[1]?m2[1]:dStreetFull).trim(); })(),
+      dNo:(function(){ var m2=/^(.*?)(\s+\d+\w*)?$/.exec(dStreetFull); return (m2&&m2[2]?m2[2]:"").trim(); })(),
+      dPlz:dPlz, dOrt:dOrt, refType:refType, ref:ref, msg:msg });
+
+    var acct = fmtIban(biz.iban)+"\n"+biz.name+"\n"+(biz.street?biz.street+"\n":"")+(biz.plz||"")+" "+(biz.ort||"");
+    var debtor = dName ? (dName+(dStreetFull?"\n"+dStreetFull:"")+(dCity?"\n"+dCity:"")) : "";
+    var amt=chfDec(total);
+
+    // rows
+    var rows=invItems.map(function(it){ return '<tr><td>'+esc(it.desc||"")+'</td><td class="r">'+chf(it.amount||0)+'</td></tr>'; }).join("");
+
+    var refBlockPay = (refType!=="NON") ? '<div class="qb-h">Referenz</div><div class="qb-v">'+esc(refDisplay)+'</div>' : "";
+    var refBlockRcpt = (refType!=="NON") ? '<div class="qb-h">Referenz</div><div class="qb-v">'+esc(refDisplay)+'</div>' : "";
+    var infoBlock = (refType==="NON") ? '<div class="qb-h">Zusätzliche Informationen</div><div class="qb-v">'+esc(msg)+'</div>' : "";
+    var debtorBlock = debtor ? '<div class="qb-h">Zahlbar durch</div><div class="qb-v">'+esc(debtor)+'</div>'
+                             : '<div class="qb-h">Zahlbar durch (Name/Adresse)</div><div class="qb-v" style="border:.75pt solid #000;height:14mm;margin-top:2px"></div>';
+    var debtorBlockR = debtor ? '<div class="qb-h">Zahlbar durch</div><div class="qb-v">'+esc(debtor)+'</div>'
+                              : '<div class="qb-h">Zahlbar durch (Name/Adresse)</div><div class="qb-v" style="border:.75pt solid #000;height:11mm;margin-top:2px"></div>';
+
+    var html=''+
+    '<div class="inv-page" id="inv_doc">'+
+      '<div class="ih"><div class="ibrand">'+LOGO_SVG+'Eigenhand</div>'+
+        '<div class="ifrom"><b>'+esc(biz.name)+'</b><br>'+esc(biz.street||"")+'<br>'+esc((biz.plz||"")+" "+(biz.ort||""))+'<br>info@eigenhand.ch<br>eigenhand.ch</div></div>'+
+      '<div class="imeta">'+
+        '<div class="ito"><div class="lbl">Rechnung an</div><b>'+esc(dName||"—")+'</b>'+(dStreetFull?'<br>'+esc(dStreetFull):'')+(dCity?'<br>'+esc(dCity):'')+'</div>'+
+        '<div class="ifacts">Rechnungs-Nr.&nbsp; <b>'+esc(no)+'</b><br>Datum&nbsp; <b>'+esc(dateTxt)+'</b>'+(term?'<br>Zahlbar innert&nbsp; <b>'+esc(term)+'</b>':'')+'</div>'+
+      '</div>'+
+      '<div class="ititle">Rechnung</div>'+
+      (intro?'<div class="iintro">'+esc(intro)+'</div>':'')+
+      '<table class="iitems"><thead><tr><th>Position</th><th class="r">Betrag</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+      '<div class="itot"><div class="r1"><span>Zwischensumme</span><span>'+chf(total)+'</span></div>'+
+        '<div class="r1 grand"><span>Total CHF</span><span>'+chf(total)+'</span></div></div>'+
+      '<div class="inote">Zahlbar innert '+esc(term||"30 Tagen")+' auf das untenstehende Konto – am einfachsten per QR-Code mit Ihrer Banking- oder TWINT-App.<br>Eigenhand ist als Einzelunternehmen nicht mehrwertsteuerpflichtig; es wird keine MWST verrechnet. Besten Dank für Ihr Vertrauen.</div>'+
+      '<div class="ifoot"><span>'+esc(biz.name)+' · '+esc((biz.plz||"")+" "+(biz.ort||""))+'</span><span>'+esc(fmtIban(biz.iban))+'</span></div>'+
+
+      '<div class="qrbill">'+
+        '<div class="qr-rcpt">'+
+          '<div class="qb-title">Empfangsschein</div>'+
+          '<div class="qb-h" style="margin-top:0">Konto / Zahlbar an</div><div class="qb-v">'+esc(acct)+'</div>'+
+          refBlockRcpt+
+          debtorBlockR+
+          '<div class="qb-amt"><div><div class="qb-h">Währung</div><div class="qb-v">CHF</div></div><div><div class="qb-h">Betrag</div><div class="qb-v">'+amt+'</div></div></div>'+
+          '<div class="qb-accept">Annahmestelle</div>'+
+        '</div>'+
+        '<div class="qr-pay">'+
+          '<div class="qpL">'+
+            '<div class="qb-title">Zahlteil</div>'+
+            '<div class="qp-qr">'+qrSvg(payload,46)+'</div>'+
+            '<div class="qb-amt"><div><div class="qb-h">Währung</div><div class="qb-v">CHF</div></div><div><div class="qb-h">Betrag</div><div class="qb-v">'+amt+'</div></div></div>'+
+          '</div>'+
+          '<div class="qpR">'+
+            '<div class="qb-h" style="margin-top:0">Konto / Zahlbar an</div><div class="qb-v">'+esc(acct)+'</div>'+
+            refBlockPay+
+            infoBlock+
+            debtorBlock+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+
+    $("inv_prevwrap").innerHTML=html;
+    $("inv_print").disabled=false;
+    window.__invNo=no;
+    fitInv();
+  });
+
+  function fitInv(){
+    var doc=document.getElementById("inv_doc"), wrap=$("inv_prevwrap"); if(!doc||!wrap) return;
+    doc.style.transform="none";
+    var avail=wrap.clientWidth-32, dw=doc.offsetWidth, sc=Math.min(1, avail/dw);
+    doc.style.transform="scale("+sc+")";
+    wrap.style.height=(doc.offsetHeight*sc+32)+"px";
+  }
+  window.addEventListener("resize", function(){ if(document.getElementById("inv_doc")) fitInv(); });
+
+  $("inv_print").addEventListener("click", function(){
+    if(window.__invNo){ bumpInvNo(window.__invNo); }
+    document.body.classList.add("inv-print"); window.print();
+  });
+  window.addEventListener("afterprint", function(){ document.body.classList.remove("inv-print"); if(document.getElementById("inv_doc")) fitInv(); });
+
+  function initInvoice(){
+    loadBiz();
+    if(!$("inv_no").value) $("inv_no").value=nextInvNo();
+    if(!$("inv_date").value) $("inv_date").value=new Date().toISOString().slice(0,10);
+    renderItems();
+  }
+
+  function renderStatic(){ fillGemeindeSelect(); renderCheck(); renderRates(); initInvoice(); }
 
   /* ---------- Boot ---------- */
   SB.auth.getSession().then(function(res){
