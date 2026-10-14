@@ -508,7 +508,7 @@ footer a{color:#fff}
         <div class="pcost"><div class="amt">CHF 1'990 <small>einmalig</small></div></div>
         <ul>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Selbst»</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Professionelle Fotos vor Ort</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Professionelle Objektfotos – vor Ort (Raum Zürich) oder angeleitet mit Profi-Bearbeitung</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Preiseinschätzung mit Besichtigung vor Ort</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Persönlicher Ansprechpartner während des ganzen Verkaufs</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Beratung bei Kaufangeboten und Verhandlung</li>
@@ -569,6 +569,7 @@ footer a{color:#fff}
         <button type="button" class="extrabtn" onclick="openBooking('besichtigung')">Besichtigungstag · <b>CHF 490</b></button>
         <button type="button" class="extrabtn" onclick="openBooking('verhandlung')">Verhandlung · <b>CHF 990</b></button>
         <button type="button" class="extrabtn" onclick="openBooking('unterlagen')">Unterlagen-Service · <b>CHF 190</b></button>
+        <button type="button" class="extrabtn" onclick="openBooking('staging')">Virtual Staging · <b>CHF 49 / Bild</b></button>
         <button type="button" class="extrabtn" onclick="openBooking('inserat')">Inserat-Verlängerung · <b>CHF 190 / 30 Tage</b></button>
       </div>
     </div>
@@ -628,7 +629,8 @@ footer a{color:#fff}
   <div class="wrap faq">
     <div class="center" style="margin-bottom:12px"><div class="eyebrow">Fragen</div><h2 class="h2">Häufige Fragen</h2></div>
     <details><summary>Ist ein Verkauf ohne Makler in der Schweiz erlaubt?</summary><p>Ja. Eigentümer dürfen ihre Immobilie selbst verkaufen. Der Kaufvertrag wird in jedem Fall von einem Notariat öffentlich beurkundet, mit oder ohne Makler.</p></details>
-    <details><summary>Für welche Objekte ist Eigenhand gedacht?</summary><p>Für Eigentumswohnungen und Einfamilienhäuser im Kanton Zürich, meist zwischen CHF 600'000 und CHF 2'000'000. Für Mehrfamilienhäuser oder besondere Objekte besprechen wir im Erstgespräch, ob und wie wir helfen können.</p></details>
+    <details><summary>Für welche Objekte ist Eigenhand gedacht?</summary><p>Für Eigentumswohnungen und Einfamilienhäuser, meist zwischen CHF 600'000 und CHF 2'000'000. Unser Schwerpunkt ist der Kanton Zürich, wir unterstützen Sie aber auch darüber hinaus. Für Mehrfamilienhäuser oder besondere Objekte besprechen wir im Erstgespräch, ob und wie wir helfen können.</p></details>
+    <details><summary>Was, wenn meine Immobilie ausserhalb des Raums Zürich liegt?</summary><p>Im Grossraum Zürich erstellen wir die Fotos vor Ort. Liegt Ihr Objekt weiter weg, läuft es angeleitet: Sie erhalten von uns eine einfache Foto-Anleitung (welche Räume, welcher Winkel, welche Tageszeit) und fotografieren selbst mit dem Handy. Wir machen daraus mit professioneller Bearbeitung hochwertige Inseratsbilder. Auf Wunsch möblieren wir leere oder vollgestellte Räume zusätzlich digital (Virtual Staging). So bekommen Sie überall ein professionelles Inserat, ohne dass jemand anreisen muss.</p></details>
     <details><summary>Welche Kosten kommen zum Paketpreis dazu?</summary><p>Von Eigenhand keine. Portalkosten für 90 Tage und MWST sind enthalten. Unabhängig von uns fallen bei jedem Verkauf Notar- und Grundbuchgebühren sowie die Grundstückgewinnsteuer an.</p></details>
     <details><summary>Wann und wie bezahle ich?</summary><p>«Selbst» und «Pro» bezahlen Sie bei Start. Bei «Begleitet» bezahlen Sie CHF 2'900 bei Start und CHF 3'000 erst, wenn der Kaufvertrag beurkundet ist. Es gibt kein Abo und keine Provision.</p></details>
     <details><summary>Was passiert, wenn ich nach 90 Tagen noch nicht verkauft habe?</summary><p>Wir analysieren mit Ihnen, woran es liegt, und passen bei Bedarf Preis oder Inserat an. Eine Verlängerung der Inserate kostet CHF 190 pro 30 Tage. Mit der Wechsel-Garantie können Sie zu «Begleitet» wechseln und bekommen Bezahltes angerechnet.</p></details>
@@ -943,6 +945,7 @@ function sendLead(fields, subject){
     "besichtigung":{ctx:"Einzelleistung",title:"Besichtigungstag für CHF 490",sub:"Wir übernehmen einen Besichtigungstag mit Interessenten für Sie.",typ:"Besichtigungstag"},
     "verhandlung":{ctx:"Einzelleistung",title:"Verhandlung für CHF 990",sub:"Wir führen die Preisverhandlung mit Ihrem Kaufinteressenten.",typ:"Verhandlung"},
     "unterlagen":{ctx:"Einzelleistung",title:"Unterlagen-Service für CHF 190",sub:"Wir beschaffen und ordnen die Verkaufsunterlagen für Sie.",typ:"Unterlagen-Service"},
+    "staging":{ctx:"Einzelleistung",title:"Virtual Staging für CHF 49 / Bild",sub:"Wir möblieren leere oder vollgestellte Räume digital, für Bilder, die im Inserat herausstechen.",typ:"Virtual Staging"},
     "inserat":{ctx:"Einzelleistung",title:"Inserat-Verlängerung",sub:"CHF 190 pro 30 Tage auf allen Portalen.",typ:"Inserat-Verlängerung"}
   };
   var labels = ["Ihre Immobilie","Ihr Verkauf","Ihre Kontaktdaten"];
