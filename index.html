@@ -342,6 +342,23 @@ footer a{color:#fff}
   .fgrid{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}html{scroll-behavior:auto}}
+/* Bewertungsrechner */
+#bewertung .bw-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+#bewertung label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink)}
+#bewertung .bw-opt{font-weight:400;color:var(--muted2)}
+#bewertung select,#bewertung .in input,#bewertung .bw-lead input{width:100%;font:inherit;font-size:16px;padding:12px 13px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);-webkit-appearance:none;appearance:none}
+#bewertung select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233E4C46' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:18px;padding-right:38px}
+#bewertung select:focus,#bewertung input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(29,91,70,.12)}
+.bw-empty{background:#fff;border:1px dashed var(--line);border-radius:20px;padding:46px 24px;color:var(--muted);text-align:center;line-height:1.55}
+.bw-hint{font-size:12.5px;color:var(--muted2);margin:2px 0 0;line-height:1.45}
+.bw-hint a{color:var(--green);font-weight:600}
+.bw-save{background:var(--mint-bg);border:1px solid var(--mint);border-radius:16px;padding:16px 18px;margin-top:16px;font-size:15px;color:var(--green-d);line-height:1.55}
+.bw-lead{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:16px;display:grid;gap:13px;text-align:left}
+.bw-leadhead{font-weight:800;font-size:17px;color:var(--ink);letter-spacing:-.01em}
+.bw-msg{font-size:13px;margin:0}
+.bw-success{background:var(--mint-bg);border:1px solid var(--mint);border-radius:16px;padding:18px;margin-top:16px;color:var(--green-d);line-height:1.5;text-align:left}
+.bw-success b{display:block;font-size:16px;margin-bottom:4px}
+.bw-cta{display:grid;gap:10px;margin-top:14px}
 </style>
 </head>
 <body>
@@ -357,6 +374,7 @@ footer a{color:#fff}
     </button>
     <nav class="links" id="mainnav" aria-label="Hauptnavigation">
       <a href="#ablauf">So funktioniert's</a>
+      <a href="#bewertung">Immobilienwert</a>
       <a href="#rechner">Ersparnis berechnen</a>
       <a href="#preise">Preise</a>
       <a href="ratgeber.html">Ratgeber</a>
@@ -423,6 +441,32 @@ footer a{color:#fff}
       <div class="step"><div class="no">2</div><h3>Preis und Paket</h3><p>Sie wählen das Paket, das zu Ihnen passt. Gemeinsam legen wir einen realistischen Angebotspreis fest.</p><div class="meta">Festpreis ab CHF 990</div></div>
       <div class="step"><div class="no">3</div><h3>Inserieren und besichtigen</h3><p>Exposé und Inserate gehen auf Homegate, ImmoScout24 und newhome online. Anfragen und Termine sehen Sie an einem Ort.</p><div class="meta">90 Tage online inklusive</div></div>
       <div class="step"><div class="no">4</div><h3>Verhandeln und abschliessen</h3><p>Sie vergleichen die Angebote und wählen den Käufer. Der Kaufvertrag wird beim Notar beurkundet, wir bereiten Sie darauf vor.</p><div class="meta">Bis zum Notartermin</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="bewertung">
+  <div class="wrap center">
+    <div class="eyebrow">Kostenlose Sofort-Einschätzung</div>
+    <h2 class="h2">Was ist Ihre Immobilie wert?</h2>
+    <p class="lead">In 60 Sekunden einen Richtwert erhalten – kostenlos und unverbindlich. Für die genaue Einschätzung und Ihr Festpreis-Angebot melden wir uns.</p>
+    <div class="calc">
+      <div class="in">
+        <div><label for="b_gem">Gemeinde</label><select id="b_gem"></select></div>
+        <div class="bw-two">
+          <div><label for="b_art">Objektart</label><select id="b_art"><option value="w">Wohnung</option><option value="h">Haus</option></select></div>
+          <div><label for="b_fl">Wohnfläche (m²)</label><input id="b_fl" type="number" inputmode="numeric" placeholder="z. B. 110"></div>
+        </div>
+        <div class="bw-two">
+          <div><label for="b_zu">Zustand</label><select id="b_zu"><option value="1.08">Neuwertig / renoviert</option><option value="1" selected>Gut / gepflegt</option><option value="0.92">Mittel</option><option value="0.82">Renovationsbedürftig</option></select></div>
+          <div><label for="b_bj">Baujahr <span class="bw-opt">(optional)</span></label><input id="b_bj" type="number" inputmode="numeric" placeholder="z. B. 1998"></div>
+        </div>
+        <button type="button" class="btn block" id="b_calc">Wert berechnen</button>
+        <p class="bw-hint">Richtwert auf Basis von Flächen- und Gemeindepreisen im Kanton Zürich. Keine verbindliche Bewertung.</p>
+      </div>
+      <div class="out">
+        <div id="b_result"><div class="bw-empty">Füllen Sie die Felder links aus und klicken Sie «Wert berechnen».<br>Ihr Richtwert und Ihre Ersparnis erscheinen hier.</div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1063,6 +1107,84 @@ function sendLead(fields, subject){
       msg.textContent = "Senden hat nicht geklappt. Bitte schreiben Sie uns an info@eigenhand.ch."; msg.style.color = "var(--warn)";
     });
   });
+})();
+
+/* Bewertungsrechner (Lead-Magnet) */
+(function(){
+  var RATES = [
+    {g:"Zürich Stadt", w:17800, h:17000},{g:"Küsnacht", w:18400, h:19000},{g:"Meilen", w:18200, h:17500},
+    {g:"Uster", w:11400, h:11300},{g:"Kloten", w:11100, h:11000},{g:"Bülach", w:10600, h:10400},
+    {g:"Winterthur", w:10500, h:10100},{g:"Dietikon", w:10400, h:11100},{g:"Dübendorf", w:12200, h:12000},
+    {g:"Andere Gemeinde im Kanton Zürich", w:12000, h:11100}
+  ];
+  function bchf(v){ var r=Math.round(v); return "CHF "+Math.abs(r).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"'"); }
+  function r10k(x){ return Math.round(x/10000)*10000; }
+  function ageFactor(bj){ bj=parseInt(bj,10); if(!bj) return 1; var y=new Date().getFullYear(), a=y-bj; if(a<5)return 1.05; if(a<15)return 1.02; if(a<30)return 1; if(a<50)return .96; return .91; }
+  function el(id){ return document.getElementById(id); }
+  var gem = el("b_gem");
+  if(!gem) return;
+  gem.innerHTML = RATES.map(function(r,i){ return '<option value="'+i+'"'+(r.g==="Kloten"?" selected":"")+'>'+r.g+'</option>'; }).join("");
+
+  var last = null; // {range, mid, data}
+
+  el("b_calc").addEventListener("click", function(){
+    var fl = parseFloat(el("b_fl").value)||0;
+    if(fl < 10){ el("b_result").innerHTML = '<div class="bw-empty">Bitte geben Sie eine gültige Wohnfläche ein.</div>'; el("b_fl").focus(); return; }
+    var ri = parseInt(gem.value,10), rate = el("b_art").value==="h" ? RATES[ri].h : RATES[ri].w;
+    var zu = parseFloat(el("b_zu").value)||1, af = ageFactor(el("b_bj").value);
+    var val = fl*rate*zu*af, lo = r10k(val*0.91), hi = r10k(val*1.09), mid = r10k(val);
+    var prov = mid*0.025, save = Math.max(0, prov - 990);
+    var artTxt = el("b_art").value==="h" ? "Haus" : "Wohnung";
+    last = { lo:lo, hi:hi, mid:mid, data:{
+      objektart:artTxt, gemeinde:RATES[ri].g, flaeche:String(fl), baujahr:(el("b_bj").value||""),
+      preisvorstellung:bchf(lo)+" – "+bchf(hi),
+      bemerkungen:"Online-Bewertung: "+bchf(lo)+" – "+bchf(hi)+" (Mittelwert "+bchf(mid)+"), Zustand-Faktor "+zu+", Baujahr "+(el("b_bj").value||"–"),
+      paket:"Online-Bewertung"
+    }};
+    el("b_result").innerHTML =
+      '<div class="savebig"><div class="t">Geschätzter Marktwert</div>'+
+        '<div class="v" style="font-size:26px">'+bchf(lo)+' – '+bchf(hi)+'</div>'+
+        '<div class="s">Richtwert · '+artTxt+', '+fl+' m² in '+(RATES[ri].g==="Andere Gemeinde im Kanton Zürich"?"Ihrer Gemeinde":RATES[ri].g)+'</div></div>'+
+      '<div class="bw-save"><b>Ihre Ersparnis gegenüber dem Makler:</b><br>'+
+        'Bei ca. '+bchf(mid)+' zahlen Sie beim Makler rund <b>'+bchf(prov)+' Provision</b> (2,5 %). '+
+        'Mit Eigenhand verkaufen Sie zum Festpreis <b>ab CHF 990</b> – Sie sparen rund <b>'+bchf(save)+'</b>.</div>'+
+      '<div class="bw-lead">'+
+        '<div class="bw-leadhead">Genaue Einschätzung &amp; Festpreis-Angebot erhalten</div>'+
+        '<div class="bw-two"><div><label for="b_name">Name</label><input id="b_name"></div>'+
+          '<div><label for="b_tel">Telefon</label><input id="b_tel" type="tel"></div></div>'+
+        '<div><label for="b_email">E-Mail</label><input id="b_email" type="email"></div>'+
+        '<button type="button" class="btn mint block" id="b_send">Auswertung &amp; Angebot anfordern</button>'+
+        '<p class="bw-msg" id="b_sendmsg"></p>'+
+        '<p class="bw-hint">Lieber sofort starten? <a href="#preise">Pakete ansehen</a></p>'+
+      '</div>';
+    document.getElementById("b_send").addEventListener("click", sendBew);
+    el("b_result").scrollIntoView({behavior:"smooth", block:"nearest"});
+  });
+
+  function sendBew(){
+    var name=(el("b_name").value||"").trim(), tel=(el("b_tel").value||"").trim(), email=(el("b_email").value||"").trim();
+    var msg=el("b_sendmsg");
+    if(!name || (!email && !tel)){ msg.textContent="Bitte Name und E-Mail oder Telefon angeben."; msg.style.color="var(--warn)"; return; }
+    if(email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ msg.textContent="Bitte eine gültige E-Mail angeben."; msg.style.color="var(--warn)"; return; }
+    var btn=el("b_send"); btn.disabled=true; btn.textContent="Wird gesendet …"; msg.textContent="";
+    var fields = Object.assign({ name:name, telefon:tel, email:email }, (last?last.data:{}));
+    sendLead(fields, "Neue Online-Bewertung (Lead)").then(function(){
+      el("b_result").insertAdjacentHTML("beforeend","");
+      var lead = document.querySelector("#b_result .bw-lead");
+      if(lead){ lead.outerHTML =
+        '<div class="bw-success"><b>Danke, '+ (name.split(" ")[0]||"") +'! Ihre Anfrage ist bei uns.</b>'+
+        'Wir senden Ihnen die genaue Einschätzung und melden uns innert 24 Stunden. So geht’s weiter – wählen Sie Ihr Paket:</div>'+
+        '<div class="bw-cta">'+
+          '<button type="button" class="btn block" onclick="openBooking(\'selbst\')">«Selbst» – CHF 990</button>'+
+          '<button type="button" class="btn block" onclick="openBooking(\'pro\')">«Pro» – CHF 1\'990</button>'+
+          '<a class="btn sec block" href="#preise">Alle Pakete ansehen</a>'+
+        '</div>';
+      }
+    }, function(){
+      btn.disabled=false; btn.textContent="Nochmals versuchen";
+      msg.textContent="Senden hat nicht geklappt. Bitte schreiben Sie an info@eigenhand.ch."; msg.style.color="var(--warn)";
+    });
+  }
 })();
 </script>
 </body>
