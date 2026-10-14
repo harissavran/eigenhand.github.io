@@ -792,7 +792,7 @@ body.inv-print #inv_doc{position:absolute !important;left:0;top:0;transform:none
   function fmtIban(s){ s=stripIban(s); return s.replace(/(.{4})/g,"$1 ").trim(); }
   function ibanValid(s){
     s=stripIban(s);
-    if(!/^(CH|LI)\d{19}$/.test(s)) return false;
+    if(!/^(CH|LI)[0-9]{7}[A-Z0-9]{12}$/.test(s)) return false;
     var re=s.slice(4)+s.slice(0,4), n="";
     for(var i=0;i<re.length;i++){ var c=re[i]; n+= (c>="A"&&c<="Z") ? (c.charCodeAt(0)-55).toString() : c; }
     var rem=0; for(var j=0;j<n.length;j++){ rem=(rem*10+parseInt(n[j],10))%97; }
