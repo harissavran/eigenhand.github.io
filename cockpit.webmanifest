@@ -1,0 +1,14 @@
+{
+  "name": "Eigenhand Cockpit",
+  "short_name": "Cockpit",
+  "description": "Internes CRM, Preisrechner, QR-Rechnungen.",
+  "start_url": "/cockpit.html",
+  "scope": "/cockpit.html",
+  "display": "standalone",
+  "background_color": "#123D2F",
+  "theme_color": "#123D2F",
+  "icons": [
+    { "src": "img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

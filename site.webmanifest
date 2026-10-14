@@ -1,0 +1,14 @@
+{
+  "name": "Eigenhand",
+  "short_name": "Eigenhand",
+  "description": "Immobilie verkaufen zum Festpreis statt Provision.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F5F4EF",
+  "theme_color": "#123D2F",
+  "icons": [
+    { "src": "img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
