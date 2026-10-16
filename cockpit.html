@@ -281,6 +281,28 @@ body.exp-print #exp_doc,body.exp-print #exp_doc *{visibility:visible !important}
 body.exp-print #exp_doc{position:absolute !important;left:0;top:0;transform:none !important}
 body.exp-print .exp-page{box-shadow:none !important;margin:0 !important;break-after:page;page-break-after:always}
 body.exp-print .exp-page:last-child{break-after:auto;page-break-after:auto}
+
+/* ===== Auftrag ===== */
+#auf_box{overflow:hidden;background:#EDEBE4;border:1px solid var(--line);border-radius:14px;padding:16px}
+#auf_doc{transform-origin:top left;background:#fff;box-shadow:0 4px 24px rgba(0,0,0,.14)}
+.auf-page{width:210mm;min-height:297mm;padding:20mm 20mm 18mm;color:#17201b;font-size:10.5pt;line-height:1.5;position:relative}
+.auf-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #e4e2da;padding-bottom:6mm;margin-bottom:7mm}
+.auf-from{font-size:8.5pt;text-align:right;color:#5c655f;line-height:1.4}
+.auf-title{font-size:18pt;font-weight:800;color:#123D2F;margin-bottom:2mm}
+.auf-meta{display:flex;gap:18px;font-size:9.5pt;color:#7a8580;margin-bottom:8mm}
+.auf-sec{margin-bottom:6mm}
+.auf-sec h4{font-size:11pt;color:#123D2F;margin:0 0 2mm;border-left:3px solid #2fae7a;padding-left:3mm}
+.auf-sec p{margin:0}
+.auf-list{margin:0;padding-left:5mm}
+.auf-list li{margin-bottom:1mm}
+.auf-fine{font-size:8.5pt;color:#5c655f;line-height:1.55;text-align:justify}
+.auf-sign{display:flex;gap:16mm;margin-top:14mm}
+.auf-sigcol{flex:1;font-size:8.5pt;color:#5c655f}
+.auf-sigline{border-bottom:1px solid #17201b;height:14mm;margin-bottom:2mm}
+body.auf-print{background:#fff}
+body.auf-print *{visibility:hidden !important}
+body.auf-print #auf_doc,body.auf-print #auf_doc *{visibility:visible !important}
+body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none !important;box-shadow:none !important}
 </style>
 </head>
 <body>
@@ -616,6 +638,15 @@ body.exp-print .exp-page:last-child{break-after:auto;page-break-after:auto}
           <p class="tiny" style="margin:0 0 8px"><b>QR-Rechnung</b> für alle Beträge, vor allem Begleitet: keine Limite, Kunde scannt den Code in seiner Banking-App.</p>
           <p class="tiny" style="margin:0">Du gibst in der Mail beide Wege an, der Kunde wählt selbst.</p>
         </div>
+
+        <div class="subhead">Auftrag zur Unterschrift</div>
+        <div class="grid2">
+          <div class="fld"><label class="fl">Kunde Strasse &amp; Nr.</label><input id="ab_street" placeholder="Musterstrasse 12"></div>
+          <div class="fld"><label class="fl">Kunde PLZ &amp; Ort</label><input id="ab_city" placeholder="8302 Kloten"></div>
+        </div>
+        <div class="fld"><label class="fl">Unterschriftsort</label><input id="ab_ort" placeholder="Kloten"></div>
+        <button class="btn block" id="ab_aufgen" style="margin-top:4px">Auftrag als PDF erstellen</button>
+        <p class="tiny" style="margin:8px 0 0">Der Kunde unterschreibt und sendet den Auftrag zurück (foto genügt). Danach schaltest du auf.</p>
       </div>
 
       <div>
@@ -630,6 +661,12 @@ body.exp-print .exp-page:last-child{break-after:auto;page-break-after:auto}
             <button class="btn sec sm" id="ab_toInv" disabled>→ QR-Rechnung für dieses Paket</button>
           </div>
           <p class="tiny" id="ab_hint" style="margin-top:12px">Tipp: Erst Mail senden, dann mit demselben Knopf die passende QR-Rechnung erstellen und als PDF anhängen.</p>
+        </div>
+        <div id="auf_prevwrap" class="hidden" style="margin-top:16px">
+          <div class="noprint" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+            <button class="btn sm" id="auf_print">Auftrag drucken / als PDF</button>
+          </div>
+          <div id="auf_box"></div>
         </div>
       </div>
     </div>
@@ -1840,8 +1877,65 @@ body.exp-print .exp-page:last-child{break-after:auto;page-break-after:auto}
       document.querySelector('#tabs button[data-v="invoice"]').click();
       window.scrollTo(0,0);
     });
+    $("ab_aufgen").addEventListener("click", buildAuftrag);
+    $("auf_print").addEventListener("click", function(){ document.body.classList.add("auf-print"); window.print(); });
+    window.addEventListener("afterprint", function(){ document.body.classList.remove("auf-print"); });
     document.querySelector('#tabs button[data-v="abschluss"]').addEventListener("click", fillAbLeads);
   }
+
+  function buildAuftrag(){
+    var p=abPkg($("ab_pak").value);
+    var name=$("ab_name").value.trim()||"—";
+    var street=$("ab_street").value.trim(), city=$("ab_city").value.trim();
+    var mail=$("ab_mail").value.trim(), obj=$("ab_obj").value.trim()||"—";
+    var ort=$("ab_ort").value.trim()||"Kloten";
+    var today=new Date().toLocaleDateString("de-CH");
+    var sender = biz && biz.name ? biz : {name:"Eigenhand, Haris Savran",street:"Bramenring 7",plz:"8302",ort:"Kloten"};
+    var signer = ($("x_kname")&&$("x_kname").value.trim()) || "Haris Savran";
+
+    var zahlung = p.split
+      ? "Teilzahlung: CHF 2'900 bei Auftragserteilung, CHF 4'000 bei erfolgreichem Verkauf (öffentliche Beurkundung)."
+      : "Zahlbar bei Auftragserteilung. Begleichung per TWINT oder mit beiliegender QR-Rechnung.";
+    var portal = p.name!=="Nur Bewertung" ? "Portalkosten für 90 Tage inbegriffen." : "";
+    var incl = p.incl.map(function(x){ return '<li>'+esc(x)+'</li>'; }).join("");
+
+    var html=
+    '<div class="auf-page" id="auf_doc">'+
+      '<div class="auf-head"><img src="img/logo.png" style="height:30px"><div class="auf-from"><b>'+esc(sender.name)+'</b><br>'+esc(sender.street||"Bramenring 7")+'<br>'+esc((sender.plz||"8302")+" "+(sender.ort||"Kloten"))+'<br>info@eigenhand.ch · eigenhand.ch</div></div>'+
+      '<div class="auf-title">Auftragsbestätigung</div>'+
+      '<div class="auf-meta"><span>Datum: '+esc(today)+'</span><span>Paket: '+esc(p.name)+'</span></div>'+
+
+      '<div class="auf-sec"><h4>Auftraggeber</h4><p>'+esc(name)+(street?'<br>'+esc(street):'')+(city?'<br>'+esc(city):'')+(mail?'<br>'+esc(mail):'')+'</p></div>'+
+      '<div class="auf-sec"><h4>Objekt</h4><p>'+esc(obj)+'</p></div>'+
+
+      '<div class="auf-sec"><h4>Leistung: Paket «'+esc(p.name)+'»</h4><ul class="auf-list">'+incl+'</ul></div>'+
+
+      '<div class="auf-sec"><h4>Preis &amp; Zahlung</h4>'+
+        '<p><b>'+esc(p.preis)+'</b> als Festpreis, ohne Provision. '+esc(portal)+'<br>'+esc(zahlung)+'<br>Eigenhand ist als Einzelunternehmen nicht mehrwertsteuerpflichtig; es wird keine MWST verrechnet.</p></div>'+
+
+      '<div class="auf-sec"><h4>Bedingungen</h4><p class="auf-fine">'+
+        'Es gelten die Allgemeinen Geschäftsbedingungen von Eigenhand (eigenhand.ch/agb). Eigenhand erbringt eine sorgfältige Vermarktung und Beratung, schuldet jedoch keinen bestimmten Verkaufspreis und keinen Verkauf innert bestimmter Frist. Der Kunde stellt die nötigen Unterlagen vollständig und richtig zur Verfügung und haftet für deren Richtigkeit. Der Kaufvertrag wird in jedem Fall durch ein Notariat öffentlich beurkundet. Der Kunde kann diesen Auftrag innert 14 Tagen in Textform widerrufen, solange mit der Leistung (z. B. Schaltung der Inserate) noch nicht begonnen wurde; danach erlischt das Widerrufsrecht und bereits erbrachte Leistungen sind anteilig zu vergüten. Es gilt Schweizer Recht, Gerichtsstand Bülach (ZH). Die Bearbeitung der Personendaten richtet sich nach der Datenschutzerklärung auf eigenhand.ch.'+
+      '</p></div>'+
+
+      '<div class="auf-sign">'+
+        '<div class="auf-sigcol"><div class="auf-sigline"></div>Ort / Datum, Unterschrift Auftraggeber<br><span class="auf-fine">'+esc(name)+'</span></div>'+
+        '<div class="auf-sigcol"><div class="auf-sigline"></div>'+esc(ort)+', '+esc(today)+'<br>Eigenhand · '+esc(signer)+'</div>'+
+      '</div>'+
+    '</div>';
+
+    $("auf_box").innerHTML=html;
+    $("auf_prevwrap").classList.remove("hidden");
+    fitAuf();
+    $("auf_prevwrap").scrollIntoView({behavior:"smooth",block:"start"});
+  }
+  function fitAuf(){
+    var doc=$("auf_doc"), box=$("auf_box"); if(!doc||!box) return;
+    doc.style.transform="none";
+    var avail=box.clientWidth-32, dw=doc.offsetWidth||794, sc=Math.min(1, avail/dw);
+    doc.style.transform="scale("+sc+")"; doc.style.transformOrigin="top left";
+    box.style.height=(doc.offsetHeight*sc+32)+"px";
+  }
+  window.addEventListener("resize", function(){ if($("auf_doc")) fitAuf(); });
 
   /* ---------- Boot ---------- */
   SB.auth.getSession().then(function(res){
