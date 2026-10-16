@@ -730,8 +730,9 @@ footer a{color:#fff}
   </div>
 </section>
 
-<section class="legal">
-  <div class="wrap" style="padding:56px 24px">
+<div class="modalbg" id="legalModal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="modal legal" style="max-width:760px;padding:40px 36px;background:var(--bg);border-top:0">
+    <button class="close" type="button" onclick="closeLegal()" aria-label="Schliessen">×</button>
     <div id="impressum" style="margin-bottom:40px">
       <h2>Impressum</h2>
       <p>Verantwortlich für diese Website:</p>
@@ -787,7 +788,7 @@ footer a{color:#fff}
       <p style="margin-top:14px">Stand: Oktober 2026</p>
     </div>
   </div>
-</section>
+</div>
 
 <footer>
   <div class="wrap row">
@@ -1201,6 +1202,33 @@ function sendLead(fields, subject){
       msg.textContent="Senden hat nicht geklappt. Bitte schreiben Sie an info@eigenhand.ch."; msg.style.color="var(--warn)";
     });
   }
+})();
+</script>
+<script>
+(function(){
+  var lm=document.getElementById("legalModal");
+  if(!lm) return;
+  window.openLegal=function(id){
+    lm.classList.add("open"); lm.setAttribute("aria-hidden","false");
+    document.body.style.overflow="hidden";
+    var t=id&&document.getElementById(id);
+    if(t){ setTimeout(function(){ try{ t.scrollIntoView({block:"start"}); }catch(e){ lm.scrollTop=0; } },30); }
+    else { lm.scrollTop=0; }
+  };
+  window.closeLegal=function(){
+    lm.classList.remove("open"); lm.setAttribute("aria-hidden","true");
+    document.body.style.overflow="";
+  };
+  lm.addEventListener("click", function(e){ if(e.target===lm) closeLegal(); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape" && lm.classList.contains("open")) closeLegal(); });
+  // Alle Links auf #impressum/#datenschutz/#agb öffnen das Fenster
+  document.addEventListener("click", function(e){
+    var a=e.target.closest('a[href="#impressum"],a[href="#datenschutz"],a[href="#agb"]');
+    if(!a) return;
+    e.preventDefault();
+    if(typeof closeBooking==="function"){ try{ closeBooking(); }catch(err){} }
+    openLegal(a.getAttribute("href").slice(1));
+  });
 })();
 </script>
 </body>
