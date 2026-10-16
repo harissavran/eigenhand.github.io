@@ -195,6 +195,83 @@ body.inv-print *{visibility:hidden !important}
 body.inv-print #inv_doc,body.inv-print #inv_doc *{visibility:visible !important}
 body.inv-print #inv_doc{position:absolute !important;left:0;top:0;transform:none !important;box-shadow:none}
 @media print{ @page{size:A4;margin:0} }
+
+/* ===== Exposé: Bedienelemente ===== */
+.rangerow{margin:12px 0 4px}
+.rangerow .fl{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px}
+.rangerow input[type=range]{width:100%}
+.segrow{display:flex;gap:6px}
+.segrow button{flex:1;padding:8px 6px;border:1px solid var(--line);background:#fff;border-radius:9px;font:inherit;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
+.segrow button.active{background:var(--green);color:#fff;border-color:var(--green)}
+.chkrow{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink)}
+.chkrow input{width:auto}
+.thumbs{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.thumb{position:relative;width:62px;height:62px;border-radius:8px;background-size:cover;background-position:center;border:1px solid var(--line)}
+.thumb button{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;border:0;background:var(--warn);color:#fff;cursor:pointer;font-size:13px;line-height:1}
+
+/* ===== Exposé: Vorschau ===== */
+#x_prevwrap{overflow:hidden;background:#EDEBE4;border:1px solid var(--line);border-radius:14px;padding:16px}
+#exp_doc{transform-origin:top left}
+.exp-page{width:210mm;min-height:297mm;background:#fff;box-shadow:0 4px 24px rgba(0,0,0,.14);margin:0 0 10mm;position:relative;overflow:hidden;color:#17201b;font-size:11pt;line-height:1.5}
+.exp-cover{padding:0}
+.xc-img{background-size:cover;background-position:center;position:relative}
+.xc-noimg{background:linear-gradient(135deg,#123D2F,#1d5e49)}
+.xc-logo{position:absolute;top:14mm;z-index:3}
+.xc-logo-links{left:14mm}.xc-logo-rechts{right:14mm}.xc-logo-mitte{left:50%;transform:translateX(-50%)}
+.xc-logo-frei{left:14mm;cursor:move}
+.xc-logo-wbox{background:#fff;padding:8px 12px;border-radius:8px}
+.xc-logo-dbox{background:rgba(10,30,22,.6);padding:8px 12px;border-radius:8px}
+.xc-tag{position:absolute;top:16mm;right:14mm;z-index:3;color:#fff;letter-spacing:.18em;font-size:11pt;font-weight:700}
+.xc-txt{position:absolute;left:14mm;right:14mm;bottom:12mm;z-index:3;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.35)}
+.xc-title{font-weight:800;line-height:1.1;margin-bottom:4mm}
+.xc-sub{font-size:13pt;opacity:.95;margin-bottom:3mm}
+.xc-adr{font-size:11pt;opacity:.9;margin-bottom:3mm}
+.xc-preis{font-size:19pt;font-weight:800}
+.xc-kennz{display:flex;gap:0;border-top:1px solid #e4e2da;background:#fff}
+.xc-k{flex:1;text-align:center;padding:7mm 2mm;border-right:1px solid #eceae3}
+.xc-k:last-child{border-right:0}
+.xc-kv{font-size:15pt;font-weight:800;color:#123D2F}
+.xc-kl{font-size:9pt;color:#7a8580;text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+.xc-foot{padding:6mm 14mm;font-size:8.5pt;color:#8a938e;background:#fff}
+/* body pages */
+.exp-body{padding:16mm 16mm 20mm}
+.xb-head{display:flex;align-items:center;gap:10px;border-bottom:1px solid #e4e2da;padding-bottom:5mm;margin-bottom:7mm;color:#123D2F;font-weight:700;font-size:11pt}
+.xb-head span{color:#7a8580;font-weight:600}
+.xsec{margin-bottom:8mm}
+.xsec h3{font-size:12.5pt;color:#123D2F;margin:0 0 3mm;border-left:3px solid var(--mint,#2fae7a);padding-left:3mm}
+.xcols{display:flex;gap:10mm}
+.xcols>div{flex:1}
+.xe{outline:none}
+.xe:focus{background:#f3faf6;box-shadow:0 0 0 2px #cfe9dd;border-radius:4px}
+.xe p{margin:0 0 2.5mm}
+.xt-eck{width:100%;border-collapse:collapse;font-size:10.5pt}
+.xt-eck td{padding:2mm 0;border-bottom:1px solid #eceae3;vertical-align:top}
+.xt-eck .xk{color:#7a8580;width:45%}
+.xt-eck .xv{font-weight:600;text-align:right}
+.xt-merk{margin:0;padding-left:5mm;font-size:10.5pt}
+.xt-merk li{margin-bottom:1.5mm}
+.xf-intro{font-size:10pt;color:#5c655f;margin:0 0 5mm}
+.xf-tab{width:100%;border-collapse:collapse;font-size:10.5pt}
+.xf-tab td{padding:2.6mm 0;border-bottom:1px solid #eceae3}
+.xf-tab td.r{text-align:right;font-weight:600}
+.xf-tab .xf-strong td{font-weight:800;color:#123D2F;border-bottom:2px solid #123D2F}
+.xf-tab .xf-gap td{padding-top:5mm;color:#7a8580;font-size:9pt;text-transform:uppercase;letter-spacing:.07em;border-bottom:0}
+.xf-note{font-size:9pt;color:#7a8580;margin-top:5mm;line-height:1.5}
+.xgal{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+.xgal-i{height:70mm;background-size:cover;background-position:center;border-radius:6px}
+.xgr{display:flex;flex-direction:column;gap:6mm}
+.xgr-i{text-align:center}
+.xgr-i img{max-width:100%;max-height:110mm;border:1px solid #eceae3;border-radius:6px}
+.xb-foot{position:absolute;left:16mm;right:16mm;bottom:8mm;display:flex;justify-content:space-between;font-size:8.5pt;color:#8a938e;border-top:1px solid #e4e2da;padding-top:3mm}
+@media(max-width:820px){.xcols{flex-direction:column;gap:0}}
+
+/* Exposé-Druck */
+body.exp-print{background:#fff}
+body.exp-print *{visibility:hidden !important}
+body.exp-print #exp_doc,body.exp-print #exp_doc *{visibility:visible !important}
+body.exp-print #exp_doc{position:absolute !important;left:0;top:0;transform:none !important}
+body.exp-print .exp-page{box-shadow:none !important;margin:0 !important;break-after:page;page-break-after:always}
+body.exp-print .exp-page:last-child{break-after:auto;page-break-after:auto}
 </style>
 </head>
 <body>
@@ -288,34 +365,147 @@ body.inv-print #inv_doc{position:absolute !important;left:0;top:0;transform:none
 
   <!-- Exposé -->
   <section class="view" id="v-expose">
-    <div class="vhead"><div><h2>Exposé-Generator</h2><p class="muted">Aus den Eckdaten einen fertigen Inseratstext erzeugen.</p></div></div>
-    <div class="grid2">
-      <div class="card noprint">
-        <div class="fld"><label class="fl">Objekttitel</label><input id="e_titel" placeholder="Helle 4.5-Zimmer-Wohnung mit Balkon"></div>
-        <div class="grid2">
-          <div class="fld"><label class="fl">Objektart</label><input id="e_art" placeholder="Eigentumswohnung"></div>
-          <div class="fld"><label class="fl">Ort</label><input id="e_ort" placeholder="8302 Kloten"></div>
-        </div>
-        <div class="grid3">
-          <div class="fld"><label class="fl">Zimmer</label><input id="e_zi" placeholder="4.5"></div>
-          <div class="fld"><label class="fl">Fläche m²</label><input id="e_fl" placeholder="110"></div>
-          <div class="fld"><label class="fl">Baujahr</label><input id="e_bj" placeholder="1998"></div>
-        </div>
-        <div class="grid3">
-          <div class="fld"><label class="fl">Stockwerk</label><input id="e_sw" placeholder="3. OG"></div>
-          <div class="fld"><label class="fl">Parkplatz</label><input id="e_pp" placeholder="1 TG-Platz"></div>
-          <div class="fld"><label class="fl">Preis CHF</label><input id="e_preis" placeholder="950000"></div>
-        </div>
-        <div class="fld"><label class="fl">Highlights (eine pro Zeile)</label><textarea id="e_hl" placeholder="Moderne Küche&#10;Sonniger Balkon nach Süden&#10;Ruhige Lage, 5 Min. zum Bahnhof"></textarea></div>
-        <div class="fld"><label class="fl">Freitext / Beschreibung (optional)</label><textarea id="e_txt" placeholder="Ergänzende Beschreibung ..."></textarea></div>
-        <button class="btn block" id="expBtn">Exposé erzeugen</button>
+    <div class="vhead">
+      <div><h2>Exposé-Generator</h2><p class="muted">Aus einem Lead ein fertiges Verkaufs-Exposé mit Deckblatt, Finanzierung und Eigenhand-Branding. Jeder Text im Exposé rechts ist anklickbar und überschreibbar.</p></div>
+      <div class="noprint" style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn sec sm" id="x_new">+ Neu</button>
+        <button class="btn sec sm" id="x_demo">Beispiel</button>
+        <label class="btn sec sm" style="cursor:pointer;margin:0">JSON laden<input type="file" id="x_jsonload" accept="application/json" hidden></label>
+        <button class="btn sec sm" id="x_jsonsave">JSON speichern</button>
+        <button class="btn sm" id="x_print">PDF drucken</button>
       </div>
-      <div>
-        <div class="out" id="e_out">Füllen Sie die Felder links aus und klicken Sie «Exposé erzeugen».</div>
-        <div style="display:flex;gap:8px;margin-top:12px" class="noprint">
-          <button class="btn sec sm" id="e_copy">Text kopieren</button>
-          <button class="btn sec sm" id="e_print">Drucken / als PDF</button>
+    </div>
+
+    <div id="x_check" class="banner hidden" style="background:#FBEEE9;border-color:#E7C4B8;color:var(--warn)"></div>
+
+    <div class="grid2">
+      <!-- Steuerpanel -->
+      <div class="noprint">
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="subhead" style="margin-top:0">① Daten aus Lead übernehmen</div>
+          <div class="fld"><select id="x_lead"><option value="">— Lead auswählen —</option></select></div>
+          <p class="tiny" style="margin:0">Füllt Titel, Eckdaten, Preis und Lage aus der Anfrage. Alles bleibt danach frei änderbar.</p>
         </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="subhead" style="margin-top:0">② Titelbild</div>
+          <label class="btn sec sm" style="cursor:pointer">Titelbild hochladen<input type="file" id="x_titelbild" accept="image/*" hidden></label>
+          <p class="tiny" style="margin:8px 0 0">Querformat-Foto der Immobilie, füllt die Fläche zuoberst auf dem Deckblatt.</p>
+          <div class="rangerow"><label class="fl">Bildhöhe <span id="x_bildh_v">118 mm</span></label><input type="range" id="x_bildh" min="70" max="190" value="118"></div>
+          <div class="rangerow"><label class="fl">Abdunklung <span id="x_abd_v">72 %</span></label><input type="range" id="x_abd" min="0" max="90" value="72"></div>
+          <p class="tiny" style="margin:0">Abdunklung hält die weisse Schrift auf dem Bild lesbar.</p>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="subhead" style="margin-top:0">③ Logo auf dem Deckblatt</div>
+          <div class="segrow" id="x_logoseg">
+            <button type="button" data-logo="gruen" class="active">Grün</button>
+            <button type="button" data-logo="weiss">Weiss</button>
+            <button type="button" data-logo="eigen">Eigenes</button>
+          </div>
+          <label class="btn sec sm" style="cursor:pointer;margin-top:8px" id="x_logofilewrap">Eigenes Logo hochladen<input type="file" id="x_logofile" accept="image/*" hidden></label>
+          <div class="rangerow"><label class="fl">Grösse <span id="x_logogr_v">90 px</span></label><input type="range" id="x_logogr" min="40" max="180" value="90"></div>
+          <div class="grid2">
+            <div class="fld"><label class="fl">Position</label><select id="x_logopos"><option value="links">Links</option><option value="mitte">Mitte</option><option value="rechts">Rechts</option><option value="frei">Frei (ziehen)</option></select></div>
+            <div class="fld"><label class="fl">Hintergrund</label><select id="x_logobg"><option value="transparent">Transparent</option><option value="weiss">Weisse Box</option><option value="dunkel">Dunkle Box</option></select></div>
+          </div>
+          <div class="fld"><label class="fl">Beschriftung oben rechts</label><input id="x_beschr" placeholder="z. B. VERKAUF"></div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="subhead" style="margin-top:0">④ Kopf &amp; Titel</div>
+          <div class="rangerow"><label class="fl">Titelgrösse <span id="x_titelgr_v">35 px</span></label><input type="range" id="x_titelgr" min="22" max="52" value="35"></div>
+          <div class="fld"><label class="fl">Titel</label><input id="x_titel" placeholder="Helle 4.5-Zimmer-Wohnung mit Garten"></div>
+          <div class="fld"><label class="fl">Untertitel / Objektart</label><input id="x_unter" placeholder="Eigentumswohnung zum Verkauf"></div>
+          <div class="grid2">
+            <div class="fld"><label class="fl">Adresse</label><input id="x_adr" placeholder="Musterstrasse 12"></div>
+            <div class="fld"><label class="fl">PLZ / Ort</label><input id="x_plzort" placeholder="8302 Kloten"></div>
+          </div>
+          <div class="grid2">
+            <div class="fld"><label class="fl">Kanton</label><input id="x_kanton" placeholder="Zürich"></div>
+            <div class="fld"><label class="fl">Kaufpreis (CHF)</label><input id="x_preis" inputmode="numeric" placeholder="950000"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="subhead" style="margin-top:0">Kennzahlen (Deckblatt)</div>
+          <div class="grid2">
+            <div class="fld"><label class="fl">Zimmer</label><input id="x_zimmer" placeholder="4.5"></div>
+            <div class="fld"><label class="fl">Wohnfläche m²</label><input id="x_flaeche" placeholder="110"></div>
+          </div>
+          <div class="grid2">
+            <div class="fld"><label class="fl">Etage</label><input id="x_etage" placeholder="3. OG"></div>
+            <div class="fld"><label class="fl">Baujahr</label><input id="x_baujahr" placeholder="1998"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="subhead" style="margin-top:0">Beschrieb</div>
+          <div class="fld"><label class="fl">Objektbeschrieb</label><textarea id="x_beschrieb" style="min-height:140px" placeholder="Leerzeile zwischen Abschnitten = neuer Absatz. Der erste Abschnitt erscheint auch auf dem Deckblatt."></textarea></div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="subhead" style="margin-top:0">Lage &amp; Gemeinde</div>
+          <div class="fld"><label class="fl">Gemeindetext</label><textarea id="x_gemeinde" placeholder="Kurzer Text zur Gemeinde, Steuern, Erreichbarkeit ..."></textarea></div>
+          <div class="fld"><label class="fl">Lage</label><textarea id="x_lage" placeholder="Umgebung, Schulen, Einkauf, ÖV ..."></textarea></div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="subhead" style="margin-top:0">Eckdaten</div>
+          <div id="x_eck"></div>
+          <button class="btn sec sm" id="x_eckadd" style="margin-top:6px">+ Eckdatum hinzufügen</button>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="subhead" style="margin-top:0">Merkmale &amp; Highlights</div>
+          <div id="x_merk"></div>
+          <button class="btn sec sm" id="x_merkadd" style="margin-top:6px">+ Merkmal hinzufügen</button>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="subhead" style="margin-top:0">Fotogalerie</div>
+          <label class="btn sec sm" style="cursor:pointer">+ Fotos hinzufügen<input type="file" id="x_fotos" accept="image/*" multiple hidden></label>
+          <div id="x_fotolist" class="thumbs"></div>
+          <p class="tiny" style="margin:0">Bis zu 6 Fotos. Erscheinen auf einer Galerie-Seite.</p>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="subhead" style="margin-top:0">Grundrisse</div>
+          <label class="btn sec sm" style="cursor:pointer">+ Grundriss hinzufügen<input type="file" id="x_grund" accept="image/*" multiple hidden></label>
+          <div id="x_grundlist" class="thumbs"></div>
+          <p class="tiny" style="margin:0">Bis zu 4 Grundrisse. Eigene Seite.</p>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="subhead" style="margin-top:0">Tragbarkeit (Finanzierung)</div>
+          <p class="tiny" style="margin:0 0 10px">Schweizer Bankstandard: 80 % Belehnung, 5 % kalk. Zins, 1 % Unterhalt, 2. Hypothek in 15 Jahren amortisiert, Drittelregel. Wird aus dem Kaufpreis berechnet.</p>
+          <div class="grid2">
+            <div class="fld"><label class="fl">Eigenmittel %</label><input id="x_em" inputmode="numeric" value="20"></div>
+            <div class="fld"><label class="fl">Kalk. Zins %</label><input id="x_zins" inputmode="numeric" value="5"></div>
+          </div>
+          <div class="grid2">
+            <div class="fld"><label class="fl">Unterhalt %</label><input id="x_unterhalt" inputmode="numeric" value="1"></div>
+            <div class="fld"><label class="fl">Amortisation Jahre</label><input id="x_amort" inputmode="numeric" value="15"></div>
+          </div>
+          <label class="chkrow" style="margin-top:4px"><input type="checkbox" id="x_tragbar_on" checked> Tragbarkeits-Seite im Exposé zeigen</label>
+        </div>
+
+        <div class="card">
+          <div class="subhead" style="margin-top:0">Kontakt (Fusszeile)</div>
+          <div class="fld"><label class="fl">Ansprechperson</label><input id="x_kname" placeholder="Haris Savran"></div>
+          <div class="grid2">
+            <div class="fld"><label class="fl">Telefon</label><input id="x_ktel" placeholder="079 000 00 00"></div>
+            <div class="fld"><label class="fl">E-Mail</label><input id="x_kmail" placeholder="info@eigenhand.ch"></div>
+          </div>
+          <p class="tiny" style="margin:0">Wird dauerhaft in diesem Browser gespeichert und bleibt bei «Neu» erhalten.</p>
+        </div>
+
+      </div>
+
+      <!-- Vorschau -->
+      <div>
+        <div id="x_prevwrap"><div class="inv-placeholder">Die Exposé-Vorschau erscheint hier. Wähle links einen Lead oder klicke «Beispiel».</div></div>
       </div>
     </div>
   </section>
@@ -623,7 +813,7 @@ body.inv-print #inv_doc{position:absolute !important;left:0;top:0;transform:none
       if(res.error){ $("leadList").innerHTML='<div class="empty">Laden fehlgeschlagen: '+esc(res.error.message)+'</div>'; return; }
       LEADS = res.data || [];
       $("syncInfo").textContent = "Stand "+new Date().toLocaleTimeString("de-CH",{hour:"2-digit",minute:"2-digit"});
-      renderPipeline(); renderLeads(); fillAbLeads();
+      renderPipeline(); renderLeads(); fillAbLeads(); fillExpoLeads();
     });
   }
   $("refreshBtn").addEventListener("click", function(){ $("refreshBtn").disabled=true; loadLeads().then(function(){ $("refreshBtn").disabled=false; }); });
@@ -767,35 +957,346 @@ body.inv-print #inv_doc{position:absolute !important;left:0;top:0;transform:none
     window.__lastCalc={ fl:fl, val:round(val) };
   });
   $("calcToExpose").addEventListener("click", function(){
-    if(window.__lastCalc){ $("e_fl").value=window.__lastCalc.fl||""; $("e_preis").value=window.__lastCalc.val||""; }
+    if(window.__lastCalc){
+      if(window.__lastCalc.fl){ $("x_flaeche").value=window.__lastCalc.fl; X.flaeche=String(window.__lastCalc.fl); }
+      if(window.__lastCalc.val){ $("x_preis").value=window.__lastCalc.val; X.preis=String(window.__lastCalc.val); }
+      renderExpo();
+    }
     document.querySelector('#tabs button[data-v="expose"]').click();
   });
 
-  /* ---------- Exposé ---------- */
-  $("expBtn").addEventListener("click", function(){
-    var g=function(id){return $(id).value.trim();};
-    var titel=g("e_titel")||"Objektbeschrieb";
-    var eck=[];
-    if(g("e_art")) eck.push("Objektart: "+g("e_art"));
-    if(g("e_zi")) eck.push("Zimmer: "+g("e_zi"));
-    if(g("e_fl")) eck.push("Wohnfläche: "+g("e_fl")+" m²");
-    if(g("e_bj")) eck.push("Baujahr: "+g("e_bj"));
-    if(g("e_sw")) eck.push("Stockwerk: "+g("e_sw"));
-    if(g("e_pp")) eck.push("Parkplatz: "+g("e_pp"));
-    if(g("e_ort")) eck.push("Lage: "+g("e_ort"));
-    if(g("e_preis")){ var p=parseFloat(g("e_preis").replace(/[^0-9.]/g,"")); eck.push("Verkaufspreis: "+(p?chf(p):g("e_preis"))); }
-    var hl=g("e_hl").split(/\n/).map(function(s){return s.trim();}).filter(Boolean);
-    var intro=g("e_txt") || ("Diese Immobilie"+(g("e_ort")?" in "+g("e_ort"):"")+" überzeugt mit "+(g("e_fl")?g("e_fl")+" m² Wohnfläche":"durchdachten Räumen")+(g("e_zi")?" auf "+g("e_zi")+" Zimmern":"")+". Vereinbaren Sie jetzt eine Besichtigung.");
-    var out="";
-    out+=titel.toUpperCase()+"\n"+new Array(Math.min(titel.length,60)+1).join("=")+"\n\n";
-    out+=intro+"\n\n";
-    out+="ECKDATEN\n"+eck.map(function(e){return "• "+e;}).join("\n")+"\n";
-    if(hl.length){ out+="\nHIGHLIGHTS\n"+hl.map(function(h){return "• "+h;}).join("\n")+"\n"; }
-    out+="\nINTERESSE?\nEigenhand · info@eigenhand.ch · https://eigenhand.ch\nVerkauf ohne Maklerprovision, zum Festpreis.";
-    $("e_out").textContent=out;
+  /* ================= Exposé-Generator ================= */
+  var K_EXPO="eh_expo_draft", K_EXPOK="eh_expo_kontakt";
+  function freshExpo(){
+    return { titel:"", unter:"", adr:"", plzort:"", kanton:"", preis:"",
+      zimmer:"", flaeche:"", etage:"", baujahr:"",
+      beschrieb:"", gemeinde:"", lage:"", eck:[], merk:[],
+      titelbild:"", fotos:[], grundrisse:[],
+      logo:"gruen", logofile:"", logogr:90, logopos:"links", logoxy:null, logobg:"transparent",
+      beschr:"", bildh:118, abd:72, titelgr:35,
+      em:"20", zins:"5", unterhalt:"1", amort:"15", tragbar:true };
+  }
+  var X=freshExpo();
+  var XK=LS.get(K_EXPOK,{name:"Haris Savran",tel:"",mail:"info@eigenhand.ch"});
+  var EXP_LOGO_GREEN="img/logo.png", EXP_LOGO_WHITE="img/logo-mint.png";
+
+  function expNum(v){ return parseFloat(String(v==null?"":v).replace(/[^0-9.]/g,""))||0; }
+  function nl2p(t){ return String(t||"").split(/\n{2,}/).map(function(s){return s.trim();}).filter(Boolean); }
+
+  /* ---- Tragbarkeit nach CH-Standard ---- */
+  function tragbarkeit(){
+    var P=expNum(X.preis); if(!P) return null;
+    var emP=expNum(X.em)||20, zinsP=expNum(X.zins)||5, untP=expNum(X.unterhalt)||1, amJ=expNum(X.amort)||15;
+    var hypo=P*(1-emP/100);
+    var em=P*emP/100;
+    var belehnung=(1-emP/100)*100;
+    var zweiteGrenze=P*(2/3);
+    var zweite=Math.max(0, hypo-zweiteGrenze);
+    var amort=amJ>0?zweite/amJ:0;
+    var zinskosten=hypo*zinsP/100;
+    var unterhalt=P*untP/100;
+    var jahr=zinskosten+unterhalt+amort;
+    var einkommen=jahr*3;
+    return { P:P, em:em, emP:emP, hypo:hypo, belehnung:belehnung, zinskosten:zinskosten, zinsP:zinsP,
+      unterhalt:unterhalt, untP:untP, amort:amort, amJ:amJ, jahr:jahr, monat:jahr/12, einkommen:einkommen };
+  }
+
+  /* ---- Render ---- */
+  function logoSrc(){ return X.logo==="weiss"?EXP_LOGO_WHITE : X.logo==="eigen"&&X.logofile?X.logofile : EXP_LOGO_GREEN; }
+  function ce(f,val,cls){ return '<span class="xe '+(cls||"")+'" contenteditable="true" data-f="'+f+'">'+esc(val||"")+'</span>'; }
+  function renderExpo(){
+    var hasPreis=expNum(X.preis)>0;
+    var kennz=[];
+    if(X.zimmer) kennz.push(["Zimmer",X.zimmer]);
+    if(X.flaeche) kennz.push(["Wohnfläche",X.flaeche+" m²"]);
+    if(X.etage) kennz.push(["Etage",X.etage]);
+    if(X.baujahr) kennz.push(["Baujahr",X.baujahr]);
+
+    /* --- cover --- */
+    var bild = X.titelbild
+      ? '<div class="xc-img" style="height:'+X.bildh+'mm;background-image:linear-gradient(rgba(10,30,22,'+(X.abd/100)+'),rgba(10,30,22,'+(X.abd/100)+')),url('+X.titelbild+')">'
+      : '<div class="xc-img xc-noimg" style="height:'+X.bildh+'mm">';
+    var logoStyle="height:"+X.logogr+"px;width:auto;display:block";
+    var logoBoxCls = X.logobg==="weiss"?"xc-logo-wbox":X.logobg==="dunkel"?"xc-logo-dbox":"";
+    var logoPosCls = "xc-logo-"+(X.logopos==="frei"?"frei":X.logopos);
+    var logoFreeStyle = (X.logopos==="frei"&&X.logoxy) ? 'style="left:'+X.logoxy.x+'%;top:'+X.logoxy.y+'%"' : "";
+    var logoHtml='<div class="xc-logo '+logoPosCls+' '+logoBoxCls+'" id="xc_logo" '+logoFreeStyle+'><img src="'+logoSrc()+'" alt="Eigenhand" style="'+logoStyle+'"></div>';
+    var beschrHtml = '<div class="xc-tag">'+ce("beschr",X.beschr||"VERKAUF")+'</div>';
+    var ortLine=[X.adr,X.plzort].filter(Boolean).join(", ")+(X.kanton?" · Kanton "+X.kanton:"");
+    var coverText=
+      '<div class="xc-txt">'+
+        '<div class="xc-title" style="font-size:'+X.titelgr+'px">'+ce("titel",X.titel||"Objekttitel")+'</div>'+
+        '<div class="xc-sub">'+ce("unter",X.unter||"Objektart")+'</div>'+
+        (ortLine.trim()&&ortLine.trim()!=="·"?'<div class="xc-adr">'+esc(ortLine)+'</div>':'')+
+        (hasPreis?'<div class="xc-preis">'+ce("preis",chf(expNum(X.preis)))+'</div>':'')+
+      '</div>';
+    var kennzHtml = kennz.length? '<div class="xc-kennz">'+kennz.map(function(k){return '<div class="xc-k"><div class="xc-kv">'+esc(k[1])+'</div><div class="xc-kl">'+esc(k[0])+'</div></div>';}).join("")+'</div>' : "";
+    var cover='<div class="exp-page exp-cover">'+bild+logoHtml+beschrHtml+coverText+'</div>'+kennzHtml+'<div class="xc-foot">Eigenhand · Festpreis statt Provision · eigenhand.ch</div></div>';
+
+    /* --- content page --- */
+    var bPar=nl2p(X.beschrieb);
+    var beschriebHtml = bPar.length? '<div class="xe" contenteditable="true" data-f="beschrieb">'+bPar.map(function(p){return '<p>'+esc(p)+'</p>';}).join("")+'</div>' : '';
+    var eckHtml = X.eck.filter(function(e){return e.k||e.v;}).length
+      ? '<table class="xt-eck"><tbody>'+X.eck.filter(function(e){return e.k||e.v;}).map(function(e){return '<tr><td class="xk">'+esc(e.k)+'</td><td class="xv">'+esc(e.v)+'</td></tr>';}).join("")+'</tbody></table>' : '';
+    var merkHtml = X.merk.filter(Boolean).length
+      ? '<ul class="xt-merk">'+X.merk.filter(Boolean).map(function(m){return '<li>'+esc(m)+'</li>';}).join("")+'</ul>' : '';
+    var lageHtml = (X.gemeinde||X.lage)
+      ? '<div class="xsec"><h3>Lage &amp; Gemeinde</h3>'+
+          (X.gemeinde?'<div class="xe" contenteditable="true" data-f="gemeinde">'+nl2p(X.gemeinde).map(function(p){return '<p>'+esc(p)+'</p>';}).join("")+'</div>':'')+
+          (X.lage?'<div class="xe" contenteditable="true" data-f="lage">'+nl2p(X.lage).map(function(p){return '<p>'+esc(p)+'</p>';}).join("")+'</div>':'')+
+        '</div>' : '';
+
+    var content='<div class="exp-page exp-body">'+
+      '<div class="xb-head"><img src="'+EXP_LOGO_GREEN+'" style="height:26px"><span>Objektdokumentation</span></div>'+
+      (beschriebHtml?'<div class="xsec"><h3>Das Objekt</h3>'+beschriebHtml+'</div>':'')+
+      (eckHtml||merkHtml?'<div class="xsec xcols"><div>'+(eckHtml?'<h3>Eckdaten</h3>'+eckHtml:'')+'</div><div>'+(merkHtml?'<h3>Merkmale &amp; Highlights</h3>'+merkHtml:'')+'</div></div>':'')+
+      lageHtml+
+      expFooter()+
+    '</div>';
+
+    /* --- financing page --- */
+    var fin="";
+    if(X.tragbar){
+      var t=tragbarkeit();
+      if(t){
+        var row=function(l,v,strong){ return '<tr class="'+(strong?"xf-strong":"")+'"><td>'+l+'</td><td class="r">'+v+'</td></tr>'; };
+        fin='<div class="exp-page exp-body">'+
+          '<div class="xb-head"><img src="'+EXP_LOGO_GREEN+'" style="height:26px"><span>Finanzierung &amp; Tragbarkeit</span></div>'+
+          '<div class="xsec"><h3>Was die Finanzierung ungefähr bedeutet</h3>'+
+          '<p class="xf-intro">Richtwerte nach Schweizer Bankstandard, basierend auf dem Kaufpreis von '+chf(t.P)+'. Keine verbindliche Finanzierungszusage.</p>'+
+          '<table class="xf-tab"><tbody>'+
+            row("Kaufpreis",chf(t.P))+
+            row("Eigenmittel ("+t.emP+" %)",chf(t.em))+
+            row("Hypothek ("+Math.round(t.belehnung)+" % Belehnung)",chf(t.hypo))+
+            '<tr class="xf-gap"><td colspan="2">Jährliche kalkulatorische Kosten</td></tr>'+
+            row("Kalk. Zins ("+t.zinsP+" %)",chf(t.zinskosten))+
+            row("Unterhalt &amp; Nebenkosten ("+t.untP+" %)",chf(t.unterhalt))+
+            row("Amortisation 2. Hypothek (über "+t.amJ+" J.)",chf(t.amort))+
+            row("Gesamtkosten pro Jahr",chf(t.jahr),true)+
+            row("Das sind pro Monat",chf(t.monat))+
+            '<tr class="xf-gap"><td colspan="2">Tragbarkeit (Drittelregel)</td></tr>'+
+            row("Empfohlenes Bruttoeinkommen",chf(t.einkommen),true)+
+          '</tbody></table>'+
+          '<p class="xf-note">Faustregel der Banken: Die jährlichen Wohnkosten sollten rund einen Drittel des Bruttoeinkommens nicht übersteigen. Zins und Amortisation sind kalkulatorisch, die tatsächlichen Konditionen legt Ihre Bank fest.</p>'+
+          '</div>'+expFooter()+'</div>';
+      }
+    }
+
+    /* --- gallery --- */
+    var gal="";
+    if(X.fotos.length){
+      gal='<div class="exp-page exp-body"><div class="xb-head"><img src="'+EXP_LOGO_GREEN+'" style="height:26px"><span>Impressionen</span></div><div class="xgal">'+
+        X.fotos.map(function(f){return '<div class="xgal-i" style="background-image:url('+f+')"></div>';}).join("")+'</div>'+expFooter()+'</div>';
+    }
+    var gr="";
+    if(X.grundrisse.length){
+      gr='<div class="exp-page exp-body"><div class="xb-head"><img src="'+EXP_LOGO_GREEN+'" style="height:26px"><span>Grundrisse</span></div><div class="xgr">'+
+        X.grundrisse.map(function(f){return '<div class="xgr-i"><img src="'+f+'"></div>';}).join("")+'</div>'+expFooter()+'</div>';
+    }
+
+    $("x_prevwrap").innerHTML='<div id="exp_doc">'+cover+content+fin+gal+gr+'</div>';
+    fitExp();
+    runCheck();
+  }
+  function expFooter(){
+    var parts=[XK.name,XK.tel,XK.mail].filter(Boolean).join("  ·  ");
+    return '<div class="xb-foot"><span>Eigenhand · Festpreis statt Provision</span><span>'+esc(parts)+'</span></div>';
+  }
+
+  function fitExp(){
+    var doc=$("exp_doc"), wrap=$("x_prevwrap"); if(!doc||!wrap) return;
+    doc.style.transform="none";
+    var avail=wrap.clientWidth-32, dw=doc.offsetWidth||794, sc=Math.min(1, avail/dw);
+    doc.style.transform="scale("+sc+")"; doc.style.transformOrigin="top left";
+    wrap.style.height=(doc.offsetHeight*sc+32)+"px";
+  }
+  window.addEventListener("resize", function(){ if($("exp_doc")) fitExp(); });
+
+  /* ---- Checkliste vor Versand ---- */
+  function runCheck(){
+    var miss=[];
+    if(!X.titel) miss.push("Titel fehlt.");
+    if(expNum(X.preis)<=0) miss.push("Kaufpreis fehlt.");
+    if(!X.titelbild) miss.push("Titelbild fürs Deckblatt fehlt.");
+    if(!X.beschrieb) miss.push("Objektbeschrieb fehlt.");
+    if(!X.eck.filter(function(e){return e.k||e.v;}).length) miss.push("Keine Eckdaten erfasst.");
+    var el=$("x_check");
+    if(miss.length){ el.innerHTML="<b>Vor Versand prüfen:</b> "+miss.join(" "); el.classList.remove("hidden"); }
+    else { el.innerHTML="Bereit zum Versand. Alle Pflichtangaben sind da."; el.classList.remove("hidden"); el.style.background="var(--mint-bg)"; el.style.borderColor="var(--mint)"; el.style.color="var(--green-d)"; }
+    if(miss.length){ el.style.background="#FBEEE9"; el.style.borderColor="#E7C4B8"; el.style.color="var(--warn)"; }
+  }
+
+  /* ---- Formular-Bindings ---- */
+  var EXPMAP={ x_titel:"titel",x_unter:"unter",x_adr:"adr",x_plzort:"plzort",x_kanton:"kanton",x_preis:"preis",
+    x_zimmer:"zimmer",x_flaeche:"flaeche",x_etage:"etage",x_baujahr:"baujahr",
+    x_beschrieb:"beschrieb",x_gemeinde:"gemeinde",x_lage:"lage",x_beschr:"beschr",
+    x_em:"em",x_zins:"zins",x_unterhalt:"unterhalt",x_amort:"amort" };
+  Object.keys(EXPMAP).forEach(function(id){
+    var el=$(id); if(!el) return;
+    el.addEventListener("input", function(){ X[EXPMAP[id]]=el.value; saveDraft(); renderExpo(); });
   });
-  $("e_copy").addEventListener("click", function(){ copyText($("e_out").textContent, this); });
-  $("e_print").addEventListener("click", function(){ document.querySelector('#tabs button[data-v="expose"]').click(); window.print(); });
+  function rng(id,key,unit,vid){ var el=$(id); if(!el) return;
+    el.addEventListener("input", function(){ X[key]=parseInt(el.value,10); $(vid).textContent=el.value+unit; saveDraft(); renderExpo(); }); }
+  rng("x_bildh","bildh"," mm","x_bildh_v"); rng("x_abd","abd"," %","x_abd_v");
+  rng("x_logogr","logogr"," px","x_logogr_v"); rng("x_titelgr","titelgr"," px","x_titelgr_v");
+  $("x_logopos").addEventListener("change", function(){ X.logopos=this.value; if(X.logopos!=="frei") X.logoxy=null; saveDraft(); renderExpo(); });
+  $("x_logobg").addEventListener("change", function(){ X.logobg=this.value; saveDraft(); renderExpo(); });
+  $("x_tragbar_on").addEventListener("change", function(){ X.tragbar=this.checked; saveDraft(); renderExpo(); });
+  $("x_logoseg").addEventListener("click", function(e){ var b=e.target.closest("button"); if(!b) return;
+    X.logo=b.dataset.logo;
+    Array.prototype.forEach.call(this.children,function(c){ c.classList.toggle("active",c===b); });
+    saveDraft(); renderExpo();
+  });
+
+  /* Kontakt (persistiert) */
+  function bindK(id,key){ var el=$(id); el.value=XK[key]||""; el.addEventListener("input", function(){ XK[key]=el.value; LS.set(K_EXPOK,XK); renderExpo(); }); }
+  bindK("x_kname","name"); bindK("x_ktel","tel"); bindK("x_kmail","mail");
+
+  /* Eckdaten & Merkmale */
+  function renderEck(){
+    $("x_eck").innerHTML = X.eck.map(function(e,i){
+      return '<div class="itemrow"><input data-ei="'+i+'" data-ek="k" value="'+esc(e.k)+'" placeholder="Bezeichnung"><input data-ei="'+i+'" data-ek="v" value="'+esc(e.v)+'" placeholder="Wert"><button class="del" data-edel="'+i+'">×</button></div>';
+    }).join("") || '<p class="tiny" style="margin:0">Noch keine Eckdaten.</p>';
+  }
+  $("x_eck").addEventListener("input", function(e){ var i=e.target.getAttribute("data-ei"), k=e.target.getAttribute("data-ek"); if(i==null) return; X.eck[+i][k]=e.target.value; saveDraft(); renderExpo(); });
+  $("x_eck").addEventListener("click", function(e){ var d=e.target.getAttribute("data-edel"); if(d==null) return; X.eck.splice(+d,1); renderEck(); saveDraft(); renderExpo(); });
+  $("x_eckadd").addEventListener("click", function(){ X.eck.push({k:"",v:""}); renderEck(); });
+  function renderMerk(){
+    $("x_merk").innerHTML = X.merk.map(function(m,i){
+      return '<div class="itemrow"><input data-mi="'+i+'" value="'+esc(m)+'" placeholder="z. B. Moderne Küche"><button class="del" data-mdel="'+i+'">×</button></div>';
+    }).join("") || '<p class="tiny" style="margin:0">Noch keine Merkmale.</p>';
+  }
+  $("x_merk").addEventListener("input", function(e){ var i=e.target.getAttribute("data-mi"); if(i==null) return; X.merk[+i]=e.target.value; saveDraft(); renderExpo(); });
+  $("x_merk").addEventListener("click", function(e){ var d=e.target.getAttribute("data-mdel"); if(d==null) return; X.merk.splice(+d,1); renderMerk(); saveDraft(); renderExpo(); });
+  $("x_merkadd").addEventListener("click", function(){ X.merk.push(""); renderMerk(); });
+
+  /* Bilder */
+  function readImg(file, cb){ var r=new FileReader(); r.onload=function(){ cb(r.result); }; r.readAsDataURL(file); }
+  $("x_titelbild").addEventListener("change", function(){ var f=this.files[0]; if(f) readImg(f,function(d){ X.titelbild=d; renderExpo(); }); this.value=""; });
+  $("x_logofile").addEventListener("change", function(){ var f=this.files[0]; if(f) readImg(f,function(d){ X.logofile=d; X.logo="eigen"; Array.prototype.forEach.call($("x_logoseg").children,function(c){c.classList.toggle("active",c.dataset.logo==="eigen");}); renderExpo(); }); this.value=""; });
+  function renderThumbs(listId, arr, kind){
+    $(listId).innerHTML = arr.map(function(src,i){ return '<div class="thumb" style="background-image:url('+src+')"><button data-'+kind+'="'+i+'">×</button></div>'; }).join("");
+  }
+  $("x_fotos").addEventListener("change", function(){
+    var files=Array.prototype.slice.call(this.files); this.value="";
+    files.forEach(function(f){ if(X.fotos.length>=6) return; readImg(f,function(d){ if(X.fotos.length<6){ X.fotos.push(d); renderThumbs("x_fotolist",X.fotos,"fdel"); renderExpo(); } }); });
+  });
+  $("x_fotolist").addEventListener("click", function(e){ var d=e.target.getAttribute("data-fdel"); if(d==null) return; X.fotos.splice(+d,1); renderThumbs("x_fotolist",X.fotos,"fdel"); renderExpo(); });
+  $("x_grund").addEventListener("change", function(){
+    var files=Array.prototype.slice.call(this.files); this.value="";
+    files.forEach(function(f){ if(X.grundrisse.length>=4) return; readImg(f,function(d){ if(X.grundrisse.length<4){ X.grundrisse.push(d); renderThumbs("x_grundlist",X.grundrisse,"gdel"); renderExpo(); } }); });
+  });
+  $("x_grundlist").addEventListener("click", function(e){ var d=e.target.getAttribute("data-gdel"); if(d==null) return; X.grundrisse.splice(+d,1); renderThumbs("x_grundlist",X.grundrisse,"gdel"); renderExpo(); });
+
+  /* Direktbearbeitung im Exposé (contenteditable, Sync bei blur) */
+  $("x_prevwrap").addEventListener("blur", function(e){
+    var el=e.target.closest("[data-f]"); if(!el) return;
+    var f=el.getAttribute("data-f");
+    if(f==="preis"){ X.preis=String(expNum(el.textContent)); }
+    else if(f==="beschrieb"||f==="gemeinde"||f==="lage"){ X[f]=(el.innerText||"").replace(/\n{3,}/g,"\n\n").trim(); }
+    else { X[f]=(el.textContent||"").trim(); }
+    if($(revMap(f))) $(revMap(f)).value=X[f];
+    saveDraft(); renderExpo();
+  }, true);
+  function revMap(f){ var m={titel:"x_titel",unter:"x_unter",preis:"x_preis",beschr:"x_beschr",beschrieb:"x_beschrieb",gemeinde:"x_gemeinde",lage:"x_lage"}; return m[f]||""; }
+
+  /* Logo frei ziehen */
+  (function(){
+    var drag=null;
+    $("x_prevwrap").addEventListener("mousedown", function(e){
+      if(X.logopos!=="frei") return;
+      var lg=e.target.closest("#xc_logo"); if(!lg) return;
+      e.preventDefault();
+      var cover=lg.parentNode, r=cover.getBoundingClientRect();
+      drag={r:r};
+      function mv(ev){ var x=(ev.clientX-drag.r.left)/drag.r.width*100, y=(ev.clientY-drag.r.top)/drag.r.height*100;
+        x=Math.max(0,Math.min(92,x)); y=Math.max(0,Math.min(92,y)); lg.style.left=x+"%"; lg.style.top=y+"%"; drag.x=x; drag.y=y; }
+      function up(){ document.removeEventListener("mousemove",mv); document.removeEventListener("mouseup",up);
+        if(drag&&drag.x!=null){ X.logoxy={x:Math.round(drag.x),y:Math.round(drag.y)}; saveDraft(); } drag=null; }
+      document.addEventListener("mousemove",mv); document.addEventListener("mouseup",up);
+    });
+  })();
+
+  /* Lead -> Exposé */
+  function fillExpoLeads(){
+    var sel=$("x_lead"); if(!sel) return; var cur=sel.value;
+    var o='<option value="">— Lead auswählen —</option>';
+    LEADS.forEach(function(l){ var m=[l.art,l.gemeinde].filter(Boolean).join(", "); o+='<option value="'+l.id+'">'+esc(l.name||"Ohne Namen")+(m?" – "+esc(m):"")+'</option>'; });
+    sel.innerHTML=o; if(cur) sel.value=cur;
+  }
+  $("x_lead").addEventListener("change", function(){
+    var l=leadById(this.value); if(!l) return;
+    X.titel=(l.zi?l.zi+"-Zimmer-":"")+(l.art||"Immobilie")+(l.gemeinde?" in "+l.gemeinde:"");
+    X.unter=(l.art||"Objekt")+" zum Verkauf";
+    X.plzort=((l.plz||"")+(l.gemeinde?" "+l.gemeinde:"")).trim();
+    X.preis=l.preis?String(expNum(l.preis)):X.preis;
+    X.zimmer=l.zi||""; X.flaeche=l.fl||""; X.baujahr=l.bj||"";
+    X.eck=[];
+    if(l.art) X.eck.push({k:"Objektart",v:l.art});
+    if(l.zi) X.eck.push({k:"Zimmer",v:l.zi});
+    if(l.fl) X.eck.push({k:"Wohnfläche",v:l.fl+" m²"});
+    if(l.bj) X.eck.push({k:"Baujahr",v:l.bj});
+    if(l.plz||l.gemeinde) X.eck.push({k:"Lage",v:((l.plz||"")+" "+(l.gemeinde||"")).trim()});
+    syncExpoForm(); renderEck(); renderMerk(); renderThumbs("x_fotolist",X.fotos,"fdel"); renderThumbs("x_grundlist",X.grundrisse,"gdel"); saveDraft(); renderExpo();
+  });
+
+  function syncExpoForm(){
+    Object.keys(EXPMAP).forEach(function(id){ if($(id)) $(id).value=X[EXPMAP[id]]||""; });
+    $("x_bildh").value=X.bildh; $("x_bildh_v").textContent=X.bildh+" mm";
+    $("x_abd").value=X.abd; $("x_abd_v").textContent=X.abd+" %";
+    $("x_logogr").value=X.logogr; $("x_logogr_v").textContent=X.logogr+" px";
+    $("x_titelgr").value=X.titelgr; $("x_titelgr_v").textContent=X.titelgr+" px";
+    $("x_logopos").value=X.logopos; $("x_logobg").value=X.logobg; $("x_tragbar_on").checked=!!X.tragbar;
+    Array.prototype.forEach.call($("x_logoseg").children,function(c){c.classList.toggle("active",c.dataset.logo===X.logo);});
+  }
+
+  /* Toolbar */
+  function saveDraft(){ try{ var slim=Object.assign({},X); slim.titelbild=slim.titelbild?"1":""; slim.fotos=[]; slim.grundrisse=[]; slim.logofile=slim.logofile?"1":""; LS.set(K_EXPO,slim); }catch(e){} }
+  $("x_new").addEventListener("click", function(){
+    if(!confirm("Neues Exposé starten? Nicht gespeicherte Bilder und Texte gehen verloren (Kontakt bleibt).")) return;
+    X=freshExpo(); syncExpoForm(); renderEck(); renderMerk(); renderThumbs("x_fotolist",[],"fdel"); renderThumbs("x_grundlist",[],"gdel"); $("x_lead").value=""; LS.set(K_EXPO,null); renderExpo();
+  });
+  $("x_jsonsave").addEventListener("click", function(){
+    var blob=new Blob([JSON.stringify(X,null,2)],{type:"application/json"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+    a.download="exposé-"+(X.titel||"objekt").toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,40)+".json"; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); },1000);
+  });
+  $("x_jsonload").addEventListener("change", function(){
+    var f=this.files[0]; if(!f) return; var r=new FileReader();
+    r.onload=function(){ try{ var o=JSON.parse(r.result); X=Object.assign(freshExpo(),o);
+      X.eck=X.eck||[]; X.merk=X.merk||[]; X.fotos=X.fotos||[]; X.grundrisse=X.grundrisse||[];
+      syncExpoForm(); renderEck(); renderMerk(); renderThumbs("x_fotolist",X.fotos,"fdel"); renderThumbs("x_grundlist",X.grundrisse,"gdel"); renderExpo();
+    }catch(err){ alert("Datei konnte nicht gelesen werden."); } };
+    r.readAsText(f); this.value="";
+  });
+  $("x_print").addEventListener("click", function(){
+    if(!$("exp_doc")){ renderExpo(); }
+    document.body.classList.add("exp-print"); window.print();
+  });
+  window.addEventListener("afterprint", function(){ document.body.classList.remove("exp-print"); if($("exp_doc")) fitExp(); });
+  document.querySelector('#tabs button[data-v="expose"]').addEventListener("click", function(){ fillExpoLeads(); if($("exp_doc")) fitExp(); });
+
+  /* Beispiel */
+  $("x_demo").addEventListener("click", function(){
+    X=freshExpo();
+    X.titel="Helle 4.5-Zimmer-Wohnung mit Garten"; X.unter="Eigentumswohnung zum Verkauf";
+    X.adr="Bramenring 7"; X.plzort="8302 Kloten"; X.kanton="Zürich"; X.preis="950000";
+    X.zimmer="4.5"; X.flaeche="118"; X.etage="EG mit Gartensitzplatz"; X.baujahr="2009";
+    X.beschrieb="Diese gepflegte Wohnung liegt ruhig und doch zentral in Kloten. Grosse Fenster, ein offener Wohn- und Essbereich und ein direkter Zugang zum eigenen Garten machen sie zu einem Zuhause zum Wohlfühlen.\n\nDie Küche ist modern, das Bad 2019 renoviert. Ein Kellerabteil und ein Tiefgaragenplatz gehören dazu.";
+    X.gemeinde="Kloten überzeugt mit guter Infrastruktur, moderaten Steuern und kurzer Distanz zum Flughafen und nach Zürich.";
+    X.lage="Schulen, Einkauf und ÖV sind in wenigen Gehminuten erreichbar. Der Bahnhof Kloten liegt rund 8 Gehminuten entfernt.";
+    X.eck=[{k:"Objektart",v:"Eigentumswohnung"},{k:"Zimmer",v:"4.5"},{k:"Wohnfläche",v:"118 m²"},{k:"Baujahr",v:"2009"},{k:"Etage",v:"EG"},{k:"Parkplatz",v:"1 TG-Platz"}];
+    X.merk=["Moderne, offene Küche","Eigener Gartensitzplatz nach Süden","Bad 2019 renoviert","Tiefgaragenplatz und Kellerabteil","Ruhige Lage, 8 Min. zum Bahnhof"];
+    X.beschr="VERKAUF";
+    syncExpoForm(); renderEck(); renderMerk(); renderThumbs("x_fotolist",[],"fdel"); renderThumbs("x_grundlist",[],"gdel"); renderExpo();
+  });
+
+  function initExpo(){
+    var d=LS.get(K_EXPO,null);
+    if(d){ X=Object.assign(freshExpo(),d); X.titelbild=""; X.logofile=""; X.fotos=[]; X.grundrisse=[]; if(X.logo==="eigen") X.logo="gruen"; }
+    syncExpoForm(); renderEck(); renderMerk(); renderThumbs("x_fotolist",X.fotos,"fdel"); renderThumbs("x_grundlist",X.grundrisse,"gdel"); renderExpo();
+  }
 
   /* ---------- Checkliste ---------- */
   var CHECK={
@@ -1082,7 +1583,7 @@ body.inv-print #inv_doc{position:absolute !important;left:0;top:0;transform:none
     renderItems();
   }
 
-  function renderStatic(){ fillGemeindeSelect(); renderCheck(); renderRates(); initInvoice(); }
+  function renderStatic(){ fillGemeindeSelect(); renderCheck(); renderRates(); initInvoice(); initExpo(); }
 
   /* ---------- Abschluss-Mail ---------- */
   function abPkg(k){
