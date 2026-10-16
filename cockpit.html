@@ -108,6 +108,12 @@ table.rates th{font-size:12px;text-transform:uppercase;color:var(--muted);letter
 table.rates input{padding:7px 9px;font-size:14px}
 table.rates td.num{width:130px}
 .banner{background:var(--mint-bg);border:1px solid var(--mint);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--green-d);margin-bottom:18px}
+.flowbar{display:flex;align-items:center;flex-wrap:wrap;gap:8px;background:var(--mint-bg);border:1px solid var(--mint);border-radius:12px;padding:12px 14px;margin-bottom:18px}
+.flowstep{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--green-d)}
+.flowstep .fn{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;font-size:12px;font-weight:700}
+.flowarr{color:var(--green);font-weight:700}
+.paybox{background:#F4F2EB;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:18px}
+@media(max-width:620px){.flowbar{font-size:12px}.flowarr{display:none}.flowstep{width:100%}}
 
 .gate{position:fixed;inset:0;background:var(--green-d);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
 .gate .box{background:var(--bg);border-radius:18px;padding:34px;max-width:360px;width:100%;text-align:center}
@@ -221,6 +227,7 @@ body.inv-print #inv_doc{position:absolute !important;left:0;top:0;transform:none
       <button data-v="crm" class="active">CRM</button>
       <button data-v="calc">Preisrechner</button>
       <button data-v="expose">Exposé</button>
+      <button data-v="abschluss">Abschluss</button>
       <button data-v="invoice">Rechnung</button>
       <button data-v="check">Checkliste</button>
       <button data-v="settings">Einstellungen</button>
@@ -308,6 +315,75 @@ body.inv-print #inv_doc{position:absolute !important;left:0;top:0;transform:none
         <div style="display:flex;gap:8px;margin-top:12px" class="noprint">
           <button class="btn sec sm" id="e_copy">Text kopieren</button>
           <button class="btn sec sm" id="e_print">Drucken / als PDF</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abschluss -->
+  <section class="view" id="v-abschluss">
+    <div class="vhead">
+      <div><h2>Abschluss</h2><p class="muted">Kunde hat zugesagt? Hier entsteht in zwei Minuten die fertige Abschluss-Mail mit Auftrag und Zahlung. Ganz ohne Telefon.</p></div>
+    </div>
+
+    <div class="flowbar">
+      <div class="flowstep"><span class="fn">1</span> Kunde &amp; Paket wählen</div>
+      <div class="flowarr">→</div>
+      <div class="flowstep"><span class="fn">2</span> Mail kopieren &amp; senden</div>
+      <div class="flowarr">→</div>
+      <div class="flowstep"><span class="fn">3</span> QR-Rechnung beilegen</div>
+      <div class="flowarr">→</div>
+      <div class="flowstep"><span class="fn">4</span> Kunde zahlt, Inserat live</div>
+    </div>
+
+    <div class="grid2">
+      <div class="card noprint">
+        <div class="fld"><label class="fl">Kunde aus Leads übernehmen</label>
+          <select id="ab_lead"><option value="">Manuell erfassen …</option></select>
+        </div>
+        <div class="grid2">
+          <div class="fld"><label class="fl">Name</label><input id="ab_name" placeholder="Max Muster"></div>
+          <div class="fld"><label class="fl">E-Mail</label><input id="ab_mail" placeholder="max@example.ch"></div>
+        </div>
+        <div class="fld"><label class="fl">Objekt (Ort / Bezeichnung)</label><input id="ab_obj" placeholder="4.5-Zimmer-Wohnung, 8302 Kloten"></div>
+        <div class="grid2">
+          <div class="fld"><label class="fl">Paket</label>
+            <select id="ab_pak">
+              <option value="selbst">Selbst – CHF 1'490</option>
+              <option value="pro" selected>Pro – CHF 2'490</option>
+              <option value="begleitet">Begleitet – CHF 6'900</option>
+              <option value="bewertung">Nur Bewertung – CHF 290</option>
+            </select>
+          </div>
+          <div class="fld"><label class="fl">Anrede</label>
+            <select id="ab_anr">
+              <option value="du">Du (locker)</option>
+              <option value="sie" selected>Sie (formell)</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn block" id="ab_gen">Abschluss-Mail erzeugen</button>
+
+        <div class="paybox">
+          <div class="subhead" style="margin-top:0">Zahlung: so läuft es</div>
+          <p class="tiny" style="margin:0 0 8px"><b>TWINT</b> für kleine Pakete (Selbst, Pro, Bewertung): sofort da, aber oft auf ca. CHF 3'000–5'000 limitiert, je nach Bank des Kunden.</p>
+          <p class="tiny" style="margin:0 0 8px"><b>QR-Rechnung</b> für alle Beträge, vor allem Begleitet: keine Limite, Kunde scannt den Code in seiner Banking-App.</p>
+          <p class="tiny" style="margin:0">Du gibst in der Mail beide Wege an, der Kunde wählt selbst.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div class="subhead" style="margin-top:0">Betreff</div>
+          <input id="ab_subj" placeholder="Erscheint nach dem Erzeugen" style="margin-bottom:14px">
+          <div class="subhead">E-Mail-Text <span class="tiny">(frei anpassbar)</span></div>
+          <textarea id="ab_body" style="min-height:360px" placeholder="Wähle links Kunde und Paket und klicke «Abschluss-Mail erzeugen». Der fertige Text erscheint hier."></textarea>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+            <button class="btn sm" id="ab_copy" disabled>Text kopieren</button>
+            <button class="btn sec sm" id="ab_mailto" disabled>Als E-Mail öffnen</button>
+            <button class="btn sec sm" id="ab_toInv" disabled>→ QR-Rechnung für dieses Paket</button>
+          </div>
+          <p class="tiny" id="ab_hint" style="margin-top:12px">Tipp: Erst Mail senden, dann mit demselben Knopf die passende QR-Rechnung erstellen und als PDF anhängen.</p>
         </div>
       </div>
     </div>
@@ -499,7 +575,7 @@ body.inv-print #inv_doc{position:absolute !important;left:0;top:0;transform:none
   ];
   var STATUSES=[
     {k:"neu",label:"Neu"},{k:"kontaktiert",label:"Kontaktiert"},{k:"termin",label:"Termin vereinbart"},
-    {k:"offerte",label:"Offerte / Angebot"},{k:"gebucht",label:"Paket gebucht"},{k:"verkauft",label:"Verkauft"},{k:"verloren",label:"Verloren"}
+    {k:"offerte",label:"Abschluss-Mail verschickt"},{k:"gebucht",label:"Bezahlt / Paket gebucht"},{k:"verkauft",label:"Verkauft"},{k:"verloren",label:"Verloren"}
   ];
   function statLabel(k){ for(var i=0;i<STATUSES.length;i++) if(STATUSES[i].k===k) return STATUSES[i].label; return k||"neu"; }
   function chf(v){ v=Math.round(v); var neg=v<0; return (neg?"-":"")+"CHF "+Math.abs(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"'"); }
@@ -547,7 +623,7 @@ body.inv-print #inv_doc{position:absolute !important;left:0;top:0;transform:none
       if(res.error){ $("leadList").innerHTML='<div class="empty">Laden fehlgeschlagen: '+esc(res.error.message)+'</div>'; return; }
       LEADS = res.data || [];
       $("syncInfo").textContent = "Stand "+new Date().toLocaleTimeString("de-CH",{hour:"2-digit",minute:"2-digit"});
-      renderPipeline(); renderLeads();
+      renderPipeline(); renderLeads(); fillAbLeads();
     });
   }
   $("refreshBtn").addEventListener("click", function(){ $("refreshBtn").disabled=true; loadLeads().then(function(){ $("refreshBtn").disabled=false; }); });
@@ -1007,6 +1083,119 @@ body.inv-print #inv_doc{position:absolute !important;left:0;top:0;transform:none
   }
 
   function renderStatic(){ fillGemeindeSelect(); renderCheck(); renderRates(); initInvoice(); }
+
+  /* ---------- Abschluss-Mail ---------- */
+  function abPkg(k){
+    var P={
+      selbst:{ name:"Selbst", preis:"CHF 1'490", invDesc:"Paket «Selbst» – Verkauf zum Festpreis", invAmt:1490, split:false,
+        incl:["Ihre Fotos aufbereitet und ein professionelles Exposé","Inserat auf Homegate, ImmoScout24, newhome und weiteren Portalen (90 Tage)","Preisschätzung mit Vergleichsobjekten","Alle Anfragen kommen zu Ihnen, Sie entscheiden, wen Sie einladen"] },
+      pro:{ name:"Pro", preis:"CHF 2'490", invDesc:"Paket «Pro» – Verkauf zum Festpreis", invAmt:2490, split:false,
+        incl:["Alles aus «Selbst»","Professionelle Objektfotos","Detaillierte Preiseinschätzung mit Marktanalyse","Ein fester Ansprechpartner während des ganzen Verkaufs","Beratung bei Kaufangeboten und Verhandlung"] },
+      begleitet:{ name:"Begleitet", preis:"CHF 6'900 (CHF 2'900 bei Start, CHF 4'000 erst beim Verkauf)", invDesc:"Paket «Begleitet» – Anzahlung bei Start", invAmt:2900, split:true,
+        incl:["Alles aus «Pro»","Wir führen die Besichtigungen durch (2 Tage inklusive)","Prüfung der Käufer inklusive Finanzierungsnachweis","Wir verhandeln den Preis in Ihrem Auftrag","Unterlagen und Koordination bis zum Notartermin"] },
+      bewertung:{ name:"Nur Bewertung", preis:"CHF 290", invDesc:"Immobilienbewertung", invAmt:290, split:false,
+        incl:["Schriftliche Preiseinschätzung mit Vergleichsobjekten","Anrechenbar, falls Sie danach ein Paket buchen"] }
+    };
+    return P[k]||P.pro;
+  }
+  function abFirst(name){ name=(name||"").trim(); return name?name.split(/\s+/)[0]:""; }
+  function buildAbschluss(){
+    var sie = $("ab_anr").value==="sie";
+    var name=$("ab_name").value.trim(), obj=$("ab_obj").value.trim();
+    var p=abPkg($("ab_pak").value);
+    var objTxt = obj || (sie?"Ihre Immobilie":"deine Immobilie");
+    var subject = "Ihr Verkauf mit Eigenhand – Paket "+p.name;
+    var incl = p.incl.map(function(x){ return "- "+x; }).join("\n");
+    var body;
+    if(sie){
+      var payS = p.split
+        ? "Für den Start sind CHF 2'900 fällig, die restlichen CHF 4'000 erst, wenn der Verkauf beim Notar beurkundet ist."
+        : "Den Betrag begleichen Sie am einfachsten per TWINT oder mit der beiliegenden QR-Rechnung über Ihre Banking-App.";
+      var payS2 = p.split ? "Die Anzahlung begleichen Sie per TWINT oder mit der beiliegenden QR-Rechnung." : "";
+      body =
+"Guten Tag "+(name||"")+"\n\n"+
+"schön, dass Sie sich für den Verkauf mit Eigenhand entschieden haben. Für "+objTxt+" passt das Paket «"+p.name+"» gut.\n\n"+
+"Im Paket enthalten:\n"+incl+"\n\n"+
+"Preis: "+p.preis+" als Festpreis, ohne Provision."+(p.name!=="Nur Bewertung"?" Die Portalkosten für 90 Tage sind inbegriffen.":"")+"\n\n"+
+"So geht es weiter:\n"+
+"1. Sie erhalten von mir den kurzen Auftrag zur Unterschrift, das dauert zwei Minuten direkt vom Handy.\n"+
+"2. "+payS+(payS2?" "+payS2:"")+"\n"+
+"3. Sobald die Zahlung da ist, bereite ich alles auf und das Inserat geht live.\n\n"+
+"Wenn Sie vorher etwas klären möchten, schreiben Sie mir einfach. Ich melde mich ohnehin, sobald alles bereit ist.\n\n"+
+"Freundliche Grüsse\nHaris Savran\nEigenhand\ninfo@eigenhand.ch\neigenhand.ch";
+    } else {
+      var fn=abFirst(name);
+      var payD = p.split
+        ? "Für den Start sind CHF 2'900 fällig, die restlichen CHF 4'000 erst, wenn der Verkauf beim Notar beurkundet ist. Die Anzahlung zahlst du per TWINT oder mit der beiliegenden QR-Rechnung."
+        : "Den Betrag zahlst du am einfachsten per TWINT oder mit der beiliegenden QR-Rechnung über deine Banking-App.";
+      body =
+"Hoi "+(fn||"")+"\n\n"+
+"schön, dass du mit Eigenhand verkaufst. Für "+objTxt+" passt das Paket «"+p.name+"» gut.\n\n"+
+"Im Paket enthalten:\n"+incl+"\n\n"+
+"Preis: "+p.preis+" als Festpreis, ohne Provision."+(p.name!=="Nur Bewertung"?" Die Portalkosten für 90 Tage sind dabei.":"")+"\n\n"+
+"So geht es weiter:\n"+
+"1. Du bekommst von mir den kurzen Auftrag zur Unterschrift, zwei Minuten direkt vom Handy.\n"+
+"2. "+payD+"\n"+
+"3. Sobald die Zahlung da ist, bereite ich alles auf und das Inserat geht live.\n\n"+
+"Wenn du vorher etwas klären willst, schreib mir einfach. Ich melde mich sowieso, sobald alles bereit ist.\n\n"+
+"Liebe Grüsse\nHaris Savran\nEigenhand\ninfo@eigenhand.ch\neigenhand.ch";
+    }
+    $("ab_subj").value=subject;
+    $("ab_body").value=body;
+    ["ab_copy","ab_mailto","ab_toInv"].forEach(function(id){ $(id).disabled=false; });
+  }
+  function fillAbLeads(){
+    var sel=$("ab_lead"); if(!sel) return;
+    var cur=sel.value;
+    var opts='<option value="">Manuell erfassen …</option>';
+    LEADS.forEach(function(l){
+      var meta=[l.art,l.gemeinde].filter(Boolean).join(", ");
+      opts+='<option value="'+l.id+'">'+esc(l.name||"Ohne Namen")+(meta?" – "+esc(meta):"")+'</option>';
+    });
+    sel.innerHTML=opts;
+    if(cur) sel.value=cur;
+  }
+  function abPkgFromText(t){ t=(t||"").toLowerCase();
+    if(t.indexOf("begleit")>=0) return "begleitet";
+    if(t.indexOf("pro")>=0) return "pro";
+    if(t.indexOf("bewert")>=0) return "bewertung";
+    if(t.indexOf("selbst")>=0) return "selbst";
+    return null;
+  }
+  if($("ab_lead")){
+    $("ab_lead").addEventListener("change", function(){
+      var l=leadById(this.value); if(!l) return;
+      $("ab_name").value=l.name||"";
+      $("ab_mail").value=l.email||"";
+      var objParts=[l.art,(l.zi?l.zi+"-Zimmer":""),(l.plz?l.plz:"")+(l.gemeinde?" "+l.gemeinde:"")].filter(Boolean);
+      $("ab_obj").value=objParts.join(", ").replace(/\s+,/g,",").trim();
+      var pk=abPkgFromText(l.paket); if(pk) $("ab_pak").value=pk;
+    });
+    $("ab_gen").addEventListener("click", buildAbschluss);
+    $("ab_copy").addEventListener("click", function(){
+      var ta=$("ab_body"); ta.select();
+      navigator.clipboard.writeText(ta.value).then(function(){
+        var b=$("ab_copy"); b.textContent="Kopiert ✓"; setTimeout(function(){b.textContent="Text kopieren";},1500);
+      },function(){ document.execCommand("copy"); });
+    });
+    $("ab_mailto").addEventListener("click", function(){
+      var to=encodeURIComponent($("ab_mail").value.trim());
+      var su=encodeURIComponent($("ab_subj").value);
+      var bo=encodeURIComponent($("ab_body").value);
+      window.location.href="mailto:"+to+"?subject="+su+"&body="+bo;
+    });
+    $("ab_toInv").addEventListener("click", function(){
+      var p=abPkg($("ab_pak").value);
+      $("inv_dName").value=$("ab_name").value.trim();
+      $("inv_dMail").value=$("ab_mail").value.trim();
+      $("inv_ref").value=($("ab_obj").value.trim()||"Verkauf")+(p.split?" – Anzahlung":"");
+      invItems=[{desc:p.invDesc, amount:p.invAmt}];
+      renderItems();
+      document.querySelector('#tabs button[data-v="invoice"]').click();
+      window.scrollTo(0,0);
+    });
+    document.querySelector('#tabs button[data-v="abschluss"]').addEventListener("click", fillAbLeads);
+  }
 
   /* ---------- Boot ---------- */
   SB.auth.getSession().then(function(res){
