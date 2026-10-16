@@ -731,9 +731,9 @@ body.exp-print .exp-page:last-child{break-after:auto;page-break-after:auto}
     </div>
 
     <div class="card" style="margin-bottom:18px">
-      <h3 style="font-size:17px;margin-bottom:6px">Quadratmeterpreise (CHF/m²)</h3>
-      <p class="muted" style="margin-bottom:14px">Startwerte Raum Zürich, Stand Okt. 2026. Passe sie an deine Erfahrung an. Diese Tabelle speist den Preisrechner (lokal gespeichert).</p>
-      <div style="overflow-x:auto"><table class="rates"><thead><tr><th>Gemeinde</th><th>Wohnung</th><th>Haus</th><th></th></tr></thead><tbody id="rateBody"></tbody></table></div>
+      <h3 style="font-size:17px;margin-bottom:6px">Quadratmeter- und Landpreise (CHF/m²)</h3>
+      <p class="muted" style="margin-bottom:14px">Startwerte Raum Zürich. Wohnung und Haus speisen den Vergleichswert, die Spalte «Land» den Realwert beim Haus. Die Landpreise sind grobe Richtwerte (Bauland schwankt stark innerhalb einer Gemeinde) – passe sie an aktuelle Vergleiche an. Lokal gespeichert.</p>
+      <div style="overflow-x:auto"><table class="rates"><thead><tr><th>Gemeinde</th><th>Wohnung</th><th>Haus</th><th>Land</th><th></th></tr></thead><tbody id="rateBody"></tbody></table></div>
       <div style="display:flex;gap:8px;margin-top:12px">
         <button class="btn sec sm" id="addRate">+ Gemeinde</button>
         <button class="btn sm" id="saveRates">Speichern</button>
@@ -815,9 +815,9 @@ body.exp-print .exp-page:last-child{break-after:auto;page-break-after:auto}
   };
   var K_RATES="eh_rates";
   var DEFAULT_RATES=[
-    {g:"Zürich Stadt", w:17800, h:17000},{g:"Küsnacht", w:18400, h:19000},{g:"Meilen", w:18200, h:17500},
-    {g:"Uster", w:11400, h:11300},{g:"Kloten", w:11100, h:11000},{g:"Winterthur", w:10500, h:10100},
-    {g:"Dietikon", w:10400, h:11100},{g:"Kanton ZH (Durchschnitt)", w:12000, h:11100}
+    {g:"Zürich Stadt", w:17800, h:17000, l:4000},{g:"Küsnacht", w:18400, h:19000, l:3500},{g:"Meilen", w:18200, h:17500, l:3000},
+    {g:"Uster", w:11400, h:11300, l:1400},{g:"Kloten", w:11100, h:11000, l:1500},{g:"Winterthur", w:10500, h:10100, l:1200},
+    {g:"Dietikon", w:10400, h:11100, l:1500},{g:"Kanton ZH (Durchschnitt)", w:12000, h:11100, l:1300}
   ];
   var STATUSES=[
     {k:"neu",label:"Neu"},{k:"kontaktiert",label:"Kontaktiert"},{k:"termin",label:"Termin vereinbart"},
@@ -827,7 +827,10 @@ body.exp-print .exp-page:last-child{break-after:auto;page-break-after:auto}
   function chf(v){ v=Math.round(v); var neg=v<0; return (neg?"-":"")+"CHF "+Math.abs(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"'"); }
   function esc(s){ return (s==null?"":String(s)).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];}); }
   function $(id){ return document.getElementById(id); }
-  function rates(){ var r=LS.get(K_RATES,null); return (r&&r.length)?r:DEFAULT_RATES.slice(); }
+  function rates(){ var r=LS.get(K_RATES,null); if(!(r&&r.length)) return DEFAULT_RATES.slice();
+    // Landpreis nachtragen, falls alte Daten ohne Spalte "l"
+    r.forEach(function(x){ if(x.l==null){ for(var i=0;i<DEFAULT_RATES.length;i++){ if(DEFAULT_RATES[i].g===x.g){ x.l=DEFAULT_RATES[i].l; break; } } if(x.l==null) x.l=1300; } });
+    return r; }
 
   var LEADS=[];
 
@@ -999,7 +1002,10 @@ body.exp-print .exp-page:last-child{break-after:auto;page-break-after:auto}
     $("c_gem").innerHTML=r.map(function(x,i){return '<option value="'+i+'">'+esc(x.g)+'</option>';}).join("")+'<option value="-1">Eigener Wert</option>';
     setRateFromGem();
   }
-  function setRateFromGem(){ var r=rates(), i=parseInt($("c_gem").value,10); if(i>=0 && r[i]){ $("c_rate").value = $("c_art").value==="h" ? r[i].h : r[i].w; } }
+  function setRateFromGem(){ var r=rates(), i=parseInt($("c_gem").value,10);
+    if(i>=0 && r[i]){ $("c_rate").value = $("c_art").value==="h" ? r[i].h : r[i].w;
+      if($("c_landp") && r[i].l!=null) $("c_landp").value=r[i].l;
+    } }
   $("c_gem").addEventListener("change", setRateFromGem);
   $("c_art").addEventListener("change", function(){ setRateFromGem(); toggleArt(); renderDocs(); });
   function toggleArt(){ var haus=$("c_art").value==="h"; $("c_hausblock").classList.toggle("hidden",!haus); $("c_wohnblock").classList.toggle("hidden",haus); }
@@ -1471,22 +1477,22 @@ body.exp-print .exp-page:last-child{break-after:auto;page-break-after:auto}
   function renderRates(){
     var r=rates();
     $("rateBody").innerHTML=r.map(function(x){
-      return '<tr><td><input class="r-g" value="'+esc(x.g)+'"></td><td class="num"><input class="r-w" type="number" value="'+x.w+'"></td><td class="num"><input class="r-h" type="number" value="'+x.h+'"></td><td><button class="btn danger sm r-del">×</button></td></tr>';
+      return '<tr><td><input class="r-g" value="'+esc(x.g)+'"></td><td class="num"><input class="r-w" type="number" value="'+x.w+'"></td><td class="num"><input class="r-h" type="number" value="'+x.h+'"></td><td class="num"><input class="r-l" type="number" value="'+(x.l!=null?x.l:"")+'"></td><td><button class="btn danger sm r-del">×</button></td></tr>';
     }).join("");
   }
   $("rateBody").addEventListener("click", function(e){ if(e.target.classList.contains("r-del")){ e.target.closest("tr").remove(); } });
   $("addRate").addEventListener("click", function(){
     var tr=document.createElement("tr");
-    tr.innerHTML='<td><input class="r-g" value=""></td><td class="num"><input class="r-w" type="number" value="11000"></td><td class="num"><input class="r-h" type="number" value="11000"></td><td><button class="btn danger sm r-del">×</button></td>';
+    tr.innerHTML='<td><input class="r-g" value=""></td><td class="num"><input class="r-w" type="number" value="11000"></td><td class="num"><input class="r-h" type="number" value="11000"></td><td class="num"><input class="r-l" type="number" value="1300"></td><td><button class="btn danger sm r-del">×</button></td>';
     $("rateBody").appendChild(tr);
   });
   $("saveRates").addEventListener("click", function(){
     var out=[];
     Array.prototype.forEach.call($("rateBody").children, function(tr){
-      var g=tr.querySelector(".r-g").value.trim(), w=parseFloat(tr.querySelector(".r-w").value)||0, h=parseFloat(tr.querySelector(".r-h").value)||0;
-      if(g) out.push({g:g,w:w,h:h});
+      var g=tr.querySelector(".r-g").value.trim(), w=parseFloat(tr.querySelector(".r-w").value)||0, h=parseFloat(tr.querySelector(".r-h").value)||0, l=parseFloat(tr.querySelector(".r-l").value)||0;
+      if(g) out.push({g:g,w:w,h:h,l:l});
     });
-    LS.set(K_RATES,out); fillGemeindeSelect(); alert("m²-Preise gespeichert.");
+    LS.set(K_RATES,out); fillGemeindeSelect(); alert("Preise gespeichert.");
   });
 
   /* ---------- Helpers ---------- */
