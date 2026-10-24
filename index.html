@@ -72,7 +72,7 @@ nav.links .btn{padding:11px 18px;color:#fff;font-size:15px}
 /* Hero */
 .herowrap{position:relative;background:#14211C;overflow:hidden}
 .herowrap::before{content:"";position:absolute;inset:0;background:linear-gradient(95deg,rgba(16,30,24,.88) 0%,rgba(16,30,24,.64) 44%,rgba(16,30,24,.30) 100%),url('img/hero.jpg');background-size:cover;background-position:center right}
-.hero{position:relative;z-index:2;min-height:610px;padding:92px 24px;display:grid;grid-template-columns:1.12fr .88fr;gap:52px;align-items:center;color:#fff}
+.hero{position:relative;z-index:2;min-height:610px;padding:92px 24px;display:grid;grid-template-columns:minmax(0,560px);gap:52px;align-items:center;color:#fff}
 .hero .tag{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:13px;font-weight:600;letter-spacing:.03em;padding:8px 16px;border-radius:999px;margin-bottom:24px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 .hero .tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mint)}
 .hero h1{font-size:clamp(36px,5.2vw,60px);color:#fff;letter-spacing:-.03em}
@@ -414,15 +414,7 @@ footer a{color:#fff}
         <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Wechsel-Garantie</span>
       </div>
     </div>
-    <aside class="excard" aria-label="Rechenbeispiel">
-      <div class="lbl">Rechenbeispiel</div>
-      <div class="obj">Haus im Kanton Zürich, Verkaufspreis <span class="nw">CHF 1'500'000</span></div>
-      <div class="exrow"><span>Makler, 2.5 % Provision</span><b class="strike">CHF 37'500</b></div>
-      <div class="exrow"><span>Eigenhand «Begleitet»</span><b>CHF 6'900</b></div>
-      <div class="exrow" style="border-bottom:0"><span>Eigenhand «Pro»</span><b>CHF 2'490</b></div>
-      <div class="exsave"><div class="t">Sie behalten mit «Begleitet»</div><div class="v">CHF 30'600 mehr</div></div>
-      <p class="fine">Übliche Maklerprovisionen in der Schweiz liegen bei 2 bis 3 % des Verkaufspreises. Rechnen Sie weiter unten mit Ihren eigenen Zahlen.</p>
-    </aside>
+    <!-- Rechenbeispiel aus dem Hero entfernt, damit das Hintergrundbild (Sofa/Aussicht) frei sichtbar ist. Dieselbe Rechnung steht direkt unten im Abschnitt "Das Prinzip". -->
   </div>
 </div>
 
