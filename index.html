@@ -180,7 +180,43 @@ section:not(.band) .step{background:#fff;border:1px solid var(--line)}
 .plan li{display:flex;gap:10px;line-height:1.45}
 .plan li svg{flex:none;margin-top:3px}
 .plan .btn{margin-top:24px}
+.inherit{background:var(--mint-bg);border:1px solid var(--mint);border-radius:12px;padding:12px 14px;margin-bottom:4px}
+.inherit .it{font-size:13px;font-weight:700;color:var(--green-d);display:flex;align-items:center;gap:7px;line-height:1.3}
+.inherit .is{font-size:13px;color:var(--muted);line-height:1.5;margin-top:5px}
+.plan.hot .inherit{background:rgba(255,255,255,.09);border-color:rgba(159,224,195,.34)}
+.plan.hot .inherit .it{color:var(--mint)}
+.plan.hot .inherit .is{color:#C7D6CE}
+.plan .plus{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted2);margin:14px 0 2px}
+.plan.hot .plus{color:#9DB8AC}
 .badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--mint);color:var(--green-d);font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;box-shadow:0 4px 12px rgba(20,33,28,.15);white-space:nowrap}
+/* Ratgeber-Fenster */
+.gm{text-align:left}
+.gm .gbody h2{font-size:26px;margin-bottom:12px;line-height:1.2}
+.gm .gbody h3{font-size:18px;margin:26px 0 8px}
+.gm .gbody p{color:var(--muted);font-size:16px;margin-bottom:12px}
+.gm .gbody ul,.gm .gbody ol{color:var(--muted);font-size:16px;padding-left:22px;margin:0 0 12px}
+.gm .gbody li{margin-bottom:8px}
+.gm .gbody li b{color:var(--ink)}
+.gm .gbody .check{list-style:none;padding-left:0}
+.gm .gbody .check li{position:relative;padding-left:32px}
+.gm .gbody .check li::before{content:"";position:absolute;left:0;top:4px;width:20px;height:20px;border-radius:6px;border:2px solid var(--green)}
+.gm .gbody .tl{list-style:none;padding:0;margin:8px 0 0;border-left:2px solid var(--mint)}
+.gm .gbody .tl li{position:relative;padding:0 0 22px 26px}
+.gm .gbody .tl li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--green)}
+.gm .gbody .tl li b{display:block;color:var(--ink);font-size:16px}
+.gm .gbody .tl li .d{display:block;font-size:13px;font-weight:600;color:var(--green);margin:2px 0 4px}
+.gm .gbody .tbl{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:8px 0 14px}
+.gm .gbody table{width:100%;border-collapse:collapse;font-size:15px;min-width:420px}
+.gm .gbody th,.gm .gbody td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.gm .gbody thead th{background:var(--bg);font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.gm .gbody tbody tr:last-child td{border-bottom:0}
+.gm .gbody td:first-child{font-weight:600;color:var(--ink)}
+.gm .gbody td{color:var(--muted)}
+.gm .gbody .tip{background:var(--mint-bg);border-radius:14px;padding:16px 18px;color:var(--green-d);font-size:15px;margin-top:8px}
+.gm .gbody .fine{font-size:13px;color:var(--muted2);margin-top:6px}
+.gm .gfoot{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.gm .gfoot .lk{font-size:14px;color:var(--muted);text-decoration:underline}
+.gm .gload{color:var(--muted);font-size:15px;padding:20px 0}
 .guarantee{margin-top:28px;display:flex;gap:16px;align-items:flex-start;background:var(--mint-bg);border:1px solid var(--mint);border-radius:16px;padding:20px 24px;text-align:left}
 .guarantee svg{flex:none;margin-top:2px}
 .guarantee p{font-size:15px;color:var(--green-d)}
@@ -401,7 +437,7 @@ footer a{color:#fff}
 <div class="herowrap">
   <div class="wrap hero">
     <div>
-      <span class="tag">Für Wohnungen und Häuser im Kanton Zürich</span>
+      <span class="tag">Schweizweit · Schwerpunkt Kanton Zürich</span>
       <h1>Verkaufen Sie Ihr Zuhause zum Festpreis. <span class="soft">Nicht für Prozente.</span></h1>
       <p class="sub">Sie haben über Jahre in Ihre Immobilie investiert. Mit Eigenhand bleibt dieser Wert bei Ihnen: Sie bezahlen einen festen Preis ab CHF 1'490 und entscheiden selbst, wie viel Unterstützung Sie möchten.</p>
       <div class="cta">
@@ -459,11 +495,12 @@ footer a{color:#fff}
     <h2 class="h2">In vier Schritten zum Verkauf</h2>
     <p class="lead">Sie behalten die Kontrolle über jeden Schritt. Wie viel wir übernehmen, bestimmen Sie mit der Wahl Ihres Pakets.</p>
     <div class="steps">
-      <div class="step"><div class="no">1</div><h3>Ersteinschätzung</h3><p>Sie schicken uns ein paar Angaben zu Ihrer Immobilie. Wir schätzen sie grob ein und sagen Ihnen ehrlich, ob sich ein Verkauf mit Eigenhand für Sie lohnt.</p><div class="meta">Kostenlos, per E-Mail</div></div>
-      <div class="step"><div class="no">2</div><h3>Preis und Paket</h3><p>Sie wählen das Paket, das zu Ihnen passt. Gemeinsam legen wir einen realistischen Angebotspreis fest.</p><div class="meta">Festpreis ab CHF 1'490</div></div>
-      <div class="step"><div class="no">3</div><h3>Inserieren und besichtigen</h3><p>Wir bereiten Exposé und Inserat auf und schalten es als Privatinserat auf Homegate, ImmoScout24, newhome und weiteren Portalen. Je nach Paket beantworten Sie die Anfragen selbst, oder wir übernehmen das.</p><div class="meta">90 Tage online inklusive</div></div>
-      <div class="step"><div class="no">4</div><h3>Verhandeln und abschliessen</h3><p>Sie vergleichen die Angebote und wählen den Käufer. Der Kaufvertrag wird beim Notar beurkundet, wir bereiten Sie darauf vor.</p><div class="meta">Bis zum Notartermin</div></div>
+      <div class="step"><div class="no">1</div><h3>Was ist Ihre Immobilie wert?</h3><p>Sie schicken uns ein paar Angaben – mehr nicht. Sie erhalten eine ehrliche Einschätzung mit Vergleichsobjekten aus Ihrer Gemeinde und eine klare Antwort darauf, was Sie gegenüber einem Makler sparen.</p><div class="meta">Kostenlos · Antwort in 48 Stunden</div></div>
+      <div class="step"><div class="no">2</div><h3>Sie entscheiden, wie viel Sie abgeben</h3><p>Alles selbst machen und maximal sparen? Oder lieber zurücklehnen und uns verhandeln lassen? Sie wählen Ihr Paket, wir legen gemeinsam den Angebotspreis fest – und ab da steht der Preis. Egal, für wie viel Sie am Ende verkaufen.</p><div class="meta">Festpreis ab CHF 1'490</div></div>
+      <div class="step"><div class="no">3</div><h3>Ihre Immobilie geht online</h3><p>Wir erstellen Exposé und Inserat und schalten beides mit Ihrer Zustimmung über Eigenhand auf Homegate, ImmoScout24, newhome und weiteren Portalen auf – dort, wo über zwei Drittel aller Käufer suchen. Die Portalkosten sind im Festpreis enthalten.</p><div class="meta">90 Tage online inklusive</div></div>
+      <div class="step"><div class="no">4</div><h3>Sie wählen den Käufer</h3><p>Sie sehen alle Angebote nebeneinander, inklusive Finanzierungsnachweis, und entscheiden selbst. Wir bereiten die Unterlagen für das Notariat vor und begleiten Sie bis zur Beurkundung.</p><div class="meta">Bis zum Notartermin</div></div>
     </div>
+    <p class="fine" style="margin-top:28px;max-width:620px;margin-left:auto;margin-right:auto">Ihre Immobilie wird mit Ihrer schriftlichen Zustimmung über Eigenhand inseriert. Sie bleiben jederzeit Eigentümer und Entscheider – wir übernehmen die Arbeit, nicht die Kontrolle.</p>
   </div>
 </section>
 
@@ -480,9 +517,10 @@ footer a{color:#fff}
           <p class="d">Für alle, die den Verkauf selbst in die Hand nehmen und maximal sparen wollen.</p>
         </div>
         <div class="pcost"><div class="amt">CHF 1'490 <small>einmalig</small></div></div>
+        <div class="plus" style="margin-top:0">Im Paket enthalten</div>
         <ul>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Ihre Fotos aufbereitet und professionelles Exposé</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Inserat auf Homegate, ImmoScout24, newhome und weiteren Portalen (90 Tage) – als Privatinserat über Ihr Konto, von uns aufbereitet</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Inserat auf Homegate, ImmoScout24, newhome und weiteren Portalen (90 Tage) – von uns aufbereitet und mit Ihrer Zustimmung über Eigenhand aufgeschaltet</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Preisschätzung mit Vergleichsobjekten</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Sie erhalten alle Anfragen und entscheiden, wen Sie einladen</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Checkliste und Interessenten-Fragebogen</li>
@@ -496,8 +534,12 @@ footer a{color:#fff}
           <p class="d">Selbst verkaufen, aber mit Profi-Fotos und einer erfahrenen Person, die Sie bei jeder Entscheidung berät.</p>
         </div>
         <div class="pcost"><div class="amt">CHF 2'490 <small>einmalig</small></div></div>
+        <div class="inherit">
+          <div class="it"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Enthält alles aus «Selbst»</div>
+          <div class="is">Exposé, Inserat auf allen Portalen (90 Tage), Preisschätzung, Checkliste und Fragebogen.</div>
+        </div>
+        <div class="plus">Zusätzlich in «Pro»</div>
         <ul>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Selbst»</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Professionelle Objektfotos – vor Ort (Raum Zürich) oder angeleitet mit Profi-Bearbeitung</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Detaillierte Preiseinschätzung mit Vergleichsobjekten und Marktanalyse</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Verkaufsdossier zu Heizung, Solarpotenzial und Zustand</li>
@@ -517,8 +559,12 @@ footer a{color:#fff}
           <div class="amt">CHF 6'900 <small>total</small></div>
           <div class="note">CHF 2'900 bei Start, CHF 4'000 erst beim Verkauf</div>
         </div>
+        <div class="inherit">
+          <div class="it"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Enthält alles aus «Pro»</div>
+          <div class="is">Profi-Fotos, Exposé, Inserat auf allen Portalen (90 Tage), Marktanalyse, Verkaufsdossier und persönliche Beratung.</div>
+        </div>
+        <div class="plus">Zusätzlich in «Begleitet»</div>
         <ul>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Alles aus «Pro»</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Wir führen die Besichtigungen durch (2 Tage inklusive)</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Prüfung der Käufer inklusive Finanzierungsnachweis</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Wir verhandeln den Preis in Ihrem Auftrag</li>
@@ -709,7 +755,7 @@ footer a{color:#fff}
   <div class="wrap faq">
     <div class="center" style="margin-bottom:12px"><div class="eyebrow">Fragen</div><h2 class="h2">Häufige Fragen</h2></div>
     <details><summary>Ist ein Verkauf ohne Makler in der Schweiz erlaubt?</summary><p>Ja. Eigentümer dürfen ihre Immobilie selbst verkaufen. Der Kaufvertrag wird in jedem Fall von einem Notariat öffentlich beurkundet, mit oder ohne Makler.</p></details>
-    <details><summary>Für welche Objekte ist Eigenhand gedacht?</summary><p>Für Eigentumswohnungen und Einfamilienhäuser, meist zwischen CHF 600'000 und CHF 2'000'000. Unser Schwerpunkt ist der Kanton Zürich, wir unterstützen Sie aber auch darüber hinaus. Für Mehrfamilienhäuser oder besondere Objekte klären wir bei der Ersteinschätzung, ob und wie wir helfen können.</p></details>
+    <details><summary>Für welche Objekte ist Eigenhand gedacht?</summary><p>Für Eigentumswohnungen, Einfamilienhäuser und Villen – von der Stadtwohnung bis zum Objekt im zweistelligen Millionenbereich. Gerade bei höheren Verkaufspreisen lohnt sich der Festpreis am meisten: Bei CHF 3'000'000 verlangt ein Makler mit 2.5 % rund CHF 75'000 Provision, bei uns bleibt es beim gleichen Festpreis. Unser Schwerpunkt ist der Kanton Zürich, wir begleiten Sie aber in der ganzen Deutschschweiz. Für Mehrfamilienhäuser und besondere Objekte klären wir in der kostenlosen Ersteinschätzung, wie wir am besten helfen.</p></details>
     <details><summary>Was, wenn meine Immobilie ausserhalb des Raums Zürich liegt?</summary><p>Im Grossraum Zürich erstellen wir die Fotos vor Ort. Liegt Ihr Objekt weiter weg, läuft es angeleitet: Sie erhalten von uns eine einfache Foto-Anleitung (welche Räume, welcher Winkel, welche Tageszeit) und fotografieren selbst mit dem Handy. Wir machen daraus mit professioneller Bearbeitung hochwertige Inseratsbilder. Auf Wunsch möblieren wir leere oder vollgestellte Räume zusätzlich digital (Virtual Staging). So bekommen Sie überall ein professionelles Inserat, ohne dass jemand anreisen muss.</p></details>
     <details><summary>Welche Kosten kommen zum Paketpreis dazu?</summary><p>Im Paketumfang keine, Portalkosten für 90 Tage sind enthalten. Optional und nur auf Ihren Wunsch kommen Einzelleistungen dazu, zum Beispiel eine Inserat-Verlängerung nach 90 Tagen (CHF 190 pro 30 Tage) oder zusätzliche Besichtigungstage (CHF 490). Unabhängig von uns fallen bei jedem Verkauf Notar- und Grundbuchgebühren sowie die Grundstückgewinnsteuer an.</p></details>
     <details><summary>Wann und wie bezahle ich?</summary><p>«Selbst» und «Pro» bezahlen Sie bei Start. Bei «Begleitet» bezahlen Sie CHF 2'900 bei Start und CHF 4'000 erst, wenn der Kaufvertrag beurkundet ist. Es gibt kein Abo und keine Provision.</p></details>
@@ -749,6 +795,18 @@ footer a{color:#fff}
     </div>
   </div>
 </section>
+
+<div class="modalbg" id="guideModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="gmtitle">
+  <div class="modal gm" style="max-width:760px;padding:40px 36px">
+    <button class="close" type="button" onclick="closeGuide()" aria-label="Schliessen">×</button>
+    <div class="mctx" style="margin-bottom:6px">Ratgeber</div>
+    <div class="gbody" id="gmtitle"><div class="gload">Wird geladen …</div></div>
+    <div class="gfoot">
+      <button type="button" class="btn" onclick="closeGuide()">Zurück zur Seite</button>
+      <a class="lk" id="gmFull" href="ratgeber.html">Ganzen Ratgeber öffnen</a>
+    </div>
+  </div>
+</div>
 
 <div class="modalbg" id="legalModal" aria-hidden="true" role="dialog" aria-modal="true">
   <div class="modal legal" style="max-width:760px;padding:40px 36px;background:var(--bg);border-top:0">
@@ -1242,6 +1300,52 @@ function sendLead(fields, subject){
   // Direktlinks von anderen Seiten (z. B. ratgeber.html#impressum) öffnen das Fenster ebenfalls
   var h=(location.hash||"").slice(1);
   if(h==="impressum"||h==="datenschutz"||h==="agb"){ openLegal(h); }
+})();
+</script>
+<script>
+/* Ratgeber-Abschnitte als Fenster öffnen, statt die Seite zu verlassen.
+   Inhalt wird aus ratgeber.html geladen – eine einzige Quelle, kein doppelter Text.
+   Ohne JavaScript bleiben die Links normale Links auf ratgeber.html. */
+(function(){
+  var gm=document.getElementById("guideModal");
+  if(!gm||!window.fetch||!window.DOMParser) return;
+  var body=gm.querySelector(".gbody"), full=document.getElementById("gmFull"), doc=null, busy=false;
+
+  function show(id){
+    var sec=doc&&doc.getElementById(id);
+    if(!sec){ location.href="ratgeber.html#"+id; return; }
+    var c=sec.cloneNode(true);
+    c.removeAttribute("id");
+    body.innerHTML=""; body.appendChild(c);
+    gm.scrollTop=0;
+  }
+  window.openGuide=function(id){
+    gm.classList.add("open"); gm.setAttribute("aria-hidden","false");
+    document.body.style.overflow="hidden";
+    full.setAttribute("href","ratgeber.html#"+id);
+    if(doc){ show(id); return; }
+    body.innerHTML='<div class="gload">Wird geladen …</div>';
+    if(busy) return;
+    busy=true;
+    fetch("ratgeber.html",{credentials:"same-origin"})
+      .then(function(r){ if(!r.ok) throw 0; return r.text(); })
+      .then(function(t){ doc=new DOMParser().parseFromString(t,"text/html"); busy=false; show(id); })
+      .catch(function(){ busy=false; location.href="ratgeber.html#"+id; });
+  };
+  window.closeGuide=function(){
+    gm.classList.remove("open"); gm.setAttribute("aria-hidden","true");
+    document.body.style.overflow="";
+  };
+  gm.addEventListener("click", function(e){ if(e.target===gm) closeGuide(); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape" && gm.classList.contains("open")) closeGuide(); });
+  document.addEventListener("click", function(e){
+    var a=e.target.closest('a.guide[href*="ratgeber.html#"]');
+    if(!a) return;
+    var id=a.getAttribute("href").split("#")[1];
+    if(!id) return;
+    e.preventDefault();
+    openGuide(id);
+  });
 })();
 </script>
 </body>
