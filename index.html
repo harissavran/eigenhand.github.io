@@ -454,21 +454,69 @@ footer a{color:#fff}
   </div>
 </div>
 
-<section id="warum">
-  <div class="wrap split">
-    <div>
-      <div class="eyebrow">Das Prinzip</div>
-      <h2 class="h2">Sie zahlen für die Arbeit, nicht für den Preis Ihres Hauses.</h2>
-      <p class="body">Eine Provision steigt mit dem Verkaufspreis. Die Arbeit dahinter nicht: Ein Haus für CHF 1.5 Millionen braucht kaum mehr Inserate, Besichtigungen und Gespräche als eines für CHF 900'000.</p>
-      <p class="body">Ein guter Makler leistet viel. Vieles davon können Sie aber selbst, wenn an den heiklen Stellen jemand mit Erfahrung an Ihrer Seite ist. Genau dort setzt Eigenhand an: Sie bezahlen einen festen Preis für die Unterstützung, die Sie wirklich brauchen.</p>
+<section id="rechner">
+  <div class="wrap center">
+    <div class="eyebrow">Das Prinzip</div>
+    <h2 class="h2">Sie zahlen für die Arbeit, nicht für den Preis Ihres Hauses.</h2>
+    <p class="lead">Eine Provision steigt mit dem Verkaufspreis – die Arbeit dahinter nicht: Ein Haus für CHF 1.5 Millionen braucht kaum mehr Inserate, Besichtigungen und Gespräche als eines für CHF 900'000. Bei Eigenhand bezahlen Sie einen festen Preis für die Unterstützung, die Sie wirklich brauchen. Was Sie nicht als Provision bezahlen, bleibt bei Ihnen.</p>
+<div class="calc">
+      <div class="in">
+        <div><label for="f_price">Erwarteter Verkaufspreis (CHF)</label><input id="f_price" type="number" inputmode="numeric" step="10000" min="0" value="1500000"></div>
+        <div>
+          <span class="lab" id="lab_rate">Maklerprovision zum Vergleich</span>
+          <div class="seg" role="group" aria-labelledby="lab_rate" id="seg_rate">
+            <button type="button" data-v="2" aria-pressed="false">2 %</button>
+            <button type="button" data-v="2.5" aria-pressed="true">2.5 %</button>
+            <button type="button" data-v="3" aria-pressed="false">3 %</button>
+          </div>
+        </div>
+        <div>
+          <span class="lab" id="lab_pack">Eigenhand-Paket</span>
+          <div class="seg" role="group" aria-labelledby="lab_pack" id="seg_pack">
+            <button type="button" data-v="1490" data-n="Selbst" aria-pressed="false">Selbst<small>CHF 1'490</small></button>
+            <button type="button" data-v="2490" data-n="Pro" aria-pressed="false">Pro<small>CHF 2'490</small></button>
+            <button type="button" data-v="6900" data-n="Begleitet" aria-pressed="true">Begleitet<small>CHF 6'900</small></button>
+          </div>
+        </div>
+        <details>
+          <summary>Nettoerlös genauer berechnen</summary>
+          <div class="adv">
+            <div><label for="f_mort">Offene Hypothek (CHF)</label><input id="f_mort" type="number" inputmode="numeric" step="10000" min="0" value="0"></div>
+            <div><label for="f_buy">Damaliger Kaufpreis (CHF), für die Steuer</label><input id="f_buy" type="number" inputmode="numeric" step="10000" min="0" placeholder="z. B. 900000"></div>
+            <div><label for="f_years">Besitzdauer (Jahre)</label><input id="f_years" type="number" inputmode="numeric" step="1" min="0" value="10"></div>
+          </div>
+        </details>
+      </div>
+      <div class="out">
+        <div class="savebig">
+          <div class="t">Bleibt Ihnen mehr als mit Makler</div>
+          <div class="v" id="o_save">CHF 0</div>
+          <div class="s" id="o_saveNote">vor Steuern</div>
+          <div class="s" id="o_selfNote" style="margin-top:8px;opacity:.85"></div>
+          <button type="button" class="btn mint" id="calcCta" onclick="openBooking(window.__calcPack||'begleitet')">Kostenlose Ersteinschätzung</button>
+        </div>
+        <div class="cmp">
+          <div class="outcard">
+            <div class="h" id="o_mHead">Mit Makler (2.5 %)</div>
+            <div class="outrow"><span class="m">Provision</span><span id="o_mCost"></span></div>
+            <div class="outrow"><span class="m">Grundstückgewinnsteuer</span><span id="o_mTax"></span></div>
+            <div class="outrow"><span class="m">Notar &amp; Grundbuch</span><span id="o_notar"></span></div>
+            <div class="outrow"><span class="m">Hypothek</span><span id="o_debt"></span></div>
+            <div class="outtot"><span id="o_mNetLbl">Nettoerlös</span><b id="o_mNet"></b></div>
+          </div>
+          <div class="outcard hi">
+            <div class="h" id="o_oHead">Mit Eigenhand «Begleitet»</div>
+            <div class="outrow"><span class="m">Festpreis</span><span id="o_oCost"></span></div>
+            <div class="outrow"><span class="m">Grundstückgewinnsteuer</span><span id="o_oTax"></span></div>
+            <div class="outrow"><span class="m">Notar &amp; Grundbuch</span><span id="o_notar2"></span></div>
+            <div class="outrow"><span class="m">Hypothek</span><span id="o_debt2"></span></div>
+            <div class="outtot"><span id="o_oNetLbl">Nettoerlös</span><b id="o_oNet"></b></div>
+          </div>
+        </div>
+        <p class="fineprint">Unverbindliche Schätzung, keine Steuer- oder Rechtsberatung. Grundstückgewinnsteuer vereinfacht nach dem Zürcher Tarif mit Besitzdauer-Abzug; die Provision ist als Kosten abziehbar, deshalb ist die Ersparnis nach Steuern etwas kleiner als vor Steuern. Notar- und Grundbuchgebühren geschätzt mit je 1 ‰, hälftig zwischen Käufer und Verkäufer geteilt. Ein Makler übernimmt meist mehr Aufgaben als «Selbst» oder «Pro»: Der Vergleich zeigt Kosten, keine identischen Leistungen.</p>
+      </div>
     </div>
-    <div class="costbars" aria-label="Kostenvergleich bei CHF 1'500'000">
-      <div class="cb"><div class="top"><span>Makler 3 %</span><b>CHF 45'000</b></div><div class="track"><div class="fill" style="width:100%"></div></div></div>
-      <div class="cb"><div class="top"><span>Makler 2 %</span><b>CHF 30'000</b></div><div class="track"><div class="fill" style="width:66.7%"></div></div></div>
-      <div class="cb us"><div class="top"><span>Eigenhand «Begleitet»</span><b>CHF 6'900</b></div><div class="track"><div class="fill" style="width:15.3%"></div></div></div>
-      <div class="cb us"><div class="top"><span>Eigenhand «Pro»</span><b>CHF 2'490</b></div><div class="track"><div class="fill" style="width:5.5%"></div></div></div>
-      <p class="fine">Beispiel bei einem Verkaufspreis von CHF 1'500'000. Der Eigenhand-Preis bleibt gleich, egal wie viel Ihre Immobilie wert ist.</p>
-    </div>
+  </div>
   </div>
 </section>
 
@@ -482,10 +530,8 @@ footer a{color:#fff}
         <div class="eyebrow">Ihr Ansprechpartner</div>
         <h2 class="h2">Eine Person, die Ihr Zuhause kennt. Kein Callcenter.</h2>
         <p>Grüezi, ich bin Haris Savran. Ich habe als Immobilienvermittler Verkäufe von der ersten Besichtigung bis zum Notartermin begleitet – und dabei immer wieder dasselbe gesehen: Eigentümer bezahlen fünfstellige Provisionen für Arbeit, die zum grossen Teil aus Organisation besteht. Fotos, Exposé, Inserate, Termine, Unterlagen.</p>
-        <p>Dafür habe ich Eigenhand gegründet. Nicht, um den Makler nachzumachen, sondern um genau diese Arbeit zu einem festen Preis zu übernehmen und Ihnen die Entscheidungen zu lassen.</p>
-        <p>Ich bin in Kloten zu Hause und arbeite vor allem im Kanton Zürich. Jede Anfrage landet direkt bei mir, und Sie haben vom ersten Mail bis zum Notartermin denselben Ansprechpartner.</p>
-        <p>Das Entscheidende an einem Verkauf hängt dabei nicht an einer einzelnen Person: Den Kaufvertrag erstellt und beurkundet in der Schweiz immer ein Notariat, der Angebotspreis wird mit vergleichbaren Verkäufen hergeleitet, und Sie sehen jedes Dokument, bevor es rausgeht.</p>
-        <p>Dazu ein fester Preis ohne Kleingedrucktes, ein kostenloser Rücktritt bis zum Start und die Wechsel-Garantie.</p>
+        <p>Dafür habe ich Eigenhand gegründet. Nicht, um den Makler nachzumachen, sondern um genau diese Arbeit zu einem festen Preis zu übernehmen und Ihnen die Entscheidungen zu lassen. Ich bin in Kloten zu Hause und arbeite vor allem im Kanton Zürich. Jede Anfrage landet direkt bei mir, und Sie haben vom ersten Mail bis zum Notartermin denselben Ansprechpartner.</p>
+        <p>Das Entscheidende hängt dabei nicht an einer einzelnen Person: Den Kaufvertrag erstellt und beurkundet in der Schweiz immer ein Notariat, der Angebotspreis wird mit vergleichbaren Verkäufen hergeleitet, und Sie sehen jedes Dokument, bevor es rausgeht. Dazu ein fester Preis ohne Kleingedrucktes, ein kostenloser Rücktritt bis zum Start und die Wechsel-Garantie.</p>
         <div class="sig">Haris Savran<span>Gründer von Eigenhand · Kloten</span></div>
       </div>
     </div>
@@ -623,91 +669,14 @@ footer a{color:#fff}
   </div>
 </section>
 
-<section id="rechner">
-  <div class="wrap center">
-    <div class="eyebrow">Ersparnis berechnen</div>
-    <h2 class="h2">Was bleibt Ihnen am Ende?</h2>
-    <p class="lead">Was Sie nicht als Provision bezahlen, bleibt bei Ihnen – für das nächste Zuhause, die Familie oder als Reserve. Geben Sie Ihren erwarteten Verkaufspreis ein. Alle Annahmen stehen offen unter dem Ergebnis.</p>
-    <div class="calc">
-      <div class="in">
-        <div><label for="f_price">Erwarteter Verkaufspreis (CHF)</label><input id="f_price" type="number" inputmode="numeric" step="10000" min="0" value="1500000"></div>
-        <div>
-          <span class="lab" id="lab_rate">Maklerprovision zum Vergleich</span>
-          <div class="seg" role="group" aria-labelledby="lab_rate" id="seg_rate">
-            <button type="button" data-v="2" aria-pressed="false">2 %</button>
-            <button type="button" data-v="2.5" aria-pressed="true">2.5 %</button>
-            <button type="button" data-v="3" aria-pressed="false">3 %</button>
-          </div>
-        </div>
-        <div>
-          <span class="lab" id="lab_pack">Eigenhand-Paket</span>
-          <div class="seg" role="group" aria-labelledby="lab_pack" id="seg_pack">
-            <button type="button" data-v="1490" data-n="Selbst" aria-pressed="false">Selbst<small>CHF 1'490</small></button>
-            <button type="button" data-v="2490" data-n="Pro" aria-pressed="false">Pro<small>CHF 2'490</small></button>
-            <button type="button" data-v="6900" data-n="Begleitet" aria-pressed="true">Begleitet<small>CHF 6'900</small></button>
-          </div>
-        </div>
-        <details>
-          <summary>Nettoerlös genauer berechnen</summary>
-          <div class="adv">
-            <div><label for="f_mort">Offene Hypothek (CHF)</label><input id="f_mort" type="number" inputmode="numeric" step="10000" min="0" value="0"></div>
-            <div><label for="f_buy">Damaliger Kaufpreis (CHF), für die Steuer</label><input id="f_buy" type="number" inputmode="numeric" step="10000" min="0" placeholder="z. B. 900000"></div>
-            <div><label for="f_years">Besitzdauer (Jahre)</label><input id="f_years" type="number" inputmode="numeric" step="1" min="0" value="10"></div>
-          </div>
-        </details>
-      </div>
-      <div class="out">
-        <div class="savebig">
-          <div class="t">Bleibt Ihnen mehr als mit Makler</div>
-          <div class="v" id="o_save">CHF 0</div>
-          <div class="s" id="o_saveNote">vor Steuern</div>
-          <div class="s" id="o_selfNote" style="margin-top:8px;opacity:.85"></div>
-          <button type="button" class="btn mint" id="calcCta" onclick="openBooking(window.__calcPack||'begleitet')">Kostenlose Ersteinschätzung</button>
-        </div>
-        <div class="cmp">
-          <div class="outcard">
-            <div class="h" id="o_mHead">Mit Makler (2.5 %)</div>
-            <div class="outrow"><span class="m">Provision</span><span id="o_mCost"></span></div>
-            <div class="outrow"><span class="m">Grundstückgewinnsteuer</span><span id="o_mTax"></span></div>
-            <div class="outrow"><span class="m">Notar &amp; Grundbuch</span><span id="o_notar"></span></div>
-            <div class="outrow"><span class="m">Hypothek</span><span id="o_debt"></span></div>
-            <div class="outtot"><span id="o_mNetLbl">Nettoerlös</span><b id="o_mNet"></b></div>
-          </div>
-          <div class="outcard hi">
-            <div class="h" id="o_oHead">Mit Eigenhand «Begleitet»</div>
-            <div class="outrow"><span class="m">Festpreis</span><span id="o_oCost"></span></div>
-            <div class="outrow"><span class="m">Grundstückgewinnsteuer</span><span id="o_oTax"></span></div>
-            <div class="outrow"><span class="m">Notar &amp; Grundbuch</span><span id="o_notar2"></span></div>
-            <div class="outrow"><span class="m">Hypothek</span><span id="o_debt2"></span></div>
-            <div class="outtot"><span id="o_oNetLbl">Nettoerlös</span><b id="o_oNet"></b></div>
-          </div>
-        </div>
-        <p class="fineprint">Unverbindliche Schätzung, keine Steuer- oder Rechtsberatung. Grundstückgewinnsteuer vereinfacht nach dem Zürcher Tarif mit Besitzdauer-Abzug; die Provision ist als Kosten abziehbar, deshalb ist die Ersparnis nach Steuern etwas kleiner als vor Steuern. Notar- und Grundbuchgebühren geschätzt mit je 1 ‰, hälftig zwischen Käufer und Verkäufer geteilt. Ein Makler übernimmt meist mehr Aufgaben als «Selbst» oder «Pro»: Der Vergleich zeigt Kosten, keine identischen Leistungen.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="dossier">
-  <div class="wrap center">
-    <div class="eyebrow">Mehr als ein Inserat</div>
-    <h2 class="h2">Käufer haben Fragen. Sie haben die Antworten.</h2>
-    <p class="lead">Unsichere Käufer zögern und drücken den Preis. Darum bereiten wir ab «Pro» ein Verkaufsdossier vor, das die Fragen beantwortet, die bei fast jeder Besichtigung kommen.</p>
-    <div class="grid3">
-      <div class="concern"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1D5B46" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><h3>«In welchem Zustand ist das Haus?»</h3><p>Ehrlich dokumentiert, mit Renovationen und Unterlagen. Das schafft Vertrauen und verhindert, dass kurz vor dem Abschluss nachverhandelt wird.</p></div>
-      <div class="concern"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1D5B46" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c2 3 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3 0-5 1-7.5z"/></svg></div><h3>«Wie alt ist die Heizung?»</h3><p>Wir halten Typ, Baujahr und Zustand fest und zeigen, womit Käufer bei einem späteren Ersatz, etwa durch eine Wärmepumpe, ungefähr rechnen müssen.</p></div>
-      <div class="concern"><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1D5B46" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></div><h3>«Lohnt sich Solar auf dem Dach?»</h3><p>Wir zeigen das Solarpotenzial Ihres Dachs anhand der öffentlichen Daten des Bundes und legen es dem Exposé bei.</p></div>
-    </div>
-  </div>
-</section>
-
 <section id="bedenken">
   <div class="wrap center">
     <div class="eyebrow">Ihre Bedenken</div>
     <h2 class="h2">Was Eigentümer vor dem Selbstverkauf beschäftigt</h2>
-    <p class="lead">Diese vier Fragen stellen sich Eigentümer vor dem Selbstverkauf am häufigsten. Hier sind unsere ehrlichen Antworten.</p>
+    <p class="lead">Diese vier Fragen stellen sich Eigentümer am häufigsten. Hier sind unsere ehrlichen Antworten.</p>
     <div class="grid2">
       <div class="concern"><h3>«Verkaufe ich unter Wert?»</h3><p>Der Preis wird nicht am Verhandlungstisch verloren, sondern beim Start. Deshalb beginnt jedes Paket mit einer Preisschätzung auf Basis vergleichbarer Verkäufe. Ab «Pro» analysieren wir Ihr Objekt im Detail – anhand Ihrer Unterlagen, Fotos und aktueller Vergleichsverkäufe.</p></div>
+      <div class="concern"><h3>«Was, wenn Käufer kritisch nachfragen?»</h3><p>Unsichere Käufer zögern und drücken den Preis. Darum bereiten wir ab «Pro» ein Verkaufsdossier vor, das die Fragen beantwortet, die bei fast jeder Besichtigung kommen: Zustand und Renovationen ehrlich dokumentiert, Typ und Baujahr der Heizung samt Kosten eines späteren Ersatzes, und das Solarpotenzial Ihres Dachs nach den öffentlichen Daten des Bundes.</p></div>
       <div class="concern"><h3>«Mache ich rechtlich etwas falsch?»</h3><p>Den Kaufvertrag setzt in der Schweiz immer ein Notariat auf und beurkundet ihn, auch wenn ein Makler beteiligt ist. Sie erhalten von uns eine Checkliste mit allen Unterlagen und wissen vor dem Termin, worauf Sie achten müssen.</p></div>
       <div class="concern"><h3>«Wie viel Zeit kostet mich das?»</h3><p>Bei «Selbst» und «Pro» übernehmen Sie Anfragen und Besichtigungen, meist einige Stunden pro Woche während der Vermarktung. Ist das zu viel, übernehmen wir mit «Begleitet» oder einzelnen Besichtigungstagen.</p></div>
       <div class="concern"><h3>«Was, wenn sich nichts tut?»</h3><p>Wir besprechen mit Ihnen, ob Preis, Fotos oder Inserat angepasst werden sollten. Mit der Wechsel-Garantie können Sie jederzeit zu «Begleitet» wechseln, ohne doppelt zu bezahlen.</p></div>
@@ -745,12 +714,7 @@ footer a{color:#fff}
   <div class="wrap center">
     <div class="eyebrow">Ratgeber</div>
     <h2 class="h2">Gut vorbereitet verkaufen</h2>
-    <p class="lead">Kostenloses Wissen rund um den privaten Immobilienverkauf in der Schweiz.</p>
-    <div class="guides">
-      <a class="guide" href="ratgeber.html#unterlagen"><span class="k">Checkliste</span><h3>Diese Unterlagen brauchen Sie</h3><p>Vom Grundbuchauszug bis zum Gebäudeversicherungsausweis: was Käufer, Bank und Notariat sehen wollen.</p><span class="go">Zur Checkliste →</span></a>
-      <a class="guide" href="ratgeber.html#ablauf"><span class="k">Ablauf</span><h3>Vom Inserat bis zum Notar</h3><p>Die Schritte eines Immobilienverkaufs in der Schweiz und wie lange sie ungefähr dauern.</p><span class="go">Zum Ablauf →</span></a>
-      <a class="guide" href="ratgeber.html#kosten"><span class="k">Kosten</span><h3>Was beim Verkauf anfällt</h3><p>Grundstückgewinnsteuer, Notar und Grundbuch: womit Sie rechnen müssen, mit oder ohne Makler.</p><span class="go">Zu den Kosten →</span></a>
-    </div>
+    <p class="lead">Kostenloses Wissen zum privaten Immobilienverkauf in der Schweiz: <a href="ratgeber.html#unterlagen">welche Unterlagen Sie brauchen</a>, <a href="ratgeber.html#ablauf">wie der Verkauf abläuft</a> und <a href="ratgeber.html#kosten">welche Kosten anfallen</a>.</p>
   </div>
 </section>
 
@@ -762,12 +726,9 @@ footer a{color:#fff}
     <details><summary>Was, wenn meine Immobilie ausserhalb des Raums Zürich liegt?</summary><p>Im Grossraum Zürich erstellen wir die Fotos vor Ort. Liegt Ihr Objekt weiter weg, läuft es angeleitet: Sie erhalten von uns eine einfache Foto-Anleitung (welche Räume, welcher Winkel, welche Tageszeit) und fotografieren selbst mit dem Handy. Wir machen daraus mit professioneller Bearbeitung hochwertige Inseratsbilder. Auf Wunsch möblieren wir leere oder vollgestellte Räume zusätzlich digital (Virtual Staging). So bekommen Sie überall ein professionelles Inserat, ohne dass jemand anreisen muss.</p></details>
     <details><summary>Welche Kosten kommen zum Paketpreis dazu?</summary><p>Im Paketumfang keine, Portalkosten für 90 Tage sind enthalten. Optional und nur auf Ihren Wunsch kommen Einzelleistungen dazu, zum Beispiel eine Inserat-Verlängerung nach 90 Tagen (CHF 190 pro 30 Tage) oder zusätzliche Besichtigungstage (CHF 490). Unabhängig von uns fallen bei jedem Verkauf Notar- und Grundbuchgebühren sowie die Grundstückgewinnsteuer an.</p></details>
     <details><summary>Wann und wie bezahle ich?</summary><p>«Selbst» und «Pro» bezahlen Sie bei Start. Bei «Begleitet» bezahlen Sie CHF 2'900 bei Start und CHF 4'000 erst, wenn der Kaufvertrag beurkundet ist. Es gibt kein Abo und keine Provision.</p></details>
-    <details><summary>Was passiert, wenn ich nach 90 Tagen noch nicht verkauft habe?</summary><p>Wir analysieren mit Ihnen, woran es liegt, und passen bei Bedarf Preis oder Inserat an. Eine Verlängerung der Inserate kostet CHF 190 pro 30 Tage. Mit der Wechsel-Garantie können Sie zu «Begleitet» wechseln und bekommen den bezahlten Paketpreis angerechnet.</p></details>
-    <details><summary>Wer führt die Besichtigungen durch?</summary><p>Bei «Selbst» und «Pro» Sie selbst, mit unserem Leitfaden und Interessenten-Fragebogen. Bei «Begleitet» übernehmen wir zwei Besichtigungstage. Weitere Tage oder einzelne Termine buchen Sie für CHF 490 pro Tag dazu.</p></details>
     <details><summary>Was ist der Unterschied zwischen «Nur Bewertung» und der kostenlosen Ersteinschätzung?</summary><p>Die Ersteinschätzung ist kostenlos: Sie erhalten per E-Mail eine grobe Preisspanne und eine ehrliche Empfehlung, welches Paket zu Ihnen passt. «Nur Bewertung» für CHF 290 ist eine ausführliche schriftliche Preiseinschätzung mit Vergleichsobjekten. Buchen Sie danach ein Paket, rechnen wir die CHF 290 an.</p></details>
     <details><summary>Was, wenn ich es mir anders überlege?</summary><p>Die Anfrage selbst ist immer unverbindlich – erst wenn Sie sich für ein Paket entscheiden, kommt ein schriftlicher Auftrag zustande. Und auch danach gilt: <strong>Solange wir noch nicht gestartet haben, können Sie jederzeit kostenlos zurücktreten.</strong> Bereits bezahlte Beträge erhalten Sie vollständig zurück – ohne Frist und ohne Begründung.</p><p>Der Startschuss liegt bei Ihnen: Wir beginnen erst, wenn Sie uns die Inserate ausdrücklich freigeben. Ab diesem Moment laufen echte Kosten bei den Portalen auf, die uns niemand zurückerstattet. Treten Sie danach zurück, bezahlen Sie deshalb die bereits erbrachten Leistungen und die effektiv angefallenen Portalkosten. Alles Weitere in Ziffer 8 unserer <a href="#agb">AGB</a>.</p></details>
     <details><summary>Wie erreiche ich Sie – auch telefonisch?</summary><p>Wir beraten bewusst schriftlich per E-Mail. Das hat einen Grund: Sie haben jede Einschätzung, jede Zahl und jede Zusage schwarz auf weiss, können alles in Ruhe nachlesen und mit jemandem besprechen – und stehen nie unter Druck in einem Verkaufsgespräch. Antworten erhalten Sie innert 24 Stunden (Montag bis Samstag). Wenn etwas dringend ist oder sich schriftlich schlecht klären lässt, erreichen Sie uns unter 078 752 81 77.</p></details>
-    <details><summary>Was passiert nach meiner Anfrage?</summary><p>Sie erhalten innert 24 Stunden (Montag bis Samstag) eine persönliche Antwort per E-Mail. Die Anfrage ist unverbindlich. Erst wenn Sie sich für ein Paket entscheiden, erhalten Sie einen schriftlichen Auftrag zur Unterschrift.</p></details>
   </div>
 </section>
 
@@ -782,7 +743,7 @@ footer a{color:#fff}
         <div class="direct">
           <p style="color:var(--muted)">Lieber direkt schreiben?</p>
           <a class="big" href="mailto:info@eigenhand.ch">info@eigenhand.ch</a>
-          <p style="color:var(--muted);font-size:14px;margin-top:16px;line-height:1.6"><strong style="color:var(--ink)">Warum schriftlich?</strong> Wir beraten bewusst per E-Mail. So haben Sie jede Einschätzung und jede Zahl schwarz auf weiss, können in Ruhe nachlesen und stehen nie unter Druck in einem Verkaufsgespräch. Wenn es einmal dringend ist, erreichen Sie uns telefonisch unter <a href="tel:+41787528177" style="color:var(--green);font-weight:600;white-space:nowrap">078 752 81 77</a>.</p>
+          <p style="color:var(--muted);font-size:14px;margin-top:16px;line-height:1.6">Wir beraten bewusst schriftlich – so haben Sie jede Zahl schwarz auf weiss und stehen nie unter Druck. Wenn es einmal dringend ist: <a href="tel:+41787528177" style="color:var(--green);font-weight:600;white-space:nowrap">078 752 81 77</a>.</p>
         </div>
       </div>
       <form class="form" id="quickform" novalidate><div class="hp" aria-hidden="true"><label>Bitte leer lassen <input type="text" name="hp_field" tabindex="-1" autocomplete="off"></label></div>
