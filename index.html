@@ -255,7 +255,8 @@ table.who td.c{text-align:center;white-space:nowrap}
 
 /* About */
 .about{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:start;max-width:860px;margin:0 auto}
-.avatar{width:120px;height:120px;border-radius:50%;background:var(--green-d);color:var(--mint);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:800;letter-spacing:-.02em}
+.avatar{width:120px;height:120px;border-radius:50%;background:var(--green-d);color:var(--mint);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:800;letter-spacing:-.02em;overflow:hidden}
+.avatar img.photo{width:100%;height:100%;object-fit:cover;display:block}
 .about p{color:var(--muted);font-size:17px;margin-top:12px}
 .about .sig{margin-top:18px;font-weight:700;color:var(--ink)}
 .about .sig span{display:block;font-weight:500;color:var(--muted2);font-size:14px}
@@ -523,15 +524,20 @@ footer a{color:#fff}
 <section class="band" id="ueber-uns">
   <div class="wrap">
     <div class="about">
-      <div class="avatar" aria-hidden="true">
+      <div class="avatar">
+        <!-- FOTO EINBAUEN: Datei als img/haris.jpg ablegen (quadratisch, mind. 400x400),
+             dann die beiden folgenden Zeilen gegeneinander austauschen. -->
         <img src="img/logo-mint.png" alt="" aria-hidden="true" style="height:52px;width:auto;display:block">
+        <!-- <img class="photo" src="img/haris.jpg" alt="Haris Savran, Gründer von Eigenhand"> -->
       </div>
       <div>
         <div class="eyebrow">Ihr Ansprechpartner</div>
         <h2 class="h2">Eine Person, die Ihr Zuhause kennt. Kein Callcenter.</h2>
-        <p>Grüezi, ich bin Haris Savran. Ich habe als Immobilienvermittler Verkäufe von der ersten Besichtigung bis zum Notartermin begleitet – und dabei immer wieder dasselbe gesehen: Eigentümer bezahlen fünfstellige Provisionen für Arbeit, die zum grossen Teil aus Organisation besteht. Fotos, Exposé, Inserate, Termine, Unterlagen.</p>
-        <p>Dafür habe ich Eigenhand gegründet. Nicht, um den Makler nachzumachen, sondern um genau diese Arbeit zu einem festen Preis zu übernehmen und Ihnen die Entscheidungen zu lassen. Ich bin in Kloten zu Hause und arbeite vor allem im Kanton Zürich. Jede Anfrage landet direkt bei mir, und Sie haben vom ersten Mail bis zum Notartermin denselben Ansprechpartner.</p>
-        <p>Das Entscheidende hängt dabei nicht an einer einzelnen Person: Den Kaufvertrag erstellt und beurkundet in der Schweiz immer ein Notariat, der Angebotspreis wird mit vergleichbaren Verkäufen hergeleitet, und Sie sehen jedes Dokument, bevor es rausgeht. Dazu ein fester Preis ohne Kleingedrucktes, ein kostenloser Rücktritt bis zum Start und die Wechsel-Garantie.</p>
+        <p>Grüezi, ich bin Haris Savran. Ich komme aus Kloten und arbeite im Kanton Zürich.</p>
+        <p>Als Immobilienvermittler habe ich Verkaufsobjekte betreut – von der Preisfindung über die Besichtigungen bis zum Notartermin. Dabei ist mir aufgefallen, wie viel von dieser Arbeit Organisation ist: Fotos, Exposé, Inserate, Termine, Unterlagen. Gute Makler leisten dafür viel. Nur wächst ihre Provision mit dem Verkaufspreis – der Aufwand nicht.</p>
+        <p>Deshalb Eigenhand: dieselbe Arbeit, zu einem festen Preis, und die Entscheidungen bleiben bei Ihnen.</p>
+        <p>Ich bin jung und baue dieses Geschäft auf. Das sage ich lieber offen, als dass Sie es sich zusammenreimen müssen. Für Sie heisst das: Sie bekommen jemanden, der sich für Ihren Verkauf wirklich ins Zeug legt, weil mein Name daran hängt. Und Sie gehen kein Risiko ein, das Sie nicht sehen – den Kaufvertrag erstellt und beurkundet immer ein Notariat, den Angebotspreis leiten wir aus vergleichbaren Verkäufen her, Sie sehen jedes Dokument vor dem Versand, und bis zum Start können Sie jederzeit kostenlos zurücktreten.</p>
+        <p>Jede Anfrage landet direkt bei mir. Vom ersten Mail bis zum Notartermin haben Sie dieselbe Ansprechperson.</p>
         <div class="sig">Haris Savran<span>Gründer von Eigenhand · Kloten</span></div>
       </div>
     </div>
