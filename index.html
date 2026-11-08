@@ -255,8 +255,8 @@ table.who td.c{text-align:center;white-space:nowrap}
 
 /* About */
 .about{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:start;max-width:860px;margin:0 auto}
-.avatar{width:120px;height:120px;border-radius:50%;background:var(--green-d);color:var(--mint);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:800;letter-spacing:-.02em;overflow:hidden}
-.avatar img.photo{width:100%;height:100%;object-fit:cover;display:block}
+.avatar{width:104px;height:104px;border-radius:50%;background:var(--green-d);color:var(--mint);display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:800;letter-spacing:-.02em;overflow:hidden;flex:0 0 auto}
+.avatar img.photo{width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block;pointer-events:none;user-select:none;-webkit-user-select:none}
 .about p{color:var(--muted);font-size:17px;margin-top:12px}
 .about .sig{margin-top:18px;font-weight:700;color:var(--ink)}
 .about .sig span{display:block;font-weight:500;color:var(--muted2);font-size:14px}
@@ -381,7 +381,7 @@ footer a{color:#fff}
   .cmp{grid-template-columns:1fr}
   .contact{grid-template-columns:1fr}
   .about{grid-template-columns:1fr;text-align:left;gap:20px}
-  .avatar{width:84px;height:84px;font-size:28px}
+  .avatar{width:76px;height:76px;font-size:28px}
   .guarantee{flex-direction:column;gap:10px}
 }
 @media(max-width:640px){
@@ -521,30 +521,7 @@ footer a{color:#fff}
   </div>
 </section>
 
-<section class="band" id="ueber-uns">
-  <div class="wrap">
-    <div class="about">
-      <div class="avatar">
-        <!-- FOTO EINBAUEN: Datei als img/haris.jpg ablegen (quadratisch, mind. 400x400),
-             dann die beiden folgenden Zeilen gegeneinander austauschen. -->
-        <img src="img/logo-mint.png" alt="" aria-hidden="true" style="height:52px;width:auto;display:block">
-        <!-- <img class="photo" src="img/haris.jpg" alt="Haris Savran, Gründer von Eigenhand"> -->
-      </div>
-      <div>
-        <div class="eyebrow">Ihr Ansprechpartner</div>
-        <h2 class="h2">Eine Person, die Ihr Zuhause kennt. Kein Callcenter.</h2>
-        <p>Grüezi, ich bin Haris Savran. Ich komme aus Kloten und arbeite im Kanton Zürich.</p>
-        <p>Als Immobilienvermittler habe ich Verkaufsobjekte betreut – von der Preisfindung über die Besichtigungen bis zum Notartermin. Dabei ist mir aufgefallen, wie viel von dieser Arbeit Organisation ist: Fotos, Exposé, Inserate, Termine, Unterlagen. Gute Makler leisten dafür viel. Nur wächst ihre Provision mit dem Verkaufspreis – der Aufwand nicht.</p>
-        <p>Deshalb Eigenhand: dieselbe Arbeit, zu einem festen Preis, und die Entscheidungen bleiben bei Ihnen.</p>
-        <p>Ich bin jung und baue dieses Geschäft auf. Das sage ich lieber offen, als dass Sie es sich zusammenreimen müssen. Für Sie heisst das: Sie bekommen jemanden, der sich für Ihren Verkauf wirklich ins Zeug legt, weil mein Name daran hängt. Und Sie gehen kein Risiko ein, das Sie nicht sehen – den Kaufvertrag erstellt und beurkundet immer ein Notariat, den Angebotspreis leiten wir aus vergleichbaren Verkäufen her, Sie sehen jedes Dokument vor dem Versand, und bis zum Start können Sie jederzeit kostenlos zurücktreten.</p>
-        <p>Jede Anfrage landet direkt bei mir. Vom ersten Mail bis zum Notartermin haben Sie dieselbe Ansprechperson.</p>
-        <div class="sig">Haris Savran<span>Gründer von Eigenhand · Kloten</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="ablauf">
+<section class="band" id="ablauf">
   <div class="wrap center">
     <div class="eyebrow">So funktioniert's</div>
     <h2 class="h2">In vier Schritten zum Verkauf</h2>
@@ -559,7 +536,7 @@ footer a{color:#fff}
   </div>
 </section>
 
-<section class="band" id="preise">
+<section id="preise">
   <div class="wrap center">
     <div class="eyebrow">Preise und Pakete</div>
     <h2 class="h2">Ein Festpreis. Keine Provision.</h2>
@@ -675,7 +652,7 @@ footer a{color:#fff}
   </div>
 </section>
 
-<section id="bedenken">
+<section class="band" id="bedenken">
   <div class="wrap center">
     <div class="eyebrow">Ihre Bedenken</div>
     <h2 class="h2">Was Eigentümer vor dem Selbstverkauf beschäftigt</h2>
@@ -686,6 +663,26 @@ footer a{color:#fff}
       <div class="concern"><h3>«Mache ich rechtlich etwas falsch?»</h3><p>Den Kaufvertrag setzt in der Schweiz immer ein Notariat auf und beurkundet ihn, auch wenn ein Makler beteiligt ist. Sie erhalten von uns eine Checkliste mit allen Unterlagen und wissen vor dem Termin, worauf Sie achten müssen.</p></div>
       <div class="concern"><h3>«Wie viel Zeit kostet mich das?»</h3><p>Bei «Selbst» und «Pro» übernehmen Sie Anfragen und Besichtigungen, meist einige Stunden pro Woche während der Vermarktung. Ist das zu viel, übernehmen wir mit «Begleitet» oder einzelnen Besichtigungstagen.</p></div>
       <div class="concern"><h3>«Was, wenn sich nichts tut?»</h3><p>Wir besprechen mit Ihnen, ob Preis, Fotos oder Inserat angepasst werden sollten. Mit der Wechsel-Garantie können Sie jederzeit zu «Begleitet» wechseln, ohne doppelt zu bezahlen.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="ueber-uns">
+  <div class="wrap">
+    <div class="about">
+      <div class="avatar">
+        <img class="photo" src="img/haris.jpg" alt="Haris Savran, Gründer von Eigenhand" width="560" height="560">
+      </div>
+      <div>
+        <div class="eyebrow">Ihr Ansprechpartner</div>
+        <h2 class="h2">Eine Person, die Ihr Zuhause kennt. Kein Callcenter.</h2>
+        <p>Grüezi, ich bin Haris Savran. Ich komme aus Kloten und arbeite im Kanton Zürich.</p>
+        <p>Als Immobilienvermittler habe ich Verkaufsobjekte betreut – von der Preisfindung über die Besichtigungen bis zum Notartermin. Dabei ist mir aufgefallen, wie viel von dieser Arbeit Organisation ist: Fotos, Exposé, Inserate, Termine, Unterlagen. Gute Makler leisten dafür viel. Nur wächst ihre Provision mit dem Verkaufspreis – der Aufwand nicht.</p>
+        <p>Deshalb Eigenhand: dieselbe Arbeit, zu einem festen Preis, und die Entscheidungen bleiben bei Ihnen.</p>
+        <p>Ich bin jung und baue dieses Geschäft auf. Das sage ich lieber offen, als dass Sie es sich zusammenreimen müssen. Für Sie heisst das: Sie bekommen jemanden, der sich für Ihren Verkauf wirklich ins Zeug legt, weil mein Name daran hängt. Und Sie gehen kein Risiko ein, das Sie nicht sehen – den Kaufvertrag erstellt und beurkundet immer ein Notariat, den Angebotspreis leiten wir aus vergleichbaren Verkäufen her, Sie sehen jedes Dokument vor dem Versand, und bis zum Start können Sie jederzeit kostenlos zurücktreten.</p>
+        <p>Jede Anfrage landet direkt bei mir. Vom ersten Mail bis zum Notartermin haben Sie dieselbe Ansprechperson.</p>
+        <div class="sig">Haris Savran<span>Gründer von Eigenhand · Kloten</span></div>
+      </div>
     </div>
   </div>
 </section>
