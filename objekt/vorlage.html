@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ========================================================================
+     OBJEKT-WEBSITE – VORLAGE
+     So gehst du vor:
+       1. Diese Datei kopieren nach  objekt/<adresse>.html
+          Beispiel:  objekt/musterstrasse-12-buelach.html
+       2. Alle [ECKIGEN KLAMMERN] ersetzen.
+       3. Fotos in  objekt/bilder/  ablegen und die Pfade unten anpassen.
+       4. Nicht benötigte Blöcke löschen.
+       5. Den Link dem Verkäufer schicken – er kann ihn weiterleiten.
+     ===================================================================== -->
+
+<title>[ADRESSE] – [4.5-Zimmer-Wohnung] in [ORT] | Eigenhand</title>
+<meta name="description" content="[OBJEKTTYP] in [ORT], [X] Zimmer, [Y] m². [EIN SATZ ZUM OBJEKT] Verkauf über Eigenhand.">
+<meta name="robots" content="noindex">
+<!-- noindex entfernen, sobald das Objekt öffentlich inseriert ist -->
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="[ADRESSE] – [OBJEKTTYP] in [ORT]">
+<meta property="og:description" content="[X] Zimmer · [Y] m² · [VERKAUFSPREIS]">
+<meta property="og:image" content="https://eigenhand.ch/objekt/bilder/[OBJEKT]-1.jpg">
+
+<link rel="icon" href="../img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap">
+
+<style>
+:root{--bg:#F5F4EF;--surface:#FFFFFF;--ink:#14211C;--muted:#3E4C46;--muted2:#5A675F;--line:#DBD8CF;--green:#1D5B46;--green-d:#123D2F;--mint:#9FE0C3;--mint-bg:#E4EEE8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Schibsted Grotesk',system-ui,-apple-system,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--green)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+/* Kopfzeile */
+.top{border-bottom:1px solid var(--line);background:var(--surface)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px}
+.top img{height:30px;width:auto}
+.top a.back{font-size:14px;color:var(--muted2);text-decoration:none}
+.top a.back:hover{color:var(--green)}
+
+/* Titel */
+.head{padding:40px 0 24px}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
+h1{font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-.02em;margin:10px 0 8px;font-weight:700}
+.sub{font-size:18px;color:var(--muted);margin:0}
+.price{margin-top:18px;font-size:26px;font-weight:700;color:var(--green-d)}
+.price small{display:block;font-size:14px;font-weight:400;color:var(--muted2);margin-top:2px}
+
+/* Bilder */
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:28px 0}
+.gallery a{grid-column:span 2;border-radius:14px;overflow:hidden;background:var(--line);aspect-ratio:4/3}
+.gallery a:first-child{grid-column:span 4;aspect-ratio:16/9}
+.gallery img{width:100%;height:100%;object-fit:cover}
+
+/* Eckdaten */
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:28px 0}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.fact .k{font-size:13px;color:var(--muted2)}
+.fact .v{font-size:19px;font-weight:700;margin-top:2px}
+
+/* Text + Listen */
+section{padding:28px 0;border-top:1px solid var(--line)}
+h2{font-size:24px;letter-spacing:-.01em;margin:0 0 14px;font-weight:700}
+p{color:var(--muted);margin:0 0 14px}
+ul.ticks{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px}
+ul.ticks li{position:relative;padding-left:26px;color:var(--muted)}
+ul.ticks li::before{content:"";position:absolute;left:0;top:9px;width:14px;height:8px;border-left:2.4px solid var(--green);border-bottom:2.4px solid var(--green);transform:rotate(-45deg)}
+
+/* Kontakt */
+.cta{background:var(--green-d);color:#fff;border-radius:20px;padding:30px;margin:32px 0 48px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.cta h2{color:#fff;margin:0 0 6px}
+.cta p{color:#C9D6D1;margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;background:var(--mint);color:var(--green-d);font-weight:700;text-decoration:none;font-size:16px}
+.btn:hover{filter:brightness(1.05)}
+
+footer{border-top:1px solid var(--line);padding:22px 0 40px;font-size:14px;color:var(--muted2)}
+footer a{color:var(--muted2)}
+
+@media(max-width:720px){
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gallery a,.gallery a:first-child{grid-column:span 2}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  ul.ticks{grid-template-columns:1fr}
+  .cta{padding:24px}
+  .btn{width:100%}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="https://eigenhand.ch"><img src="../img/logo.png" alt="Eigenhand"></a>
+    <a class="back" href="https://eigenhand.ch">eigenhand.ch →</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="head">
+    <div class="kicker">Zum Verkauf · [ORT]</div>
+    <h1>[4.5-Zimmer-Eigentumswohnung an der Musterstrasse 12]</h1>
+    <p class="sub">[Ein Satz, der das Objekt in Worte fasst – was macht es besonders?]</p>
+    <div class="price">CHF [1'050'000]<small>[Verhandlungsbasis · zuzüglich Nebenkosten]</small></div>
+  </div>
+
+  <!-- Bilder: erstes Bild gross, danach je zwei nebeneinander -->
+  <div class="gallery">
+    <a href="bilder/[OBJEKT]-1.jpg"><img src="bilder/[OBJEKT]-1.jpg" alt="[Wohnzimmer mit Blick nach Süden]"></a>
+    <a href="bilder/[OBJEKT]-2.jpg"><img src="bilder/[OBJEKT]-2.jpg" alt="[Küche]"></a>
+    <a href="bilder/[OBJEKT]-3.jpg"><img src="bilder/[OBJEKT]-3.jpg" alt="[Schlafzimmer]"></a>
+    <a href="bilder/[OBJEKT]-4.jpg"><img src="bilder/[OBJEKT]-4.jpg" alt="[Badezimmer]"></a>
+    <a href="bilder/[OBJEKT]-5.jpg"><img src="bilder/[OBJEKT]-5.jpg" alt="[Balkon]"></a>
+  </div>
+
+  <div class="facts">
+    <div class="fact"><div class="k">Zimmer</div><div class="v">[4.5]</div></div>
+    <div class="fact"><div class="k">Wohnfläche</div><div class="v">[110 m²]</div></div>
+    <div class="fact"><div class="k">Baujahr</div><div class="v">[2012]</div></div>
+    <div class="fact"><div class="k">Verfügbar ab</div><div class="v">[nach Vereinbarung]</div></div>
+  </div>
+
+  <section>
+    <h2>Das Objekt</h2>
+    <p>[Zwei bis drei Absätze. Schreib, wie es sich anfühlt, dort zu wohnen – Lichteinfall, Aussicht, Raumaufteilung. Keine Floskeln wie «Traumwohnung». Konkret und ehrlich.]</p>
+    <p>[Was wurde wann renoviert? Was ist der Zustand? Ehrlichkeit hier schafft Vertrauen und spart später Diskussionen.]</p>
+  </section>
+
+  <section>
+    <h2>Ausstattung</h2>
+    <ul class="ticks">
+      <li>[Küche von 2019, Geschirrspüler und Steamer]</li>
+      <li>[Parkettboden in allen Wohnräumen]</li>
+      <li>[Balkon nach Süden, 12 m²]</li>
+      <li>[Kellerabteil und Einstellhallenplatz]</li>
+      <li>[Waschturm in der Wohnung]</li>
+      <li>[Lift bis in die Tiefgarage]</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Lage</h2>
+    <p>[Was ist zu Fuss erreichbar? Schule, Einkauf, Bahnhof – mit Minutenangaben. Wie lange nach Zürich HB? Was ist der Charakter des Quartiers?]</p>
+  </section>
+
+  <section>
+    <h2>Heizung und Energie</h2>
+    <p>[Typ, Baujahr und Zustand der Heizung. Solarpotenzial des Dachs nach den öffentlichen Daten des Bundes (sonnendach.ch). Für konkrete Zahlen zu einem späteren Ersatz verweisen wir auf eine Offerte des Installateurs – wir schätzen nicht, was wir nicht wissen.]</p>
+  </section>
+
+  <section>
+    <h2>Unterlagen</h2>
+    <p>Grundbuchauszug, Grundrisse, Gebäudeversicherungsausweis und die Nebenkostenabrechnung liegen vor und werden ernsthaften Interessenten auf Anfrage zugestellt.</p>
+  </section>
+
+  <div class="cta">
+    <div>
+      <h2>Interesse an diesem Objekt?</h2>
+      <p>Schreiben Sie uns – Sie erhalten die Unterlagen und einen Besichtigungstermin.</p>
+    </div>
+    <a class="btn" href="mailto:info@eigenhand.ch?subject=Anfrage%20[ADRESSE]%2C%20[ORT]">Anfrage senden</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Vermarktet durch <a href="https://eigenhand.ch">Eigenhand</a>, Kloten ·
+    <a href="mailto:info@eigenhand.ch">info@eigenhand.ch</a> ·
+    <a href="https://eigenhand.ch#impressum">Impressum</a><br>
+    Angaben nach bestem Wissen, ohne Gewähr. Massgebend sind die Unterlagen und der Kaufvertrag.
+  </div>
+</footer>
+
+</body>
+</html>
