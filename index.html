@@ -32,7 +32,7 @@
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Ist ein Verkauf ohne Makler in der Schweiz erlaubt?","acceptedAnswer":{"@type":"Answer","text":"Ja. Eigentümer dürfen ihre Immobilie selbst verkaufen. Der Kaufvertrag wird in jedem Fall von einem Notariat öffentlich beurkundet, mit oder ohne Makler."}},
 {"@type":"Question","name":"Was kostet der Verkauf mit Eigenhand?","acceptedAnswer":{"@type":"Answer","text":"Eigenhand arbeitet mit Festpreisen statt Provision: «Selbst» für CHF 1'490, «Pro» für CHF 2'490 und «Begleitet» für CHF 6'900. Portalkosten für 90 Tage sind enthalten."}},
-{"@type":"Question","name":"Welche Kosten kommen zum Paketpreis dazu?","acceptedAnswer":{"@type":"Answer","text":"Im Paketumfang keine. Optional und nur auf Ihren Wunsch kommen Einzelleistungen dazu, zum Beispiel eine Inserat-Verlängerung nach 90 Tagen (CHF 190 pro 30 Tage). Unabhängig vom Anbieter fallen bei jedem Verkauf Notar- und Grundbuchgebühren sowie die Grundstückgewinnsteuer an."}},
+{"@type":"Question","name":"Welche Kosten kommen zum Paketpreis dazu?","acceptedAnswer":{"@type":"Answer","text":"Im Paketumfang keine. Optional und nur auf Ihren Wunsch kommen Einzelleistungen dazu. Unabhängig vom Anbieter fallen bei jedem Verkauf Notar- und Grundbuchgebühren sowie die Grundstückgewinnsteuer an."}},
 {"@type":"Question","name":"Was, wenn meine Immobilie ausserhalb des Raums Zürich liegt?","acceptedAnswer":{"@type":"Answer","text":"Im Grossraum Zürich erstellen wir die Fotos vor Ort. Weiter weg läuft es angeleitet: Sie fotografieren mit dem Handy nach unserer Foto-Anleitung, wir bearbeiten die Bilder professionell und möblieren Räume auf Wunsch digital. So bekommen Sie überall ein professionelles Inserat."}},
 {"@type":"Question","name":"Wer führt die Besichtigungen durch?","acceptedAnswer":{"@type":"Answer","text":"Bei «Selbst» und «Pro» Sie selbst, mit Leitfaden und Interessenten-Fragebogen. Bei «Begleitet» übernehmen wir zwei Besichtigungstage."}}
 ]}
@@ -546,7 +546,7 @@ footer a{color:#fff}
   <div class="wrap center">
     <div class="eyebrow">Preise und Pakete</div>
     <h2 class="h2">Ein Festpreis. Keine Provision.</h2>
-    <p class="lead">Je mehr Sie selbst machen, desto mehr sparen Sie. Je mehr wir übernehmen, desto weniger Aufwand haben Sie. Alle Preise sind Festpreise inklusive Portalkosten für 90 Tage.</p>
+    <p class="lead">Je mehr Sie selbst machen, desto mehr sparen Sie. Je mehr wir übernehmen, desto weniger Aufwand haben Sie. Alle Preise sind Festpreise inklusive Portalkosten. Bei «Pro» und «Begleitet» bleibt das Inserat online, bis verkauft ist.</p>
     <div class="price">
       <div class="plan">
         <div class="phead">
@@ -578,6 +578,7 @@ footer a{color:#fff}
         </div>
         <div class="plus">Zusätzlich in «Pro»</div>
         <ul>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg><span><strong>Inserat online, bis verkauft ist</strong> – ohne Zeitlimit, ohne Verlängerungsgebühr</span></li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Professionelle Objektfotos – vor Ort (Raum Zürich) oder angeleitet mit Profi-Bearbeitung</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Detaillierte Preiseinschätzung mit Vergleichsobjekten und Marktanalyse</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Verkaufsdossier zu Heizung, Solarpotenzial und Zustand</li>
@@ -599,7 +600,7 @@ footer a{color:#fff}
         </div>
         <div class="inherit">
           <div class="it"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Enthält alles aus «Pro»</div>
-          <div class="is">Profi-Fotos, Exposé, Inserat auf allen Portalen (90 Tage), Marktanalyse, Verkaufsdossier und persönliche Beratung.</div>
+          <div class="is">Profi-Fotos, Exposé, Inserat auf allen Portalen (online bis verkauft), Marktanalyse, Verkaufsdossier und persönliche Beratung.</div>
         </div>
         <div class="plus">Zusätzlich in «Begleitet»</div>
         <ul>
@@ -660,7 +661,6 @@ footer a{color:#fff}
         <button type="button" class="extrabtn" onclick="openBooking('verhandlung')">Verhandlung · <b>CHF 990</b></button>
         <button type="button" class="extrabtn" onclick="openBooking('unterlagen')">Unterlagen-Service · <b>CHF 190</b></button>
         <button type="button" class="extrabtn" onclick="openBooking('staging')">Virtual Staging · <b>CHF 49 / Bild</b></button>
-        <button type="button" class="extrabtn" onclick="openBooking('inserat')">Inserat-Verlängerung · <b>CHF 190 / 30 Tage</b></button>
       </div>
     </div>
 
@@ -746,7 +746,7 @@ footer a{color:#fff}
     <details><summary>Ist ein Verkauf ohne Makler in der Schweiz erlaubt?</summary><p>Ja. Eigentümer dürfen ihre Immobilie selbst verkaufen. Der Kaufvertrag wird in jedem Fall von einem Notariat öffentlich beurkundet, mit oder ohne Makler.</p></details>
     <details><summary>Für welche Objekte ist Eigenhand gedacht?</summary><p>Für Eigentumswohnungen und Einfamilienhäuser, von der Stadtwohnung bis zum grösseren Objekt im Millionenbereich. Nach oben gibt es keine Grenze: Gerade bei höheren Verkaufspreisen lohnt sich der Festpreis am meisten. Bei CHF 3'000'000 verlangt ein Makler mit 2.5 % rund CHF 75'000 Provision, bei uns bleibt es beim gleichen Festpreis. Unser Schwerpunkt ist der Kanton Zürich, auf Anfrage begleiten wir Sie auch in der übrigen Deutschschweiz. Für Mehrfamilienhäuser und besondere Objekte klären wir in der kostenlosen Ersteinschätzung, wie wir am besten helfen.</p></details>
     <details><summary>Was, wenn meine Immobilie ausserhalb des Raums Zürich liegt?</summary><p>Im Grossraum Zürich erstellen wir die Fotos vor Ort. Liegt Ihr Objekt weiter weg, läuft es angeleitet: Sie erhalten von uns eine einfache Foto-Anleitung (welche Räume, welcher Winkel, welche Tageszeit) und fotografieren selbst mit dem Handy. Wir machen daraus mit professioneller Bearbeitung hochwertige Inseratsbilder. Auf Wunsch möblieren wir leere oder vollgestellte Räume zusätzlich digital (Virtual Staging). So bekommen Sie überall ein professionelles Inserat, ohne dass jemand anreisen muss.</p></details>
-    <details><summary>Welche Kosten kommen zum Paketpreis dazu?</summary><p>Im Paketumfang keine, Portalkosten für 90 Tage sind enthalten. Optional und nur auf Ihren Wunsch kommen Einzelleistungen dazu, zum Beispiel eine Inserat-Verlängerung nach 90 Tagen (CHF 190 pro 30 Tage) oder zusätzliche Besichtigungstage (CHF 490). Unabhängig von uns fallen bei jedem Verkauf Notar- und Grundbuchgebühren sowie die Grundstückgewinnsteuer an.</p></details>
+    <details><summary>Welche Kosten kommen zum Paketpreis dazu?</summary><p>Im Paketumfang keine, die Portalkosten sind enthalten – bei «Pro» und «Begleitet» ohne Zeitlimit, bei «Selbst» für 90 Tage. Optional und nur auf Ihren Wunsch kommen Einzelleistungen dazu, zum Beispiel zusätzliche Besichtigungstage (CHF 490). Unabhängig von uns fallen bei jedem Verkauf Notar- und Grundbuchgebühren sowie die Grundstückgewinnsteuer an.</p></details>
     <details><summary>Wann und wie bezahle ich?</summary><p>«Selbst» und «Pro» bezahlen Sie bei Start. Bei «Begleitet» bezahlen Sie CHF 2'900 bei Start und CHF 4'000 erst, wenn der Kaufvertrag beurkundet ist. Es gibt kein Abo und keine Provision.</p></details>
     <details><summary>Was ist der Unterschied zwischen «Nur Bewertung» und der kostenlosen Ersteinschätzung?</summary><p>Die Ersteinschätzung ist kostenlos: Sie erhalten per E-Mail eine grobe Preisspanne und eine ehrliche Empfehlung, welches Paket zu Ihnen passt. «Nur Bewertung» für CHF 290 ist eine ausführliche schriftliche Preiseinschätzung mit Vergleichsobjekten. Buchen Sie danach ein Paket, rechnen wir die CHF 290 an.</p></details>
     <details><summary>Was, wenn ich es mir anders überlege?</summary><p>Die Anfrage selbst ist immer unverbindlich – erst wenn Sie sich für ein Paket entscheiden, kommt ein schriftlicher Auftrag zustande. Und auch danach gilt: <strong>Solange wir noch nicht gestartet haben, können Sie jederzeit kostenlos zurücktreten.</strong> Bereits bezahlte Beträge erhalten Sie vollständig zurück – ohne Frist und ohne Begründung.</p><p>Der Startschuss liegt bei Ihnen: Wir beginnen erst, wenn Sie uns die Inserate ausdrücklich freigeben. Ab diesem Moment laufen echte Kosten bei den Portalen auf, die uns niemand zurückerstattet. Treten Sie danach zurück, bezahlen Sie deshalb die bereits erbrachten Leistungen und die effektiv angefallenen Portalkosten. Alles Weitere in Ziffer 8 unserer <a href="#agb">AGB</a>.</p></details>
@@ -837,7 +837,7 @@ footer a{color:#fff}
       <p>Eigenhand unterstützt Privatpersonen beim Verkauf ihrer Immobilie mit den Paketen «Selbst», «Pro» und «Begleitet» sowie einzeln buchbaren Zusatzleistungen. Der konkrete Leistungsumfang richtet sich nach dem gewählten Paket gemäss der Beschreibung auf dieser Website und dem schriftlichen Auftrag. Eigenhand tritt nicht als beurkundende Stelle auf; die öffentliche Beurkundung des Kaufvertrags erfolgt durch ein Notariat.</p>
       <p>Mit Auftragserteilung beauftragt der Kunde Eigenhand, die Immobilie mit den vom Kunden gelieferten Angaben und Bildern auf Immobilienportalen (insbesondere Homegate, ImmoScout24 und Acheter-Louer) über die von Eigenhand bewirtschafteten Konten zu inserieren. Der Kunde bestätigt, Eigentümer der Immobilie oder zur Beauftragung des Verkaufs bevollmächtigt zu sein, und stellt Eigenhand von Ansprüchen Dritter frei, die auf unzutreffenden Angaben beruhen.</p>
       <h3>3. Preise und Mehrwertsteuer</h3>
-      <p>Es gelten die auf dieser Website angegebenen Festpreise inklusive Portalkosten für 90 Tage. Eigenhand ist als Einzelunternehmen nicht mehrwertsteuerpflichtig; es wird keine MWST verrechnet. Zusätzliche, nicht im Paket enthaltene Leistungen (z. B. weitere Besichtigungstage, Inserat-Verlängerung) werden gesondert in Rechnung gestellt. Kosten Dritter wie Notariat, Grundbuch und Grundstückgewinnsteuer sind nicht enthalten und vom Kunden direkt zu tragen.</p>
+      <p>Es gelten die auf dieser Website angegebenen Festpreise inklusive Portalkosten – bei «Pro» und «Begleitet» ohne zeitliche Begrenzung bis zum Verkauf, bei «Selbst» für 90 Tage. Eigenhand ist als Einzelunternehmen nicht mehrwertsteuerpflichtig; es wird keine MWST verrechnet. Zusätzliche, nicht im Paket enthaltene Leistungen (z. B. weitere Besichtigungstage) werden gesondert in Rechnung gestellt. Kosten Dritter wie Notariat, Grundbuch und Grundstückgewinnsteuer sind nicht enthalten und vom Kunden direkt zu tragen.</p>
       <h3>4. Zahlungsbedingungen</h3>
       <p>Die Pakete «Selbst» und «Pro» sind bei Auftragserteilung zur Zahlung fällig. Beim Paket «Begleitet» wird ein Teilbetrag von CHF 2'900 bei Auftragserteilung und der Restbetrag von CHF 4'000 bei erfolgreichem Verkauf fällig. Als erfolgreicher Verkauf gilt die öffentliche Beurkundung des Kaufvertrags über das vermittelte Objekt. Rechnungen sind innert 30 Tagen zahlbar.</p>
       <h3>5. Mitwirkung des Kunden</h3>
@@ -1115,7 +1115,7 @@ function sendLead(fields, subject){
     "verhandlung":{ctx:"Einzelleistung",title:"Verhandlung für CHF 990",sub:"Wir führen die Preisverhandlung mit Ihrem Kaufinteressenten.",typ:"Verhandlung"},
     "unterlagen":{ctx:"Einzelleistung",title:"Unterlagen-Service für CHF 190",sub:"Wir beschaffen und ordnen die Verkaufsunterlagen für Sie.",typ:"Unterlagen-Service"},
     "staging":{ctx:"Einzelleistung",title:"Virtual Staging für CHF 49 / Bild",sub:"Wir möblieren leere oder vollgestellte Räume digital, für Bilder, die im Inserat herausstechen.",typ:"Virtual Staging"},
-    "inserat":{ctx:"Einzelleistung",title:"Inserat-Verlängerung",sub:"CHF 190 pro 30 Tage auf allen Portalen.",typ:"Inserat-Verlängerung"}
+    "inserat":{ctx:"Einzelleistung",title:"Inserat",sub:"Inserat auf allen Portalen.",typ:"Inserat"}
   };
   var labels = ["Ihre Immobilie","Ihr Verkauf","Ihre Kontaktdaten"];
   var modal = document.getElementById("booking"), form = document.getElementById("bookingform");
