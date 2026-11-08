@@ -450,6 +450,7 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
         <button class="btn sec sm" id="x_demo">Beispiel</button>
         <label class="btn sec sm" style="cursor:pointer;margin:0">JSON laden<input type="file" id="x_jsonload" accept="application/json" hidden></label>
         <button class="btn sec sm" id="x_jsonsave">JSON speichern</button>
+        <button class="btn sec sm" id="x_site">Objekt-Website</button>
         <button class="btn sm" id="x_print">PDF drucken</button>
       </div>
     </div>
@@ -1452,6 +1453,104 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
     }catch(err){ alert("Datei konnte nicht gelesen werden."); } };
     r.readAsText(f); this.value="";
   });
+  /* ---- Objekt-Website aus den Exposé-Daten erzeugen ---- */
+  function slugify(s){
+    return String(s||"").toLowerCase()
+      .replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss")
+      .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60);
+  }
+  function buildSite(){
+    var e=esc;
+    var ort   = X.plzort || X.gemeinde || "";
+    var titel = X.titel || [X.zimmer?X.zimmer+"-Zimmer":"", "Objekt", X.adr?"an der "+X.adr:""].filter(Boolean).join(" ");
+    var preis = expNum(X.preis);
+    var bilder = [].concat(X.titelbild?[X.titelbild]:[], X.fotos||[], X.grundrisse||[]).slice(0,9);
+
+    var kennz = [];
+    if(X.zimmer)  kennz.push(["Zimmer", X.zimmer]);
+    if(X.flaeche) kennz.push(["Wohnfläche", X.flaeche+" m²"]);
+    if(X.baujahr) kennz.push(["Baujahr", X.baujahr]);
+    if(X.etage)   kennz.push(["Etage", X.etage]);
+    (X.eck||[]).forEach(function(k){
+      if(k.k && k.v && kennz.length<8 && !kennz.some(function(p){return p[0]===k.k;})) kennz.push([k.k,k.v]);
+    });
+
+    var gal = bilder.map(function(src,i){
+      return '<a href="'+e(src)+'" target="_blank" rel="noopener"><img src="'+e(src)+'" alt="Bild '+(i+1)+'" loading="lazy"></a>';
+    }).join("\n      ");
+
+    var facts = kennz.map(function(p){
+      return '<div class="fact"><div class="k">'+e(p[0])+'</div><div class="v">'+e(p[1])+'</div></div>';
+    }).join("\n      ");
+
+    var besch = nl2p(X.beschrieb).map(function(p){return '<p>'+e(p)+'</p>';}).join("\n    ");
+    var merk  = (X.merk||[]).filter(Boolean).map(function(m){return '<li>'+e(m)+'</li>';}).join("\n        ");
+    var lage  = nl2p(X.lage).map(function(p){return '<p>'+e(p)+'</p>';}).join("\n    ");
+    var betr  = "Anfrage "+(X.adr||titel)+(ort?", "+ort:"");
+
+    return '<!doctype html>\n<html lang="de">\n<head>\n'+
+'<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n'+
+'<title>'+e(titel)+(ort?' – '+e(ort):'')+' | Eigenhand</title>\n'+
+'<meta name="description" content="'+e(titel)+(ort?', '+e(ort):'')+'. Verkauf über Eigenhand.">\n'+
+'<meta name="robots" content="noindex">\n'+
+'<meta property="og:title" content="'+e(titel)+'">\n'+
+'<meta property="og:description" content="'+e([X.zimmer?X.zimmer+" Zimmer":"",X.flaeche?X.flaeche+" m²":"",preis?"CHF "+chf(preis):""].filter(Boolean).join(" · "))+'">\n'+
+'<link rel="icon" href="https://eigenhand.ch/img/favicon-32.png">\n'+
+'<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'+
+'<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap">\n'+
+'<style>\n'+
+':root{--bg:#F5F4EF;--surface:#FFF;--ink:#14211C;--muted:#3E4C46;--muted2:#5A675F;--line:#DBD8CF;--green:#1D5B46;--green-d:#123D2F;--mint:#9FE0C3}\n'+
+'*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Schibsted Grotesk",system-ui,sans-serif;line-height:1.6}\n'+
+'img{max-width:100%;display:block}a{color:var(--green)}.wrap{max-width:1040px;margin:0 auto;padding:0 20px}\n'+
+'.top{border-bottom:1px solid var(--line);background:var(--surface)}.top .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}.top img{height:30px;width:auto}.top a.back{font-size:14px;color:var(--muted2);text-decoration:none}\n'+
+'.head{padding:40px 0 24px}.kicker{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}\n'+
+'h1{font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-.02em;margin:10px 0 8px;font-weight:700}.sub{font-size:18px;color:var(--muted);margin:0}\n'+
+'.price{margin-top:18px;font-size:26px;font-weight:700;color:var(--green-d)}\n'+
+'.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:28px 0}\n'+
+'.gallery a{grid-column:span 2;border-radius:14px;overflow:hidden;background:var(--line);aspect-ratio:4/3}\n'+
+'.gallery a:first-child{grid-column:span 4;aspect-ratio:16/9}.gallery img{width:100%;height:100%;object-fit:cover}\n'+
+'.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:28px 0}\n'+
+'.fact{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}.fact .k{font-size:13px;color:var(--muted2)}.fact .v{font-size:19px;font-weight:700;margin-top:2px}\n'+
+'section{padding:28px 0;border-top:1px solid var(--line)}h2{font-size:24px;margin:0 0 14px;font-weight:700}p{color:var(--muted);margin:0 0 14px}\n'+
+'ul.ticks{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px}\n'+
+'ul.ticks li{position:relative;padding-left:26px;color:var(--muted)}\n'+
+'ul.ticks li::before{content:"";position:absolute;left:0;top:9px;width:14px;height:8px;border-left:2.4px solid var(--green);border-bottom:2.4px solid var(--green);transform:rotate(-45deg)}\n'+
+'.cta{background:var(--green-d);color:#fff;border-radius:20px;padding:30px;margin:32px 0 48px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:space-between}\n'+
+'.cta h2{color:#fff;margin:0 0 6px}.cta p{color:#C9D6D1;margin:0}\n'+
+'.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;background:var(--mint);color:var(--green-d);font-weight:700;text-decoration:none}\n'+
+'footer{border-top:1px solid var(--line);padding:22px 0 40px;font-size:14px;color:var(--muted2)}footer a{color:var(--muted2)}\n'+
+'@media(max-width:720px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.gallery a,.gallery a:first-child{grid-column:span 2}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}ul.ticks{grid-template-columns:1fr}.btn{width:100%}}\n'+
+'</style>\n</head>\n<body>\n'+
+'<header class="top"><div class="wrap">'+
+'<a href="https://eigenhand.ch"><img src="https://eigenhand.ch/img/logo.png" alt="Eigenhand"></a>'+
+'<a class="back" href="https://eigenhand.ch">eigenhand.ch →</a></div></header>\n'+
+'<main class="wrap">\n'+
+'  <div class="head">\n'+
+'    <div class="kicker">Zum Verkauf'+(ort?' · '+e(ort):'')+'</div>\n'+
+'    <h1>'+e(titel)+'</h1>\n'+
+(X.unter?'    <p class="sub">'+e(X.unter)+'</p>\n':'')+
+(preis?'    <div class="price">CHF '+chf(preis)+'</div>\n':'')+
+'  </div>\n'+
+(gal?'  <div class="gallery">\n      '+gal+'\n  </div>\n':'')+
+(facts?'  <div class="facts">\n      '+facts+'\n  </div>\n':'')+
+(besch?'  <section><h2>Das Objekt</h2>\n    '+besch+'\n  </section>\n':'')+
+(merk?'  <section><h2>Ausstattung</h2>\n      <ul class="ticks">\n        '+merk+'\n      </ul>\n  </section>\n':'')+
+(lage?'  <section><h2>Lage</h2>\n    '+lage+'\n  </section>\n':'')+
+'  <section><h2>Unterlagen</h2>\n    <p>Grundbuchauszug, Grundrisse, Gebäudeversicherungsausweis und die Nebenkostenabrechnung liegen vor und werden ernsthaften Interessenten auf Anfrage zugestellt.</p>\n  </section>\n'+
+'  <div class="cta">\n    <div><h2>Interesse an diesem Objekt?</h2>\n      <p>Schreiben Sie uns – Sie erhalten die Unterlagen und einen Besichtigungstermin.</p></div>\n'+
+'    <a class="btn" href="mailto:'+e(XK.mail||"info@eigenhand.ch")+'?subject='+encodeURIComponent(betr)+'">Anfrage senden</a>\n  </div>\n'+
+'</main>\n'+
+'<footer><div class="wrap">Vermarktet durch <a href="https://eigenhand.ch">Eigenhand</a>, Kloten · '+
+'<a href="mailto:'+e(XK.mail||"info@eigenhand.ch")+'">'+e(XK.mail||"info@eigenhand.ch")+'</a><br>'+
+'Angaben nach bestem Wissen, ohne Gewähr. Massgebend sind die Unterlagen und der Kaufvertrag.</div></footer>\n'+
+'</body>\n</html>';
+  }
+  $("x_site").addEventListener("click", function(){
+    if(!X.titel && !X.adr){ alert("Bitte zuerst einen Lead wählen oder Titel und Adresse ausfüllen."); return; }
+    var name = "objekt-"+(slugify(X.adr||X.titel)||"neu")+".html";
+    dl(name, buildSite(), "text/html;charset=utf-8");
+  });
+
   $("x_print").addEventListener("click", function(){
     if(!$("exp_doc")){ renderExpo(); }
     document.body.classList.add("exp-print"); window.print();
