@@ -217,6 +217,10 @@ section:not(.band) .step{background:#fff;border:1px solid var(--line)}
 .gm .gfoot{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .gm .gfoot .lk{font-size:14px;color:var(--muted);text-decoration:underline}
 .gm .gload{color:var(--muted);font-size:15px;padding:20px 0}
+.pricemail{margin-top:20px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 24px;text-align:left}
+.pricemail strong{font-size:17px;display:block;margin-bottom:4px}
+.pricemail p{font-size:15px;color:var(--muted);margin:0;max-width:560px}
+.pricemail .btn{flex:none}
 .guarantee{margin-top:28px;display:flex;gap:16px;align-items:flex-start;background:var(--mint-bg);border:1px solid var(--mint);border-radius:16px;padding:20px 24px;text-align:left}
 .guarantee svg{flex:none;margin-top:2px}
 .guarantee p{font-size:15px;color:var(--green-d)}
@@ -383,6 +387,8 @@ footer a{color:#fff}
   .about{grid-template-columns:1fr;text-align:left;gap:20px}
   .avatar{width:76px;height:76px;font-size:28px}
   .guarantee{flex-direction:column;gap:10px}
+  .pricemail{flex-direction:column;align-items:flex-start;gap:14px}
+  .pricemail .btn{width:100%;text-align:center}
 }
 @media(max-width:640px){
   .modalbg{padding:16px 10px}
@@ -608,7 +614,20 @@ footer a{color:#fff}
 
     <div class="guarantee">
       <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#123D2F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4 6 8v7c0 6.5 4.3 11 10 13 5.7-2 10-6.5 10-13V8z"/><path d="m11.5 16 3.2 3.2 6-6.4"/></svg>
-      <p><strong>Wechsel-Garantie.</strong> Sie merken unterwegs, dass Sie doch mehr Unterstützung möchten? Wechseln Sie jederzeit von «Selbst» oder «Pro» zu «Begleitet». Den bereits bezahlten Paketpreis rechnen wir an den Startbetrag von «Begleitet» an. Sie zahlen nicht doppelt.</p>
+      <div>
+        <p style="margin:0 0 10px"><strong>Sie gehen kein Risiko ein, das Sie nicht sehen.</strong></p>
+        <p style="margin:0 0 8px">Bis zum Start können Sie <strong>jederzeit kostenlos zurücktreten</strong> – ohne Begründung, ohne Kosten.</p>
+        <p style="margin:0 0 8px">Bei «Begleitet» werden <strong>CHF 4'000 erst beim Verkauf fällig</strong>. Verkauft sich Ihre Immobilie nicht, bleibt es bei den CHF 2'900 vom Start.</p>
+        <p style="margin:0"><strong>Wechsel-Garantie:</strong> Sie merken unterwegs, dass Sie doch mehr Unterstützung möchten? Wechseln Sie jederzeit von «Selbst» oder «Pro» zu «Begleitet» – den bereits bezahlten Paketpreis rechnen wir an. Sie zahlen nicht doppelt.</p>
+      </div>
+    </div>
+
+    <div class="pricemail">
+      <div>
+        <strong>Lieber in Ruhe vergleichen?</strong>
+        <p>Wir senden Ihnen die komplette Festpreis-Übersicht per E-Mail – ohne Konto, ohne Formular und ohne dass Sie jemand anruft.</p>
+      </div>
+      <a class="btn sec" href="mailto:info@eigenhand.ch?subject=Festpreis-%C3%9Cbersicht%20bitte%20zusenden&amp;body=Guten%20Tag%0A%0Abitte%20senden%20Sie%20mir%20die%20Festpreis-%C3%9Cbersicht%20von%20Eigenhand%20zu.%0A%0AFreundliche%20Gr%C3%BCsse%0A">Übersicht per E-Mail</a>
     </div>
 
     <details class="compare">
