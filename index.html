@@ -112,6 +112,21 @@ section{padding:92px 0}
 .cb .fill{height:100%;border-radius:7px;background:var(--muted2)}
 .cb.us .fill{background:var(--green)}
 .costbars .fine{font-size:12px;color:var(--muted2);line-height:1.5}
+.anchor{max-width:820px;margin:34px auto 38px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 32px;text-align:left}
+.anchor h3{font-size:19px;margin:0 0 4px;letter-spacing:-.01em}
+.anchor .asub{font-size:14.5px;color:var(--muted2);margin:0 0 22px}
+.anchor .cb{margin-bottom:18px}
+.anchor .cb .top{align-items:baseline}
+.anchor .cb .top span small{display:block;font-size:13px;color:var(--muted2);margin-top:1px}
+.anchor .cb .top b{font-size:17px}
+.anchor .cb.us .top b{color:var(--green);font-size:20px}
+.anchor .cb .fill.mid{background:#B9B4A6}
+.anchor .keep{margin-top:24px;background:var(--mint-bg);border-radius:14px;padding:18px 20px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.anchor .keep .big{font-size:26px;font-weight:800;color:var(--green-d);letter-spacing:-.02em;white-space:nowrap}
+.anchor .keep p{margin:0;font-size:15px;color:var(--muted);max-width:430px}
+.anchor .keep p strong{color:var(--ink)}
+.anchor .fine{font-size:12px;color:var(--muted2);line-height:1.5;margin:14px 0 0}
+@media(max-width:720px){.anchor{padding:22px 18px}.anchor .keep .big{font-size:23px}}
 
 /* Steps */
 .steps{display:grid;gap:18px;grid-template-columns:repeat(4,1fr);margin-top:48px}
@@ -547,6 +562,27 @@ footer a{color:#fff}
     <div class="eyebrow">Preise und Pakete</div>
     <h2 class="h2">Ein Festpreis. Keine Provision.</h2>
     <p class="lead">Je mehr Sie selbst machen, desto mehr sparen Sie. Je mehr wir übernehmen, desto weniger Aufwand haben Sie. Alle Preise sind Festpreise inklusive Portalkosten. Bei «Pro» und «Begleitet» bleibt das Inserat online, bis verkauft ist.</p>
+    <div class="anchor">
+      <h3>Was der Verkauf einer Immobilie für CHF 1 Mio. kostet</h3>
+      <p class="asub">Drei Wege, dieselbe Immobilie, dieselben Portale.</p>
+      <div class="cb">
+        <div class="top"><span>Makler mit 3 % Provision<small>fällig beim Verkauf, steigt mit dem Preis</small></span><b>ca. CHF 30'000</b></div>
+        <div class="track"><div class="fill" style="width:100%"></div></div>
+      </div>
+      <div class="cb">
+        <div class="top"><span>Nur die Inserate, selbst gebucht – 3 Monate<small>ohne Fotos, ohne Exposé, ohne Preisschätzung</small></span><b>ca. CHF 3'300</b></div>
+        <div class="track"><div class="fill mid" style="width:11%"></div></div>
+      </div>
+      <div class="cb us">
+        <div class="top"><span><strong>Eigenhand «Selbst»</strong><small>Inserate, Exposé und Preisschätzung inklusive</small></span><b>CHF 1'490</b></div>
+        <div class="track"><div class="fill" style="width:5%"></div></div>
+      </div>
+      <div class="keep">
+        <div class="big">bis CHF 28'510</div>
+        <p><strong>bleiben bei Ihnen statt beim Makler.</strong> Portale rechnen pro Woche ab, solange das Inserat läuft. Wir rechnen einmal ab.</p>
+      </div>
+      <p class="fine">Richtwerte, Stand November 2026. Inserate: Premium-Platzierung auf Homegate und ImmoScout24 für Privatpersonen, rund CHF 1'100 pro Monat; der genaue Preis hängt von Lage und Objekt ab. Maklerprovisionen liegen in der Schweiz üblicherweise bei 2–3 %.</p>
+    </div>
     <div class="price">
       <div class="plan">
         <div class="phead">
