@@ -326,6 +326,8 @@ table.who td.c{text-align:center;white-space:nowrap}
 .legal p{color:var(--muted);font-size:15px;margin-bottom:8px}
 footer{background:var(--green-d);color:#C7D6CE;font-size:14px}
 footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:30px 0}
+footer .orte-links{display:block;border-top:1px solid rgba(255,255,255,.14);padding:16px 24px 26px;font-size:13.5px;color:#A8BDB2;line-height:1.9}
+footer .orte-links a{color:#DCE8E1;white-space:nowrap}
 footer a{color:#fff}
 
 /* Modal */
@@ -916,6 +918,9 @@ footer a{color:#fff}
     <span><strong style="color:#fff">Eigenhand</strong> · Festpreis statt Provision. Schwerpunkt Kanton Zürich, Deutschschweiz auf Anfrage.</span>
     <span><a href="ratgeber.html">Ratgeber</a> · <a href="#impressum">Impressum</a> · <a href="#datenschutz">Datenschutz</a> · <a href="#agb">AGB</a> · <a href="mailto:info@eigenhand.ch">info@eigenhand.ch</a> · <a href="tel:+41787528177">078 752 81 77</a></span>
   </div>
+  <!-- orte:start -->
+  <div class="wrap row orte-links"><span>Verkaufen in Ihrer Gemeinde: <a href="/immobilie-verkaufen-kloten.html">Kloten</a> · <a href="/immobilie-verkaufen-buelach.html">Bülach</a> · <a href="/immobilie-verkaufen-opfikon.html">Opfikon</a> · <a href="/immobilie-verkaufen-wallisellen.html">Wallisellen</a> · <a href="/immobilie-verkaufen-bassersdorf.html">Bassersdorf</a> · <a href="/immobilie-verkaufen-dietlikon.html">Dietlikon</a> · <a href="/immobilie-verkaufen-embrach.html">Embrach</a> · <a href="/immobilie-verkaufen-nuerensdorf.html">Nürensdorf</a></span></div>
+  <!-- orte:end -->
 </footer>
 
 <div class="modalbg" id="booking" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="booktitle">
@@ -1281,18 +1286,32 @@ function sendLead(fields, subject){
 (function(){
   var RATES = [
     {g:"Zürich Stadt", w:17800, h:17000},{g:"Küsnacht", w:18400, h:19000},{g:"Meilen", w:18200, h:17500},
-    {g:"Uster", w:11400, h:11300},{g:"Kloten", w:11100, h:11000},{g:"Bülach", w:10600, h:10400},
-    {g:"Winterthur", w:10500, h:10100},{g:"Dietikon", w:10400, h:11100},{g:"Dübendorf", w:12200, h:12000},
+    {g:"Wallisellen", w:12600, h:12400},{g:"Dübendorf", w:12200, h:12000},{g:"Opfikon (Glattbrugg/Glattpark)", w:11600, h:11300},
+    {g:"Dietlikon", w:11500, h:11400},{g:"Uster", w:11400, h:11300},{g:"Kloten", w:11100, h:11000},
+    {g:"Regensdorf", w:11000, h:10900},{g:"Bülach", w:10900, h:10700},{g:"Bassersdorf", w:10600, h:10500},
+    {g:"Winterthur", w:10500, h:10100},{g:"Dietikon", w:10400, h:11100},{g:"Rümlang", w:10400, h:10300},
+    {g:"Nürensdorf", w:10400, h:10700},{g:"Oberglatt", w:9900, h:9700},{g:"Embrach", w:9600, h:9400},
     {g:"Andere Gemeinde im Kanton Zürich", w:12000, h:11100},
     {g:"Ausserhalb Kanton Zürich", w:9500, h:8800}
-  ];
-  function bchf(v){ var r=Math.round(v); return "CHF "+Math.abs(r).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"'"); }
+  ];  function bchf(v){ var r=Math.round(v); return "CHF "+Math.abs(r).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"'"); }
   function r10k(x){ return Math.round(x/10000)*10000; }
   function ageFactor(bj){ bj=parseInt(bj,10); if(!bj) return 1; var y=new Date().getFullYear(), a=y-bj; if(a<5)return 1.05; if(a<15)return 1.02; if(a<30)return 1; if(a<50)return .96; return .91; }
   function el(id){ return document.getElementById(id); }
   var gem = el("bw_gem");
   if(!gem) return;
-  gem.innerHTML = RATES.map(function(r,i){ return '<option value="'+i+'"'+(r.g==="Kloten"?" selected":"")+'>'+r.g+'</option>'; }).join("");
+  gem.innerHTML = RATES.map(function(r,i){ return '<option value="'+i+'">'+r.g+'</option>'; }).join("");
+  (function(){
+    var want = "kloten";
+    try { var q = new URLSearchParams(location.search).get("g"); if(q) want = q; } catch(e){}
+    var norm = function(t){ return String(t).toLowerCase()
+      .replace(/ü/g,"u").replace(/ö/g,"o").replace(/ä/g,"a")
+      .replace(/ue/g,"u").replace(/oe/g,"o").replace(/ae/g,"a")
+      .replace(/[^a-z]/g,""); };
+    var w = norm(want), pick = -1;
+    RATES.forEach(function(r,i){ if(pick<0 && w && norm(r.g).indexOf(w)===0) pick = i; });
+    if(pick<0) pick = RATES.map(function(r){return r.g;}).indexOf("Kloten");
+    gem.value = pick < 0 ? 0 : pick;
+  })();
 
   var last = null; // {range, mid, data}
 

@@ -1,0 +1,77 @@
+/* Eigenhand – Styles für die Ortsseiten. Erzeugt von Hand, genutzt von tools/build_orte.py */
+:root{--bg:#F5F4EF;--surface:#FFFFFF;--ink:#14211C;--muted:#3E4C46;--muted2:#5A675F;--line:#DBD8CF;--green:#1D5B46;--green-d:#123D2F;--mint:#9FE0C3;--mint-bg:#E4EEE8;--warn:#B45233}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Schibsted Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-0.02em;line-height:1.14}
+p{margin:0}
+a{color:var(--green);text-decoration:none}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+.btn{display:inline-block;background:var(--green);color:#fff;border:0;border-radius:11px;padding:16px 24px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;text-align:center}
+.btn:hover{background:var(--green-d)}
+.btn.sec{background:#fff;color:var(--ink);border:1px solid var(--line);font-weight:600}
+
+header{position:sticky;top:0;z-index:40;background:rgba(245,244,239,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px;max-width:1080px;margin:0 auto}
+header .brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:19px;color:var(--ink);letter-spacing:-0.02em}
+header .links{display:flex;align-items:center;gap:20px;font-size:15px;font-weight:600}
+header .links a{color:var(--muted)}
+header .links a.btn{color:#fff;padding:10px 16px;font-size:15px}
+@media(max-width:720px){header .links a:not(.btn){display:none}}
+
+.crumb{font-size:14px;color:var(--muted2);padding:18px 0 0}
+.crumb a{color:var(--muted2)}
+
+.top{padding:26px 0 40px}
+h1{font-size:clamp(30px,5.2vw,44px)}
+.lead{font-size:18px;color:var(--muted);margin-top:16px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.hint{font-size:14px;color:var(--muted2);margin-top:12px}
+
+section{padding:34px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(22px,3.4vw,30px);margin-bottom:14px}
+h3{font-size:18px;margin-bottom:6px}
+section p+p{margin-top:12px}
+.body{color:var(--muted);font-size:16.5px}
+
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-top:20px}
+.calc .row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:9px 0;border-bottom:1px solid var(--line)}
+.calc .row:last-of-type{border-bottom:0}
+.calc .row small{display:block;font-size:13px;color:var(--muted2);font-weight:400}
+.calc .row b{white-space:nowrap}
+.calc .row.tot b{font-size:23px;color:var(--green-d)}
+.calc .note{font-size:13px;color:var(--muted2);margin-top:12px}
+
+.prices{background:var(--mint-bg);border-radius:16px;padding:20px 24px;margin-top:18px}
+.prices div{display:flex;justify-content:space-between;gap:12px;padding:6px 0;font-size:16px}
+.prices b{white-space:nowrap}
+
+.pk{display:grid;gap:12px;margin-top:18px}
+.pk a{display:block;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;color:var(--ink)}
+.pk a:hover{border-color:var(--green)}
+.pk .n{display:block;font-weight:800}
+.pk .d{display:block;font-size:14.5px;color:var(--muted);margin-top:2px}
+.pk .p{display:block;font-weight:800;color:var(--green-d);margin-top:6px}
+
+.tip{background:var(--surface);border-left:4px solid var(--green);border-radius:0 12px 12px 0;padding:16px 20px;margin-top:18px;font-size:16px;color:var(--muted)}
+.tip b{color:var(--ink)}
+
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}
+summary{font-weight:700;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--green);font-weight:800}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--muted);font-size:16px}
+
+.end{background:var(--green-d);color:#E7EEEA;border-radius:18px;padding:28px 26px;margin:34px 0}
+.end h2{color:#fff;margin-bottom:10px}
+.end .btn{background:var(--mint);color:var(--green-d);margin-top:16px}
+.end .btn:hover{background:#fff}
+
+.nearby{font-size:15px;color:var(--muted2);padding-bottom:10px}
+.nearby a{color:var(--green);font-weight:600}
+
+footer{background:var(--green-d);color:#C7D6CE;font-size:14px;margin-top:10px}
+footer .row{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:30px 24px}
+footer a{color:#fff}
