@@ -7,7 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>Immobilie ohne Makler verkaufen – Kanton Zürich | Eigenhand</title>
-<meta name="description" content="Statt 20'000–30'000 Franken Provision: Wohnung oder Haus zum Festpreis ab CHF 1'490 verkaufen. Kanton Zürich. Kostenlose Ersteinschätzung in 24 Stunden.">
+<meta name="description" content="Statt 20'000–30'000 Franken Provision: Wohnung oder Haus zum Festpreis ab CHF 1'490 verkaufen. Kanton Zürich. Wert und Ersparnis kostenlos in 60 Sekunden berechnen.">
 <link rel="canonical" href="https://eigenhand.ch/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://eigenhand.ch/">
@@ -82,6 +82,7 @@ nav.links .btn{padding:11px 18px;color:#fff;font-size:15px}
 .hero p.sub{font-size:19px;color:#E7EEEA;max-width:540px;margin-top:20px}
 .hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
 .hero .btn.sec{background:rgba(255,255,255,.96);color:var(--ink);border:0}
+.hero .herohint{font-size:14px;color:#E7EEEA;margin-top:12px;opacity:.9}
 .ticks{display:flex;gap:10px 24px;flex-wrap:wrap;font-size:15px;color:#E7EEEA;margin-top:26px}
 .ticks span{display:flex;align-items:center;gap:8px}
 .excard{background:#fff;color:var(--ink);border-radius:20px;padding:28px;box-shadow:0 24px 60px rgba(0,0,0,.28)}
@@ -325,6 +326,8 @@ table.who td.c{text-align:center;white-space:nowrap}
 .legal p{color:var(--muted);font-size:15px;margin-bottom:8px}
 footer{background:var(--green-d);color:#C7D6CE;font-size:14px}
 footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:30px 0}
+footer .orte-links{display:block;border-top:1px solid rgba(255,255,255,.14);padding:16px 24px 26px;font-size:13.5px;color:#A8BDB2;line-height:1.9}
+footer .orte-links a{color:#DCE8E1;white-space:nowrap}
 footer a{color:#fff}
 
 /* Modal */
@@ -432,6 +435,21 @@ footer a{color:#fff}
 .bw-success{background:var(--mint-bg);border:1px solid var(--mint);border-radius:16px;padding:18px;margin-top:16px;color:var(--green-d);line-height:1.5;text-align:left}
 .bw-success b{display:block;font-size:16px;margin-bottom:4px}
 .bw-cta{display:grid;gap:10px;margin-top:14px}
+.bw-save .bw-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:7px 0;border-bottom:1px solid rgba(29,91,70,.15);text-align:left}
+.bw-save .bw-row small{display:block;font-size:12.5px;color:var(--muted);font-weight:400}
+.bw-save .bw-row b{white-space:nowrap}
+.bw-save .bw-row.tot{border-bottom:0;padding-top:10px;font-size:17px}
+.bw-save .bw-row.tot b{font-size:22px;color:var(--green-d)}
+.bw-small{font-size:13px;margin:6px 0 0;color:var(--muted);text-align:left}
+.bw-get{list-style:none;margin:0;padding:0;display:grid;gap:5px;font-size:14.5px;color:var(--muted)}
+.bw-get li{padding-left:22px;position:relative}
+.bw-get li::before{content:"✓";position:absolute;left:2px;color:var(--green);font-weight:800}
+.bw-lab{display:block;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:7px}
+.bw-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bw-chips button{font:inherit;font-size:14px;padding:8px 13px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);cursor:pointer}
+.bw-chips button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.faqmore{margin-top:22px;font-size:15px;color:var(--muted)}
+.faqmore a{color:var(--green);font-weight:600}
 </style>
 </head>
 <body>
@@ -452,7 +470,7 @@ footer a{color:#fff}
       <a href="#bewertung">Immobilienwert</a>
       <a href="ratgeber.html">Ratgeber</a>
       <a href="#faq">Fragen</a>
-      <button type="button" class="btn" onclick="openBooking('erst')">Kostenlose Ersteinschätzung</button>
+      <a href="#bewertung" class="btn">Wert berechnen</a>
     </nav>
   </div>
 </header>
@@ -465,9 +483,10 @@ footer a{color:#fff}
       <h1>Verkaufen Sie Ihr Zuhause zum Festpreis. <span class="soft">Nicht für Prozente.</span></h1>
       <p class="sub">Sie haben über Jahre in Ihre Immobilie investiert. Mit Eigenhand bleibt dieser Wert bei Ihnen: Sie bezahlen einen festen Preis ab CHF 1'490 und entscheiden selbst, wie viel Unterstützung Sie möchten.</p>
       <div class="cta">
-        <button type="button" class="btn" onclick="openBooking('erst')">Kostenlose Ersteinschätzung</button>
-        <a href="#rechner" class="btn sec">Meine Ersparnis berechnen</a>
+        <a href="#bewertung" class="btn">Was ist mein Zuhause wert?</a>
+        <a href="#preise" class="btn sec">Pakete ansehen</a>
       </div>
+      <p class="herohint">Kostenlos · Richtwert und Ersparnis in 60 Sekunden · ohne Anruf</p>
       <button type="button" class="vidbtn" onclick="openVideo()" aria-haspopup="dialog"><span class="pl"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6L12.6 8z" fill="#123D2F"/></svg></span>In 90 Sekunden erklärt</button>
       <div class="ticks">
         <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Keine Provision</span>
@@ -478,6 +497,32 @@ footer a{color:#fff}
     <!-- Rechenbeispiel aus dem Hero entfernt, damit das Hintergrundbild (Sofa/Aussicht) frei sichtbar ist. Dieselbe Rechnung steht direkt unten im Abschnitt "Das Prinzip". -->
   </div>
 </div>
+
+<section class="band" id="bewertung">
+  <div class="wrap center">
+    <div class="eyebrow">Kostenlos · in 60 Sekunden</div>
+    <h2 class="h2">Was ist Ihr Zuhause wert – und was sparen Sie?</h2>
+    <p class="lead">Vier Angaben genügen. Sie sehen sofort einen Richtwert und wie viel Ihnen gegenüber einem Makler bleibt. Ohne Anmeldung, ohne Anruf.</p>
+    <div class="calc">
+      <div class="in">
+        <div><label for="bw_gem">Gemeinde</label><select id="bw_gem"></select></div>
+        <div class="bw-two">
+          <div><label for="bw_art">Objektart</label><select id="bw_art"><option value="w">Wohnung</option><option value="h">Haus</option></select></div>
+          <div><label for="bw_fl">Wohnfläche (m²)</label><input id="bw_fl" type="number" inputmode="numeric" placeholder="z. B. 110"></div>
+        </div>
+        <div class="bw-two">
+          <div><label for="bw_zu">Zustand</label><select id="bw_zu"><option value="1.08">Neuwertig / renoviert</option><option value="1" selected>Gut / gepflegt</option><option value="0.92">Mittel</option><option value="0.82">Renovationsbedürftig</option></select></div>
+          <div><label for="bw_bj">Baujahr <span class="bw-opt">(optional)</span></label><input id="bw_bj" type="number" inputmode="numeric" placeholder="z. B. 1998"></div>
+        </div>
+        <button type="button" class="btn block" id="bw_calc">Wert &amp; Ersparnis anzeigen</button>
+        <p class="bw-hint">Richtwert auf Basis grober Durchschnittspreise pro m² (keine amtlichen Daten). Keine verbindliche Bewertung.</p>
+      </div>
+      <div class="out">
+        <div id="bw_result"><div class="bw-empty">Füllen Sie die Felder aus und klicken Sie «Wert berechnen».<br>Ihr Richtwert und Ihre Ersparnis erscheinen hier.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="rechner">
   <div class="wrap center">
@@ -518,7 +563,7 @@ footer a{color:#fff}
           <div class="v" id="o_save">CHF 0</div>
           <div class="s" id="o_saveNote">vor Steuern</div>
           <div class="s" id="o_selfNote" style="margin-top:8px;opacity:.85"></div>
-          <button type="button" class="btn mint" id="calcCta" onclick="openBooking(window.__calcPack||'begleitet')">Kostenlose Ersteinschätzung</button>
+          <button type="button" class="btn mint" id="calcCta" onclick="openBooking(window.__calcPack||'begleitet')">«Begleitet» unverbindlich anfragen</button>
         </div>
         <div class="cmp">
           <div class="outcard">
@@ -551,7 +596,7 @@ footer a{color:#fff}
     <h2 class="h2">In vier Schritten zum Verkauf</h2>
     <p class="lead">Sie behalten die Kontrolle über jeden Schritt. Wie viel wir übernehmen, bestimmen Sie mit der Wahl Ihres Pakets.</p>
     <div class="steps">
-      <div class="step"><div class="no">1</div><h3>Was ist Ihre Immobilie wert?</h3><p>Sie schicken uns ein paar Angaben – mehr nicht. Sie erhalten eine ehrliche Einschätzung mit Vergleichsobjekten aus Ihrer Gemeinde und eine klare Antwort darauf, was Sie gegenüber einem Makler sparen.</p><div class="meta">Kostenlos · Antwort innert 24 Stunden</div></div>
+      <div class="step"><div class="no">1</div><h3>Was ist Ihre Immobilie wert?</h3><p>Vier Angaben im <a href="#bewertung">Online-Rechner</a>, und Sie sehen sofort Richtwert und Ersparnis. Auf Wunsch erhalten Sie innert 24 Stunden eine genaue Einschätzung mit Vergleichsverkäufen aus Ihrer Gemeinde.</p><div class="meta">Kostenlos · sofort online</div></div>
       <div class="step"><div class="no">2</div><h3>Sie entscheiden, wie viel Sie abgeben</h3><p>Alles selbst machen und maximal sparen? Oder lieber zurücklehnen und uns verhandeln lassen? Sie wählen Ihr Paket, wir legen gemeinsam den Angebotspreis fest – und ab da steht der Preis. Egal, für wie viel Sie am Ende verkaufen.</p><div class="meta">Festpreis ab CHF 1'490</div></div>
       <div class="step"><div class="no">3</div><h3>Ihre Immobilie geht online</h3><p>Wir erstellen Exposé und Inserat und schalten beides über Eigenhand auf Homegate, ImmoScout24 und Acheter-Louer auf, drei der grossen Immobilienportale der Schweiz. Die Portalkosten sind im Festpreis enthalten.</p><div class="meta">Inseratskosten inklusive</div></div>
       <div class="step"><div class="no">4</div><h3>Sie wählen den Käufer</h3><p>Sie sehen alle Angebote nebeneinander, inklusive Finanzierungsnachweis, und entscheiden selbst. Wir bereiten die Unterlagen für das Notariat vor und begleiten Sie bis zur Beurkundung.</p><div class="meta">Bis zum Notartermin</div></div>
@@ -567,7 +612,7 @@ footer a{color:#fff}
     <p class="lead">Je mehr Sie selbst machen, desto mehr sparen Sie. Je mehr wir übernehmen, desto weniger Aufwand haben Sie. Alle Preise sind Festpreise inklusive Portalkosten. Bei «Pro» und «Begleitet» bleibt das Inserat online, bis verkauft ist.</p>
     <div class="anchor">
       <h3>Was der Verkauf einer Immobilie für CHF 1 Mio. kostet</h3>
-      <p class="asub">Drei Wege, dieselbe Immobilie, dieselben Portale.</p>
+      <p class="asub">Dieselbe Immobilie, dieselben Portale.</p>
       <div class="cb">
         <div class="top"><span>Makler mit 3 % Provision<small>fällig beim Verkauf, steigt mit dem Preis</small></span><b>ca. CHF 30'000</b></div>
         <div class="track"><div class="fill" style="width:100%"></div></div>
@@ -577,12 +622,16 @@ footer a{color:#fff}
         <div class="track"><div class="fill mid" style="width:11%"></div></div>
       </div>
       <div class="cb us">
-        <div class="top"><span><strong>Eigenhand «Selbst»</strong><small>Inserate, Exposé und Preisschätzung inklusive</small></span><b>CHF 1'490</b></div>
+        <div class="top"><span><strong>Eigenhand «Begleitet»</strong><small>wie mit Makler: wir übernehmen Besichtigungen und Verhandlung</small></span><b>CHF 6'900</b></div>
+        <div class="track"><div class="fill" style="width:23%"></div></div>
+      </div>
+      <div class="cb us">
+        <div class="top"><span><strong>Eigenhand «Selbst»</strong><small>Sie übernehmen Anfragen und Besichtigungen selbst</small></span><b>CHF 1'490</b></div>
         <div class="track"><div class="fill" style="width:5%"></div></div>
       </div>
       <div class="keep">
-        <div class="big">bis CHF 28'510</div>
-        <p><strong>bleiben bei Ihnen statt beim Makler.</strong> Portale rechnen pro Woche ab, solange das Inserat läuft. Wir rechnen einmal ab.</p>
+        <div class="big">CHF 23'100 bis 28'510</div>
+        <p><strong>bleiben bei Ihnen statt beim Makler</strong> – je nachdem, wie viel Sie selbst übernehmen. Portale rechnen pro Woche ab, solange das Inserat läuft. Wir rechnen einmal ab.</p>
       </div>
       <p class="fine">Richtwerte, Stand November 2026. Inserate: Premium-Platzierung auf Homegate und ImmoScout24 für Privatpersonen, rund CHF 1'100 pro Monat; der genaue Preis hängt von Lage und Objekt ab. Maklerprovisionen liegen in der Schweiz üblicherweise bei 2–3 %.</p>
     </div>
@@ -664,13 +713,6 @@ footer a{color:#fff}
       </div>
     </div>
 
-    <div class="pricemail">
-      <div>
-        <strong>Lieber in Ruhe vergleichen?</strong>
-        <p>Wir senden Ihnen die komplette Festpreis-Übersicht per E-Mail – ohne Konto, ohne Formular und ohne dass Sie jemand anruft.</p>
-      </div>
-      <a class="btn sec" href="mailto:info@eigenhand.ch?subject=Festpreis-%C3%9Cbersicht%20bitte%20zusenden&amp;body=Guten%20Tag%0A%0Abitte%20senden%20Sie%20mir%20die%20Festpreis-%C3%9Cbersicht%20von%20Eigenhand%20zu.%0A%0AFreundliche%20Gr%C3%BCsse%0A">Übersicht per E-Mail</a>
-    </div>
 
     <details class="compare">
       <summary>Wer macht was? Alle Leistungen im Vergleich</summary>
@@ -747,39 +789,7 @@ footer a{color:#fff}
   </div>
 </section>
 
-<section class="band" id="bewertung">
-  <div class="wrap center">
-    <div class="eyebrow">Kostenlose Sofort-Einschätzung</div>
-    <h2 class="h2">Was ist Ihre Immobilie wert?</h2>
-    <p class="lead">In 60 Sekunden einen Richtwert erhalten – kostenlos und unverbindlich. Für die genaue Einschätzung und Ihr Festpreis-Angebot melden wir uns per E-Mail.</p>
-    <div class="calc">
-      <div class="in">
-        <div><label for="bw_gem">Gemeinde</label><select id="bw_gem"></select></div>
-        <div class="bw-two">
-          <div><label for="bw_art">Objektart</label><select id="bw_art"><option value="w">Wohnung</option><option value="h">Haus</option></select></div>
-          <div><label for="bw_fl">Wohnfläche (m²)</label><input id="bw_fl" type="number" inputmode="numeric" placeholder="z. B. 110"></div>
-        </div>
-        <div class="bw-two">
-          <div><label for="bw_zu">Zustand</label><select id="bw_zu"><option value="1.08">Neuwertig / renoviert</option><option value="1" selected>Gut / gepflegt</option><option value="0.92">Mittel</option><option value="0.82">Renovationsbedürftig</option></select></div>
-          <div><label for="bw_bj">Baujahr <span class="bw-opt">(optional)</span></label><input id="bw_bj" type="number" inputmode="numeric" placeholder="z. B. 1998"></div>
-        </div>
-        <button type="button" class="btn block" id="bw_calc">Wert berechnen</button>
-        <p class="bw-hint">Richtwert auf Basis grober Durchschnittspreise pro m² (keine amtlichen Daten). Keine verbindliche Bewertung.</p>
-      </div>
-      <div class="out">
-        <div id="bw_result"><div class="bw-empty">Füllen Sie die Felder aus und klicken Sie «Wert berechnen».<br>Ihr Richtwert und Ihre Ersparnis erscheinen hier.</div></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section id="ratgeber">
-  <div class="wrap center">
-    <div class="eyebrow">Ratgeber</div>
-    <h2 class="h2">Gut vorbereitet verkaufen</h2>
-    <p class="lead">Kostenloses Wissen zum privaten Immobilienverkauf in der Schweiz: <a href="ratgeber.html#unterlagen">welche Unterlagen Sie brauchen</a>, <a href="ratgeber.html#ablauf">wie der Verkauf abläuft</a> und <a href="ratgeber.html#kosten">welche Kosten anfallen</a>.</p>
-  </div>
-</section>
 
 <section class="band" id="faq">
   <div class="wrap faq">
@@ -789,15 +799,16 @@ footer a{color:#fff}
     <details><summary>Was, wenn meine Immobilie ausserhalb des Raums Zürich liegt?</summary><p>Im Grossraum Zürich erstellen wir die Fotos vor Ort. Liegt Ihr Objekt weiter weg, läuft es angeleitet: Sie erhalten von uns eine einfache Foto-Anleitung (welche Räume, welcher Winkel, welche Tageszeit) und fotografieren selbst mit dem Handy. Wir machen daraus mit professioneller Bearbeitung hochwertige Inseratsbilder. Auf Wunsch möblieren wir leere oder vollgestellte Räume zusätzlich digital (Virtual Staging). So bekommen Sie überall ein professionelles Inserat, ohne dass jemand anreisen muss.</p></details>
     <details><summary>Welche Kosten kommen zum Paketpreis dazu?</summary><p>Im Paketumfang keine, die Portalkosten sind enthalten – bei «Pro» und «Begleitet» ohne Zeitlimit, bei «Selbst» für 90 Tage. Ist nach 90 Tagen noch nicht verkauft, analysieren wir gemeinsam Aufrufe, Anfragen und Preis und besprechen, wie es weitergeht. Optional und nur auf Ihren Wunsch kommen Einzelleistungen dazu, zum Beispiel zusätzliche Besichtigungstage (CHF 490). Unabhängig von uns fallen bei jedem Verkauf Notar- und Grundbuchgebühren sowie die Grundstückgewinnsteuer an.</p></details>
     <details><summary>Wann und wie bezahle ich?</summary><p>«Selbst» und «Pro» bezahlen Sie bei Start. Bei «Begleitet» bezahlen Sie CHF 2'900 bei Start und CHF 4'000 erst, wenn der Kaufvertrag beurkundet ist. Es gibt kein Abo und keine Provision.</p></details>
-    <details><summary>Was ist der Unterschied zwischen «Nur Bewertung» und der kostenlosen Ersteinschätzung?</summary><p>Die Ersteinschätzung ist kostenlos: Sie erhalten per E-Mail eine grobe Preisspanne und eine ehrliche Empfehlung, welches Paket zu Ihnen passt. «Nur Bewertung» für CHF 290 ist eine ausführliche schriftliche Preiseinschätzung mit Vergleichsobjekten. Buchen Sie danach ein Paket, rechnen wir die CHF 290 an.</p></details>
+    <details><summary>Was ist der Unterschied zwischen «Nur Bewertung» und der kostenlosen Ersteinschätzung?</summary><p>Die Ersteinschätzung ist kostenlos: Nach dem <a href="#bewertung">Online-Rechner</a> erhalten Sie per E-Mail eine Preisspanne mit Vergleichsverkäufen und eine ehrliche Empfehlung, welches Paket zu Ihnen passt. «Nur Bewertung» für CHF 290 ist eine ausführliche schriftliche Preiseinschätzung mit Vergleichsobjekten. Buchen Sie danach ein Paket, rechnen wir die CHF 290 an.</p></details>
     <details><summary>Was, wenn ich es mir anders überlege?</summary><p>Die Anfrage selbst ist immer unverbindlich – erst wenn Sie sich für ein Paket entscheiden, kommt ein schriftlicher Auftrag zustande. Und auch danach gilt: <strong>Solange wir noch nicht gestartet haben, können Sie jederzeit kostenlos zurücktreten.</strong> Bereits bezahlte Beträge erhalten Sie vollständig zurück – ohne Frist und ohne Begründung.</p><p>Der Startschuss liegt bei Ihnen: Wir beginnen erst, wenn Sie uns die Inserate ausdrücklich freigeben. Ab diesem Moment laufen echte Kosten bei den Portalen auf, die uns niemand zurückerstattet. Treten Sie danach zurück, bezahlen Sie deshalb die bereits erbrachten Leistungen und die effektiv angefallenen Portalkosten. Alles Weitere in Ziffer 8 unserer <a href="#agb">AGB</a>.</p></details>
     <details><summary>Wie erreiche ich Sie – auch telefonisch?</summary><p>Wir beraten bewusst schriftlich per E-Mail. Das hat einen Grund: Sie haben jede Einschätzung, jede Zahl und jede Zusage schwarz auf weiss, können alles in Ruhe nachlesen und mit jemandem besprechen – und stehen nie unter Druck in einem Verkaufsgespräch. Antworten erhalten Sie innert 24 Stunden (Montag bis Samstag). Wenn etwas dringend ist oder sich schriftlich schlecht klären lässt, erreichen Sie uns unter 078 752 81 77.</p></details>
+    <p class="faqmore">Mehr Wissen zum privaten Verkauf im <a href="ratgeber.html">Ratgeber</a>: <a href="ratgeber.html#unterlagen">welche Unterlagen Sie brauchen</a>, <a href="ratgeber.html#ablauf">wie der Verkauf abläuft</a> und <a href="ratgeber.html#kosten">welche Kosten anfallen</a>.</p>
   </div>
 </section>
 
 <section id="kontakt">
   <div class="wrap">
-    <div class="center"><div class="eyebrow">Kostenlose Ersteinschätzung</div><h2 class="h2">Erzählen Sie uns von Ihrem Zuhause.</h2><p class="lead">Sie erhalten Ihre Ersteinschätzung schriftlich per E-Mail – unverbindlich, kostenlos und ohne Verkaufsgespräch. Wenn ein klassischer Makler für Ihre Situation besser passt, sagen wir Ihnen das auch.</p></div>
+    <div class="center"><div class="eyebrow">Lieber direkt schreiben?</div><h2 class="h2">Erzählen Sie uns von Ihrem Zuhause.</h2><p class="lead">Mehrfamilienhaus, besonderes Objekt oder eine Frage? Schreiben Sie uns. Sie erhalten eine schriftliche Antwort per E-Mail – kostenlos und ohne Verkaufsgespräch. Wenn ein klassischer Makler für Ihre Situation besser passt, sagen wir Ihnen das auch.</p></div>
     <div class="contact">
       <div class="next">
         <div class="n"><div class="no">1</div><div><b>Sie senden uns ein paar Angaben</b><span>Dauert etwa eine Minute.</span></div></div>
@@ -907,6 +918,9 @@ footer a{color:#fff}
     <span><strong style="color:#fff">Eigenhand</strong> · Festpreis statt Provision. Schwerpunkt Kanton Zürich, Deutschschweiz auf Anfrage.</span>
     <span><a href="ratgeber.html">Ratgeber</a> · <a href="#impressum">Impressum</a> · <a href="#datenschutz">Datenschutz</a> · <a href="#agb">AGB</a> · <a href="mailto:info@eigenhand.ch">info@eigenhand.ch</a> · <a href="tel:+41787528177">078 752 81 77</a></span>
   </div>
+  <!-- orte:start -->
+  <div class="wrap row orte-links"><span>Verkaufen in Ihrer Gemeinde: <a href="/immobilie-verkaufen-kloten.html">Kloten</a> · <a href="/immobilie-verkaufen-buelach.html">Bülach</a> · <a href="/immobilie-verkaufen-opfikon.html">Opfikon</a> · <a href="/immobilie-verkaufen-wallisellen.html">Wallisellen</a> · <a href="/immobilie-verkaufen-bassersdorf.html">Bassersdorf</a> · <a href="/immobilie-verkaufen-dietlikon.html">Dietlikon</a> · <a href="/immobilie-verkaufen-embrach.html">Embrach</a> · <a href="/immobilie-verkaufen-nuerensdorf.html">Nürensdorf</a></span></div>
+  <!-- orte:end -->
 </footer>
 
 <div class="modalbg" id="booking" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="booktitle">
@@ -1001,12 +1015,13 @@ function buildAutoresponse(f){
   var name = (f.name||"").trim();
   var vorname = name ? name.split(" ")[0] : "";
   var hallo = vorname ? ("Guten Tag " + vorname) : "Guten Tag";
-  var paket = f.paket || f.buchungstyp || "";
-  var was;
-  if (paket === "selbst")          was = 'Ihre Anfrage zum Paket "Selbst" (CHF 1\'490)';
-  else if (paket === "pro")        was = 'Ihre Anfrage zum Paket "Pro" (CHF 2\'490)';
-  else if (paket === "begleitet")  was = 'Ihre Anfrage zum Paket "Begleitet" (CHF 6\'900)';
-  else                             was = "Ihre Anfrage für eine kostenlose Ersteinschätzung";
+  var paket = ((f.buchungstyp || "") + " " + (f.paket || "")).toLowerCase();
+  var was, istPaket = true;
+  if (paket.indexOf("begleitet") >= 0)    was = 'Ihre Anfrage zum Paket "Begleitet" (CHF 6\'900)';
+  else if (paket.indexOf("pro") >= 0 && paket.indexOf("paket") >= 0) was = 'Ihre Anfrage zum Paket "Pro" (CHF 2\'490)';
+  else if (paket.indexOf("selbst") >= 0)  was = 'Ihre Anfrage zum Paket "Selbst" (CHF 1\'490)';
+  else if (f.buchungstyp && !/ersteinsch|bewertung \(lead\)/i.test(f.buchungstyp) && f.paket !== "Online-Bewertung") was = 'Ihre Anfrage "' + f.buchungstyp + '"';
+  else { was = "Ihre Anfrage für eine kostenlose Ersteinschätzung"; istPaket = false; }
 
   var teile = [];
   if (f.objektart) teile.push(f.objektart);
@@ -1018,8 +1033,14 @@ function buildAutoresponse(f){
   l.push("");
   l.push("vielen Dank. " + was + " ist bei uns eingegangen.");
   if (teile.length) { l.push(""); l.push("Ihre Angaben: " + teile.join(", ")); }
+  if (f.richtwert) {
+    l.push("");
+    l.push("Ihr Online-Richtwert: " + f.richtwert);
+    if (f.ersparnis) l.push("Mehr für Sie als mit Makler: " + f.ersparnis);
+  }
   l.push("");
-  l.push("Ich melde mich innert 24 Stunden persönlich bei Ihnen.");
+  l.push(istPaket ? "Ich melde mich innert 24 Stunden persönlich mit allen Details und dem Auftrag." : "Ich melde mich innert 24 Stunden persönlich mit der genauen Einschätzung.");
+  if (!istPaket) l.push("Wenn Sie mögen, antworten Sie direkt auf diese E-Mail mit Zimmerzahl, Baujahr, letzten Renovationen und 2-3 Fotos. Dann wird die Einschätzung genauer.");
   l.push("");
   l.push("Freundliche Grüsse");
   l.push("Haris Savran");
@@ -1128,6 +1149,7 @@ function sendLead(fields, subject){
     };
     set("o_selfNote", selfNotes[packKey] || "");
     window.__calcPack = packKey;
+    set("calcCta", "«" + packName + "» unverbindlich anfragen");
   }
   function seg(id, cb){
     var wrap = document.getElementById(id);
@@ -1264,18 +1286,32 @@ function sendLead(fields, subject){
 (function(){
   var RATES = [
     {g:"Zürich Stadt", w:17800, h:17000},{g:"Küsnacht", w:18400, h:19000},{g:"Meilen", w:18200, h:17500},
-    {g:"Uster", w:11400, h:11300},{g:"Kloten", w:11100, h:11000},{g:"Bülach", w:10600, h:10400},
-    {g:"Winterthur", w:10500, h:10100},{g:"Dietikon", w:10400, h:11100},{g:"Dübendorf", w:12200, h:12000},
+    {g:"Wallisellen", w:12600, h:12400},{g:"Dübendorf", w:12200, h:12000},{g:"Opfikon (Glattbrugg/Glattpark)", w:11600, h:11300},
+    {g:"Dietlikon", w:11500, h:11400},{g:"Uster", w:11400, h:11300},{g:"Kloten", w:11100, h:11000},
+    {g:"Regensdorf", w:11000, h:10900},{g:"Bülach", w:10900, h:10700},{g:"Bassersdorf", w:10600, h:10500},
+    {g:"Winterthur", w:10500, h:10100},{g:"Dietikon", w:10400, h:11100},{g:"Rümlang", w:10400, h:10300},
+    {g:"Nürensdorf", w:10400, h:10700},{g:"Oberglatt", w:9900, h:9700},{g:"Embrach", w:9600, h:9400},
     {g:"Andere Gemeinde im Kanton Zürich", w:12000, h:11100},
     {g:"Ausserhalb Kanton Zürich", w:9500, h:8800}
-  ];
-  function bchf(v){ var r=Math.round(v); return "CHF "+Math.abs(r).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"'"); }
+  ];  function bchf(v){ var r=Math.round(v); return "CHF "+Math.abs(r).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"'"); }
   function r10k(x){ return Math.round(x/10000)*10000; }
   function ageFactor(bj){ bj=parseInt(bj,10); if(!bj) return 1; var y=new Date().getFullYear(), a=y-bj; if(a<5)return 1.05; if(a<15)return 1.02; if(a<30)return 1; if(a<50)return .96; return .91; }
   function el(id){ return document.getElementById(id); }
   var gem = el("bw_gem");
   if(!gem) return;
-  gem.innerHTML = RATES.map(function(r,i){ return '<option value="'+i+'"'+(r.g==="Kloten"?" selected":"")+'>'+r.g+'</option>'; }).join("");
+  gem.innerHTML = RATES.map(function(r,i){ return '<option value="'+i+'">'+r.g+'</option>'; }).join("");
+  (function(){
+    var want = "kloten";
+    try { var q = new URLSearchParams(location.search).get("g"); if(q) want = q; } catch(e){}
+    var norm = function(t){ return String(t).toLowerCase()
+      .replace(/ü/g,"u").replace(/ö/g,"o").replace(/ä/g,"a")
+      .replace(/ue/g,"u").replace(/oe/g,"o").replace(/ae/g,"a")
+      .replace(/[^a-z]/g,""); };
+    var w = norm(want), pick = -1;
+    RATES.forEach(function(r,i){ if(pick<0 && w && norm(r.g).indexOf(w)===0) pick = i; });
+    if(pick<0) pick = RATES.map(function(r){return r.g;}).indexOf("Kloten");
+    gem.value = pick < 0 ? 0 : pick;
+  })();
 
   var last = null; // {range, mid, data}
 
@@ -1293,40 +1329,60 @@ function sendLead(fields, subject){
       bemerkungen:"Online-Bewertung: "+bchf(lo)+" – "+bchf(hi)+" (Mittelwert "+bchf(mid)+"), Zustand-Faktor "+zu+", Baujahr "+(el("bw_bj").value||"–"),
       paket:"Online-Bewertung"
     }};
+    var gemTxt = (RATES[ri].g==="Andere Gemeinde im Kanton Zürich"||RATES[ri].g==="Ausserhalb Kanton Zürich") ? "Ihrer Gemeinde" : RATES[ri].g;
+    last.data.richtwert = bchf(lo)+" - "+bchf(hi);
+    last.data.ersparnis = bchf(saveB)+" bis "+bchf(save)+" (bei 2.5 % Provision, vor Steuern)";
     el("bw_result").innerHTML =
       '<div class="savebig"><div class="t">Geschätzter Marktwert</div>'+
         '<div class="v" style="font-size:26px">'+bchf(lo)+' – '+bchf(hi)+'</div>'+
-        '<div class="s">Richtwert · '+artTxt+', '+fl+' m² in '+((RATES[ri].g==="Andere Gemeinde im Kanton Zürich"||RATES[ri].g==="Ausserhalb Kanton Zürich")?"Ihrer Gemeinde":RATES[ri].g)+'</div>'+(el("bw_art").value==="h"?'<div class="s" style="margin-top:6px">Bei Häusern ist der Landwert nicht eingerechnet. Der Richtwert ist deshalb besonders grob.</div>':'')+'</div>'+
-      '<div class="bw-save"><b>Ihre Ersparnis gegenüber dem Makler:</b><br>'+
-        'Bei ca. '+bchf(mid)+' zahlen Sie beim Makler rund <b>'+bchf(prov)+' Provision</b> (2,5 %). '+
-        'Mit Eigenhand zahlen Sie einen Festpreis von CHF 1\'490 bis CHF 6\'900, je nachdem, wie viel Sie selbst übernehmen. Rechnerisch bleiben Ihnen so rund <b>'+bchf(saveB)+' bis '+bchf(save)+'</b> mehr (vor Steuern).</div>'+
-      '<div class="bw-lead">'+
-        '<div class="bw-leadhead">Genaue Einschätzung &amp; Festpreis-Angebot erhalten</div>'+
+        '<div class="s">Richtwert · '+artTxt+', '+fl+' m² in '+gemTxt+'</div>'+(el("bw_art").value==="h"?'<div class="s" style="margin-top:6px">Bei Häusern ist der Landwert nicht eingerechnet. Der Richtwert ist deshalb besonders grob.</div>':'')+'</div>'+
+      '<div class="bw-save">'+
+        '<div class="bw-row"><span>Makler, 2.5 % Provision</span><b>'+bchf(prov)+'</b></div>'+
+        '<div class="bw-row"><span>Eigenhand «Begleitet»<small>wir übernehmen Besichtigungen und Verhandlung</small></span><b>CHF 6\'900</b></div>'+
+        '<div class="bw-row tot"><span>Bleibt Ihnen mehr</span><b>'+bchf(saveB)+'</b></div>'+
+        '<p class="bw-small">Machen Sie mehr selbst («Selbst», CHF 1\'490), sind es bis '+bchf(save)+'. Vor Steuern.</p>'+
+      '</div>'+
+      '<div class="bw-lead" id="bw_lead">'+
+        '<div class="bw-leadhead">Genaue Einschätzung gratis per E-Mail</div>'+
+        '<ul class="bw-get"><li>Preisspanne mit Vergleichsverkäufen aus '+gemTxt+'</li><li>Ehrliche Paket-Empfehlung für Ihre Situation</li><li>Innert 24 Stunden, ohne Anruf</li></ul>'+
         '<div class="bw-two"><div><label for="bw_name">Name</label><input id="bw_name" autocomplete="name"></div>'+
           '<div><label for="bw_email">E-Mail</label><input id="bw_email" type="email" autocomplete="email"></div></div>'+
-        '<div><label for="bw_tel">Telefon <span class="bw-opt">(optional)</span></label><input id="bw_tel" type="tel" autocomplete="tel"></div>'+
+        '<div><span class="bw-lab">Wann möchten Sie verkaufen? <span class="bw-opt">(optional)</span></span>'+
+          '<div class="bw-chips" id="bw_zeit">'+
+            '<button type="button" data-v="So bald wie möglich">Bald</button>'+
+            '<button type="button" data-v="In 1 bis 3 Monaten">1–3 Monate</button>'+
+            '<button type="button" data-v="In 3 bis 12 Monaten">3–12 Monate</button>'+
+            '<button type="button" data-v="Ich informiere mich erst">Nur informieren</button>'+
+          '</div></div>'+
         '<div class="hp" aria-hidden="true"><input id="bw_web" type="text" tabindex="-1" autocomplete="off"></div>'+
-        '<button type="button" class="btn mint block" id="bw_send">Auswertung &amp; Angebot anfordern</button>'+
+        '<button type="button" class="btn mint block" id="bw_send">Genaue Einschätzung anfordern</button>'+
         '<p class="bw-msg" id="bw_sendmsg"></p>'+
-        '<p class="bw-hint">Lieber sofort starten? <a href="#preise">Pakete ansehen</a></p>'+
+        '<p class="bw-hint">Mit dem Absenden sind Sie einverstanden, dass wir Sie per E-Mail zu dieser Anfrage kontaktieren (<a href="#datenschutz">Datenschutz</a>). Schon entschieden? <a href="#preise">Pakete ansehen</a></p>'+
       '</div>';
+    var zeitWrap = el("bw_zeit");
+    zeitWrap.addEventListener("click", function(e){
+      var b = e.target.closest("button"); if(!b) return;
+      var on = b.getAttribute("aria-pressed")!=="true";
+      Array.prototype.forEach.call(zeitWrap.querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed","false"); });
+      if(on) b.setAttribute("aria-pressed","true");
+    });
     document.getElementById("bw_send").addEventListener("click", sendBew);
     el("bw_result").scrollIntoView({behavior:"smooth", block:"nearest"});
   });
 
   function sendBew(){
-    var name=(el("bw_name").value||"").trim(), tel=(el("bw_tel").value||"").trim(), email=(el("bw_email").value||"").trim();
+    var name=(el("bw_name").value||"").trim(), email=(el("bw_email").value||"").trim();
     var msg=el("bw_sendmsg");
     if(!name || !email){ msg.textContent="Bitte Name und E-Mail angeben."; msg.style.color="var(--warn)"; return; }
-    if(email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ msg.textContent="Bitte eine gültige E-Mail angeben."; msg.style.color="var(--warn)"; return; }
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ msg.textContent="Bitte eine gültige E-Mail angeben."; msg.style.color="var(--warn)"; return; }
+    var zsel = document.querySelector('#bw_zeit button[aria-pressed="true"]');
     var btn=el("bw_send"); btn.disabled=true; btn.textContent="Wird gesendet …"; msg.textContent="";
-    var fields = Object.assign({ name:name, telefon:tel, email:email, hp_field:(el("bw_web")?el("bw_web").value:"") }, (last?last.data:{}));
+    var fields = Object.assign({ name:name, email:email, zeithorizont:(zsel?zsel.getAttribute("data-v"):""), hp_field:(el("bw_web")?el("bw_web").value:"") }, (last?last.data:{}));
     sendLead(fields, "Neue Online-Bewertung (Lead)").then(function(){
-      el("bw_result").insertAdjacentHTML("beforeend","");
-      var lead = document.querySelector("#bw_result .bw-lead");
+      var lead = el("bw_lead");
       if(lead){ lead.outerHTML =
-        '<div class="bw-success"><b>Danke, '+ (name.split(" ")[0]||"") +'! Ihre Anfrage ist bei uns.</b>'+
-        'Sie erhalten die genaue Einschätzung innert 24 Stunden per E-Mail. Wenn Sie schon wissen, wie Sie verkaufen möchten:</div>'+
+        '<div class="bw-success"><b>Danke, '+ esc1(name.split(" ")[0]||"") +'! Ihre Anfrage ist bei uns.</b>'+
+        'Ihren Richtwert haben wir Ihnen soeben per E-Mail geschickt. Die genaue Einschätzung folgt innert 24 Stunden. Wenn Sie schon wissen, wie Sie verkaufen möchten:</div>'+
         '<div class="bw-cta">'+
           '<button type="button" class="btn block" onclick="openBooking(\'begleitet\')">«Begleitet» – CHF 6\'900</button>'+
           '<button type="button" class="btn sec block" onclick="openBooking(\'pro\')">«Pro» – CHF 2\'490</button>'+
@@ -1338,6 +1394,7 @@ function sendLead(fields, subject){
       msg.textContent="Senden hat nicht geklappt. Bitte schreiben Sie an info@eigenhand.ch."; msg.style.color="var(--warn)";
     });
   }
+  function esc1(t){ return String(t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
 })();
 </script>
 <script>

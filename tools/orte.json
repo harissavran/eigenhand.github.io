@@ -1,0 +1,110 @@
+{
+  "_hinweis": "Grundlage für die Ortsseiten. 'w' und 'h' sind grobe Richtwerte pro m² (Wohnung / Haus) und müssen periodisch geprüft werden. Nach Änderungen: python3 tools/build_orte.py",
+  "_stand": "November 2026",
+  "orte": [
+    {
+      "slug": "kloten",
+      "name": "Kloten",
+      "plz": "8302",
+      "bezirk": "Bülach",
+      "w": 11100,
+      "h": 11000,
+      "beispiel_flaeche": 100,
+      "intro": "Kloten ist vom Flughafen geprägt – als grösster Arbeitgeber der Region und beim Thema Fluglärm. Wer hier verkauft, bekommt fast immer Fragen zur Anflugroute und zu den Lärmzeiten.",
+      "markt": "Ein grosser Teil des Bestands sind Mehrfamilienhäuser aus den 1960er- bis 1980er-Jahren, dazu kommen Einfamilienhausquartiere an den Hanglagen Richtung Wald. Käufer sind häufig Familien aus der Region sowie Berufstätige mit Arbeitsort Flughafen oder Zürich-Nord, die kurze Wege suchen.",
+      "tipp": "Sprechen Sie die Lärmsituation offen an, mit Quartier, Ausrichtung der Zimmer und Schallschutzfenstern. Käufer recherchieren das ohnehin, und eine ehrliche Angabe verhindert Besichtigungen, die zu nichts führen.",
+      "lokal": "Eigenhand ist selbst in Kloten zuhause. Fotos und Besichtigungen vor Ort sind hier also unkompliziert."
+    },
+    {
+      "slug": "buelach",
+      "name": "Bülach",
+      "plz": "8180",
+      "bezirk": "Bülach",
+      "w": 10900,
+      "h": 10700,
+      "beispiel_flaeche": 110,
+      "intro": "Bülach wächst seit Jahren stark und ist Hauptort des Bezirks. Mit dem Glasi-Areal und weiteren Neubauprojekten sind viele moderne Eigentumswohnungen auf den Markt gekommen.",
+      "markt": "Für Verkäufer heisst das: Neubauwohnungen stehen in direkter Konkurrenz zu Projekten mit professioneller Vermarktung. Ältere Wohnungen und Häuser punkten dafür mit Lage, Grundstück und Preis. Käufer sind meist Familien und Pendler, welche die direkte Bahnverbindung nach Zürich und Winterthur schätzen.",
+      "tipp": "Stellen Sie heraus, was ein Neubau nicht bietet: gewachsene Umgebung, grössere Grundstücke, Bäume und oft tiefere Nebenkosten.",
+      "lokal": "Bülach liegt nur wenige Minuten von Kloten entfernt, Fotos und Besichtigungen vor Ort sind problemlos möglich."
+    },
+    {
+      "slug": "opfikon",
+      "name": "Opfikon",
+      "plz": "8152",
+      "bezirk": "Bülach",
+      "w": 11600,
+      "h": 11300,
+      "beispiel_flaeche": 95,
+      "intro": "Opfikon ist mit Glattbrugg und dem Glattpark eine der urbansten Gemeinden im Zürcher Unterland. Im Glattpark dominieren moderne Eigentumswohnungen in grösseren Überbauungen.",
+      "markt": "Genau das ist die Herausforderung: Oft sind in derselben Überbauung mehrere ähnliche Wohnungen gleichzeitig ausgeschrieben. Wer auffallen will, braucht bessere Bilder und ein klares Merkmal, das heraussticht, etwa Stockwerk, Aussicht oder Ausrichtung. Käufer sind häufig Berufstätige aus Zürich-Nord und international tätige Personen.",
+      "tipp": "Ein zusätzlicher Inseratstext auf Englisch lohnt sich hier besonders, weil viele Interessenten aus dem internationalen Umfeld kommen.",
+      "lokal": "Glattbrugg und Glattpark sind von Kloten aus in wenigen Minuten erreichbar."
+    },
+    {
+      "slug": "wallisellen",
+      "name": "Wallisellen",
+      "plz": "8304",
+      "bezirk": "Bülach",
+      "w": 12600,
+      "h": 12400,
+      "beispiel_flaeche": 110,
+      "intro": "Wallisellen ist über S-Bahn und Glattalbahn hervorragend erschlossen und mit dem Glattzentrum ein Einkaufsschwerpunkt der Region. Die Preise liegen entsprechend über dem Durchschnitt des Bezirks.",
+      "markt": "Neben modernen Überbauungen wie dem Richti-Areal gibt es gewachsene Quartiere mit Einfamilien- und Reihenhäusern. Käufer sind häufig Familien und Doppelverdiener, die in der Stadt arbeiten, aber mehr Platz möchten.",
+      "tipp": "Rechnen Sie die Wegzeiten konkret vor, etwa zum Hauptbahnhof oder zum Flughafen. Die Erreichbarkeit ist hier eines der stärksten Verkaufsargumente.",
+      "lokal": "Wallisellen liegt im Einzugsgebiet von Eigenhand, Fototermine sind kurzfristig möglich."
+    },
+    {
+      "slug": "bassersdorf",
+      "name": "Bassersdorf",
+      "plz": "8303",
+      "bezirk": "Bülach",
+      "w": 10600,
+      "h": 10500,
+      "beispiel_flaeche": 140,
+      "intro": "Bassersdorf ist dörflicher als die Nachbargemeinden und liegt trotzdem nahe am Flughafen und an der Autobahn. Der Anteil an Einfamilien- und Reihenhäusern ist hoch.",
+      "markt": "Käufer sind fast immer Familien, die Platz und einen Garten suchen und dafür etwas längere Wege in Kauf nehmen. Preislich liegt Bassersdorf unter Kloten und Opfikon, und für viele ist genau das der Grund für den Umzug.",
+      "tipp": "Zeigen Sie Garten und Umgebung so, wie Familien sie nutzen: Spielplatz, Schulweg, Einkaufen zu Fuss. Diese Angaben entscheiden hier öfter als die Küche.",
+      "lokal": "Bassersdorf grenzt an Kloten, Fotos und Besichtigungen vor Ort sind unkompliziert."
+    },
+    {
+      "slug": "dietlikon",
+      "name": "Dietlikon",
+      "plz": "8305",
+      "bezirk": "Bülach",
+      "w": 11500,
+      "h": 11400,
+      "beispiel_flaeche": 120,
+      "intro": "Dietlikon ist klein, zentral gelegen und über S-Bahn und Autobahn sehr gut angebunden. Die Gemeinde ist bei Familien beliebt, und der Markt ist entsprechend überschaubar.",
+      "markt": "Weil selten viele Objekte gleichzeitig auf dem Markt sind, bekommt ein gut gemachtes Inserat hier überdurchschnittlich viel Aufmerksamkeit. Der Bestand reicht von Einfamilienhäusern aus den 1970er-Jahren bis zu neueren Eigentumswohnungen.",
+      "tipp": "Warten Sie nicht auf den perfekten Zeitpunkt. Bei kleinem Angebot zählt vor allem, dass Ihr Objekt auf allen grossen Portalen gleichzeitig sichtbar ist.",
+      "lokal": "Dietlikon ist von Kloten aus in rund einer Viertelstunde erreichbar."
+    },
+    {
+      "slug": "embrach",
+      "name": "Embrach",
+      "plz": "8424",
+      "bezirk": "Bülach",
+      "w": 9600,
+      "h": 9400,
+      "beispiel_flaeche": 140,
+      "intro": "Embrach liegt im Embrachertal, ist grüner und deutlich günstiger als die Gemeinden rund um den Flughafen. Viele Käufer kommen genau deswegen hierher.",
+      "markt": "Der Bestand ist stark von Einfamilienhäusern und kleineren Mehrfamilienhäusern geprägt. Käufer sind Familien und Pendler, für die das Budget in Kloten oder Bülach nicht mehr reicht.",
+      "tipp": "Rechnen Sie den Preisunterschied zu den Nachbargemeinden vor. Wer zwischen Embrach und Bülach schwankt, entscheidet oft über den Quadratmeterpreis.",
+      "lokal": "Embrach liegt rund zehn Minuten von Kloten entfernt."
+    },
+    {
+      "slug": "nuerensdorf",
+      "name": "Nürensdorf",
+      "plz": "8309",
+      "bezirk": "Bülach",
+      "w": 10400,
+      "h": 10700,
+      "beispiel_flaeche": 140,
+      "intro": "Nürensdorf mit Birchwil, Breite und Oberwil gilt als steuergünstig und ländlich. Häuser und Wohnungen liegen hier oft am Dorfrand mit Blick ins Grüne.",
+      "markt": "Der Markt ist klein und stark von Einfamilienhäusern geprägt, die Erschliessung mit öffentlichem Verkehr ist schwächer als in den Nachbargemeinden. Käufer sind meist Familien mit Auto, denen Ruhe und Steuerbelastung wichtiger sind als die Nähe zum Bahnhof.",
+      "tipp": "Der tiefe Steuerfuss ist hier ein echtes Verkaufsargument. Nennen Sie ihn im Inserat, zusammen mit der Fahrzeit zum nächsten Bahnhof und zur Autobahn.",
+      "lokal": "Nürensdorf liegt gleich neben Bassersdorf und ist von Kloten aus schnell erreichbar."
+    }
+  ]
+}

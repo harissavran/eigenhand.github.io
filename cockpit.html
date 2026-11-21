@@ -78,6 +78,12 @@ main{padding:26px 0 80px}
 .s-verkauft{background:#123D2F;color:#fff}
 .s-verloren{background:#EFECEA;color:#79716B}
 .empty{text-align:center;padding:50px 20px;color:var(--muted)}
+.due{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap;background:#FBE3DA;color:var(--warn)}
+.due.ok{background:#E7EEF6;color:#2C5C8A}
+.dueBanner{background:#FBE3DA;color:#8A3A20;border-radius:12px;padding:12px 16px;margin:0 0 14px;font-size:14px;font-weight:600;cursor:pointer}
+.nextbox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:4px 0 16px}
+.nextbox .t{font-size:13px;font-weight:700;color:var(--muted2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em}
+.nextbox .row{display:flex;gap:8px;flex-wrap:wrap}
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
 .toolbar input{max-width:260px}
 .toolbar .spacer{flex:1}
@@ -821,10 +827,44 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
       <div class="fld"><label class="fl">Paket / Interesse</label><input id="l_paket"></div>
     </div>
     <div class="fld"><label class="fl">Notizen</label><textarea id="l_notes"></textarea></div>
+    <div class="nextbox" id="l_next">
+      <div class="t">Nächster Schritt</div>
+      <div class="row">
+        <button class="btn sm" id="l_eiBtn">1 · Ersteinschätzung-Mail</button>
+        <button class="btn sec sm" id="l_abBtn">2 · Kunde sagt «Start» → Abschluss</button>
+      </div>
+      <p class="tiny" style="margin:8px 0 0">Die Ersteinschätzung endet mit «Antworten Sie einfach mit Start». Kommt die Antwort, gehst du direkt zum Abschluss: Mail, Auftrag, QR-Rechnung.</p>
+    </div>
     <div style="display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap">
       <button class="btn danger sm" id="l_del">Löschen</button>
       <div style="display:flex;gap:8px"><button class="btn sec sm" id="l_cancel">Abbrechen</button><button class="btn sm" id="l_save">Speichern</button></div>
     </div>
+  </div>
+</div>
+
+<!-- Ersteinschätzung-Modal -->
+<div class="ovl" id="eiOvl">
+  <div class="modal" style="max-width:760px">
+    <button class="x" id="eiX">×</button>
+    <h3>Ersteinschätzung per E-Mail</h3>
+    <p class="muted" style="margin:-8px 0 14px">Spanne ist aus Fläche und Gemeinde vorgerechnet (bzw. aus der Online-Bewertung übernommen). Kurz prüfen, anpassen, senden.</p>
+    <div class="grid3">
+      <div class="fld"><label class="fl">Marktwert von (CHF)</label><input id="ei_lo" inputmode="numeric"></div>
+      <div class="fld"><label class="fl">bis (CHF)</label><input id="ei_hi" inputmode="numeric"></div>
+      <div class="fld"><label class="fl">Empfehlung</label>
+        <select id="ei_pak"><option value="begleitet">Begleitet</option><option value="pro">Pro</option><option value="selbst">Selbst</option></select></div>
+    </div>
+    <div class="grid2">
+      <div class="fld"><label class="fl">Anrede</label><select id="ei_anr"><option value="sie" selected>Sie (formell)</option><option value="du">Du (locker)</option></select></div>
+      <div class="fld"><label class="fl">Betreff</label><input id="ei_subj"></div>
+    </div>
+    <div class="fld"><label class="fl">E-Mail-Text <span class="tiny">(frei anpassbar)</span></label><textarea id="ei_body" style="min-height:340px"></textarea></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn sm" id="ei_mailto">Als E-Mail öffnen</button>
+      <button class="btn sec sm" id="ei_copy">Text kopieren</button>
+      <button class="btn sec sm" id="ei_done">Als «Kontaktiert» markieren</button>
+    </div>
+    <p class="tiny" id="ei_msg" style="margin-top:10px"></p>
   </div>
 </div>
 
@@ -937,15 +977,25 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
       if(q){ var hay=((l.name||"")+" "+(l.gemeinde||"")+" "+(l.email||"")+" "+(l.plz||"")+" "+(l.art||"")).toLowerCase(); return hay.indexOf(q)>=0; }
       return true;
     });
-    if(!list.length){ $("leadList").innerHTML='<div class="empty">Keine Leads'+(LEADS.length?" in dieser Ansicht.":" vorhanden. Sobald jemand das Formular ausfüllt, erscheinen sie hier automatisch.")+'</div>'; return; }
-    $("leadList").innerHTML=list.map(function(l){
+    var overdue=LEADS.filter(function(l){ return (l.status||"neu")==="neu" && hoursSince(l.created_at)>=18; }).length;
+    var banner = overdue ? '<div class="dueBanner" id="dueBanner">⚠ '+overdue+' neue'+(overdue===1?"r Lead wartet":" Leads warten")+' seit über 18 Stunden auf die Ersteinschätzung (Versprechen: 24 h). Antippen zum Filtern.</div>' : "";
+    if(!list.length){ $("leadList").innerHTML=banner+'<div class="empty">Keine Leads'+(LEADS.length?" in dieser Ansicht.":" vorhanden. Sobald jemand das Formular ausfüllt, erscheinen sie hier automatisch.")+'</div>'; return; }
+    $("leadList").innerHTML=banner+list.map(function(l){
       var meta=[l.art,l.gemeinde,(l.zi?l.zi+" Zi":""),(l.fl?l.fl+" m²":""),l.tel].filter(Boolean).join(" · ");
       var web = l.quelle==="website" ? '<span class="badgewebsite">Website</span>' : "";
+      var due = dueBadge(l);
       return '<div class="leadrow" data-id="'+l.id+'"><div class="main"><div class="nm">'+esc(l.name||"Ohne Namen")+'</div><div class="meta">'+esc(meta)+'</div></div>'+
-        '<div class="right">'+web+'<span class="stat s-'+(l.status||"neu")+'">'+statLabel(l.status)+'</span><button class="btn sec sm" data-open="'+l.id+'">Öffnen</button></div></div>';
+        '<div class="right">'+due+web+'<span class="stat s-'+(l.status||"neu")+'">'+statLabel(l.status)+'</span><button class="btn sec sm" data-open="'+l.id+'">Öffnen</button></div></div>';
     }).join("");
   }
-  $("leadList").addEventListener("click", function(e){ var b=e.target.closest("[data-open]")||e.target.closest(".leadrow"); if(b){ var id=b.getAttribute("data-open")||b.getAttribute("data-id"); openLead(id); } });
+  function hoursSince(ts){ if(!ts) return 0; var t=new Date(ts).getTime(); return isNaN(t)?0:(Date.now()-t)/36e5; }
+  function dueBadge(l){
+    if((l.status||"neu")!=="neu") return "";
+    var h=hoursSince(l.created_at); if(!h) return "";
+    var txt = h<1 ? "gerade eben" : (h<48 ? Math.floor(h)+" h" : Math.floor(h/24)+" Tage");
+    return h>=18 ? '<span class="due">Antwort fällig · '+txt+'</span>' : '<span class="due ok">neu · '+txt+'</span>';
+  }
+  $("leadList").addEventListener("click", function(e){ if(e.target.closest("#dueBanner")){ filterStatus="neu"; renderPipeline(); renderLeads(); return; } var b=e.target.closest("[data-open]")||e.target.closest(".leadrow"); if(b){ var id=b.getAttribute("data-open")||b.getAttribute("data-id"); openLead(id); } });
   $("search").addEventListener("input", function(){ searchQ=this.value; renderLeads(); });
 
   /* ---------- Lead modal ---------- */
@@ -959,6 +1009,7 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
     [["l_name","name"],["l_tel","tel"],["l_email","email"],["l_art","art"],["l_plz","plz"],["l_gem","gemeinde"],["l_zi","zi"],["l_fl","fl"],["l_bj","bj"],["l_preis","preis"],["l_zeit","zeit"],["l_err","err"],["l_paket","paket"],["l_notes","notes"]].forEach(function(p){ $(p[0]).value = l?(l[p[1]]||""):""; });
     $("l_status").value = l?(l.status||"neu"):"neu";
     $("l_del").style.display = l?"":"none";
+    $("l_next").style.display = l?"":"none";
     $("leadOvl").classList.add("open");
   }
   function closeLead(){ $("leadOvl").classList.remove("open"); }
@@ -1870,9 +1921,9 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
   function abPkg(k){
     var P={
       selbst:{ name:"Selbst", preis:"CHF 1'490", invDesc:"Paket «Selbst» – Verkauf zum Festpreis", invAmt:1490, split:false,
-        incl:["Ihre Fotos aufbereitet und ein professionelles Exposé","Inserat auf Homegate, ImmoScout24, newhome und weiteren Portalen (90 Tage)","Preisschätzung mit Vergleichsobjekten","Alle Anfragen kommen zu Ihnen, Sie entscheiden, wen Sie einladen"] },
+        incl:["Ihre Fotos aufbereitet und ein professionelles Exposé","Inserat auf Homegate, ImmoScout24 und Acheter-Louer (90 Tage)","Preisschätzung mit Vergleichsobjekten","Alle Anfragen kommen zu Ihnen, Sie entscheiden, wen Sie einladen"] },
       pro:{ name:"Pro", preis:"CHF 2'490", invDesc:"Paket «Pro» – Verkauf zum Festpreis", invAmt:2490, split:false,
-        incl:["Alles aus «Selbst»","Professionelle Objektfotos","Detaillierte Preiseinschätzung mit Marktanalyse","Ein fester Ansprechpartner während des ganzen Verkaufs","Beratung bei Kaufangeboten und Verhandlung"] },
+        incl:["Alles aus «Selbst»","Inserat online, bis verkauft ist – ohne Zeitlimit","Professionelle Objektfotos","Detaillierte Preiseinschätzung mit Marktanalyse","Ein fester Ansprechpartner während des ganzen Verkaufs","Beratung bei Kaufangeboten und Verhandlung"] },
       begleitet:{ name:"Begleitet", preis:"CHF 6'900 (CHF 2'900 bei Start, CHF 4'000 erst beim Verkauf)", invDesc:"Paket «Begleitet» – Anzahlung bei Start", invAmt:2900, split:true,
         incl:["Alles aus «Pro»","Wir führen die Besichtigungen durch (2 Tage inklusive)","Prüfung der Käufer inklusive Finanzierungsnachweis","Wir verhandeln den Preis in Ihrem Auftrag","Unterlagen und Koordination bis zum Notartermin"] },
       bewertung:{ name:"Nur Bewertung", preis:"CHF 290", invDesc:"Immobilienbewertung", invAmt:290, split:false,
@@ -1898,7 +1949,7 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
 "Guten Tag "+(name||"")+"\n\n"+
 "schön, dass Sie sich für den Verkauf mit Eigenhand entschieden haben. Für "+objTxt+" passt das Paket «"+p.name+"» gut.\n\n"+
 "Im Paket enthalten:\n"+incl+"\n\n"+
-"Preis: "+p.preis+" als Festpreis, ohne Provision."+(p.name!=="Nur Bewertung"?" Die Portalkosten für 90 Tage sind inbegriffen.":"")+"\n\n"+
+"Preis: "+p.preis+" als Festpreis, ohne Provision."+(p.name==="Selbst"?" Die Portalkosten für 90 Tage sind inbegriffen.":(p.name!=="Nur Bewertung"?" Die Portalkosten sind inbegriffen, bis verkauft ist.":""))+"\n\n"+
 "So geht es weiter:\n"+
 "1. Sie erhalten von mir den kurzen Auftrag zur Unterschrift, das dauert zwei Minuten direkt vom Handy.\n"+
 "2. "+payS+(payS2?" "+payS2:"")+"\n"+
@@ -1914,7 +1965,7 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
 "Hoi "+(fn||"")+"\n\n"+
 "schön, dass du mit Eigenhand verkaufst. Für "+objTxt+" passt das Paket «"+p.name+"» gut.\n\n"+
 "Im Paket enthalten:\n"+incl+"\n\n"+
-"Preis: "+p.preis+" als Festpreis, ohne Provision."+(p.name!=="Nur Bewertung"?" Die Portalkosten für 90 Tage sind dabei.":"")+"\n\n"+
+"Preis: "+p.preis+" als Festpreis, ohne Provision."+(p.name==="Selbst"?" Die Portalkosten für 90 Tage sind dabei.":(p.name!=="Nur Bewertung"?" Die Portalkosten sind dabei, bis verkauft ist.":""))+"\n\n"+
 "So geht es weiter:\n"+
 "1. Du bekommst von mir den kurzen Auftrag zur Unterschrift, zwei Minuten direkt vom Handy.\n"+
 "2. "+payD+"\n"+
@@ -1950,7 +2001,7 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
       $("ab_name").value=l.name||"";
       $("ab_mail").value=l.email||"";
       var objParts=[l.art,(l.zi?l.zi+"-Zimmer":""),(l.plz?l.plz:"")+(l.gemeinde?" "+l.gemeinde:"")].filter(Boolean);
-      $("ab_obj").value=objParts.join(", ").replace(/\s+,/g,",").trim();
+      $("ab_obj").value=objParts.join(", ").replace(/\s+,/g,",").replace(/\s{2,}/g," ").trim();
       var pk=abPkgFromText(l.paket); if(pk) $("ab_pak").value=pk;
     });
     $("ab_gen").addEventListener("click", buildAbschluss);
@@ -1980,6 +2031,123 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
     $("auf_print").addEventListener("click", function(){ document.body.classList.add("auf-print"); window.print(); });
     window.addEventListener("afterprint", function(){ document.body.classList.remove("auf-print"); });
     document.querySelector('#tabs button[data-v="abschluss"]').addEventListener("click", fillAbLeads);
+  }
+
+
+  /* ---------- Ersteinschätzung-Mail (Schritt 1 nach neuem Lead) ---------- */
+  var EI_LEAD=null;
+  var EI_PRICE={selbst:1490, pro:2490, begleitet:6900};
+  function eiNum(v){ return parseFloat(String(v==null?"":v).replace(/[^0-9.]/g,""))||0; }
+  function eiFmt(v){ return Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"'"); }
+  function eiRange(l){
+    // 1) Online-Bewertung: "CHF 1'110'000 – CHF 1'330'000" steht im Feld preis
+    var m=String(l.preis||"").match(/([\d']{5,})\D+([\d']{5,})/);
+    if(m){ var a=eiNum(m[1]), b=eiNum(m[2]); if(a&&b) return [Math.min(a,b),Math.max(a,b)]; }
+    // 2) Aus Fläche und Gemeinde mit den m²-Preisen aus den Einstellungen
+    var fl=eiNum(l.fl); if(!fl) { var single=eiNum(l.preis); return single?[round10k(single*0.95),round10k(single*1.05)]:[0,0]; }
+    var r=rates(), g=(l.gemeinde||"").toLowerCase(), hit=null;
+    r.forEach(function(x){ var n=x.g.toLowerCase(); if(!hit && g && (n.indexOf(g)>=0 || g.indexOf(n.split(" ")[0])>=0)) hit=x; });
+    if(!hit){ r.forEach(function(x){ if(!hit && /durchschnitt/i.test(x.g)) hit=x; }); }
+    if(!hit) hit=r[r.length-1];
+    var haus=/haus/i.test(l.art||""), val=fl*(haus?hit.h:hit.w);
+    return [round10k(val*0.91), round10k(val*1.09)];
+  }
+  function eiPkgGuess(l){
+    var t=((l.paket||"")+" "+(l.notes||"")).toLowerCase();
+    if(t.indexOf("selbst")>=0) return "selbst";
+    if(/\bpro\b/.test(t)) return "pro";
+    return "begleitet";
+  }
+  function eiBuild(){
+    var l=EI_LEAD||{}, sie=$("ei_anr").value==="sie";
+    var lo=eiNum($("ei_lo").value), hi=eiNum($("ei_hi").value), mid=(lo+hi)/2;
+    var pk=$("ei_pak").value, pkName={selbst:"Selbst",pro:"Pro",begleitet:"Begleitet"}[pk], price=EI_PRICE[pk];
+    var prov=mid*0.025, bleibt=Math.max(0,prov-price);
+    var art=(l.art||"Immobilie"), ort=l.gemeinde||"", objekt=art+(ort?" in "+ort:"")+(l.fl?" ("+l.fl+" m²)":"");
+    var why={
+      begleitet: sie ? "Sie müssen sich um nichts kümmern: Wir führen die Besichtigungen durch, prüfen die Käufer und verhandeln für Sie. CHF 2'900 bei Start, CHF 4'000 erst, wenn der Verkauf beim Notar beurkundet ist."
+                     : "Du musst dich um nichts kümmern: Wir führen die Besichtigungen durch, prüfen die Käufer und verhandeln für dich. CHF 2'900 bei Start, CHF 4'000 erst, wenn der Verkauf beim Notar beurkundet ist.",
+      pro: sie ? "Sie zeigen die Immobilie selbst, haben aber Profi-Fotos, eine detaillierte Marktanalyse und mich als Berater bei Angeboten und Verhandlung an Ihrer Seite."
+               : "Du zeigst die Immobilie selbst, hast aber Profi-Fotos, eine detaillierte Marktanalyse und mich als Berater bei Angeboten und Verhandlung an deiner Seite.",
+      selbst: sie ? "Sie übernehmen Fotos, Anfragen und Besichtigungen selbst und sparen am meisten. Exposé, Inserat auf drei Portalen und Preisschätzung kommen von uns."
+                  : "Du übernimmst Fotos, Anfragen und Besichtigungen selbst und sparst am meisten. Exposé, Inserat auf drei Portalen und Preisschätzung kommen von uns."
+    }[pk];
+    var name=(l.name||"").trim(), fn=name.split(/\s+/)[0]||"";
+    var range = lo&&hi ? "CHF "+eiFmt(lo)+" bis CHF "+eiFmt(hi) : "[Spanne eintragen]";
+    var subj = (sie?"Ihre":"Deine")+" Einschätzung: "+objekt;
+    var b;
+    if(sie){
+      b="Guten Tag "+name+"\n\n"+
+"vielen Dank für Ihre Anfrage. Hier ist meine Einschätzung zu Ihrer "+objekt+".\n\n"+
+"Geschätzter Marktwert: "+range+"\n"+
+"Grundlage sind vergleichbare Verkäufe in "+(ort||"Ihrer Gemeinde")+" und Umgebung. Den genauen Angebotspreis legen wir beim Start gemeinsam fest, anhand Ihrer Unterlagen und Fotos.\n\n"+
+"Was Ihnen mehr bleibt:\n"+
+"Bei rund CHF "+eiFmt(mid)+" verlangt ein Makler mit 2.5 % etwa CHF "+eiFmt(prov)+" Provision. Mit Eigenhand «"+pkName+"» zahlen Sie CHF "+eiFmt(price)+" fix. Es bleiben Ihnen also rund CHF "+eiFmt(bleibt)+" mehr.\n\n"+
+"Meine Empfehlung: «"+pkName+"»\n"+why+"\n\n"+
+"So starten Sie:\n"+
+"Antworten Sie einfach mit «Start» auf diese E-Mail. Sie erhalten dann den kurzen Auftrag zur Unterschrift (zwei Minuten, direkt vom Handy) und die Rechnung. Bis zum Start können Sie jederzeit kostenlos zurücktreten.\n\n"+
+"Haben Sie noch Fragen? Antworten Sie einfach auf diese E-Mail, ich melde mich innert 24 Stunden.\n\n"+
+"Freundliche Grüsse\nHaris Savran\nEigenhand\ninfo@eigenhand.ch\neigenhand.ch";
+    } else {
+      b="Hoi "+fn+"\n\n"+
+"danke für deine Anfrage. Hier ist meine Einschätzung zu deiner "+objekt+".\n\n"+
+"Geschätzter Marktwert: "+range+"\n"+
+"Grundlage sind vergleichbare Verkäufe in "+(ort||"deiner Gemeinde")+" und Umgebung. Den genauen Angebotspreis legen wir beim Start gemeinsam fest.\n\n"+
+"Was dir mehr bleibt:\n"+
+"Bei rund CHF "+eiFmt(mid)+" verlangt ein Makler mit 2.5 % etwa CHF "+eiFmt(prov)+" Provision. Mit Eigenhand «"+pkName+"» zahlst du CHF "+eiFmt(price)+" fix. Es bleiben dir also rund CHF "+eiFmt(bleibt)+" mehr.\n\n"+
+"Meine Empfehlung: «"+pkName+"»\n"+why+"\n\n"+
+"So startest du:\n"+
+"Antworte einfach mit «Start» auf diese Mail. Du bekommst dann den kurzen Auftrag zur Unterschrift (zwei Minuten, direkt vom Handy) und die Rechnung. Bis zum Start kannst du jederzeit kostenlos zurücktreten.\n\n"+
+"Fragen? Schreib mir einfach zurück.\n\n"+
+"Liebe Grüsse\nHaris Savran\nEigenhand\ninfo@eigenhand.ch\neigenhand.ch";
+    }
+    $("ei_subj").value=subj; $("ei_body").value=b;
+  }
+  function openEi(){
+    var l=leadById($("l_id").value); if(!l) return;
+    EI_LEAD=l;
+    var r=eiRange(l);
+    $("ei_lo").value=r[0]?eiFmt(r[0]):""; $("ei_hi").value=r[1]?eiFmt(r[1]):"";
+    $("ei_pak").value=eiPkgGuess(l);
+    $("ei_msg").textContent = r[0] ? "" : "Keine Fläche erfasst: Spanne bitte selbst eintragen (z. B. aus dem Preisrechner).";
+    eiBuild();
+    $("eiOvl").classList.add("open");
+  }
+  if($("eiOvl")){
+    $("l_eiBtn").addEventListener("click", openEi);
+    $("l_abBtn").addEventListener("click", function(){
+      var id=$("l_id").value; if(!id) return;
+      var l=leadById(id);
+      closeLead();
+      document.querySelector('#tabs button[data-v="abschluss"]').click();
+      fillAbLeads();
+      $("ab_lead").value=id;
+      $("ab_lead").dispatchEvent(new Event("change"));
+      var fromLead = l && !/online-bewertung/i.test(l.paket||"") ? abPkgFromText(l.paket) : null;
+      $("ab_pak").value = (EI_LEAD && l && EI_LEAD.id===l.id) ? $("ei_pak").value : (fromLead || "begleitet");
+      buildAbschluss();
+      window.scrollTo(0,0);
+    });
+    ["ei_lo","ei_hi"].forEach(function(id){ $(id).addEventListener("input", eiBuild); });
+    ["ei_pak","ei_anr"].forEach(function(id){ $(id).addEventListener("change", eiBuild); });
+    $("eiX").addEventListener("click", function(){ $("eiOvl").classList.remove("open"); });
+    $("eiOvl").addEventListener("click", function(e){ if(e.target===this) this.classList.remove("open"); });
+    $("ei_copy").addEventListener("click", function(){ copyText($("ei_body").value, $("ei_copy")); });
+    $("ei_mailto").addEventListener("click", function(){
+      var to=encodeURIComponent((EI_LEAD&&EI_LEAD.email)||"");
+      window.location.href="mailto:"+to+"?subject="+encodeURIComponent($("ei_subj").value)+"&body="+encodeURIComponent($("ei_body").value);
+    });
+    $("ei_done").addEventListener("click", function(){
+      if(!EI_LEAD) return;
+      var note=((EI_LEAD.notes||"")+"\n"+new Date().toLocaleDateString("de-CH")+": Ersteinschätzung gesendet ("+$("ei_lo").value+" – "+$("ei_hi").value+", Empfehlung "+$("ei_pak").value+")").trim();
+      $("ei_done").disabled=true;
+      SB.from("leads").update({status:"kontaktiert", notes:note}).eq("id",EI_LEAD.id).then(function(res){
+        $("ei_done").disabled=false;
+        if(res.error){ $("ei_msg").textContent="Speichern fehlgeschlagen: "+res.error.message; return; }
+        $("ei_msg").textContent="Gespeichert: Status «Kontaktiert», Notiz ergänzt.";
+        $("eiOvl").classList.remove("open"); closeLead(); loadLeads();
+      });
+    });
   }
 
   function buildAuftrag(){
