@@ -12,6 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 :root{--bg:#F5F4EF;--surface:#FFFFFF;--ink:#14211C;--muted:#3E4C46;--muted2:#5A675F;--line:#DBD8CF;--green:#1D5B46;--green-d:#123D2F;--mint:#9FE0C3;--mint-bg:#E4EEE8;--warn:#B45233;--amber:#B5881F}
 *{box-sizing:border-box}
@@ -309,6 +311,33 @@ body.auf-print{background:#fff}
 body.auf-print *{visibility:hidden !important}
 body.auf-print #auf_doc,body.auf-print #auf_doc *{visibility:visible !important}
 body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none !important;box-shadow:none !important}
+
+/* ---------- Property Locator ---------- */
+.lo-step{font-size:17px;margin-bottom:6px}
+.lo-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:999px;background:var(--mint);color:var(--green-d);font-size:12px;font-weight:800;margin-right:8px;vertical-align:2px}
+.lo-tbl{width:100%;border-collapse:collapse;font-size:14px}
+.lo-tbl th,.lo-tbl td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.lo-tbl th{width:38%;font-weight:600;color:var(--muted);font-size:13px}
+.lo-tbl tr:last-child th,.lo-tbl tbl tr:last-child td{border-bottom:0}
+.lo-tbl td .src{display:block;font-size:11px;color:var(--muted2);margin-top:3px}
+.lo-badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 12px;font-size:12px;font-weight:700;letter-spacing:.01em}
+.lo-badge.ok{background:var(--mint-bg);color:var(--green-d);border:1px solid var(--mint)}
+.lo-badge.amb{background:#FBF1DA;color:#7A5B0E;border:1px solid #E6CE8E}
+.lo-badge.no{background:#F4F2EE;color:var(--muted);border:1px solid var(--line)}
+.lo-cand{border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin-bottom:10px;background:#fff;display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.lo-cand:hover{border-color:var(--green)}
+.lo-cand .adr{font-weight:700;font-size:15px}
+.lo-cand .meta{font-size:13px;color:var(--muted);margin-top:3px}
+.lo-cand .acts{display:flex;gap:6px;flex-wrap:wrap}
+.lo-note{border-left:3px solid var(--amber);background:#FDFBF4;padding:11px 14px;border-radius:0 10px 10px 0;font-size:13px;color:var(--muted);margin-top:14px}
+#lo_map{height:420px;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--mint-bg)}
+.lo-chk{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
+.lo-chk input{width:auto;margin:0}
+.lo-log{font-size:13px;color:var(--muted)}
+.lo-log div{padding:3px 0}
+.lo-log .y{color:var(--green)}
+.lo-log .n{color:var(--warn)}
+@media(max-width:700px){.lo-tbl th{width:46%}#lo_map{height:300px}}
 </style>
 </head>
 <body>
@@ -344,6 +373,7 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
       <button data-v="abschluss">Abschluss</button>
       <button data-v="invoice">Rechnung</button>
       <button data-v="check">Checkliste</button>
+      <button data-v="loc">Locator</button>
       <button data-v="settings">Einstellungen</button>
     </nav>
   </div>
@@ -741,6 +771,146 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
       </div>
     </div>
     <div class="card"><div id="ck_body"></div></div>
+  </section>
+
+  <!-- Property Locator -->
+  <section class="view" id="v-loc">
+    <div class="vhead">
+      <div><h2>Property Locator</h2><p class="muted">Inserat erfassen, Objektmerkmale extrahieren und mit amtlichen Schweizer Geodaten abgleichen.</p></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn sec sm" id="lo_demo">Beispiel einsetzen</button>
+        <button class="btn sec sm" id="lo_reset">Zurücksetzen</button>
+        <button class="btn sec sm" id="lo_list">Gespeicherte Objekte</button>
+      </div>
+    </div>
+
+    <div class="banner">Der Locator bestimmt keine Adressen durch Vermutung. Er zeigt, welche Standortangaben sich mit amtlichen Daten belegen lassen – und sagt es offen, wenn das nicht gelingt.</div>
+
+    <!-- 1. Erfassen -->
+    <div class="card" style="margin-bottom:18px">
+      <h3 class="lo-step"><span class="lo-num">1</span>Inserat erfassen</h3>
+      <p class="muted" style="margin-bottom:14px">Portale lassen sich technisch nicht direkt auslesen. Kopiere den Inseratstext (Ctrl+A, Ctrl+C auf der Inseratsseite) hier hinein – die Felder werden automatisch erkannt.</p>
+      <div class="fld">
+        <label class="fl" for="lo_url">Link zum Inserat</label>
+        <input id="lo_url" placeholder="https://www.homegate.ch/kaufen/..." autocomplete="off">
+      </div>
+      <div class="fld">
+        <label class="fl" for="lo_text">Inseratstext</label>
+        <textarea id="lo_text" style="min-height:170px" placeholder="5.5 Zimmer&#10;151 m² Wohnfläche&#10;Baujahr 2006&#10;CHF 1'470'000&#10;8172 Niederglatt&#10;Duplexwohnung mit Terrasse ..."></textarea>
+      </div>
+      <button class="btn" id="lo_parse">Immobilie analysieren</button>
+      <span class="tiny" id="lo_parseMsg" style="margin-left:12px"></span>
+    </div>
+
+    <!-- 2. Merkmale -->
+    <div class="card hidden" id="lo_fieldsCard" style="margin-bottom:18px">
+      <h3 class="lo-step"><span class="lo-num">2</span>Objektmerkmale prüfen und ergänzen</h3>
+      <p class="muted" style="margin-bottom:14px">Erkannte Werte sind vorausgefüllt. Korrigiere oder ergänze von Hand – jede manuelle Änderung wird als solche gespeichert.</p>
+      <div class="grid2">
+        <div class="fld"><label class="fl">Portal</label><input id="lo_portal"></div>
+        <div class="fld"><label class="fl">Inseratsnummer</label><input id="lo_iid"></div>
+      </div>
+      <div class="grid2">
+        <div class="fld"><label class="fl">Anbieter / Maklerunternehmen</label><input id="lo_makler"></div>
+        <div class="fld"><label class="fl">Objektart</label><input id="lo_art" placeholder="Wohnung, Einfamilienhaus ..."></div>
+      </div>
+      <div class="grid3">
+        <div class="fld"><label class="fl">PLZ</label><input id="lo_plz" inputmode="numeric"></div>
+        <div class="fld"><label class="fl">Gemeinde</label><input id="lo_gem"></div>
+        <div class="fld"><label class="fl">Quartier</label><input id="lo_quartier"></div>
+      </div>
+      <div class="grid3">
+        <div class="fld"><label class="fl">Zimmer</label><input id="lo_zi" inputmode="decimal"></div>
+        <div class="fld"><label class="fl">Wohnfläche m²</label><input id="lo_wfl" inputmode="numeric"></div>
+        <div class="fld"><label class="fl">Grundstücksfläche m²</label><input id="lo_gfl" inputmode="numeric"></div>
+      </div>
+      <div class="grid3">
+        <div class="fld"><label class="fl">Baujahr</label><input id="lo_bj" inputmode="numeric"></div>
+        <div class="fld"><label class="fl">Etage</label><input id="lo_etage"></div>
+        <div class="fld"><label class="fl">Stockwerke im Gebäude</label><input id="lo_stw" inputmode="numeric"></div>
+      </div>
+      <div class="grid2">
+        <div class="fld"><label class="fl">Kaufpreis CHF</label><input id="lo_preis" inputmode="numeric"></div>
+        <div class="fld"><label class="fl">Parkplätze / Garagen</label><input id="lo_pp"></div>
+      </div>
+      <div class="fld">
+        <label class="fl">Bekannte Adresse (nur falls im Inserat ausdrücklich genannt)</label>
+        <input id="lo_adr" placeholder="z. B. Musterstrasse 12">
+        <p class="tiny" style="margin-top:6px">Leer lassen, wenn das Inserat anonymisiert ist. Nur eine hier eingetragene oder amtlich belegte Adresse kann den Status «bestätigt» erhalten.</p>
+      </div>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;margin:4px 0 18px">
+        <label class="lo-chk"><input type="checkbox" id="lo_balkon"> Balkon</label>
+        <label class="lo-chk"><input type="checkbox" id="lo_terrasse"> Terrasse</label>
+        <label class="lo-chk"><input type="checkbox" id="lo_garten"> Garten</label>
+        <label class="lo-chk"><input type="checkbox" id="lo_garage"> Garage</label>
+      </div>
+      <button class="btn" id="lo_geo">Mit Geodaten abgleichen</button>
+      <span class="tiny" id="lo_geoMsg" style="margin-left:12px"></span>
+    </div>
+
+    <!-- 3. Ergebnis -->
+    <div class="card hidden" id="lo_resCard" style="margin-bottom:18px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px">
+        <h3 class="lo-step" style="margin:0"><span class="lo-num">3</span>Ergebnis</h3>
+        <span id="lo_status"></span>
+      </div>
+      <table class="lo-tbl"><tbody id="lo_resBody"></tbody></table>
+      <div class="lo-note" id="lo_resNote"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px">
+        <button class="btn" id="lo_save">Im Cockpit speichern</button>
+        <button class="btn sec sm" id="lo_copy">Als Text kopieren</button>
+      </div>
+      <span class="tiny" id="lo_saveMsg" style="display:block;margin-top:10px"></span>
+    </div>
+
+    <!-- Kandidaten -->
+    <div class="card hidden" id="lo_candCard" style="margin-bottom:18px">
+      <h3 class="lo-step">Mögliche Gebäude</h3>
+      <p class="muted" style="margin-bottom:6px" id="lo_candLead"></p>
+      <div class="lo-note" style="margin:0 0 16px">Diese Liste ist kein Beweis. Die Treffer stimmen in den geprüften Merkmalen mit dem Inserat überein – das Objekt kann ein anderes sein. Das System wählt bewusst keinen Treffer aus.</div>
+      <div id="lo_candList"></div>
+      <p class="tiny" id="lo_candMore" style="margin-top:4px"></p>
+    </div>
+
+    <!-- Karte -->
+    <div class="card hidden" id="lo_mapCard" style="margin-bottom:18px">
+      <h3 class="lo-step">Karte</h3>
+      <p class="muted" style="margin-bottom:14px">Amtliche Landeskarte und Gebäudeadressen von swisstopo. Kandidaten sind nummeriert, bestätigte Standorte grün.</p>
+      <div id="lo_map"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+        <button class="btn sec sm" id="lo_mapKat">Grundstücksgrenzen ein/aus</button>
+        <button class="btn sec sm" id="lo_mapFit">Auf Treffer zoomen</button>
+      </div>
+    </div>
+
+    <!-- Quellen -->
+    <div class="card hidden" id="lo_srcCard" style="margin-bottom:18px">
+      <h3 class="lo-step">Verwendete Datenquellen</h3>
+      <div id="lo_srcList" class="lo-log" style="margin-top:10px"></div>
+      <p class="tiny" style="margin-top:14px">Quellenangabe gemäss Nutzungsbedingungen: Gebäude- und Wohnungsdaten © Bundesamt für Statistik (eidg. Gebäude- und Wohnungsregister, öffentliche Daten der Berechtigungsstufe A). Karten, Adress- und Vermessungsdaten © swisstopo / geo.admin.ch.</p>
+    </div>
+
+    <!-- Eigentümer -->
+    <div class="card hidden" id="lo_ownCard" style="margin-bottom:18px">
+      <h3 class="lo-step">Eigentümerauskunft</h3>
+      <p class="muted" style="margin-bottom:12px">Der Locator führt keine Eigentümerdaten und erstellt keine Profile oder Zielllisten. Eine Auskunft zu einem einzelnen Grundstück erteilt ausschliesslich das zuständige Grundbuchamt.</p>
+      <div id="lo_ownBody" class="lo-log"></div>
+    </div>
+
+    <!-- Gespeicherte Objekte -->
+    <div class="card hidden" id="lo_listCard">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px">
+        <h3 class="lo-step" style="margin:0">Gespeicherte Objekte</h3>
+        <button class="btn sec sm" id="lo_listRefresh">Aktualisieren</button>
+      </div>
+      <div id="lo_listBody"></div>
+    </div>
+
+    <!-- Selbsttest -->
+    <div class="card hidden" id="lo_testCard" style="margin-top:18px">
+      <h3 class="lo-step">Selbsttest Parser</h3>
+      <div id="lo_testBody" class="lo-log"></div>
+    </div>
   </section>
 
   <!-- Einstellungen -->
@@ -1915,7 +2085,7 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
     renderItems();
   }
 
-  function renderStatic(){ fillGemeindeSelect(); toggleArt(); renderDocs(); renderCheck(); renderRates(); initInvoice(); initExpo(); }
+  function renderStatic(){ fillGemeindeSelect(); toggleArt(); renderDocs(); renderCheck(); renderRates(); initInvoice(); initExpo(); initLoc(); }
 
   /* ---------- Abschluss-Mail ---------- */
   function abPkg(k){
@@ -2203,6 +2373,805 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
     box.style.height=(doc.offsetHeight*sc+32)+"px";
   }
   window.addEventListener("resize", function(){ if($("auf_doc")) fitAuf(); });
+
+  /* ======================================================================
+     PROPERTY LOCATOR
+     Analysiert Inseratstexte und gleicht sie mit amtlichen Schweizer
+     Geodaten ab (GeoAdmin/swisstopo API + eidg. GWR in Supabase).
+
+     Grundsaetze, die im Code durchgesetzt werden:
+     - Es wird nie eine Adresse erfunden oder geraten.
+     - "bestaetigt" nur bei einer amtlich aufgeloesten Adresse.
+     - Bei mehreren Treffern wird keiner automatisch ausgewaehlt.
+     - Keine Eigentuemerdaten, keine Massenabfragen, kein Scraping.
+     ====================================================================== */
+
+  var LO_API   = "https://api3.geo.admin.ch/rest/services/ech/";
+  var LO_WMTS  = "https://wmts.geo.admin.ch/1.0.0/";
+  var LO_MAXREQ = 25;                /* Obergrenze Requests pro Analyse  */
+  var LO_TOL    = 0.10;              /* Flaechentoleranz +/- 10 %        */
+
+  var LO = { obj:null, parsed:null, cands:[], srcs:[], status:null,
+             map:null, layerKat:null, markers:[], reqs:0, gwr:true };
+
+  /* ---------- Hilfsfunktionen ---------- */
+
+  /* Schweizer Zahlenformate: 1'470'000 / 1’470’000 / 151.5 / 151,5 */
+  function loNum(s){
+    if(s==null) return null;
+    s = String(s).replace(/[’‘'`\s ]/g,"");
+    if(/^\d+,\d{1,2}$/.test(s)) s = s.replace(",",".");
+    else s = s.replace(/,/g,"");
+    if(/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g,"");   /* 1.470.000 */
+    var v = parseFloat(s);
+    return isFinite(v) ? v : null;
+  }
+
+  /* LV95 (EPSG:2056) -> WGS84, Naeherungsformeln swisstopo */
+  function loLv95ToWgs(e,n){
+    var y=(e-2600000)/1000000, x=(n-1200000)/1000000;
+    var lam = 2.6779094 + 4.728982*y + 0.791484*y*x + 0.1306*y*x*x - 0.0436*y*y*y;
+    var phi = 16.9023892 + 3.238272*x - 0.270978*y*y - 0.002528*x*x - 0.0447*y*y*x - 0.0140*x*x*x;
+    return { lat: phi*100/36, lon: lam*100/36 };
+  }
+
+  function loSrc(name,detail){
+    for(var i=0;i<LO.srcs.length;i++) if(LO.srcs[i].name===name) return;
+    LO.srcs.push({name:name, detail:detail||""});
+  }
+
+  /* Rate-Limit: GeoAdmin nennt 20 Requests/Minute als Fair Use. */
+  var loLastCall = 0;
+  function loApi(path,params){
+    if(LO.reqs >= LO_MAXREQ) return Promise.reject(new Error("Requestlimit der Analyse erreicht"));
+    LO.reqs++;
+    var qs=[],k;
+    for(k in params) if(params[k]!=null && params[k]!=="") qs.push(encodeURIComponent(k)+"="+encodeURIComponent(params[k]));
+    var url = LO_API+path+"?"+qs.join("&");
+    var wait = Math.max(0, 250-(Date.now()-loLastCall));
+    loLastCall = Date.now()+wait;
+    return new Promise(function(resolve,reject){
+      setTimeout(function(){
+        fetch(url,{headers:{Accept:"application/json"}}).then(function(r){
+          if(!r.ok) throw new Error("GeoAdmin HTTP "+r.status);
+          return r.json();
+        }).then(resolve).catch(reject);
+      }, wait);
+    });
+  }
+
+  /* ---------- Portal und Inseratsnummer aus dem Link ---------- */
+  function loPortal(url){
+    var r={portal:"",id:""};
+    if(!url) return r;
+    var u=String(url).trim();
+    var host=(u.match(/^https?:\/\/([^\/]+)/i)||[])[1]||"";
+    host=host.replace(/^www\./,"").toLowerCase();
+    var map=[["homegate.ch","Homegate"],["immoscout24.ch","ImmoScout24"],["immoscout24.com","ImmoScout24"],
+             ["newhome.ch","Newhome"],["neho.ch","Neho"],["properstar.ch","Properstar"],
+             ["acheter-louer.ch","Acheter-Louer"],["comparis.ch","Comparis"],["urbanhome.ch","UrbanHome"],
+             ["flatfox.ch","Flatfox"],["realadvisor.ch","RealAdvisor"],["remax.ch","RE/MAX"],
+             ["immostreet.ch","ImmoStreet"],["engelvoelkers.com","Engel & Voelkers"],["ron-orp.ch","Ron Orp"]];
+    for(var i=0;i<map.length;i++){ if(host.indexOf(map[i][0])>-1){ r.portal=map[i][1]; break; } }
+    if(!r.portal && host) r.portal=host;
+    var ids=u.replace(/^https?:\/\/[^\/]+/i,"").match(/\d{5,12}/g);
+    if(ids && ids.length){
+      var best=ids[0];
+      for(var j=0;j<ids.length;j++) if(ids[j].length>best.length) best=ids[j];
+      r.id=best;
+    }
+    return r;
+  }
+
+  /* ---------- Parser fuer eingefuegte Inseratstexte ---------- */
+  function loParse(text,url){
+    var t=(text||"").replace(/ /g," ");
+    var o={}, m, v;
+
+    /* Zimmer: "5.5 Zimmer", "5½ Zi.", "4 1/2 Zimmer" */
+    m=t.match(/(\d{1,2})\s*(?:½|1\/2)\s*(?:Zimmer|Zi\.?)/i);
+    if(m) o.zimmer=loNum(m[1])+0.5;
+    if(o.zimmer==null){
+      m=t.match(/(\d{1,2}(?:[.,]\d)?)\s*(?:Zimmer|Zi\.|Zi\b)/i);
+      if(m) o.zimmer=loNum(m[1]);
+    }
+
+    /* Wohnflaeche: Wert kann vor oder nach der Bezeichnung stehen.
+       Reihenfolge ist wichtig - "112 m² Wohnfläche, 8302 Kloten" darf nicht die PLZ liefern. */
+    var WFL="(?:Wohnfl(?:aeche|äche)|Wohnfl\\.|Nettowohnfl(?:aeche|äche)|NWF|Wohnungsfl(?:aeche|äche))";
+    m=t.match(new RegExp("(\\d{2,4}(?:[.,]\\d+)?)\\s*(?:m²|m2|qm)?\\s*"+WFL,"i"));
+    if(m) o.wohnflaeche=loNum(m[1]);
+    if(o.wohnflaeche==null){
+      /* Komma und Zeilenumbruch beenden das Feld, damit nicht der naechste Wert erfasst wird */
+      m=t.match(new RegExp(WFL+"[^0-9\\n,;]{0,18}(\\d{2,4}(?:[.,]\\d+)?)","i"));
+      if(m) o.wohnflaeche=loNum(m[1]);
+    }
+
+    /* Grundstuecksflaeche */
+    m=t.match(/(?:Grundst(?:ueck|ück)(?:sfl(?:aeche|äche))?|Landfl(?:aeche|äche)|Parzellenfl(?:aeche|äche))[^0-9\n,;]{0,18}(\d{2,6}(?:[.,]\d+)?)/i);
+    if(m) o.grundstueck=loNum(m[1]);
+
+    /* Fallback: erste m²-Angabe, falls keine benannte Wohnflaeche.
+       Kein \b nach "m²" - "²" ist kein Wortzeichen, die Grenze schlaegt am Zeilenende fehl. */
+    if(o.wohnflaeche==null){
+      var mAll=t.match(/(\d{2,4}(?:[.,]\d+)?)\s*(?:m²|m2|qm)(?![a-z])/gi);
+      if(mAll && mAll.length){
+        /* nicht die Grundstuecksflaeche doppelt verwenden */
+        for(var fi=0;fi<mAll.length;fi++){
+          var fv=loNum((mAll[fi].match(/[\d.,]+/)||[""])[0]);
+          if(fv!=null && (o.grundstueck==null || fv!==o.grundstueck)){ o.wohnflaeche=fv; break; }
+        }
+      }
+    }
+
+    /* Baujahr */
+    m=t.match(/(?:Baujahr|Bauj\.|erbaut(?:\s*(?:im|in))?|Baujahr:)[^0-9]{0,14}((?:1[89]|20)\d{2})/i);
+    if(m) o.baujahr=parseInt(m[1],10);
+
+    /* Kaufpreis: keine Leerzeichen in der Zahl, sonst wird die folgende PLZ mitgelesen
+       ("CHF 1'470'000\n8172 Niederglatt" ergab sonst 14700008172). */
+    m=t.match(/(?:CHF|Fr\.|SFr\.)\s*([0-9][0-9'’‘.]{3,15})/i);
+    if(m){ v=loNum(m[1]); if(v && v>=10000) o.preis=v; }
+    if(o.preis==null){
+      m=t.match(/([0-9][0-9'’‘.]{5,14})\s*(?:CHF|Fr\.)/i);
+      if(m){ v=loNum(m[1]); if(v && v>=10000) o.preis=v; }
+    }
+
+    /* PLZ + Gemeinde: beide auf derselben Zeile, Ortsname mit Kleinbuchstaben,
+       und keine Jahresangabe ("Baujahr 2006 ...") als PLZ interpretieren. */
+    var rePlz=/([1-9]\d{3})[ \t]+([A-ZÄÖÜ][a-zäöüéèàêôûç][A-Za-zÄÖÜäöüéèàêôûç.\-]*(?:[ \-][A-Za-zÄÖÜäöüéèàêôûç.\-]+){0,3})/g, mp;
+    while((mp=rePlz.exec(t))!==null){
+      var before=t.slice(Math.max(0,mp.index-14), mp.index);
+      if(/(?:Baujahr|Bauj\.|erbaut|umgebaut|saniert|renoviert|seit|ab)\s*$/i.test(before)) continue;
+      o.plz=mp[1];
+      o.gemeinde=mp[2].replace(/\s+(bei|am|an|im|ob|und)$/i,"").trim();
+      break;
+    }
+
+    /* Etage */
+    if(/\bAttika/i.test(t)) o.etage="Attika";
+    else if(/\bDachgeschoss\b|\bDachwohnung\b/i.test(t)) o.etage="Dachgeschoss";
+    else {
+      m=t.match(/(\d{1,2})\.\s*(?:OG|Obergeschoss|Etage|Stock\b)/i);
+      if(m) o.etage=m[1]+". OG";
+      else if(/\bErdgeschoss\b|\bParterre\b/i.test(t)) o.etage="Erdgeschoss";
+      else if(/\bSouterrain\b|\bUntergeschoss\b/i.test(t)) o.etage="Untergeschoss";
+    }
+
+    /* Stockwerke im Gebaeude */
+    m=t.match(/(\d{1,2})\s*(?:Stockwerke|Geschosse|Vollgeschosse|Etagen)\b/i);
+    if(m) o.stockwerke=parseInt(m[1],10);
+
+    /* Objektart: spezifische Begriffe zuerst */
+    var arts=[["Duplexwohnung",/Duplex/i],["Maisonettewohnung",/Maisonette/i],
+              ["Attikawohnung",/Attikawohnung|Attika-Wohnung|Attika\b/i],["Terrassenhaus",/Terrassenhaus/i],
+              ["Loft",/\bLoft\b/i],["Studio",/\bStudio\b/i],
+              ["Reiheneinfamilienhaus",/Reiheneinfamilienhaus|Reihenhaus|\bREFH\b/i],
+              ["Doppeleinfamilienhaus",/Doppeleinfamilienhaus|Doppelhaus(?:haelfte|hälfte)?|\bDEFH\b/i],
+              ["Mehrfamilienhaus",/Mehrfamilienhaus|\bMFH\b|Renditeliegenschaft/i],
+              ["Einfamilienhaus",/Einfamilienhaus|\bEFH\b|\bVilla\b/i],
+              ["Wohnung",/Eigentumswohnung|\bWohnung\b/i],
+              ["Bauland",/\bBauland\b|\bBauparzelle\b/i]];
+    for(var i=0;i<arts.length;i++){ if(arts[i][1].test(t)){ o.objektart=arts[i][0]; break; } }
+
+    /* Ausstattung */
+    o.balkon   = /\bBalkon/i.test(t);
+    o.terrasse = /\bTerrasse|\bSitzplatz|\bDachterrasse/i.test(t);
+    o.garten   = /\bGarten|\bGartenanteil|\bGartensitzplatz/i.test(t);
+    o.garage   = /\bGarage|\bTiefgarage|Einstellhallenplatz|Einstellplatz|\bAutoeinstellplatz/i.test(t);
+    m=t.match(/(\d{1,2})\s*(?:Parkpl|Aussenparkpl|Garagenpl|Einstellpl|Autoabstellpl)/i);
+    if(m) o.parkplaetze=m[1];
+
+    /* Quartier */
+    m=t.match(/(?:Quartier|Ortsteil|Stadtteil)\s*:?\s*([A-ZÄÖÜ][A-Za-zÄÖÜäöü\-]{2,24})/);
+    if(m) o.quartier=m[1];
+
+    /* Anbieter: Firmenform im Text, danach explizite Labels (haben Vorrang) */
+    m=t.match(/([A-ZÄÖÜ][A-Za-zÄÖÜäöü&.\-]*(?:\s+[A-Za-zÄÖÜäöü&.\-]+){0,4}\s(?:AG|GmbH|SA|S[aà]rl))\b/);
+    if(m) o.makler=m[1].trim();
+    m=t.match(/(?:Anbieter|Anbieterin|Vermarktung|Verkauf durch|Angeboten von|Vermarkter)\s*:?\s*([^\n]{3,60})/i);
+    if(m) o.makler=m[1].trim();
+
+    /* Adresse nur, wenn Strasse UND Hausnummer ausdruecklich im Text stehen */
+    m=t.match(/\b([A-ZÄÖÜ][A-Za-zÄÖÜäöüéè\-.]*(?:strasse|strase|gasse|weg|platz|allee|rain|halde|matte?|acker|b(?:ue|ü)hl|berg|hof|ring|steig|str\.))\s+(\d{1,4}\s?[a-z]?)\b/i);
+    if(m) o.adresse=m[1]+" "+m[2].replace(/\s/g,"");
+
+    var pi=loPortal(url);
+    o.portal=pi.portal; o.inserat_id=pi.id; o.url=url||"";
+    o.beschreibung=t.length>4000?t.slice(0,4000):t;
+    return o;
+  }
+
+  /* ---------- Formular <-> Objekt ---------- */
+  function loFill(o){
+    $("lo_portal").value=o.portal||"";   $("lo_iid").value=o.inserat_id||"";
+    $("lo_makler").value=o.makler||"";   $("lo_art").value=o.objektart||"";
+    $("lo_plz").value=o.plz||"";         $("lo_gem").value=o.gemeinde||"";
+    $("lo_quartier").value=o.quartier||"";
+    $("lo_zi").value=o.zimmer!=null?o.zimmer:"";
+    $("lo_wfl").value=o.wohnflaeche!=null?o.wohnflaeche:"";
+    $("lo_gfl").value=o.grundstueck!=null?o.grundstueck:"";
+    $("lo_bj").value=o.baujahr||"";      $("lo_etage").value=o.etage||"";
+    $("lo_stw").value=o.stockwerke||"";  $("lo_preis").value=o.preis!=null?o.preis:"";
+    $("lo_pp").value=o.parkplaetze||"";  $("lo_adr").value=o.adresse||"";
+    $("lo_balkon").checked=!!o.balkon;   $("lo_terrasse").checked=!!o.terrasse;
+    $("lo_garten").checked=!!o.garten;   $("lo_garage").checked=!!o.garage;
+  }
+
+  function loRead(){
+    var o={
+      portal:$("lo_portal").value.trim(), inserat_id:$("lo_iid").value.trim(),
+      url:$("lo_url").value.trim(), makler:$("lo_makler").value.trim(),
+      objektart:$("lo_art").value.trim(), plz:$("lo_plz").value.trim(),
+      gemeinde:$("lo_gem").value.trim(), quartier:$("lo_quartier").value.trim(),
+      zimmer:loNum($("lo_zi").value), wohnflaeche:loNum($("lo_wfl").value),
+      grundstueck:loNum($("lo_gfl").value), baujahr:parseInt($("lo_bj").value,10)||null,
+      etage:$("lo_etage").value.trim(), stockwerke:parseInt($("lo_stw").value,10)||null,
+      preis:loNum($("lo_preis").value), parkplaetze:$("lo_pp").value.trim(),
+      adresse:$("lo_adr").value.trim(), balkon:$("lo_balkon").checked,
+      terrasse:$("lo_terrasse").checked, garten:$("lo_garten").checked,
+      garage:$("lo_garage").checked,
+      beschreibung:LO.parsed?LO.parsed.beschreibung:$("lo_text").value.slice(0,4000)
+    };
+    /* Welche Felder hat der Nutzer von Hand geaendert? */
+    o.manuell={};
+    if(LO.parsed){
+      var keys=["portal","inserat_id","makler","objektart","plz","gemeinde","quartier",
+                "zimmer","wohnflaeche","grundstueck","baujahr","etage","stockwerke",
+                "preis","parkplaetze","adresse"];
+      for(var i=0;i<keys.length;i++){
+        var a=LO.parsed[keys[i]], b=o[keys[i]];
+        var an=(a==null||a==="")?"":String(a), bn=(b==null||b==="")?"":String(b);
+        if(an!==bn) o.manuell[keys[i]]={erkannt:an||null, erfasst:bn||null};
+      }
+    }
+    return o;
+  }
+
+  /* ---------- Schritt 1: Inserat analysieren ---------- */
+  $("lo_parse").addEventListener("click", function(){
+    var txt=$("lo_text").value, url=$("lo_url").value.trim();
+    if(!txt.trim() && !url){
+      $("lo_parseMsg").textContent="Bitte Inseratstext einfügen oder Link erfassen.";
+      $("lo_parseMsg").style.color="var(--warn)"; return;
+    }
+    LO.parsed=loParse(txt,url);
+    LO.obj=null; LO.cands=[]; LO.srcs=[]; LO.status=null; LO.reqs=0;
+    loFill(LO.parsed);
+    $("lo_fieldsCard").classList.remove("hidden");
+    ["lo_resCard","lo_candCard","lo_mapCard","lo_srcCard","lo_ownCard","lo_listCard"]
+      .forEach(function(id){ $(id).classList.add("hidden"); });
+
+    var found=0, chk=["zimmer","wohnflaeche","baujahr","plz","gemeinde","objektart","preis"];
+    for(var i=0;i<chk.length;i++) if(LO.parsed[chk[i]]!=null && LO.parsed[chk[i]]!=="") found++;
+    $("lo_parseMsg").style.color=found>=4?"var(--green)":"var(--amber)";
+    $("lo_parseMsg").textContent=found+" von "+chk.length+" Kernmerkmalen erkannt."+
+      (found<4?" Bitte fehlende Felder von Hand ergänzen.":"");
+    if(!url) {
+      $("lo_parseMsg").textContent+=" Kein Link erfasst – Portal und Inseratsnummer bitte nachtragen.";
+    }
+    $("lo_fieldsCard").scrollIntoView({behavior:"smooth",block:"start"});
+  });
+
+  /* ---------- Schritt 2: Geodatenabgleich ---------- */
+  $("lo_geo").addEventListener("click", function(){
+    var o=loRead();
+    if(!o.plz && !o.gemeinde){
+      $("lo_geoMsg").textContent="Mindestens PLZ oder Gemeinde wird benötigt.";
+      $("lo_geoMsg").style.color="var(--warn)"; return;
+    }
+    LO.obj=o; LO.cands=[]; LO.srcs=[]; LO.reqs=0;
+    $("lo_geo").disabled=true;
+    $("lo_geoMsg").style.color="var(--muted)";
+    $("lo_geoMsg").innerHTML='<span class="spin"></span> Gleiche mit amtlichen Daten ab ...';
+
+    loVerifyGemeinde(o)
+      .then(function(){ return o.adresse ? loResolveAdresse(o) : null; })
+      .then(function(){ return LO.adrHit ? null : loFindKandidaten(o); })
+      .then(function(){
+        loDecideStatus(o);
+        loRenderResult(o);
+        loRenderKandidaten();
+        loRenderSources();
+        loRenderOwner(o);
+        loInitMap();
+        $("lo_geo").disabled=false;
+        $("lo_geoMsg").textContent="Abgleich abgeschlossen ("+LO.reqs+" Abfragen).";
+        $("lo_resCard").scrollIntoView({behavior:"smooth",block:"start"});
+      })
+      .catch(function(err){
+        $("lo_geo").disabled=false;
+        $("lo_geoMsg").style.color="var(--warn)";
+        $("lo_geoMsg").textContent="Abgleich fehlgeschlagen: "+(err&&err.message?err.message:"unbekannter Fehler");
+        /* Teilergebnisse trotzdem zeigen, statt alles zu verwerfen */
+        loDecideStatus(o); loRenderResult(o); loRenderSources();
+      });
+  });
+
+  /* Gemeinde und PLZ gegen das amtliche Verzeichnis pruefen */
+  var loGemHit=null, loPlzHit=null;
+  function loVerifyGemeinde(o){
+    loGemHit=null; loPlzHit=null; LO.adrHit=null;
+    var jobs=[];
+    if(o.gemeinde){
+      jobs.push(loApi("SearchServer",{searchText:o.gemeinde,type:"locations",origins:"gg25",sr:2056,limit:5})
+        .then(function(d){
+          var r=(d&&d.results)||[];
+          for(var i=0;i<r.length;i++){
+            var lbl=(r[i].attrs&&r[i].attrs.label||"").replace(/<[^>]+>/g,"");
+            if(lbl.toLowerCase().indexOf(o.gemeinde.toLowerCase())>-1){ loGemHit=r[i].attrs; break; }
+          }
+          if(loGemHit) loSrc("Amtliches Gemeindeverzeichnis (gg25)","Gemeinde bestätigt: "+(loGemHit.label||"").replace(/<[^>]+>/g,""));
+        }).catch(function(){}));
+    }
+    if(o.plz){
+      jobs.push(loApi("SearchServer",{searchText:o.plz,type:"locations",origins:"zipcode",sr:2056,limit:5})
+        .then(function(d){
+          var r=(d&&d.results)||[];
+          if(r.length){ loPlzHit=r[0].attrs; loSrc("Amtliches PLZ-Verzeichnis (swisstopo)","PLZ bestätigt: "+(loPlzHit.label||"").replace(/<[^>]+>/g,"")); }
+        }).catch(function(){}));
+    }
+    return Promise.all(jobs);
+  }
+
+  /* Eine ausdruecklich genannte Adresse amtlich aufloesen */
+  function loResolveAdresse(o){
+    var q=o.adresse+" "+(o.plz||"")+" "+(o.gemeinde||"");
+    return loApi("SearchServer",{searchText:q.trim(),type:"locations",origins:"address",sr:2056,limit:10})
+      .then(function(d){
+        var r=(d&&d.results)||[];
+        if(!r.length) return;
+        /* nur eindeutige Treffer akzeptieren */
+        var exact=[];
+        for(var i=0;i<r.length;i++){
+          var lbl=(r[i].attrs&&r[i].attrs.label||"").replace(/<[^>]+>/g,"");
+          if(o.plz && lbl.indexOf(o.plz)===-1) continue;
+          exact.push({label:lbl, attrs:r[i].attrs});
+        }
+        if(exact.length===1){
+          LO.adrHit=exact[0];
+          loSrc("Amtliches Gebäudeadressverzeichnis (swisstopo)","Adresse aufgelöst: "+exact[0].label);
+          return loBuildingAt(exact[0].attrs);
+        }
+        if(exact.length>1){
+          for(var j=0;j<exact.length;j++){
+            LO.cands.push({adresse:exact[j].label, quelle:"Gebäudeadressverzeichnis",
+                           lat:exact[j].attrs.lat, lon:exact[j].attrs.lon});
+          }
+          loSrc("Amtliches Gebäudeadressverzeichnis (swisstopo)",exact.length+" mögliche Adressen");
+        }
+      }).catch(function(){});
+  }
+
+  /* GWR-Gebaeude an einer Koordinate identifizieren (EGID, Baujahr, Geschosse) */
+  function loBuildingAt(attrs){
+    var lat=attrs.lat, lon=attrs.lon;
+    if(lat==null||lon==null) return;
+    return loApi("MapServer/identify",{
+      geometry:lon+","+lat, geometryType:"esriGeometryPoint", sr:4326,
+      layers:"all:ch.bfs.gebaeude_wohnungs_register", tolerance:8,
+      mapExtent:(lon-0.002)+","+(lat-0.002)+","+(lon+0.002)+","+(lat+0.002),
+      imageDisplay:"600,600,96", geometryFormat:"geojson", limit:10
+    }).then(function(d){
+      var r=(d&&d.results)||[];
+      if(!r.length) return;
+      var a=r[0].properties||r[0].attributes||{};
+      LO.gebaeude={ egid:a.egid||a.EGID||null, gbauj:a.gbauj||a.GBAUJ||null,
+                    gastw:a.gastw||a.GASTW||null, garea:a.garea||a.GAREA||null,
+                    ganzwhg:a.ganzwhg||a.GANZWHG||null, strname:a.strname_deinr||a.strname1||null };
+      loSrc("Eidg. Gebäude- und Wohnungsregister (BFS, Stufe A)","Gebäudedaten über GeoAdmin-API, EGID "+(LO.gebaeude.egid||"?"));
+    }).catch(function(){});
+  }
+
+  /* Kandidatensuche in der importierten GWR-Tabelle (Supabase/Postgres) */
+  function loFindKandidaten(o){
+    if(!o.baujahr && !o.zimmer && !o.wohnflaeche) return Promise.resolve();
+    return SB.rpc("locator_kandidaten",{
+      p_gemeinde: o.gemeinde||null,
+      p_plz:      o.plz?parseInt(o.plz,10):null,
+      p_baujahr:  o.baujahr||null,
+      p_zimmer:   o.zimmer||null,
+      p_flaeche:  o.wohnflaeche||null,
+      p_tol:      LO_TOL
+    }).then(function(res){
+      if(res.error){
+        LO.gwr=false;
+        LO.gwrErr=res.error.message||"unbekannt";
+        return;
+      }
+      var rows=res.data||[];
+      for(var i=0;i<rows.length;i++){
+        rows[i].quelle="GWR (BFS)";
+        if(rows[i].gkode && rows[i].gkodn){
+          var w=loLv95ToWgs(Number(rows[i].gkode),Number(rows[i].gkodn));
+          rows[i].lat=w.lat; rows[i].lon=w.lon;
+        }
+        LO.cands.push(rows[i]);
+      }
+      loSrc("Eidg. Gebäude- und Wohnungsregister (BFS, Stufe A)",
+            "Merkmalsabgleich über importierte GWR-Daten, "+rows.length+" Treffer");
+    });
+  }
+
+  /* ---------- Status bestimmen ---------- */
+  function loDecideStatus(o){
+    if(LO.adrHit){ LO.status="bestaetigt"; return; }
+    if(LO.cands.length===1){ LO.status="nicht_eindeutig"; return; }  /* ein Kandidat ist keine Bestaetigung */
+    if(LO.cands.length>1){ LO.status="nicht_eindeutig"; return; }
+    LO.status="nicht_verifizierbar";
+  }
+
+  function loBadge(st){
+    if(st==="bestaetigt")   return '<span class="lo-badge ok">BESTÄTIGT</span>';
+    if(st==="nicht_eindeutig") return '<span class="lo-badge amb">NICHT EINDEUTIG</span>';
+    return '<span class="lo-badge no">NICHT VERIFIZIERBAR</span>';
+  }
+
+  /* ---------- Ergebnis rendern ---------- */
+  function loRow(label,val,src){
+    if(val==null||val==="") val='<span class="muted">–</span>';
+    return "<tr><th>"+esc(label)+"</th><td>"+val+(src?'<span class="src">Quelle: '+esc(src)+"</span>":"")+"</td></tr>";
+  }
+
+  function loRenderResult(o){
+    var h="";
+    h+=loRow("Inserat", o.url?'<a href="'+esc(o.url)+'" target="_blank" rel="noopener">Inserat öffnen</a>':null,"Eingabe");
+    h+=loRow("Portal", esc(o.portal),"Link bzw. Eingabe");
+    h+=loRow("Inseratsnummer", esc(o.inserat_id),"Link bzw. Eingabe");
+    h+=loRow("Anbieter / Makler", esc(o.makler),"Inseratstext");
+    h+=loRow("Gemeinde", loGemHit?esc((loGemHit.label||"").replace(/<[^>]+>/g,"")):esc(o.gemeinde),
+             loGemHit?"Amtliches Gemeindeverzeichnis":"Inseratstext, nicht geprüft");
+    h+=loRow("PLZ", loPlzHit?esc((loPlzHit.label||"").replace(/<[^>]+>/g,"")):esc(o.plz),
+             loPlzHit?"Amtliches PLZ-Verzeichnis":"Inseratstext, nicht geprüft");
+    h+=loRow("Quartier", esc(o.quartier),"Inseratstext");
+    h+=loRow("Objektart", esc(o.objektart),"Inseratstext");
+    h+=loRow("Zimmer", o.zimmer!=null?esc(o.zimmer):null,"Inseratstext");
+    h+=loRow("Wohnfläche", o.wohnflaeche!=null?esc(o.wohnflaeche)+" m²":null,"Inseratstext");
+    h+=loRow("Grundstücksfläche", o.grundstueck!=null?esc(o.grundstueck)+" m²":null,"Inseratstext");
+    h+=loRow("Baujahr", o.baujahr?esc(o.baujahr):null,"Inseratstext");
+    if(LO.gebaeude){
+      h+=loRow("Baujahr amtlich (GWR)", LO.gebaeude.gbauj?esc(LO.gebaeude.gbauj):null,"GWR, BFS");
+      h+=loRow("Geschosse amtlich (GWR)", LO.gebaeude.gastw?esc(LO.gebaeude.gastw):null,"GWR, BFS");
+      h+=loRow("EGID", LO.gebaeude.egid?esc(LO.gebaeude.egid):null,"GWR, BFS");
+    }
+    h+=loRow("Kaufpreis", o.preis!=null?chf(o.preis):null,"Inseratstext");
+    h+=loRow("Adresse", LO.adrHit?esc(LO.adrHit.label):
+             (o.adresse?esc(o.adresse)+' <span class="muted">(nicht amtlich aufgelöst)</span>':null),
+             LO.adrHit?"Amtliches Gebäudeadressverzeichnis, swisstopo":(o.adresse?"Eingabe, unbestätigt":""));
+    h+=loRow("Grundstücksnummer", loKatLink(o),"Kanton / amtliche Vermessung");
+    h+=loRow("Standortstatus", loBadge(LO.status),"Ergebnis des Abgleichs");
+    h+=loRow("Letzte Aktualisierung", new Date().toLocaleString("de-CH"),"");
+    $("lo_resBody").innerHTML=h;
+    $("lo_status").innerHTML=loBadge(LO.status);
+
+    var note="";
+    if(LO.status==="bestaetigt"){
+      note="Die Adresse stammt aus dem Inserat und liess sich im amtlichen Gebäudeadressverzeichnis eindeutig auflösen. Sie wurde nicht erschlossen.";
+    } else if(LO.status==="nicht_eindeutig"){
+      note="Es gibt "+LO.cands.length+" Gebäude, die zu den Inseratsmerkmalen passen. Welches das Objekt ist, lässt sich mit öffentlichen Daten nicht entscheiden. Es wird deshalb keines ausgewählt.";
+    } else {
+      note="Die verfügbaren Angaben reichen für eine Standortbestimmung nicht aus";
+      if(LO.gwr===false) note+=" – die GWR-Daten sind in dieser Datenbank noch nicht importiert ("+esc(LO.gwrErr||"")+"). Siehe Importskript in tools/";
+      note+=". Bestätigt sind nur Gemeinde und PLZ.";
+    }
+    if(o.wohnflaeche!=null) note+=" Hinweis: die GWR-Wohnungsfläche ist anders definiert als die Flächenangabe im Inserat; der Abgleich läuft mit ±"+Math.round(LO_TOL*100)+" % Toleranz.";
+    $("lo_resNote").innerHTML=note;
+    $("lo_resCard").classList.remove("hidden");
+  }
+
+  /* Deep-Link in den amtlichen Kataster; die Parzellennummer liest man dort ab.
+     Die GeoAdmin-API gibt die Grundstuecksnummer nicht als abfragbares Attribut her. */
+  function loKatLink(o){
+    var lat=null,lon=null;
+    if(LO.adrHit){ lat=LO.adrHit.lat; lon=LO.adrHit.lon; }
+    else if(loGemHit){ lat=loGemHit.lat; lon=loGemHit.lon; }
+    if(lat==null||lon==null) return null;
+    var u="https://map.geo.admin.ch/?lang=de&topic=cadastre&bgLayer=ch.swisstopo.pixelkarte-farbe"+
+          "&layers=ch.kantone.cadastralwebmap-farbe&E=&N=&zoom=11&crosshair=marker&swisssearch="+
+          encodeURIComponent((LO.adrHit?LO.adrHit.label:(o.plz+" "+o.gemeinde)));
+    return '<a href="'+u+'" target="_blank" rel="noopener">im amtlichen Kataster öffnen</a> '+
+           '<span class="muted">– Nummer dort ablesen und unten nachtragen</span>';
+  }
+
+  function loRenderKandidaten(){
+    if(!LO.cands.length){ $("lo_candCard").classList.add("hidden"); return; }
+    $("lo_candLead").textContent=LO.cands.length+" Gebäude stimmen in den geprüften Merkmalen mit dem Inserat überein.";
+    var h="";
+    for(var i=0;i<LO.cands.length && i<50;i++){
+      var c=LO.cands[i];
+      var adr=c.adresse||((c.strname||"")+" "+(c.deinr||"")).trim()||"Adresse unbekannt";
+      var meta=[];
+      if(c.plz4||c.plzname) meta.push(esc(((c.plz4||"")+" "+(c.plzname||"")).trim()));
+      if(c.gbauj) meta.push("Baujahr "+esc(c.gbauj));
+      if(c.gastw) meta.push(esc(c.gastw)+" Geschosse");
+      if(c.ganzwhg) meta.push(esc(c.ganzwhg)+" Wohnungen");
+      if(c.wazim) meta.push(esc(c.wazim)+" Zi.");
+      if(c.warea) meta.push(esc(c.warea)+" m²");
+      if(c.egid) meta.push("EGID "+esc(c.egid));
+      h+='<div class="lo-cand"><div><div class="adr">'+(i+1)+". "+esc(adr)+'</div>'+
+         '<div class="meta">'+meta.join(" · ")+'</div></div><div class="acts">'+
+         (c.lat!=null?'<button class="btn sec sm lo-zoom" data-i="'+i+'">Auf Karte</button>':"")+
+         '<a class="btn sec sm" target="_blank" rel="noopener" href="https://map.geo.admin.ch/?lang=de&topic=cadastre&layers=ch.kantone.cadastralwebmap-farbe&swisssearch='+
+         encodeURIComponent(adr)+'">Kataster</a></div></div>';
+    }
+    $("lo_candList").innerHTML=h;
+    $("lo_candMore").textContent=LO.cands.length>50?("Es werden 50 von "+LO.cands.length+" Treffern angezeigt. Bitte Merkmale ergänzen, um die Menge einzugrenzen."):"";
+    $("lo_candCard").classList.remove("hidden");
+  }
+
+  function loRenderSources(){
+    var h="";
+    for(var i=0;i<LO.srcs.length;i++){
+      h+='<div><span class="y">✓</span> '+esc(LO.srcs[i].name)+
+         (LO.srcs[i].detail?' <span class="muted">– '+esc(LO.srcs[i].detail)+"</span>":"")+"</div>";
+    }
+    if(LO.gwr===false) h+='<div><span class="n">✗</span> Eidg. Gebäude- und Wohnungsregister – nicht verfügbar: '+esc(LO.gwrErr||"")+"</div>";
+    h+='<div class="muted" style="margin-top:8px">Portalinhalte wurden nicht automatisiert abgerufen; die Objektmerkmale stammen aus dem eingefügten Text.</div>';
+    $("lo_srcList").innerHTML=h;
+    $("lo_srcCard").classList.remove("hidden");
+  }
+
+  function loRenderOwner(o){
+    var gb = (o.gemeinde||"").trim();
+    var h='<div>Zuständig ist das Grundbuchamt der Gemeinde bzw. des Bezirks'+(gb?" "+esc(gb):"")+".</div>"+
+          '<div class="muted" style="margin-top:8px">Ohne Interessennachweis erteilt das Grundbuchamt auf Gesuch Auskunft über Grundstücksbezeichnung und -beschreibung, Name und Identifikation des Eigentümers, Eigentumsform und Erwerbsdatum (Art. 970 Abs. 2 ZGB). Die Auskunft erfolgt pro Grundstück und ist kostenpflichtig. Serienauskünfte darf der Grundbuchverwalter verweigern, wenn die Daten offensichtlich kommerziellen Zwecken dienen.</div>'+
+          '<div style="margin-top:12px"><a class="btn sec sm" href="https://www.zh.ch/de/steuern-finanzen/grundbuch-notariat.html" target="_blank" rel="noopener">Grundbuchämter Kanton Zürich</a></div>';
+    $("lo_ownBody").innerHTML=h;
+    $("lo_ownCard").classList.remove("hidden");
+  }
+
+  /* ---------- Karte (Leaflet + swisstopo WMTS) ---------- */
+  function loInitMap(){
+    if(typeof L==="undefined"){ $("lo_mapCard").classList.add("hidden"); return; }
+    $("lo_mapCard").classList.remove("hidden");
+    if(!LO.map){
+      LO.map=L.map("lo_map",{scrollWheelZoom:false}).setView([47.45,8.55],11);
+      L.tileLayer(LO_WMTS+"ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg",
+        {maxZoom:19, attribution:'&copy; <a href="https://www.swisstopo.admin.ch" target="_blank" rel="noopener">swisstopo</a>'}).addTo(LO.map);
+      LO.layerKat=L.tileLayer(LO_WMTS+"ch.kantone.cadastralwebmap-farbe/default/current/3857/{z}/{x}/{y}.png",
+        {maxZoom:19, opacity:.85, attribution:"&copy; Kantone / swisstopo"});
+    }
+    for(var i=0;i<LO.markers.length;i++) LO.map.removeLayer(LO.markers[i]);
+    LO.markers=[];
+    var pts=[];
+    if(LO.adrHit && LO.adrHit.lat!=null){
+      var m=L.circleMarker([LO.adrHit.lat,LO.adrHit.lon],
+        {radius:9,color:"#123D2F",fillColor:"#1D5B46",fillOpacity:.9,weight:2})
+        .bindPopup("<b>"+esc(LO.adrHit.label)+"</b><br>amtlich bestätigt");
+      m.addTo(LO.map); LO.markers.push(m); pts.push([LO.adrHit.lat,LO.adrHit.lon]);
+    }
+    for(var j=0;j<LO.cands.length;j++){
+      var c=LO.cands[j];
+      if(c.lat==null) continue;
+      var adr=c.adresse||((c.strname||"")+" "+(c.deinr||"")).trim()||"Kandidat";
+      var mk=L.circleMarker([c.lat,c.lon],
+        {radius:8,color:"#B5881F",fillColor:"#E6CE8E",fillOpacity:.9,weight:2})
+        .bindPopup("<b>"+(j+1)+". "+esc(adr)+"</b><br>möglicher Treffer, nicht bestätigt");
+      mk.addTo(LO.map); LO.markers.push(mk); pts.push([c.lat,c.lon]);
+    }
+    if(!pts.length && loGemHit && loGemHit.lat!=null){ pts.push([loGemHit.lat,loGemHit.lon]); }
+    setTimeout(function(){
+      LO.map.invalidateSize();
+      if(pts.length===1) LO.map.setView(pts[0],17);
+      else if(pts.length>1) LO.map.fitBounds(pts,{padding:[40,40],maxZoom:17});
+    },120);
+  }
+
+  $("lo_mapKat").addEventListener("click", function(){
+    if(!LO.map||!LO.layerKat) return;
+    if(LO.map.hasLayer(LO.layerKat)) LO.map.removeLayer(LO.layerKat);
+    else LO.layerKat.addTo(LO.map);
+  });
+  $("lo_mapFit").addEventListener("click", function(){
+    if(!LO.map) return;
+    var pts=[],i;
+    for(i=0;i<LO.markers.length;i++) pts.push(LO.markers[i].getLatLng());
+    if(pts.length===1) LO.map.setView(pts[0],17);
+    else if(pts.length>1) LO.map.fitBounds(pts,{padding:[40,40],maxZoom:17});
+  });
+  $("lo_candList").addEventListener("click", function(e){
+    var b=e.target.closest(".lo-zoom"); if(!b||!LO.map) return;
+    var c=LO.cands[parseInt(b.dataset.i,10)];
+    if(c&&c.lat!=null){ LO.map.setView([c.lat,c.lon],18); $("lo_mapCard").scrollIntoView({behavior:"smooth",block:"center"}); }
+  });
+
+  /* ---------- Speichern ---------- */
+  $("lo_save").addEventListener("click", function(){
+    var o=LO.obj||loRead();
+    var row={
+      portal:o.portal||null, inserat_id:o.inserat_id||null, url:o.url||null,
+      makler:o.makler||null, gemeinde:o.gemeinde||null, plz:o.plz||null,
+      quartier:o.quartier||null, objektart:o.objektart||null,
+      zimmer:o.zimmer, wohnflaeche:o.wohnflaeche, grundstueck:o.grundstueck,
+      baujahr:o.baujahr, etage:o.etage||null, stockwerke:o.stockwerke,
+      balkon:!!o.balkon, terrasse:!!o.terrasse, garten:!!o.garten, garage:!!o.garage,
+      parkplaetze:o.parkplaetze||null, preis:o.preis, beschreibung:o.beschreibung||null,
+      adresse:LO.adrHit?LO.adrHit.label:null,
+      egid:LO.gebaeude&&LO.gebaeude.egid?LO.gebaeude.egid:null,
+      status:LO.status||"nicht_verifizierbar",
+      kandidaten:LO.cands.slice(0,50), quellen:LO.srcs,
+      manuell:o.manuell||{}, analysiert_at:new Date().toISOString()
+    };
+    $("lo_save").disabled=true;
+    $("lo_saveMsg").style.color="var(--muted)";
+    $("lo_saveMsg").textContent="Speichere ...";
+    SB.from("locator_objekte").insert([row]).then(function(res){
+      $("lo_save").disabled=false;
+      if(res.error){
+        if(String(res.error.code)==="23505"||/duplicate|unique/i.test(res.error.message||"")){
+          $("lo_saveMsg").style.color="var(--amber)";
+          $("lo_saveMsg").textContent="Dieses Inserat ist bereits gespeichert (gleiche Inseratsnummer oder gleicher Link).";
+        } else if(/relation|does not exist|schema/i.test(res.error.message||"")){
+          $("lo_saveMsg").style.color="var(--warn)";
+          $("lo_saveMsg").textContent="Tabelle locator_objekte fehlt. Bitte zuerst tools/locator_schema.sql in Supabase ausführen.";
+        } else {
+          $("lo_saveMsg").style.color="var(--warn)";
+          $("lo_saveMsg").textContent="Speichern fehlgeschlagen: "+res.error.message;
+        }
+        return;
+      }
+      $("lo_saveMsg").style.color="var(--green)";
+      $("lo_saveMsg").textContent="Gespeichert.";
+    });
+  });
+
+  $("lo_copy").addEventListener("click", function(){
+    var rows=$("lo_resBody").querySelectorAll("tr"), out=[],i;
+    for(i=0;i<rows.length;i++){
+      var th=rows[i].querySelector("th"), td=rows[i].querySelector("td");
+      if(th&&td) out.push(th.textContent.trim()+": "+td.textContent.replace(/\s+/g," ").trim());
+    }
+    var txt=out.join("\n");
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){ $("lo_saveMsg").style.color="var(--green)"; $("lo_saveMsg").textContent="In die Zwischenablage kopiert."; });
+    }
+  });
+
+  /* ---------- Gespeicherte Objekte ---------- */
+  function loLoadList(){
+    $("lo_listCard").classList.remove("hidden");
+    $("lo_listBody").innerHTML='<div class="empty">Lade ...</div>';
+    SB.from("locator_objekte").select("*").order("analysiert_at",{ascending:false}).limit(100).then(function(res){
+      if(res.error){
+        $("lo_listBody").innerHTML='<div class="empty">'+esc(res.error.message)+"</div>"; return;
+      }
+      var d=res.data||[];
+      if(!d.length){ $("lo_listBody").innerHTML='<div class="empty">Noch keine Objekte gespeichert.</div>'; return; }
+      var h="";
+      for(var i=0;i<d.length;i++){
+        var r=d[i];
+        var meta=[];
+        if(r.objektart) meta.push(esc(r.objektart));
+        if(r.zimmer) meta.push(esc(r.zimmer)+" Zi.");
+        if(r.wohnflaeche) meta.push(esc(r.wohnflaeche)+" m²");
+        if(r.baujahr) meta.push("Bj. "+esc(r.baujahr));
+        if(r.preis) meta.push(chf(r.preis));
+        h+='<div class="lo-cand"><div><div class="adr">'+esc(((r.plz||"")+" "+(r.gemeinde||"")).trim()||"ohne Ort")+
+           (r.adresse?" – "+esc(r.adresse):"")+'</div><div class="meta">'+meta.join(" · ")+
+           (r.portal?" · "+esc(r.portal):"")+(r.inserat_id?" #"+esc(r.inserat_id):"")+
+           (r.makler?" · "+esc(r.makler):"")+'</div></div><div class="acts">'+loBadge(r.status)+
+           (r.url?' <a class="btn sec sm" href="'+esc(r.url)+'" target="_blank" rel="noopener">Inserat</a>':"")+
+           '</div></div>';
+      }
+      $("lo_listBody").innerHTML=h;
+    });
+  }
+  $("lo_list").addEventListener("click", loLoadList);
+  $("lo_listRefresh").addEventListener("click", loLoadList);
+
+  /* ---------- Beispiel und Reset ---------- */
+  $("lo_demo").addEventListener("click", function(){
+    $("lo_url").value="";
+    $("lo_text").value=
+      "Duplexwohnung mit Terrasse\n5.5 Zimmer\nWohnfläche 151 m²\nBaujahr 2006\n"+
+      "Kaufpreis: CHF 1'470'000\n8172 Niederglatt\n2. OG\n"+
+      "Grosse Terrasse, 2 Einstellplätze in der Tiefgarage.\n"+
+      "Anbieter: Beispiel Immobilien AG";
+    $("lo_parse").click();
+  });
+
+  $("lo_reset").addEventListener("click", function(){
+    $("lo_url").value=""; $("lo_text").value="";
+    $("lo_parseMsg").textContent=""; $("lo_geoMsg").textContent=""; $("lo_saveMsg").textContent="";
+    LO.obj=null; LO.parsed=null; LO.cands=[]; LO.srcs=[]; LO.status=null;
+    LO.gebaeude=null; LO.adrHit=null; LO.gwr=true; LO.gwrErr=null;
+    ["lo_fieldsCard","lo_resCard","lo_candCard","lo_mapCard","lo_srcCard","lo_ownCard","lo_listCard","lo_testCard"]
+      .forEach(function(id){ $(id).classList.add("hidden"); });
+  });
+
+  /* ---------- Selbsttest des Parsers ---------- */
+  var LO_TESTS=[
+    {n:"Niederglatt, Duplex, vollständig",
+     t:"Duplexwohnung\n5.5 Zimmer\nWohnfläche 151 m²\nBaujahr 2006\nCHF 1'470'000\n8172 Niederglatt\nTerrasse",
+     e:{zimmer:5.5,wohnflaeche:151,baujahr:2006,preis:1470000,plz:"8172",gemeinde:"Niederglatt",objektart:"Duplexwohnung",terrasse:true}},
+    {n:"Halbe Zimmer mit ½-Zeichen",
+     t:"4½ Zimmer, 112 m² Wohnfläche, 8302 Kloten, Baujahr 1998, CHF 980'000",
+     e:{zimmer:4.5,wohnflaeche:112,plz:"8302",gemeinde:"Kloten",baujahr:1998,preis:980000}},
+    {n:"EFH mit Grundstück",
+     t:"Einfamilienhaus, 6.5 Zimmer, Wohnfläche 180 m², Grundstücksfläche 520 m², Baujahr 1974, 8600 Dübendorf, Fr. 1'850'000, Garten und Garage",
+     e:{objektart:"Einfamilienhaus",zimmer:6.5,wohnflaeche:180,grundstueck:520,baujahr:1974,plz:"8600",preis:1850000,garten:true,garage:true}},
+    {n:"Attika ohne Baujahr",
+     t:"Attikawohnung 3.5 Zimmer\n98 m²\n8400 Winterthur\nCHF 795'000\nDachterrasse",
+     e:{objektart:"Attikawohnung",zimmer:3.5,wohnflaeche:98,plz:"8400",gemeinde:"Winterthur",preis:795000,terrasse:true,baujahr:undefined}},
+    {n:"Preis vor CHF",
+     t:"3.5 Zimmer Wohnung, 85 m², 8604 Volketswil, 720'000 CHF, Balkon, 1. OG",
+     e:{zimmer:3.5,wohnflaeche:85,plz:"8604",preis:720000,balkon:true,etage:"1. OG"}},
+    {n:"Adresse ausdrücklich genannt",
+     t:"Musterstrasse 12, 8302 Kloten\n4.5 Zimmer, 120 m², Baujahr 2010, CHF 1'150'000",
+     e:{adresse:"Musterstrasse 12",plz:"8302",gemeinde:"Kloten",zimmer:4.5,wohnflaeche:120,baujahr:2010}},
+    {n:"Maisonette mit Anbieter",
+     t:"Maisonette 4.5 Zi., 135 m², 8105 Regensdorf, Baujahr 2015, CHF 1'290'000\nAnbieter: Mustermann Immobilien GmbH",
+     e:{objektart:"Maisonettewohnung",zimmer:4.5,wohnflaeche:135,plz:"8105",baujahr:2015,makler:"Mustermann Immobilien GmbH"}},
+    {n:"MFH Renditeobjekt",
+     t:"Mehrfamilienhaus mit 6 Wohnungen, Grundstücksfläche 890 m², erbaut 1962, 8180 Bülach, Kaufpreis CHF 3'450'000",
+     e:{objektart:"Mehrfamilienhaus",grundstueck:890,baujahr:1962,plz:"8180",gemeinde:"Bülach",preis:3450000}},
+    {n:"Nur Minimalangaben",
+     t:"Wohnung in 8105 Regensdorf, Preis auf Anfrage",
+     e:{objektart:"Wohnung",plz:"8105",gemeinde:"Regensdorf",zimmer:undefined,preis:undefined}},
+    {n:"Zahlenformat mit Punkt",
+     t:"5.5 Zimmer, 151 m², Baujahr 2006, CHF 1.470.000, 8172 Niederglatt",
+     e:{preis:1470000,zimmer:5.5,wohnflaeche:151}},
+    {n:"Komma als Dezimaltrennzeichen",
+     t:"Wohnfläche 151,5 m², 4,5 Zimmer, 8600 Dübendorf, Baujahr 2001, CHF 1'100'000",
+     e:{wohnflaeche:151.5,zimmer:4.5,baujahr:2001}},
+    {n:"Terrassenhaus, Geschosse",
+     t:"Terrassenhaus, 5.5 Zimmer, 165 m², 3 Stockwerke, Baujahr 1988, 8132 Egg, CHF 1'680'000",
+     e:{objektart:"Terrassenhaus",stockwerke:3,baujahr:1988,plz:"8132"}},
+    {n:"Reihenhaus mit Abkürzung",
+     t:"Reihenhaus (REFH), 5.5 Zi, Wohnfl. 142 m², Bauj. 1996, 8157 Dielsdorf, CHF 1'390'000",
+     e:{objektart:"Reiheneinfamilienhaus",wohnflaeche:142,baujahr:1996,plz:"8157"}},
+    {n:"Dachgeschoss, Parkplätze",
+     t:"3.5 Zimmer Dachwohnung, 92 m², 8303 Bassersdorf, Baujahr 2004, 2 Parkplätze, CHF 860'000",
+     e:{etage:"Dachgeschoss",parkplaetze:"2",plz:"8303",baujahr:2004}},
+    {n:"Zweiwortgemeinde",
+     t:"4.5 Zimmer, 118 m², 8623 Wetzikon ZH, Baujahr 2008, CHF 1'050'000",
+     e:{plz:"8623",zimmer:4.5,baujahr:2008}},
+    {n:"Kein Preis, kein Baujahr",
+     t:"5.5 Zimmer Duplexwohnung, 151 m², 8172 Niederglatt, Terrasse, Tiefgarage",
+     e:{zimmer:5.5,wohnflaeche:151,objektart:"Duplexwohnung",garage:true,preis:undefined,baujahr:undefined}},
+    {n:"Bauland",
+     t:"Bauland, Grundstücksfläche 780 m², 8192 Glattfelden, CHF 980'000",
+     e:{objektart:"Bauland",grundstueck:780,plz:"8192",preis:980000}},
+    {n:"Loft",
+     t:"Loft 3.5 Zimmer, 140 m², Baujahr 1930, umgebaut 2012, 8005 Zürich, CHF 1'750'000",
+     e:{objektart:"Loft",zimmer:3.5,wohnflaeche:140,baujahr:1930,plz:"8005"}},
+    {n:"Flächen in anderer Reihenfolge",
+     t:"8910 Affoltern am Albis, Einfamilienhaus, Baujahr 1985, Grundstücksfläche 610 m², Wohnfläche 156 m², CHF 1'580'000",
+     e:{plz:"8910",grundstueck:610,wohnflaeche:156,baujahr:1985}},
+    {n:"Leerer Text",
+     t:"",
+     e:{zimmer:undefined,plz:undefined,preis:undefined}}
+  ];
+
+  function loSelfTest(){
+    var pass=0, fail=0, h="";
+    for(var i=0;i<LO_TESTS.length;i++){
+      var tc=LO_TESTS[i], got=loParse(tc.t,""), bad=[];
+      for(var k in tc.e){
+        var exp=tc.e[k], act=got[k];
+        if(exp===undefined){ if(act!=null&&act!==""&&act!==false) bad.push(k+"=“"+act+"” (erwartet: leer)"); }
+        else if(typeof exp==="number"){ if(Number(act)!==exp) bad.push(k+"=“"+act+"” (erwartet "+exp+")"); }
+        else if(typeof exp==="boolean"){ if(!!act!==exp) bad.push(k+"=“"+act+"” (erwartet "+exp+")"); }
+        else if(String(act||"")!==String(exp)) bad.push(k+"=“"+act+"” (erwartet “"+exp+"”)");
+      }
+      if(bad.length){ fail++; h+='<div><span class="n">✗</span> '+esc(tc.n)+' – '+esc(bad.join("; "))+"</div>"; }
+      else { pass++; h+='<div><span class="y">✓</span> '+esc(tc.n)+"</div>"; }
+    }
+    h='<div style="margin-bottom:8px"><b>'+pass+" von "+(pass+fail)+" Testfällen bestanden.</b></div>"+h+
+      '<div class="muted" style="margin-top:10px">Das sind Textvarianten in den üblichen Schweizer Inseratsformaten, nicht echte Portalinserate. Für den Abnahmetest mit 20 echten Inseraten siehe tools/locator_testprotokoll.md.</div>';
+    $("lo_testBody").innerHTML=h;
+    $("lo_testCard").classList.remove("hidden");
+    return {pass:pass,fail:fail};
+  }
+  window.loSelfTest=loSelfTest;   /* in der Konsole aufrufbar: loSelfTest() */
+
+  function initLoc(){
+    /* Karte erst beim Oeffnen des Tabs korrekt dimensionieren */
+    var btn=document.querySelector('#tabs button[data-v="loc"]');
+    if(btn) btn.addEventListener("click", function(){
+      if(LO.map) setTimeout(function(){ LO.map.invalidateSize(); },120);
+    });
+  }
 
   /* ---------- Boot ---------- */
   SB.auth.getSession().then(function(res){
