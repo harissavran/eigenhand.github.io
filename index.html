@@ -115,6 +115,33 @@ section{padding:92px 0}
 .cb .fill{height:100%;border-radius:7px;background:var(--muted2)}
 .cb.us .fill{background:var(--green)}
 .costbars .fine{font-size:12px;color:var(--muted2);line-height:1.5}
+/* Drei Wege im Vergleich */
+.ways{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;text-align:left;align-items:stretch}
+.way{background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:28px 24px;display:flex;flex-direction:column;position:relative}
+.way .wl{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);margin-bottom:8px}
+.way h3{font-size:22px;margin:0 0 6px}
+.way .wd{font-size:15px;color:var(--muted);line-height:1.5;margin:0;min-height:46px}
+.way .wc{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:18px 0 18px;padding:16px 0}
+.way .wc b{display:block;font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.1;color:var(--warn)}
+.way .wc small{display:block;font-size:13px;color:var(--muted2);margin-top:4px;line-height:1.4}
+.way ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;font-size:15px;line-height:1.45;flex-grow:1}
+.way li{display:flex;gap:9px}
+.way li svg{flex:none;margin-top:2px}
+.way li.no svg{color:var(--warn)}
+.way li.ok svg{color:var(--green)}
+.way.us{background:var(--green-d);border-color:var(--green-d);color:#fff;box-shadow:0 18px 44px rgba(20,33,28,.13)}
+.way.us .wl{color:var(--mint)}
+.way.us .wd,.way.us .wc small{color:#C7D6CE}
+.way.us .wc{border-color:rgba(255,255,255,.15)}
+.way.us .wc b{color:var(--mint)}
+.way.us li.ok svg{color:var(--mint)}
+.way.us .btn{margin-top:22px}
+.way .badge{position:absolute;top:-12px;left:24px;right:auto;transform:none;background:var(--mint);color:var(--green-d);font-size:12px;font-weight:800;letter-spacing:.04em;padding:5px 11px;border-radius:999px}
+.verdict{max-width:820px;margin:34px auto 0;background:var(--mint-bg);border-radius:16px;padding:22px 26px;text-align:left;font-size:17px;line-height:1.55;color:var(--ink)}
+.verdict strong{color:var(--green-d)}
+.ways-fine{font-size:12px;color:var(--muted2);line-height:1.5;max-width:820px;margin:14px auto 0}
+#rechner{margin-top:26px;text-align:left}
+@media(max-width:900px){.ways{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto}.way .wd{min-height:0}}
 .anchor{max-width:820px;margin:34px auto 38px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 32px;text-align:left}
 .anchor h3{font-size:19px;margin:0 0 4px;letter-spacing:-.01em}
 .anchor .asub{font-size:14.5px;color:var(--muted2);margin:0 0 22px}
@@ -466,7 +493,7 @@ footer a{color:#fff}
     <nav class="links" id="mainnav" aria-label="Hauptnavigation">
       <a href="#ablauf">Ablauf</a>
       <a href="#preise">Preise</a>
-      <a href="#rechner">Ersparnis</a>
+      <a href="#vergleich">Vergleich</a>
       <a href="#bewertung">Immobilienwert</a>
       <a href="ratgeber.html">Ratgeber</a>
       <a href="#faq">Fragen</a>
@@ -480,25 +507,72 @@ footer a{color:#fff}
   <div class="wrap hero">
     <div>
       <span class="tag">Schweizweit · Schwerpunkt Kanton Zürich</span>
-      <h1>Verkaufen Sie Ihr Zuhause zum Festpreis. <span class="soft">Nicht für Prozente.</span></h1>
-      <p class="sub">Sie haben über Jahre in Ihre Immobilie investiert. Mit Eigenhand bleibt dieser Wert bei Ihnen: Sie bezahlen einen festen Preis ab CHF 1'490 und entscheiden selbst, wie viel Unterstützung Sie möchten.</p>
+      <h1>Ihre Immobilie verkaufen – <span class="soft">ohne Maklerprovision.</span></h1>
+      <p class="sub">Wir machen, was ein Makler macht: Preis bestimmen, Fotos, Inserat auf Homegate und ImmoScout24 – auf Wunsch auch Besichtigungen und Verhandlung. Sie zahlen dafür einen <strong>Festpreis ab CHF 1'490</strong> statt 20'000 bis 30'000 Franken Provision.</p>
       <div class="cta">
-        <a href="#bewertung" class="btn">Was ist mein Zuhause wert?</a>
-        <a href="#preise" class="btn sec">Pakete ansehen</a>
+        <a href="#bewertung" class="btn">Meine Ersparnis berechnen</a>
+        <a href="#vergleich" class="btn sec">Wie funktioniert das?</a>
       </div>
       <p class="herohint">Kostenlos · Richtwert und Ersparnis in 60 Sekunden · ohne Anruf</p>
       <button type="button" class="vidbtn" onclick="openVideo()" aria-haspopup="dialog"><span class="pl"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6L12.6 8z" fill="#123D2F"/></svg></span>In 90 Sekunden erklärt</button>
       <div class="ticks">
-        <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Keine Provision</span>
+        <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Festpreis statt Provision</span>
         <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Portalkosten inklusive</span>
-        <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Wechsel-Garantie</span>
+        <span><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Bis zum Start kostenlos zurücktreten</span>
       </div>
     </div>
     <!-- Rechenbeispiel aus dem Hero entfernt, damit das Hintergrundbild (Sofa/Aussicht) frei sichtbar ist. Dieselbe Rechnung steht direkt unten im Abschnitt "Das Prinzip". -->
   </div>
 </div>
 
-<section class="band" id="bewertung">
+<section class="band" id="vergleich">
+  <div class="wrap center">
+    <div class="eyebrow">Ihre drei Möglichkeiten</div>
+    <h2 class="h2">Makler, allein verkaufen oder Eigenhand?</h2>
+    <p class="lead">Wer eine Immobilie verkauft, hat drei Wege. Ehrlich gerechnet am Beispiel einer Wohnung für CHF 1 Million:</p>
+    <div class="ways">
+      <div class="way">
+        <div class="wl">Weg 1</div>
+        <h3>Mit Makler</h3>
+        <p class="wd">Er macht alles. Sie bezahlen ihn mit einem Teil Ihres Verkaufspreises.</p>
+        <div class="wc"><b>CHF 20'000–30'000</b><small>Provision (2–3 %), abgezogen von Ihrem Erlös</small></div>
+        <ul>
+          <li class="ok"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Sie haben kaum Aufwand</li>
+          <li class="no"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l9 9M14.5 5.5l-9 9"/></svg>Je teurer Ihre Immobilie, desto mehr zahlen Sie – für dieselbe Arbeit</li>
+        </ul>
+      </div>
+      <div class="way">
+        <div class="wl">Weg 2</div>
+        <h3>Allein inserieren</h3>
+        <p class="wd">Sie buchen die Portale selbst und machen alles allein.</p>
+        <div class="wc"><b>ca. CHF 1'100 / Monat</b><small>Portalkosten für gute Sichtbarkeit – jeden Monat, bis verkauft ist</small></div>
+        <ul>
+          <li class="no"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l9 9M14.5 5.5l-9 9"/></svg>Niemand prüft Ihren Preis: 3 % zu tief angesetzt sind CHF 30'000 verschenkt</li>
+          <li class="no"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l9 9M14.5 5.5l-9 9"/></svg>Fotos, Inserat, Anfragen, Besichtigungen, Unterlagen – alles bei Ihnen</li>
+          <li class="no"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5.5 5.5l9 9M14.5 5.5l-9 9"/></svg>Ohne Profi-Fotos und Exposé geht Ihr Inserat zwischen vielen anderen unter</li>
+        </ul>
+      </div>
+      <div class="way us">
+        <span class="badge">Das Beste aus beiden</span>
+        <div class="wl">Weg 3</div>
+        <h3>Mit Eigenhand</h3>
+        <p class="wd">Die Arbeit eines Maklers – zum Festpreis statt Provision.</p>
+        <div class="wc"><b>ab CHF 1'490</b><small>einmalig, Portalkosten inklusive</small></div>
+        <ul>
+          <li class="ok"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Sie starten mit dem richtigen Preis – geschätzt anhand vergleichbarer Verkäufe</li>
+          <li class="ok"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Exposé und Inserat auf Homegate, ImmoScout24 und Acheter-Louer</li>
+          <li class="ok"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Auf Wunsch übernehmen wir Besichtigungen und Verhandlung</li>
+          <li class="ok"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg><span><strong>Bis zu CHF 28'510 mehr</strong> für Sie als mit Makler</span></li>
+        </ul>
+        <a href="#bewertung" class="btn mint block">Meine Ersparnis berechnen</a>
+      </div>
+    </div>
+    <div class="verdict">Gegenüber dem Makler <strong>behalten Sie Zehntausende Franken.</strong> Gegenüber dem Alleingang <strong>sparen Sie Portalkosten, Zeit und das Risiko, unter Wert zu verkaufen.</strong> Egal, wie Sie sonst verkaufen würden: Mit Eigenhand fahren Sie besser.</div>
+    <p class="ways-fine">Richtwerte, Stand November 2026. Portalkosten: Premium-Platzierung auf Homegate und ImmoScout24 für Privatpersonen, der genaue Preis hängt von Lage und Objekt ab. Maklerprovisionen liegen in der Schweiz üblicherweise bei 2–3 %. Bei Eigenhand «Selbst» übernehmen Sie Anfragen und Besichtigungen selbst; «Begleitet» (CHF 6'900) übernimmt sie wie ein Makler.</p>
+  </div>
+</section>
+
+<section id="bewertung">
   <div class="wrap center">
     <div class="eyebrow">Kostenlos · in 60 Sekunden</div>
     <h2 class="h2">Was ist Ihr Zuhause wert – und was sparen Sie?</h2>
@@ -521,14 +595,8 @@ footer a{color:#fff}
         <div id="bw_result"><div class="bw-empty">Füllen Sie die Felder aus und klicken Sie «Wert berechnen».<br>Ihr Richtwert und Ihre Ersparnis erscheinen hier.</div></div>
       </div>
     </div>
-  </div>
-</section>
-
-<section id="rechner">
-  <div class="wrap center">
-    <div class="eyebrow">Das Prinzip</div>
-    <h2 class="h2">Sie zahlen für die Arbeit, nicht für den Preis Ihres Hauses.</h2>
-    <p class="lead">Eine Provision steigt mit dem Verkaufspreis – die Arbeit dahinter nicht: Ein Haus für CHF 1.5 Millionen braucht kaum mehr Inserate, Besichtigungen und Gespräche als eines für CHF 900'000. Bei Eigenhand bezahlen Sie einen festen Preis für die Unterstützung, die Sie wirklich brauchen. Was Sie nicht als Provision bezahlen, bleibt bei Ihnen.</p>
+    <details class="compare" id="rechner">
+      <summary>Genau nachrechnen: Ihr Nettoerlös mit Hypothek und Steuern</summary>
 <div class="calc">
       <div class="in">
         <div><label for="f_price">Erwarteter Verkaufspreis (CHF)</label><input id="f_price" type="number" inputmode="numeric" step="10000" min="0" value="1500000"></div>
@@ -586,7 +654,7 @@ footer a{color:#fff}
         <p class="fineprint">Unverbindliche Schätzung, keine Steuer- oder Rechtsberatung. Grundstückgewinnsteuer vereinfacht nach dem Zürcher Tarif mit Besitzdauer-Abzug; die Provision ist als Kosten abziehbar, deshalb ist die Ersparnis nach Steuern etwas kleiner als vor Steuern. Notar- und Grundbuchgebühren geschätzt mit je 1 ‰, hälftig zwischen Käufer und Verkäufer geteilt. Ein Makler übernimmt meist mehr Aufgaben als «Selbst» oder «Pro»: Der Vergleich zeigt Kosten, keine identischen Leistungen.</p>
       </div>
     </div>
-  </div>
+    </details>
   </div>
 </section>
 
@@ -594,14 +662,13 @@ footer a{color:#fff}
   <div class="wrap center">
     <div class="eyebrow">So funktioniert's</div>
     <h2 class="h2">In vier Schritten zum Verkauf</h2>
-    <p class="lead">Sie behalten die Kontrolle über jeden Schritt. Wie viel wir übernehmen, bestimmen Sie mit der Wahl Ihres Pakets.</p>
+    <p class="lead">Sie bleiben Eigentümer und entscheiden jeden Schritt. Wir übernehmen die Arbeit.</p>
     <div class="steps">
-      <div class="step"><div class="no">1</div><h3>Was ist Ihre Immobilie wert?</h3><p>Vier Angaben im <a href="#bewertung">Online-Rechner</a>, und Sie sehen sofort Richtwert und Ersparnis. Auf Wunsch erhalten Sie innert 24 Stunden eine genaue Einschätzung mit Vergleichsverkäufen aus Ihrer Gemeinde.</p><div class="meta">Kostenlos · sofort online</div></div>
-      <div class="step"><div class="no">2</div><h3>Sie entscheiden, wie viel Sie abgeben</h3><p>Alles selbst machen und maximal sparen? Oder lieber zurücklehnen und uns verhandeln lassen? Sie wählen Ihr Paket, wir legen gemeinsam den Angebotspreis fest – und ab da steht der Preis. Egal, für wie viel Sie am Ende verkaufen.</p><div class="meta">Festpreis ab CHF 1'490</div></div>
-      <div class="step"><div class="no">3</div><h3>Ihre Immobilie geht online</h3><p>Wir erstellen Exposé und Inserat und schalten beides über Eigenhand auf Homegate, ImmoScout24 und Acheter-Louer auf, drei der grossen Immobilienportale der Schweiz. Die Portalkosten sind im Festpreis enthalten.</p><div class="meta">Inseratskosten inklusive</div></div>
-      <div class="step"><div class="no">4</div><h3>Sie wählen den Käufer</h3><p>Sie sehen alle Angebote nebeneinander, inklusive Finanzierungsnachweis, und entscheiden selbst. Wir bereiten die Unterlagen für das Notariat vor und begleiten Sie bis zur Beurkundung.</p><div class="meta">Bis zum Notartermin</div></div>
+      <div class="step"><div class="no">1</div><h3>Kostenlose Einschätzung</h3><p>Im <a href="#bewertung">Online-Rechner</a> oder per Anfrage. Innert 24 Stunden erhalten Sie eine Preisspanne per E-Mail.</p><div class="meta">Kostenlos · ohne Anruf</div></div>
+      <div class="step"><div class="no">2</div><h3>Paket wählen</h3><p>Sie bestimmen, wie viel Sie selbst machen. Der Preis steht fest – egal, wofür Sie verkaufen.</p><div class="meta">Festpreis ab CHF 1'490</div></div>
+      <div class="step"><div class="no">3</div><h3>Ihre Immobilie geht online</h3><p>Exposé und Inserat auf Homegate, ImmoScout24 und Acheter-Louer – Portalkosten inklusive.</p><div class="meta">Inseratskosten inklusive</div></div>
+      <div class="step"><div class="no">4</div><h3>Sie verkaufen</h3><p>Sie wählen den Käufer. Die Unterlagen für das Notariat bereiten wir mit Ihnen vor.</p><div class="meta">Bis zum Notartermin</div></div>
     </div>
-    <p class="fine" style="margin-top:28px;max-width:620px;margin-left:auto;margin-right:auto">Ihre Immobilie wird über Eigenhand inseriert. Sie bleiben jederzeit Eigentümer und Entscheider – wir übernehmen die Arbeit, nicht die Kontrolle.</p>
   </div>
 </section>
 
@@ -609,49 +676,21 @@ footer a{color:#fff}
   <div class="wrap center">
     <div class="eyebrow">Preise und Pakete</div>
     <h2 class="h2">Ein Festpreis. Keine Provision.</h2>
-    <p class="lead">Je mehr Sie selbst machen, desto mehr sparen Sie. Je mehr wir übernehmen, desto weniger Aufwand haben Sie. Alle Preise sind Festpreise inklusive Portalkosten. Bei «Pro» und «Begleitet» bleibt das Inserat online, bis verkauft ist.</p>
-    <div class="anchor">
-      <h3>Was der Verkauf einer Immobilie für CHF 1 Mio. kostet</h3>
-      <p class="asub">Dieselbe Immobilie, dieselben Portale.</p>
-      <div class="cb">
-        <div class="top"><span>Makler mit 3 % Provision<small>fällig beim Verkauf, steigt mit dem Preis</small></span><b>ca. CHF 30'000</b></div>
-        <div class="track"><div class="fill" style="width:100%"></div></div>
-      </div>
-      <div class="cb">
-        <div class="top"><span>Nur die Inserate, selbst gebucht – 3 Monate<small>ohne Fotos, ohne Exposé, ohne Preisschätzung</small></span><b>ca. CHF 3'300</b></div>
-        <div class="track"><div class="fill mid" style="width:11%"></div></div>
-      </div>
-      <div class="cb us">
-        <div class="top"><span><strong>Eigenhand «Begleitet»</strong><small>wie mit Makler: wir übernehmen Besichtigungen und Verhandlung</small></span><b>CHF 6'900</b></div>
-        <div class="track"><div class="fill" style="width:23%"></div></div>
-      </div>
-      <div class="cb us">
-        <div class="top"><span><strong>Eigenhand «Selbst»</strong><small>Sie übernehmen Anfragen und Besichtigungen selbst</small></span><b>CHF 1'490</b></div>
-        <div class="track"><div class="fill" style="width:5%"></div></div>
-      </div>
-      <div class="keep">
-        <div class="big">CHF 23'100 bis 28'510</div>
-        <p><strong>bleiben bei Ihnen statt beim Makler</strong> – je nachdem, wie viel Sie selbst übernehmen. Portale rechnen pro Woche ab, solange das Inserat läuft. Wir rechnen einmal ab.</p>
-      </div>
-      <p class="fine">Richtwerte, Stand November 2026. Inserate: Premium-Platzierung auf Homegate und ImmoScout24 für Privatpersonen, rund CHF 1'100 pro Monat; der genaue Preis hängt von Lage und Objekt ab. Maklerprovisionen liegen in der Schweiz üblicherweise bei 2–3 %.</p>
-    </div>
+    <p class="lead">Sie wählen, wie viel wir übernehmen. Alle Preise einmalig, Portalkosten inklusive.</p>
     <div class="price">
       <div class="plan">
         <div class="phead">
           <div class="who">Sie verkaufen selbst</div>
           <h3>Selbst</h3>
-          <p class="d">Für alle, die den Verkauf selbst in die Hand nehmen und maximal sparen wollen.</p>
+          <p class="d">Sie zeigen die Immobilie selbst und sparen am meisten.</p>
         </div>
         <div class="pcost"><div class="amt">CHF 1'490 <small>einmalig</small></div></div>
         <div class="plus" style="margin-top:0">Im Paket enthalten</div>
         <ul>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Ihre Fotos aufbereitet und professionelles Exposé</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Inserat auf Homegate, ImmoScout24 und Acheter-Louer (90 Tage) – von uns aufbereitet und über Eigenhand aufgeschaltet</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Ihre Fotos aufbereitet und professionelles Exposé</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Nach 90 Tagen noch nicht verkauft? Wir analysieren gemeinsam Aufrufe, Anfragen und Preis und besprechen, wie es weitergeht</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Preisschätzung mit Vergleichsobjekten</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Sie erhalten alle Anfragen und entscheiden, wen Sie einladen</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Checkliste und Interessenten-Fragebogen</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Ihre Fotos professionell aufbereitet, mit Exposé</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Inserat auf Homegate, ImmoScout24 und Acheter-Louer (90 Tage)</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Checkliste und Fragebogen für Interessenten</li>
         </ul>
         <button type="button" class="btn sec block" onclick="openBooking('selbst')">«Selbst» anfragen</button>
       </div>
@@ -659,21 +698,19 @@ footer a{color:#fff}
         <div class="phead">
           <div class="who">Sie verkaufen, wir beraten</div>
           <h3>Pro</h3>
-          <p class="d">Selbst verkaufen, aber mit Profi-Fotos und einer erfahrenen Person, die Sie bei jeder Entscheidung berät.</p>
+          <p class="d">Sie zeigen selbst – mit Profi-Fotos und Beratung an Ihrer Seite.</p>
         </div>
         <div class="pcost"><div class="amt">CHF 2'490 <small>einmalig</small></div></div>
         <div class="inherit">
           <div class="it"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Enthält alles aus «Selbst»</div>
-          <div class="is">Exposé, Inserat auf allen Portalen (90 Tage), Preisschätzung, Checkliste und Fragebogen.</div>
+          <div class="is">Preisschätzung, Exposé, Inserat auf allen Portalen, Checkliste.</div>
         </div>
         <div class="plus">Zusätzlich in «Pro»</div>
         <ul>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg><span><strong>Inserat online, bis verkauft ist</strong> – ohne Zeitlimit, ohne Verlängerungsgebühr</span></li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Professionelle Objektfotos – vor Ort (Raum Zürich) oder angeleitet mit Profi-Bearbeitung</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Detaillierte Preiseinschätzung mit Vergleichsobjekten und Marktanalyse</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Verkaufsdossier zu Heizung, Solarpotenzial und Zustand</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Persönliche Beratung während des ganzen Verkaufs</li>
-          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Beratung bei Kaufangeboten und Verhandlung</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg><span><strong>Inserat online, bis verkauft ist</strong></span></li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Professionelle Objektfotos</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Marktanalyse und Verkaufsdossier (Zustand, Heizung, Solar)</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D5B46" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Persönliche Beratung bis zum Verkauf, auch bei Kaufangeboten</li>
         </ul>
         <button type="button" class="btn sec block" onclick="openBooking('pro')">«Pro» anfragen</button>
       </div>
@@ -682,7 +719,7 @@ footer a{color:#fff}
         <div class="phead">
           <div class="who">Wir verkaufen für Sie</div>
           <h3>Begleitet</h3>
-          <p class="d">Für alle, die verkaufen wollen, ohne sich um Besichtigungen und Verhandlungen zu kümmern.</p>
+          <p class="d">Wir übernehmen alles wie ein Makler – nur zum Festpreis.</p>
         </div>
         <div class="pcost">
           <div class="amt">CHF 6'900 <small>total</small></div>
@@ -690,7 +727,7 @@ footer a{color:#fff}
         </div>
         <div class="inherit">
           <div class="it"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#9FE0C3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg>Enthält alles aus «Pro»</div>
-          <div class="is">Profi-Fotos, Exposé, Inserat auf allen Portalen (online bis verkauft), Marktanalyse, Verkaufsdossier und persönliche Beratung.</div>
+          <div class="is">Profi-Fotos, Inserat bis verkauft, Marktanalyse, Verkaufsdossier, Beratung.</div>
         </div>
         <div class="plus">Zusätzlich in «Begleitet»</div>
         <ul>
@@ -706,10 +743,10 @@ footer a{color:#fff}
     <div class="guarantee">
       <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#123D2F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4 6 8v7c0 6.5 4.3 11 10 13 5.7-2 10-6.5 10-13V8z"/><path d="m11.5 16 3.2 3.2 6-6.4"/></svg>
       <div>
-        <p style="margin:0 0 10px"><strong>Sie gehen kein Risiko ein, das Sie nicht sehen.</strong></p>
-        <p style="margin:0 0 8px">Bis zum Start können Sie <strong>jederzeit kostenlos zurücktreten</strong> – ohne Begründung, ohne Kosten.</p>
-        <p style="margin:0 0 8px">Bei «Begleitet» werden <strong>CHF 4'000 erst beim Verkauf fällig</strong>. Verkauft sich Ihre Immobilie nicht, bleibt es bei den CHF 2'900 vom Start.</p>
-        <p style="margin:0"><strong>Wechsel-Garantie:</strong> Sie merken unterwegs, dass Sie doch mehr Unterstützung möchten? Wechseln Sie jederzeit von «Selbst» oder «Pro» zu «Begleitet» – den bereits bezahlten Paketpreis rechnen wir an. Sie zahlen nicht doppelt.</p>
+        <p style="margin:0 0 10px"><strong>Ohne Risiko starten</strong></p>
+        <p style="margin:0 0 6px">Bis zum Start <strong>jederzeit kostenlos zurücktreten</strong>.</p>
+        <p style="margin:0 0 6px">Bei «Begleitet» sind <strong>CHF 4'000 erst beim Verkauf fällig</strong>.</p>
+        <p style="margin:0"><strong>Wechsel-Garantie:</strong> Jederzeit zu «Begleitet» wechseln – Bezahltes wird angerechnet.</p>
       </div>
     </div>
 
@@ -749,7 +786,7 @@ footer a{color:#fff}
 
     <div class="notincl">
       <h3>Was nicht im Preis enthalten ist</h3>
-      <p>Notar- und Grundbuchgebühren sowie die Grundstückgewinnsteuer fallen bei jedem Immobilienverkauf an, auch mit einem Makler. Diese Kosten bezahlen Sie direkt an Notariat und Gemeinde. Wir zeigen Ihnen vorab, mit welchen Beträgen Sie rechnen müssen.</p>
+      <p>Notar, Grundbuch und Grundstückgewinnsteuer fallen bei jedem Verkauf an, auch mit Makler. Wir zeigen Ihnen vorab, mit welchen Beträgen Sie rechnen müssen.</p>
     </div>
   </div>
 </section>
@@ -757,14 +794,13 @@ footer a{color:#fff}
 <section class="band" id="bedenken">
   <div class="wrap center">
     <div class="eyebrow">Ihre Bedenken</div>
-    <h2 class="h2">Was Eigentümer vor dem Selbstverkauf beschäftigt</h2>
-    <p class="lead">Diese vier Fragen stellen sich Eigentümer am häufigsten. Hier sind unsere ehrlichen Antworten.</p>
+    <h2 class="h2">Die häufigsten Bedenken – ehrlich beantwortet</h2>
     <div class="grid2">
-      <div class="concern"><h3>«Verkaufe ich unter Wert?»</h3><p>Der Preis wird nicht am Verhandlungstisch verloren, sondern beim Start. Deshalb beginnt jedes Paket mit einer Preisschätzung auf Basis vergleichbarer Verkäufe. Ab «Pro» analysieren wir Ihr Objekt im Detail – anhand Ihrer Unterlagen, Fotos und aktueller Vergleichsverkäufe.</p></div>
-      <div class="concern"><h3>«Was, wenn Käufer kritisch nachfragen?»</h3><p>Unsichere Käufer zögern und drücken den Preis. Darum bereiten wir ab «Pro» ein Verkaufsdossier vor, das die Fragen beantwortet, die bei fast jeder Besichtigung kommen: Zustand und Renovationen ehrlich dokumentiert, Typ, Baujahr und Zustand der Heizung, und das Solarpotenzial Ihres Dachs nach den öffentlichen Daten des Bundes. Wo es um konkrete Zahlen für einen späteren Ersatz geht, holen Sie eine Offerte beim Installateur ein – wir schätzen nicht, was wir nicht wissen.</p></div>
-      <div class="concern"><h3>«Mache ich rechtlich etwas falsch?»</h3><p>Den Kaufvertrag setzt in der Schweiz immer ein Notariat auf und beurkundet ihn, auch wenn ein Makler beteiligt ist. Sie erhalten von uns eine Checkliste mit allen Unterlagen und wissen vor dem Termin, worauf Sie achten müssen.</p></div>
-      <div class="concern"><h3>«Wie viel Zeit kostet mich das?»</h3><p>Bei «Selbst» und «Pro» übernehmen Sie Anfragen und Besichtigungen, meist einige Stunden pro Woche während der Vermarktung. Ist das zu viel, übernehmen wir mit «Begleitet» oder einzelnen Besichtigungstagen.</p></div>
-      <div class="concern"><h3>«Was, wenn sich nichts tut?»</h3><p>Wir besprechen mit Ihnen, ob Preis, Fotos oder Inserat angepasst werden sollten. Mit der Wechsel-Garantie können Sie jederzeit zu «Begleitet» wechseln, ohne doppelt zu bezahlen.</p></div>
+      <div class="concern"><h3>«Verkaufe ich unter Wert?»</h3><p>Nicht, wenn der Startpreis stimmt. Darum beginnt jedes Paket mit einer Preisschätzung anhand vergleichbarer Verkäufe.</p></div>
+      <div class="concern"><h3>«Was, wenn Käufer kritisch nachfragen?»</h3><p>Ab «Pro» erhalten Sie ein Verkaufsdossier zu Zustand, Heizung und Solarpotenzial. Es beantwortet die typischen Fragen, bevor sie gestellt werden.</p></div>
+      <div class="concern"><h3>«Mache ich rechtlich etwas falsch?»</h3><p>Den Kaufvertrag erstellt und beurkundet in der Schweiz immer ein Notariat – auch mit Makler. Von uns erhalten Sie die Checkliste mit allen Unterlagen.</p></div>
+      <div class="concern"><h3>«Wie viel Zeit kostet mich das?»</h3><p>Bei «Selbst» und «Pro» einige Stunden pro Woche für Anfragen und Besichtigungen. Zu viel? Dann übernehmen wir mit «Begleitet».</p></div>
+      <div class="concern"><h3>«Was, wenn sich nichts tut?»</h3><p>Wir passen mit Ihnen Preis, Fotos oder Inserat an. Und Sie können jederzeit zu «Begleitet» wechseln, ohne doppelt zu zahlen.</p></div>
     </div>
   </div>
 </section>
@@ -778,10 +814,9 @@ footer a{color:#fff}
       <div>
         <div class="eyebrow">Ihr Ansprechpartner</div>
         <h2 class="h2">Eine Person, die Ihr Zuhause kennt. Kein Callcenter.</h2>
-        <p>Grüezi, ich bin Haris Savran. Ich komme aus Kloten und arbeite im Kanton Zürich.</p>
-        <p>Als Immobilienvermittler habe ich Verkaufsobjekte betreut – von der Preisfindung über die Besichtigungen bis zum Notartermin. Dabei ist mir aufgefallen, wie viel von dieser Arbeit Organisation ist: Fotos, Exposé, Inserate, Termine, Unterlagen. Gute Makler leisten dafür viel. Nur wächst ihre Provision mit dem Verkaufspreis – der Aufwand nicht.</p>
-        <p>Deshalb Eigenhand: dieselbe Arbeit, zu einem festen Preis, und die Entscheidungen bleiben bei Ihnen.</p>
-        <p>Ich bin jung und baue dieses Geschäft auf. Das sage ich lieber offen, als dass Sie es sich zusammenreimen müssen. Für Sie heisst das: Sie bekommen jemanden, der sich für Ihren Verkauf wirklich ins Zeug legt, weil mein Name daran hängt. Und Sie gehen kein Risiko ein, das Sie nicht sehen – den Kaufvertrag erstellt und beurkundet immer ein Notariat, den Angebotspreis leiten wir aus vergleichbaren Verkäufen her, Sie sehen jedes Dokument vor dem Versand, und bis zum Start können Sie jederzeit kostenlos zurücktreten.</p>
+        <p>Grüezi, ich bin Haris Savran aus Kloten.</p>
+        <p>Als Immobilienvermittler habe ich Verkäufe vom ersten Preis bis zum Notartermin betreut. Dabei habe ich gesehen: Eine Wohnung für CHF 800'000 macht fast gleich viel Arbeit wie ein Haus für CHF 2 Millionen – die Provision ist aber mehr als doppelt so hoch.</p>
+        <p>Deshalb Eigenhand: dieselbe Arbeit, ein fester Preis, und die Entscheidungen bleiben bei Ihnen. Ich baue dieses Geschäft neu auf – darum lege ich mich für jeden Verkauf ins Zeug, denn mein Name hängt daran.</p>
         <p>Jede Anfrage landet direkt bei mir. Vom ersten Mail bis zum Notartermin haben Sie dieselbe Ansprechperson.</p>
         <div class="sig">Haris Savran<span>Gründer von Eigenhand · Kloten</span></div>
       </div>
