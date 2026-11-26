@@ -1727,7 +1727,7 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
   });
   /* ================= Import aus Inserat (Homegate, ImmoScout24 …) ================= */
   var IMP={imgs:[], host:""}, PENDING_IMPORT=null, LAST_IMPORT_SRC="", LAST_IMPORT_AT=0;
-  var IMPORT_HOSTS=/(^|\.)(homegate\.ch|immoscout24\.ch|newhome\.ch|flatfox\.ch|comparis\.ch|immostreet\.ch|acheter-louer\.ch|properstar\.ch)$/;
+  var IMPORT_HOSTS=/(^|\.)(homegate\.ch|immoscout24\.ch|newhome\.ch|flatfox\.ch|comparis\.ch|immostreet\.ch|acheter-louer\.ch|properstar\.ch|facebook\.com|tutti\.ch|anibis\.ch|ricardo\.ch)$/;
   window.addEventListener("message", function(e){
     if(!e.data || e.data.type!=="ehimport" || typeof e.data.data!=="object") return;
     var host=""; try{ host=new URL(e.origin).hostname; }catch(x){}
