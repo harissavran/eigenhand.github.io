@@ -65,7 +65,7 @@
   }
   function num(v) { if (v == null) return ""; if (typeof v === "object") v = v.value != null ? v.value : (v.amount != null ? v.amount : ""); var n = parseFloat(String(v).replace(/[^0-9.]/g, "")); return isNaN(n) ? "" : n; }
 
-  var out = { v: 1, src: location.href, host: location.hostname, title: "", desc: "", street: "", plz: "", ort: "", kanton: "",
+  var out = { v: 3, src: location.href, host: location.hostname, title: "", desc: "", street: "", plz: "", ort: "", kanton: "",
     price: "", rooms: "", area: "", plot: "", year: "", renov: "", floor: "", type: "", features: [], imgs: [], text: "" };
 
   if (best) {
