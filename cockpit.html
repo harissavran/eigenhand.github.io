@@ -1682,7 +1682,11 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
       var m=l.match(/^\s*[•\-–*·✓✔]\s*(.+)/);
       if(m && m[1].trim().length<=90) bullets.push(m[1].trim()); else rest.push(l);
     });
-    X.beschrieb=splitParas(rest.join("\n").replace(/\n{3,}/g,"\n\n"));
+    /* Absätze mit Kontaktdaten des Verkäufers oder Makler-Hinweisen gehören nicht ins Eigenhand-Exposé */
+    var restTxt=rest.join("\n").replace(/\n{3,}/g,"\n\n").split(/\n{2,}/).filter(function(par){
+      return !/[\w.+-]+@[\w-]+\.[\w.]+|(?:\+41|0)\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}|makler|besichtigung(?:en)? (?:finden|nach)|kontaktieren sie|melden sie sich/i.test(par);
+    }).join("\n\n");
+    X.beschrieb=splitParas(restTxt);
     var feats=[]; (d.features||[]).forEach(function(f){ if(FEAT_LABELS[f]) feats.push(FEAT_LABELS[f]); });
     var merk=[], seenM={};
     bullets.concat(feats, p.features||[]).forEach(function(m){
