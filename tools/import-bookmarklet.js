@@ -14,6 +14,16 @@
     return (d.textContent || "").replace(/ /g, " ").replace(/[ \t]+/g, " ").replace(/\n[ \t]+/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
   }
   function meta(n) { var m = document.querySelector('meta[property="' + n + '"],meta[name="' + n + '"]'); return m ? m.getAttribute("content") || "" : ""; }
+  var IS_FB = /(^|\.)facebook\.com$/.test(location.hostname);
+  if (IS_FB) {
+    /* Beschreibung aufklappen («Mehr ansehen»), dann auslesen */
+    var root = document.querySelector('[role="main"]') || document.body;
+    var more = Array.prototype.filter.call(root.querySelectorAll('[role="button"], span, div'), function (e) { return /^(Mehr ansehen|See more|Voir plus|Mostra altro)$/.test((e.innerText || "").trim()); })[0];
+    if (more) { try { more.click(); } catch (e) {} }
+    setTimeout(run, more ? 800 : 0);
+  } else { run(); }
+
+  function run() {
 
   /* 1. Datenquellen sammeln */
   var cands = [];
@@ -126,6 +136,28 @@
   out.text = clean((document.querySelector("main") || document.body).innerText || "").slice(0, 12000);
   out.textRaw = ((document.querySelector("main") || document.body).innerText || "").slice(0, 12000);
 
+  /* 4b. Facebook Marketplace: eigener Aufbau */
+  if (IS_FB) {
+    var main = document.querySelector('[role="main"]') || document.body;
+    var full = (main.innerText || "").replace(/\u00a0/g, " ");
+    var cut = full.search(/\n(Verkäuferinfos|Details zum Verkäufer|Heutige Auswahl|Seller information|Today's picks)\n/);
+    var top = cut > 0 ? full.slice(0, cut) : full.slice(0, 4000);
+    var ttl = clean(document.title.replace(/^\(\d+\)\s*/, "").replace(/^Marketplace\s*[-–]\s*/i, "").replace(/\s*\|\s*Facebook$/i, ""));
+    if (ttl) out.title = ttl;
+    var lines = top.split("\n").map(function (l) { return l.trim(); }).filter(Boolean);
+    var pl = lines.filter(function (l) { return /CHF|Fr\./.test(l) && /\d/.test(l); })[0];
+    if (pl) { var pn = parseInt(pl.replace(/[^\d]/g, ""), 10); if (pn >= 30000) out.price = pn; }
+    var lm = top.match(/\n([A-ZÄÖÜ][^\n,]{1,40}),\s*([A-Z]{2})\n/); if (lm) { out.ort = clean(lm[1]); out.kanton = lm[2]; }
+    var dm = top.match(/\n(?:Beschreibung|Description|Details)\n([\s\S]+?)(?=\n(?:Weniger anzeigen|See less|Mehr ansehen|See more|Anzeige|Gesponsert|Sponsored|Standort|Location)\n|$)/);
+    if (dm) out.desc = clean(dm[1].replace(/\n{3,}/g, "\n\n")).replace(/ ?\n ?/g, "\n").replace(/\s*(Weniger anzeigen|See less|Voir moins|Mostra meno)\s*$/i, "");
+    var key = ttl.slice(0, 14).toLowerCase();
+    var own = []; Array.prototype.forEach.call(main.querySelectorAll("img"), function (im) {
+      if (key && (im.alt || "").toLowerCase().indexOf(key) >= 0 && (im.naturalWidth || 0) >= 300) { try { own.push(new URL(im.currentSrc || im.src, location.href).href); } catch (e) {} }
+    });
+    if (own.length >= 2) { var ok = [], ks = []; own.forEach(function (u) { var k = u.split("?")[0].split("/").pop(); if (ks.indexOf(k) < 0) { ks.push(k); ok.push(u); } }); out.imgs = ok.slice(0, 30); }
+    out.text = clean(top); out.textRaw = top;
+  }
+
   /* 5. Bilder als Datei mitgeben, wenn die Seite es erlaubt (sonst bleibt der Link) */
   function toData(u) {
     return new Promise(function (res) {
@@ -159,4 +191,5 @@
       setTimeout(send, 500);
     })();
   });
+  }
 })();
