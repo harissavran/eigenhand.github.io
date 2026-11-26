@@ -323,6 +323,13 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
       <input type="password" id="loginPw" placeholder="Passwort" autocomplete="current-password">
       <button class="btn block" id="loginBtn">Einloggen</button>
       <p class="tiny" id="loginMsg" style="margin-top:14px"></p>
+      <p class="tiny" style="margin-top:6px"><a href="#" id="forgotBtn">Passwort vergessen?</a></p>
+    </div>
+    <div id="resetForm" class="hidden">
+      <input type="password" id="newPw" placeholder="Neues Passwort (mind. 8 Zeichen)" autocomplete="new-password">
+      <input type="password" id="newPw2" placeholder="Neues Passwort wiederholen" autocomplete="new-password">
+      <button class="btn block" id="resetBtn">Passwort speichern</button>
+      <p class="tiny" id="resetMsg" style="margin-top:14px"></p>
     </div>
   </div>
 </div>
@@ -885,6 +892,7 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
   /* ---------- Supabase ---------- */
   var SB_URL = "https://mljsvtgzbkvqcnxcrdir.supabase.co";
   var SB_KEY = "sb_publishable_8lxy-lRs0zM1kZ3_qVESLw_Zidi1Q5w";
+  var IS_RECOVERY = /type=recovery/.test(location.hash);
   var SB = window.supabase.createClient(SB_URL, SB_KEY);
 
   var LS = {
@@ -932,6 +940,38 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
     });
   });
   $("loginPw").addEventListener("keydown", function(e){ if(e.key==="Enter") $("loginBtn").click(); });
+
+  /* ---------- Passwort vergessen / neu setzen ---------- */
+  $("forgotBtn").addEventListener("click", function(e){
+    e.preventDefault();
+    var email=$("loginEmail").value.trim();
+    if(!email){ $("loginMsg").textContent="Bitte zuerst oben Ihre E-Mail-Adresse eingeben."; $("loginMsg").style.color="var(--warn)"; return; }
+    $("loginMsg").textContent="Sende Link ..."; $("loginMsg").style.color="";
+    SB.auth.resetPasswordForEmail(email, { redirectTo: location.origin + "/cockpit.html" }).then(function(res){
+      if(res.error){ $("loginMsg").textContent="Konnte keinen Link senden: "+res.error.message; $("loginMsg").style.color="var(--warn)"; }
+      else { $("loginMsg").textContent="Link gesendet. Bitte E-Mail (auch Spam) prüfen und den Link auf diesem Gerät öffnen."; $("loginMsg").style.color=""; }
+    });
+  });
+  function showReset(){
+    $("app").classList.add("hidden"); $("gate").classList.remove("hidden");
+    $("loginForm").classList.add("hidden"); $("resetForm").classList.remove("hidden");
+    $("gateSub").textContent="Neues Passwort festlegen.";
+    setTimeout(function(){ try{$("newPw").focus();}catch(e){} },80);
+  }
+  $("resetBtn").addEventListener("click", function(){
+    var a=$("newPw").value, b=$("newPw2").value;
+    if(a.length<8){ $("resetMsg").textContent="Mindestens 8 Zeichen."; $("resetMsg").style.color="var(--warn)"; return; }
+    if(a!==b){ $("resetMsg").textContent="Die Passwörter stimmen nicht überein."; $("resetMsg").style.color="var(--warn)"; return; }
+    $("resetBtn").disabled=true;
+    SB.auth.updateUser({ password:a }).then(function(res){
+      $("resetBtn").disabled=false;
+      if(res.error){ $("resetMsg").textContent="Fehler: "+res.error.message; $("resetMsg").style.color="var(--warn)"; return; }
+      history.replaceState(null,"",location.pathname);
+      $("resetForm").classList.add("hidden"); $("loginForm").classList.remove("hidden"); $("gateSub").textContent="Bitte einloggen.";
+      openApp();
+    });
+  });
+  SB.auth.onAuthStateChange(function(ev){ if(ev==="PASSWORD_RECOVERY"){ IS_RECOVERY=true; showReset(); } });
   function doLogout(){ stopPolling(); SB.auth.signOut().then(function(){ location.reload(); }); }
   $("logoutBtn").addEventListener("click", doLogout);
   $("logoutBtn2").addEventListener("click", doLogout);
@@ -2206,7 +2246,7 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
 
   /* ---------- Boot ---------- */
   SB.auth.getSession().then(function(res){
-    if(res && res.data && res.data.session){ openApp(); }
+    if(res && res.data && res.data.session){ if(IS_RECOVERY){ showReset(); } else { openApp(); } }
     else { showLogin(); }
   });
 })();
