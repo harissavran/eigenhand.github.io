@@ -15,9 +15,18 @@
   }
   function meta(n) { var m = document.querySelector('meta[property="' + n + '"],meta[name="' + n + '"]'); return m ? m.getAttribute("content") || "" : ""; }
   var IS_FB = /(^|\.)facebook\.com$/.test(location.hostname);
+  /* Facebook: Das Inserat ist entweder die ganze Seite oder ein Fenster (Dialog) über der Liste.
+     Nur dieses Inserat auslesen, nie die Liste dahinter. */
+  function fbRoot() {
+    var dl = Array.prototype.filter.call(document.querySelectorAll('[role="dialog"]'), function (d) {
+      return /Beschreibung|Nachricht senden|Verkäufer|Description|Send message|Seller|Wohnort|Standort/i.test(d.innerText || "") &&
+        Array.prototype.some.call(d.querySelectorAll("img"), function (i) { return (i.naturalWidth || 0) >= 300; });
+    });
+    return dl.length ? dl[dl.length - 1] : (document.querySelector('[role="main"]') || document.body);
+  }
   if (IS_FB) {
     /* Beschreibung aufklappen («Mehr ansehen»), dann auslesen */
-    var root = document.querySelector('[role="main"]') || document.body;
+    var root = fbRoot();
     var more = Array.prototype.filter.call(root.querySelectorAll('[role="button"], span, div'), function (e) { return /^(Mehr ansehen|See more|Voir plus|Mostra altro)$/.test((e.innerText || "").trim()); })[0];
     if (more) { try { more.click(); } catch (e) {} }
     setTimeout(run, more ? 800 : 0);
@@ -65,7 +74,7 @@
   }
   function num(v) { if (v == null) return ""; if (typeof v === "object") v = v.value != null ? v.value : (v.amount != null ? v.amount : ""); var n = parseFloat(String(v).replace(/[^0-9.]/g, "")); return isNaN(n) ? "" : n; }
 
-  var out = { v: 4, src: location.href, host: location.hostname, title: "", desc: "", street: "", plz: "", ort: "", kanton: "",
+  var out = { v: 5, src: location.href, host: location.hostname, title: "", desc: "", street: "", plz: "", ort: "", kanton: "",
     price: "", rooms: "", area: "", plot: "", year: "", renov: "", floor: "", type: "", features: [], imgs: [], text: "" };
 
   if (best) {
@@ -136,25 +145,40 @@
   out.text = clean((document.querySelector("main") || document.body).innerText || "").slice(0, 12000);
   out.textRaw = ((document.querySelector("main") || document.body).innerText || "").slice(0, 12000);
 
-  /* 4b. Facebook Marketplace: eigener Aufbau */
+  /* 4b. Facebook Marketplace: nur das geöffnete Inserat */
   if (IS_FB) {
-    var main = document.querySelector('[role="main"]') || document.body;
+    var main = fbRoot();
+    var isDialog = main.getAttribute && main.getAttribute("role") === "dialog";
     var full = (main.innerText || "").replace(/\u00a0/g, " ");
-    var cut = full.search(/\n(Verkäuferinfos|Details zum Verkäufer|Heutige Auswahl|Seller information|Today's picks)\n/);
+    var stopRe = /^(Verkäuferinfos|Details zum Verkäufer|Heutige Auswahl|Ähnliche Artikel|Ähnliche Inserate|Seller information|Seller details|Today's picks|Related listings|Similar listings|Sponsored|Gesponsert)$/;
+    var cut = full.search(/\n(Verkäuferinfos|Details zum Verkäufer|Heutige Auswahl|Ähnliche Artikel|Ähnliche Inserate|Seller information|Seller details|Today's picks|Related listings|Similar listings)\n/);
     var top = cut > 0 ? full.slice(0, cut) : full.slice(0, 4000);
-    var ttl = clean(document.title.replace(/^\(\d+\)\s*/, "").replace(/^Marketplace\s*[-–]\s*/i, "").replace(/\s*\|\s*Facebook$/i, ""));
-    if (ttl) out.title = ttl;
     var lines = top.split("\n").map(function (l) { return l.trim(); }).filter(Boolean);
+    var docT = clean(document.title.replace(/^\(\d+\)\s*/, "").replace(/^Marketplace\s*[-–]\s*/i, "").replace(/\s*\|\s*Facebook$/i, ""));
+    var ttl = (isDialog && lines[0]) ? lines[0] : (/^(Facebook|Marketplace)/i.test(docT) ? (lines[0] || docT) : docT);
+    out.title = clean(ttl);
     var pl = lines.filter(function (l) { return /CHF|Fr\./.test(l) && /\d/.test(l); })[0];
+    out.price = "";
     if (pl) { var pn = parseInt(pl.replace(/[^\d]/g, ""), 10); if (pn >= 30000) out.price = pn; }
+    out.ort = ""; out.kanton = ""; out.plz = ""; out.street = "";
     var lm = top.match(/\n([A-ZÄÖÜ][^\n,]{1,40}),\s*([A-Z]{2})\n/); if (lm) { out.ort = clean(lm[1]); out.kanton = lm[2]; }
+    out.desc = "";
     var dm = top.match(/\n(?:Beschreibung|Description|Details)\n([\s\S]+?)(?=\n(?:Weniger anzeigen|See less|Mehr ansehen|See more|Anzeige|Gesponsert|Sponsored|Standort|Location)\n|$)/);
-    if (dm) out.desc = clean(dm[1].replace(/\n{3,}/g, "\n\n")).replace(/ ?\n ?/g, "\n").replace(/\s*(Weniger anzeigen|See less|Voir moins|Mostra meno)\s*$/i, "");
-    var key = ttl.slice(0, 14).toLowerCase();
-    var own = []; Array.prototype.forEach.call(main.querySelectorAll("img"), function (im) {
-      if (key && (im.alt || "").toLowerCase().indexOf(key) >= 0 && (im.naturalWidth || 0) >= 300) { try { own.push(new URL(im.currentSrc || im.src, location.href).href); } catch (e) {} }
+    if (dm) out.desc = clean(dm[1].replace(/\n{3,}/g, "\n\n")).replace(/ ?\n ?/g, "\n").replace(/\s*(Weniger anzeigen|See less|Voir moins|Mostra meno)\s*$/i, "").replace(/\n?(Übersetzung anzeigen|See translation|Voir la traduction|Original anzeigen)\s*/gi, "\n").trim();
+    /* Bilder: nur aus dem Inserat und nur vor dem Abschnitt «Verkäufer» / «Ähnliche Artikel» */
+    var stopEl = Array.prototype.filter.call(main.querySelectorAll("span, h2, h3, div"), function (e) { return e.children.length === 0 && stopRe.test((e.textContent || "").trim()); })[0];
+    var key = out.title.slice(0, 14).toLowerCase();
+    var cand = Array.prototype.filter.call(main.querySelectorAll("img"), function (im) {
+      if ((im.naturalWidth || 0) < 300) return false;
+      if (stopEl && (stopEl.compareDocumentPosition(im) & Node.DOCUMENT_POSITION_FOLLOWING)) return false;
+      return true;
     });
-    if (own.length >= 2) { var ok = [], ks = []; own.forEach(function (u) { var k = u.split("?")[0].split("/").pop(); if (ks.indexOf(k) < 0) { ks.push(k); ok.push(u); } }); out.imgs = ok.slice(0, 30); }
+    var byAlt = cand.filter(function (im) { return key && (im.alt || "").toLowerCase().indexOf(key) >= 0; });
+    var use = byAlt.length >= 1 ? byAlt : cand;
+    var ok = [], ks = [];
+    use.forEach(function (im) { var u; try { u = new URL(im.currentSrc || im.src, location.href).href; } catch (e) { return; } var k = u.split("?")[0].split("/").pop(); if (ks.indexOf(k) < 0) { ks.push(k); ok.push(u); } });
+    out.imgs = ok.slice(0, 30);
+    out.features = [];
     out.text = clean(top); out.textRaw = top;
   }
 
