@@ -5,7 +5,7 @@
    Nach Änderungen: node tools/build_bookmarklet.js ausführen und den Link im Cockpit ersetzen. */
 (function () {
   var TARGET = "https://eigenhand.ch";
-  var win = window.open(TARGET + "/cockpit.html#ehimport", "eh_cockpit");
+  var win = window.open(TARGET + "/cockpit.html?i=" + Date.now() + "#ehimport", "eh_cockpit");
 
   function clean(s) { return String(s == null ? "" : s).replace(/ /g, " ").replace(/[ \t]+/g, " ").trim(); }
   function stripHtml(h) {
@@ -65,7 +65,7 @@
   }
   function num(v) { if (v == null) return ""; if (typeof v === "object") v = v.value != null ? v.value : (v.amount != null ? v.amount : ""); var n = parseFloat(String(v).replace(/[^0-9.]/g, "")); return isNaN(n) ? "" : n; }
 
-  var out = { v: 3, src: location.href, host: location.hostname, title: "", desc: "", street: "", plz: "", ort: "", kanton: "",
+  var out = { v: 4, src: location.href, host: location.hostname, title: "", desc: "", street: "", plz: "", ort: "", kanton: "",
     price: "", rooms: "", area: "", plot: "", year: "", renov: "", floor: "", type: "", features: [], imgs: [], text: "" };
 
   if (best) {
