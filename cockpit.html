@@ -341,7 +341,7 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
       <img src="img/logo-mint.png" alt="Eigenhand" style="height:26px;width:auto;display:block">
       Cockpit <span class="sub">Eigenhand</span>
     </div>
-    <button class="btn sec sm" id="logoutBtn">Abmelden</button>
+    <span style="display:flex;gap:8px"><button class="btn sec sm" id="pwBtn">Passwort ändern</button><button class="btn sec sm" id="logoutBtn">Abmelden</button></span>
   </div>
   <div class="wrap">
     <nav class="tabs" id="tabs">
@@ -794,7 +794,7 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
     <div class="card">
       <h3 style="font-size:17px;margin-bottom:6px">Konto</h3>
       <p class="muted" id="accInfo" style="margin-bottom:14px"></p>
-      <button class="btn sec sm" id="logoutBtn2">Abmelden</button>
+      <div style="display:flex;gap:8px"><button class="btn sec sm" id="pwBtn2">Passwort ändern</button><button class="btn sec sm" id="logoutBtn2">Abmelden</button></div>
     </div>
   </section>
 
@@ -971,6 +971,8 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
       openApp();
     });
   });
+  $("pwBtn").addEventListener("click", showReset);
+  $("pwBtn2").addEventListener("click", showReset);
   SB.auth.onAuthStateChange(function(ev){ if(ev==="PASSWORD_RECOVERY"){ IS_RECOVERY=true; showReset(); } });
   function doLogout(){ stopPolling(); SB.auth.signOut().then(function(){ location.reload(); }); }
   $("logoutBtn").addEventListener("click", doLogout);
