@@ -494,7 +494,7 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
             <summary class="tiny" style="cursor:pointer;font-weight:600">Oder Inseratstext einfügen</summary>
             <div class="fld" style="margin-top:8px"><textarea id="x_imptext" style="min-height:110px" placeholder="Auf dem Inserat alles markieren (Cmd/Ctrl+A), kopieren (Cmd/Ctrl+C) und hier einfügen."></textarea></div>
             <button class="btn sec sm" id="x_impgo">Erkennen &amp; übernehmen</button>
-            <p class="tiny" style="margin:6px 0 0">Bilder dann unten unter «Titelbild» und «Fotogalerie» selbst hochladen.</p>
+            <p class="tiny" style="margin:6px 0 0"><b>Bilder:</b> Auf dem Inserat Rechtsklick aufs Foto → «Bild kopieren», dann hier im Cockpit Cmd/Ctrl+V drücken (nicht ins Textfeld). Das erste wird Titelbild, die nächsten kommen in die Galerie.</p>
           </details>
           <p class="tiny" id="x_impinfo" style="margin:10px 0 0"></p>
           <div id="x_imppick" class="hidden">
@@ -1741,6 +1741,22 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
     renderThumbs("x_fotolist",X.fotos,"fdel"); renderExpo(); renderImpPick();
   });
   $("x_bm").addEventListener("click", function(e){ e.preventDefault(); alert("Dieser Knopf funktioniert als Lesezeichen: Ziehe ihn mit der Maus in deine Lesezeichenleiste. Danach auf einem Homegate- oder ImmoScout24-Inserat anklicken."); });
+  /* Bilder per Kopieren & Einfügen (Rechtsklick > «Bild kopieren», dann Cmd/Ctrl+V im Exposé-Tab) */
+  document.addEventListener("paste", function(e){
+    if(!$("v-expose") || !$("v-expose").classList.contains("active")) return;
+    var tg=e.target; if(tg && (tg.tagName==="TEXTAREA" || (tg.tagName==="INPUT" && tg.type!=="file") || tg.isContentEditable)) return;
+    var items=(e.clipboardData&&e.clipboardData.items)||[], files=[];
+    for(var i=0;i<items.length;i++){ if(items[i].kind==="file" && /^image\//.test(items[i].type)){ var f=items[i].getAsFile(); if(f) files.push(f); } }
+    if(!files.length) return;
+    e.preventDefault();
+    files.forEach(function(f){ readImg(f,function(d){
+      var msg;
+      if(!X.titelbild){ X.titelbild=d; msg="Bild als Titelbild eingefügt."; }
+      else if(X.fotos.length<6){ X.fotos.push(d); msg="Bild "+X.fotos.length+" von 6 in die Galerie eingefügt."; }
+      else { msg="Galerie ist voll (6 Bilder). Zuerst eines entfernen."; }
+      renderThumbs("x_fotolist",X.fotos,"fdel"); renderExpo(); $("x_impinfo").textContent=msg+" Nächstes Bild: kopieren und hier wieder Cmd/Ctrl+V.";
+    }); });
+  });
   $("x_impgo").addEventListener("click", function(){
     var v=$("x_imptext").value.trim(); if(!v){ $("x_impinfo").textContent="Bitte zuerst den Inseratstext einfügen."; return; }
     var d=null; if(v.charAt(0)==="{"){ try{ d=JSON.parse(v); }catch(x){} }
