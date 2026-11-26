@@ -202,6 +202,17 @@ body.inv-print #inv_doc,body.inv-print #inv_doc *{visibility:visible !important}
 body.inv-print #inv_doc{position:absolute !important;left:0;top:0;transform:none !important;box-shadow:none}
 @media print{ @page{size:A4;margin:0} }
 
+/* ===== Exposé: Import aus Inserat ===== */
+.impcard{border-color:var(--green)!important;background:linear-gradient(#fff,#fff) padding-box}
+.bmbtn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;border-radius:10px;padding:10px 14px;font-weight:700;font-size:14px;text-decoration:none;cursor:grab}
+.impgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}
+.impt{position:relative;aspect-ratio:4/3;background:#ddd center/cover no-repeat;border-radius:8px;cursor:pointer;border:3px solid transparent}
+.impt.sel{border-color:var(--green)}
+.impt.tit{border-color:#C9A227}
+.impt .n{position:absolute;left:4px;top:4px;background:var(--green);color:#fff;font-size:11px;font-weight:700;border-radius:999px;padding:1px 7px}
+.impt .n.tn{background:#C9A227}
+.impt .star{position:absolute;right:4px;top:4px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(255,255,255,.92);cursor:pointer;font-size:13px;line-height:26px;padding:0}
+.impt.tit .star{background:#C9A227;color:#fff}
 /* ===== Exposé: Bedienelemente ===== */
 .rangerow{margin:12px 0 4px}
 .rangerow .fl{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px}
@@ -473,6 +484,25 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
     <div class="grid2">
       <!-- Steuerpanel -->
       <div class="noprint">
+
+        <div class="card impcard" style="margin-bottom:14px">
+          <div class="subhead" style="margin-top:0">⓪ Aus Inserat importieren (Homegate, ImmoScout24)</div>
+          <p class="tiny" style="margin:0 0 8px"><b>Einmal einrichten:</b> Ziehe diesen Knopf mit der Maus in deine Lesezeichenleiste (Chrome: Cmd/Ctrl+Shift+B blendet sie ein).</p>
+          <a id="x_bm" class="bmbtn" href="javascript:!function()%7Bvar%20e%3D%22https%3A%2F%2Feigenhand.ch%22%2Ct%3Dwindow.open(e%2B%22%2Fcockpit.html%23ehimport%22%2C%22eh_cockpit%22)%3Bfunction%20r(e)%7Breturn%20String(null%3D%3De%3F%22%22%3Ae).replace(%2F%C2%A0%2Fg%2C%22%20%22).replace(%2F%5B%20%5Ct%5D%2B%2Fg%2C%22%20%22).trim()%7Dfunction%20i(e)%7Bvar%20t%3Ddocument.createElement(%22div%22)%3Breturn%20t.innerHTML%3DString(e%7C%7C%22%22).replace(%2F%3Cbr%5Cs*%5C%2F%3F%3E%2Fgi%2C%22%5Cn%22).replace(%2F%3C%5C%2F(p%7Cdiv%7Ch%5Cd)%3E%2Fgi%2C%22%5Cn%5Cn%22).replace(%2F%3C%5C%2Fli%3E%2Fgi%2C%22%5Cn%22).replace(%2F%3Cli%5B%5E%3E%5D*%3E%2Fgi%2C%22%5Cn%E2%80%A2%20%22)%2C(t.textContent%7C%7C%22%22).replace(%2F%C2%A0%2Fg%2C%22%20%22).replace(%2F%5B%20%5Ct%5D%2B%2Fg%2C%22%20%22).replace(%2F%5Cn%5B%20%5Ct%5D%2B%2Fg%2C%22%5Cn%22).replace(%2F%5Cn%7B3%2C%7D%2Fg%2C%22%5Cn%5Cn%22).trim()%7Dfunction%20a(e)%7Bvar%20t%3Ddocument.querySelector('meta%5Bproperty%3D%22'%2Be%2B'%22%5D%2Cmeta%5Bname%3D%22'%2Be%2B'%22%5D')%3Breturn%20t%26%26t.getAttribute(%22content%22)%7C%7C%22%22%7Dvar%20o%3D%5B%5D%3B%5B%22__INITIAL_STATE__%22%2C%22__NEXT_DATA__%22%2C%22__NUXT__%22%2C%22__APOLLO_STATE__%22%2C%22__PRELOADED_STATE__%22%5D.forEach(function(e)%7Btry%7Bwindow%5Be%5D%26%26%22object%22%3D%3Dtypeof%20window%5Be%5D%26%26o.push(window%5Be%5D)%7Dcatch(e)%7B%7D%7D)%2CArray.prototype.forEach.call(document.querySelectorAll(%22script%22)%2Cfunction(e)%7Bvar%20t%3De.textContent%7C%7C%22%22%3Bif(t%26%26!(t.length%3C50))if(%22application%2Fjson%22!%3D%3De.type%26%26%22__NEXT_DATA__%22!%3D%3De.id)%7Bvar%20r%3Dt.indexOf(%22__INITIAL_STATE__%22)%3Bif(r%3E%3D0)%7Bvar%20i%3Dt.indexOf(%22%7B%22%2Cr)%2Ca%3Dt.lastIndexOf(%22%7D%22)%3Bif(i%3E0%26%26a%3Ei)try%7Bo.push(JSON.parse(t.slice(i%2Ca%2B1)))%7Dcatch(e)%7B%7D%7D%7Delse%20try%7Bo.push(JSON.parse(t))%7Dcatch(e)%7B%7D%7D)%3Bvar%20n%3D%5B%5D%3BArray.prototype.forEach.call(document.querySelectorAll('script%5Btype%3D%22application%2Fld%2Bjson%22%5D')%2Cfunction(e)%7Btry%7Bvar%20t%3DJSON.parse(e.textContent)%3B(Array.isArray(t)%3Ft%3At%5B%22%40graph%22%5D%7C%7C%5Bt%5D).forEach(function(e)%7Bn.push(e)%7D)%7Dcatch(e)%7B%7D%7D)%3Bvar%20c%3Dnull%2Cs%3D0%2Cl%3Dnew%20WeakSet%2Cp%3D0%3Bfunction%20u(e%2Ct)%7Bif(!(!e%7C%7C%22object%22!%3Dtypeof%20e%7C%7Ct%3E16%7C%7Cp%3E15e4%7C%7Cl.has(e)))%7Bif(l.add(e)%2Cp%2B%2B%2C!Array.isArray(e))%7Bvar%20r%3D0%3Be.characteristics%26%26(r%2B%3D4)%2Ce.address%26%26(r%2B%3D2)%2C(e.prices%7C%7Ce.price)%26%26(r%2B%3D2)%2Ce.localization%26%26(r%2B%3D3)%2C(e.numberOfRooms%7C%7Ce.livingSpace)%26%26(r%2B%3D3)%2Ce.offerType%26%26(r%2B%3D1)%2Cr%3Es%26%26(s%3Dr%2Cc%3De)%7Dfor(var%20i%20in%20e)if(Object.prototype.hasOwnProperty.call(e%2Ci))try%7Bu(e%5Bi%5D%2Ct%2B1)%7Dcatch(e)%7B%7D%7D%7Dfunction%20f(e%2Ct%2Cr)%7Bif(e%26%26%22object%22%3D%3Dtypeof%20e%26%26!((r%7C%7C0)%3E8))%7Bfor(var%20i%3D0%3Bi%3Ct.length%3Bi%2B%2B)if(null!%3De%5Bt%5Bi%5D%5D%26%26%22%22!%3D%3De%5Bt%5Bi%5D%5D)return%20e%5Bt%5Bi%5D%5D%3Bfor(var%20a%20in%20e)if(e%5Ba%5D%26%26%22object%22%3D%3Dtypeof%20e%5Ba%5D)%7Bvar%20o%3Df(e%5Ba%5D%2Ct%2C(r%7C%7C0)%2B1)%3Bif(void%200!%3D%3Do)return%20o%7D%7D%7Dfunction%20d(e)%7Bif(null%3D%3De)return%22%22%3B%22object%22%3D%3Dtypeof%20e%26%26(e%3Dnull!%3De.value%3Fe.value%3Anull!%3De.amount%3Fe.amount%3A%22%22)%3Bvar%20t%3DparseFloat(String(e).replace(%2F%5B%5E0-9.%5D%2Fg%2C%22%22))%3Breturn%20isNaN(t)%3F%22%22%3At%7Do.forEach(function(e)%7Bu(e%2C0)%7D)%3Bvar%20m%3D%7Bv%3A1%2Csrc%3Alocation.href%2Chost%3Alocation.hostname%2Ctitle%3A%22%22%2Cdesc%3A%22%22%2Cstreet%3A%22%22%2Cplz%3A%22%22%2Cort%3A%22%22%2Ckanton%3A%22%22%2Cprice%3A%22%22%2Crooms%3A%22%22%2Carea%3A%22%22%2Cplot%3A%22%22%2Cyear%3A%22%22%2Crenov%3A%22%22%2Cfloor%3A%22%22%2Ctype%3A%22%22%2Cfeatures%3A%5B%5D%2Cimgs%3A%5B%5D%2Ctext%3A%22%22%7D%3Bif(c)%7Bvar%20h%3Dc.address%7C%7C%7B%7D%3Bm.street%3Dr(h.street%7C%7Ch.streetAddress%7C%7C%22%22)%2Cm.plz%3Dr(h.postalCode%7C%7Ch.zip%7C%7C%22%22)%2Cm.ort%3Dr(h.locality%7C%7Ch.city%7C%7Ch.addressLocality%7C%7C%22%22)%2Cm.kanton%3Dr(h.region%7C%7Ch.addressRegion%7C%7C%22%22)%3Bvar%20g%3Dc.characteristics%7C%7C%7B%7D%3Bm.rooms%3Dd(g.numberOfRooms%7C%7Cc.numberOfRooms)%2Cm.area%3Dd(g.livingSpace%7C%7Cg.netLivingSpace%7C%7Cc.livingSpace)%2Cm.plot%3Dd(g.lotSize%7C%7Cg.plotArea%7C%7Cg.propertyArea)%2Cm.year%3Dd(g.yearBuilt%7C%7Cc.yearBuilt)%2Cm.renov%3Dd(g.yearLastRenovated%7C%7Cg.yearRenovated)%3Bvar%20y%3Dnull!%3Dg.floor%3Fg.floor%3Ac.floor%3Bm.floor%3D0%3D%3D%3Dy%3F%22EG%22%3Anull!%3Dy%26%26%22%22!%3D%3Dy%3Fy%2B%22.%20OG%22%3A%22%22%3Bvar%20v%3Dc.prices%7C%7C%7B%7D%3Bm.price%3Dd(v.buy%26%26(v.buy.price%7C%7Cv.buy.gross)%7C%7Cv.price%7C%7Cc.price%7C%7Cf(c%2C%5B%22sellingPrice%22%2C%22purchasePrice%22%5D))%3Bvar%20_%3Dc.categories%7C%7Cc.category%7C%7Cc.objectCategory%7C%7C%22%22%3Bm.type%3Dr(Array.isArray(_)%3F_%5B0%5D%3A_)%3Bvar%20A%3Dc.localization%7C%7C%7B%7D%2CS%3DA%5BA.primary%7C%7C%22de%22%5D%7C%7CA.de%7C%7CA%5BObject.keys(A).filter(function(e)%7Breturn%20A%5Be%5D%26%26%22object%22%3D%3Dtypeof%20A%5Be%5D%7D)%5B0%5D%5D%7C%7C%7B%7D%2Cb%3DS.text%7C%7CS%3Bfor(var%20w%20in%20m.title%3Dr(b.title%7C%7Cf(c%2C%5B%22title%22%5D)%7C%7C%22%22)%2Cm.desc%3Di(b.description%7C%7Cf(c%2C%5B%22description%22%5D)%7C%7C%22%22)%2C(S.attachments%7C%7Cf(c%2C%5B%22attachments%22%2C%22images%22%2C%22pictures%22%5D)%7C%7C%5B%5D).forEach(function(e)%7Bvar%20t%3D%22string%22%3D%3Dtypeof%20e%3Fe%3Ae%26%26(e.url%7C%7Ce.src%7C%7Ce.href)%3B!t%7C%7Ce.type%26%26!%2FIMAGE%2Fi.test(e.type)%7C%7Cm.imgs.push(t)%7D)%2Cg)!0%3D%3D%3Dg%5Bw%5D%26%26m.features.push(w)%7Dn.forEach(function(e)%7B!m.title%26%26e.name%26%26(m.title%3Dr(e.name))%2C!m.desc%26%26e.description%26%26(m.desc%3Di(e.description))%3Bvar%20t%3De.address%7C%7Ce.itemOffered%26%26e.itemOffered.address%7C%7C%7B%7D%3B!m.plz%26%26t.postalCode%26%26(m.plz%3Dr(t.postalCode))%2C!m.ort%26%26t.addressLocality%26%26(m.ort%3Dr(t.addressLocality))%2C!m.street%26%26t.streetAddress%26%26(m.street%3Dr(t.streetAddress))%2C!m.rooms%26%26e.numberOfRooms%26%26(m.rooms%3Dd(e.numberOfRooms))%2C!m.area%26%26e.floorSize%26%26(m.area%3Dd(e.floorSize))%3Bvar%20a%3De.offers%7C%7C%7B%7D%3B!m.price%26%26(a.price%7C%7Ca.priceSpecification%26%26a.priceSpecification.price)%26%26(m.price%3Dd(a.price%7C%7Ca.priceSpecification.price))%3Bvar%20o%3De.image%7C%7Ce.photo%3B(Array.isArray(o)%3Fo%3Ao%3F%5Bo%5D%3A%5B%5D).forEach(function(e)%7Bvar%20t%3D%22string%22%3D%3Dtypeof%20e%3Fe%3Ae.url%7C%7Ce.contentUrl%3Bt%26%26m.imgs.push(t)%7D)%7D)%2Cm.title%7C%7C(m.title%3Dr(a(%22og%3Atitle%22)%7C%7C(document.querySelector(%22h1%22)%7C%7C%7B%7D).textContent%7C%7Cdocument.title))%2Cm.desc%7C%7C(m.desc%3Di(a(%22og%3Adescription%22)%7C%7Ca(%22description%22)))%2Ca(%22og%3Aimage%22)%26%26m.imgs.push(a(%22og%3Aimage%22))%2CArray.prototype.forEach.call(document.querySelectorAll(%22img%2C%20source%22)%2Cfunction(e)%7Bvar%20t%3De.currentSrc%7C%7Ce.src%7C%7C%22%22%2Cr%3De.getAttribute(%22srcset%22)%7C%7Ce.getAttribute(%22data-srcset%22)%7C%7C%22%22%3Bif(r)%7Bvar%20i%3Dr.split(%22%2C%22).map(function(e)%7Bvar%20t%3De.trim().split(%2F%5Cs%2B%2F)%3Breturn%7Bu%3At%5B0%5D%2Cw%3AparseFloat(t%5B1%5D)%7C%7C0%7D%7D).sort(function(e%2Ct)%7Breturn%20t.w-e.w%7D)%3Bi%5B0%5D%26%26i%5B0%5D.u%26%26(t%3Di%5B0%5D.u)%7Dvar%20a%3De.naturalWidth%7C%7Ce.width%7C%7C0%3Bt%26%26%2F%5Ehttps%3F%3A%2F.test(t)%26%26(a%3E%3D400%7C%7Cr)%26%26!%2Flogo%7Cicon%7Cavatar%7Csprite%7Cplaceholder%7C%5C.svg%2Fi.test(t)%26%26m.imgs.push(t)%7D)%3Bvar%20E%3D%5B%5D%2CT%3D%5B%5D%3Bm.imgs.forEach(function(e)%7Btry%7Be%3Dnew%20URL(e%2Clocation.href).href%7Dcatch(e)%7Breturn%7Dvar%20t%3De.split(%22%3F%22)%5B0%5D.replace(%2F%5C%2F(%5Cd%2Bx%5Cd%2B%7Cw_%5Cd%2B%7Ch_%5Cd%2B)%5B%5E%2F%5D*%5C%2F%2Fg%2C%22%2F%22)%3BT.indexOf(t)%3C0%26%26(T.push(t)%2CE.push(e))%7D)%2Cm.imgs%3DE.slice(0%2C30)%2Cm.text%3Dr((document.querySelector(%22main%22)%7C%7Cdocument.body).innerText%7C%7C%22%22).slice(0%2C12e3)%2Cm.textRaw%3D((document.querySelector(%22main%22)%7C%7Cdocument.body).innerText%7C%7C%22%22).slice(0%2C12e3)%2CPromise.all(m.imgs.map(function(e)%7Breturn%20new%20Promise(function(t)%7Bvar%20r%3D!1%2Ci%3DsetTimeout(function()%7Br%7C%7C(r%3D!0%2Ct(null))%7D%2C8e3)%2Ca%3Dnew%20Image%3Ba.crossOrigin%3D%22anonymous%22%2Ca.onload%3Dfunction()%7Btry%7Bvar%20e%3DMath.min(1%2C1800%2FMath.max(a.naturalWidth%2Ca.naturalHeight))%2Co%3Ddocument.createElement(%22canvas%22)%3Bo.width%3DMath.round(a.naturalWidth*e)%2Co.height%3DMath.round(a.naturalHeight*e)%2Co.getContext(%222d%22).drawImage(a%2C0%2C0%2Co.width%2Co.height)%3Bvar%20n%3Do.toDataURL(%22image%2Fjpeg%22%2C.85)%3Br%7C%7C(r%3D!0%2CclearTimeout(i)%2Ct(n))%7Dcatch(e)%7Br%7C%7C(r%3D!0%2CclearTimeout(i)%2Ct(null))%7D%7D%2Ca.onerror%3Dfunction()%7Br%7C%7C(r%3D!0%2CclearTimeout(i)%2Ct(null))%7D%2Ca.src%3De%7D)%7D)).then(function(r)%7Bif(m.imgData%3Dr%2Ct)%7Bvar%20i%3D0%2Ca%3D!1%3Bwindow.addEventListener(%22message%22%2Cfunction(t)%7Bt.origin%3D%3D%3De%26%26%22ehimport-ok%22%3D%3D%3Dt.data%26%26(a%3D!0)%7D)%2Cfunction%20r()%7Bif(!(a%7C%7Ci%3E120))%7Bi%2B%2B%3Btry%7Bt.postMessage(%7Btype%3A%22ehimport%22%2Cdata%3Am%7D%2Ce)%7Dcatch(e)%7B%7DsetTimeout(r%2C500)%7D%7D()%7Delse%7Btry%7Bnavigator.clipboard.writeText(JSON.stringify(Object.assign(%7B%7D%2Cm%2C%7BimgData%3A%5B%5D%7D)))%7Dcatch(e)%7B%7Dalert(%22Eigenhand%3A%20Das%20Cockpit%20konnte%20nicht%20ge%C3%B6ffnet%20werden%20(Pop-up%20blockiert).%20Die%20Daten%20sind%20in%20der%20Zwischenablage%20%E2%80%93%20im%20Cockpit%20unter%20Expos%C3%A9%20%3E%20%C2%ABAus%20Inserat%20importieren%C2%BB%20einf%C3%BCgen.%22)%7D%7D)%7D()%3B">⇪ Eigenhand-Import</a>
+          <p class="tiny" style="margin:8px 0 0"><b>Danach:</b> Inserat öffnen, auf das Lesezeichen klicken. Das Cockpit öffnet sich mit Titel, Preis, Eckdaten, Beschrieb und Bildern.</p>
+          <details style="margin-top:10px">
+            <summary class="tiny" style="cursor:pointer;font-weight:600">Oder Inseratstext einfügen</summary>
+            <div class="fld" style="margin-top:8px"><textarea id="x_imptext" style="min-height:110px" placeholder="Auf dem Inserat alles markieren (Cmd/Ctrl+A), kopieren (Cmd/Ctrl+C) und hier einfügen."></textarea></div>
+            <button class="btn sec sm" id="x_impgo">Erkennen &amp; übernehmen</button>
+            <p class="tiny" style="margin:6px 0 0">Bilder dann unten unter «Titelbild» und «Fotogalerie» selbst hochladen.</p>
+          </details>
+          <p class="tiny" id="x_impinfo" style="margin:10px 0 0"></p>
+          <div id="x_imppick" class="hidden">
+            <div class="subhead">Bilder auswählen</div>
+            <p class="tiny" style="margin:0">Klick aufs Bild = in die Galerie (max. 6). ★ = Titelbild.</p>
+            <div id="x_impimgs" class="impgrid"></div>
+          </div>
+        </div>
 
         <div class="card" style="margin-bottom:14px">
           <div class="subhead" style="margin-top:0">① Daten aus Lead übernehmen</div>
@@ -922,7 +952,9 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
 
   /* ---------- Auth ---------- */
   function showLogin(msg){ $("app").classList.add("hidden"); $("gate").classList.remove("hidden"); if(msg){ $("loginMsg").textContent=msg; } setTimeout(function(){ try{$("loginEmail").focus();}catch(e){} },80); }
-  function openApp(){ $("gate").classList.add("hidden"); $("app").classList.remove("hidden"); renderStatic(); loadLeads(); startPolling(); showAccount(); }
+  function openApp(){ $("gate").classList.add("hidden"); $("app").classList.remove("hidden"); renderStatic(); loadLeads(); startPolling(); showAccount();
+    if(/^#ehimport/.test(location.hash)) history.replaceState(null,"",location.pathname);
+    if(PENDING_IMPORT){ var pd=PENDING_IMPORT; PENDING_IMPORT=null; setTimeout(function(){ applyImport(pd); },200); } }
   function showAccount(){
     SB.auth.getUser().then(function(res){
       var email = res && res.data && res.data.user ? res.data.user.email : "";
@@ -1546,6 +1578,176 @@ body.auf-print #auf_doc{position:absolute !important;left:0;top:0;transform:none
     }catch(err){ alert("Datei konnte nicht gelesen werden."); } };
     r.readAsText(f); this.value="";
   });
+  /* ================= Import aus Inserat (Homegate, ImmoScout24 …) ================= */
+  var IMP={imgs:[], host:""}, PENDING_IMPORT=null, LAST_IMPORT_SRC="", LAST_IMPORT_AT=0;
+  var IMPORT_HOSTS=/(^|\.)(homegate\.ch|immoscout24\.ch|newhome\.ch|flatfox\.ch|comparis\.ch|immostreet\.ch|acheter-louer\.ch|properstar\.ch)$/;
+  window.addEventListener("message", function(e){
+    if(!e.data || e.data.type!=="ehimport" || typeof e.data.data!=="object") return;
+    var host=""; try{ host=new URL(e.origin).hostname; }catch(x){}
+    if(!IMPORT_HOSTS.test(host)) return;
+    try{ e.source.postMessage("ehimport-ok", e.origin); }catch(x){}
+    var d=e.data.data;
+    if(d.src===LAST_IMPORT_SRC && Date.now()-LAST_IMPORT_AT<15000) return;
+    LAST_IMPORT_SRC=d.src; LAST_IMPORT_AT=Date.now();
+    if($("app").classList.contains("hidden")){ PENDING_IMPORT=d; } else { applyImport(d); }
+  });
+
+  var KANTONE={ZH:"Zürich",AG:"Aargau",SZ:"Schwyz",ZG:"Zug",LU:"Luzern",BE:"Bern",SG:"St. Gallen",TG:"Thurgau",SH:"Schaffhausen",BS:"Basel-Stadt",BL:"Basel-Landschaft",SO:"Solothurn",FR:"Freiburg",VD:"Waadt",GE:"Genf",VS:"Wallis",TI:"Tessin",GR:"Graubünden",NE:"Neuenburg",JU:"Jura",NW:"Nidwalden",OW:"Obwalden",UR:"Uri",GL:"Glarus",AR:"Appenzell Ausserrhoden",AI:"Appenzell Innerrhoden"};
+  var SMG_TYPES={APARTMENT:"Eigentumswohnung",FLAT:"Eigentumswohnung",ATTIC_FLAT:"Attikawohnung",PENTHOUSE:"Attikawohnung",MAISONETTE:"Maisonette-Wohnung",DUPLEX:"Maisonette-Wohnung",LOFT:"Loft",TERRACE_FLAT:"Terrassenwohnung",TERRACE_HOUSE:"Terrassenhaus",STUDIO:"Studio",SINGLE_HOUSE:"Einfamilienhaus",HOUSE:"Einfamilienhaus",DETACHED_HOUSE:"Einfamilienhaus",ROW_HOUSE:"Reihenhaus",SEMI_DETACHED_HOUSE:"Doppelhaushälfte",VILLA:"Villa",FARM_HOUSE:"Bauernhaus",CHALET:"Chalet",MULTIPLE_DWELLING:"Mehrfamilienhaus",BUILDING_LAND:"Bauland"};
+  var FEAT_LABELS={hasBalcony:"Balkon",hasTerrace:"Terrasse",hasGarden:"Garten",hasElevator:"Lift",hasLift:"Lift",hasGarage:"Garage",hasParking:"Parkplatz",hasParkingSpace:"Parkplatz",isWheelchairAccessible:"Rollstuhlgängig",hasFireplace:"Cheminée",isNewBuilding:"Neubau",isMinergieCertified:"Minergie-zertifiziert",isMinergieGeneral:"Minergie-Standard",hasView:"Aussicht",hasNiceView:"Schöne Aussicht",hasLakeView:"Seesicht",hasMountainView:"Bergsicht",isChildFriendly:"Kinderfreundlich",hasSwimmingPool:"Swimmingpool",isQuiet:"Ruhige Lage",isSunny:"Sonnige Lage",hasAttic:"Estrich",hasCellar:"Keller",hasStorageRoom:"Abstellraum",hasDishwasher:"Geschirrspüler",hasWashingMachine:"Eigene Waschmaschine",hasTumbleDryer:"Eigener Tumbler",isOldBuilding:"Altbau",hasCableTv:"Kabel-TV",hasConservatory:"Wintergarten",hasSauna:"Sauna"};
+
+  function guessType(t){
+    t=String(t||"");
+    var L=[[/attika/i,"Attikawohnung"],[/maisonette/i,"Maisonette-Wohnung"],[/terrassenhaus/i,"Terrassenhaus"],[/doppel(?:einfamilien)?haus|doppelhaush/i,"Doppelhaushälfte"],[/reihen(?:einfamilien)?haus/i,"Reihenhaus"],[/mehrfamilienhaus/i,"Mehrfamilienhaus"],[/einfamilienhaus|\bEFH\b/i,"Einfamilienhaus"],[/\bvilla\b/i,"Villa"],[/chalet/i,"Chalet"],[/bauernhaus/i,"Bauernhaus"],[/eigentumswohnung|wohnung/i,"Eigentumswohnung"],[/\bhaus\b/i,"Einfamilienhaus"]];
+    for(var i=0;i<L.length;i++){ if(L[i][0].test(t)) return L[i][1]; }
+    return "";
+  }
+  function normType(v){ v=String(v||"").trim(); if(!v) return ""; var k=v.toUpperCase().replace(/[^A-Z_]/g,""); return SMG_TYPES[k]||guessType(v); }
+  function impNum(s){ var n=parseFloat(String(s==null?"":s).replace(/['’`\s]/g,"").replace(/,(\d{1,2})$/,".$1").replace(/[^0-9.]/g,"")); return isNaN(n)?"":n; }
+  function safeImg(u){
+    if(typeof u!=="string") return "";
+    if(/^data:image\/(jpeg|png|webp|gif);base64,[A-Za-z0-9+\/=]+$/.test(u)) return u;
+    if(/^https:\/\/[^\s"'()<>\\]+$/.test(u)) return u;
+    return "";
+  }
+  var KEY_LABELS=/^(zimmer|wohnfläche|nutzfläche|grundstücksfläche|baujahr|renovationsjahr|etage|stockwerk|verfügbarkeit|verfügbar|preis|kaufpreis|verkaufspreis|objektart|typ|anzahl.*|letzte renovation|bezugsbereit.*)$/i;
+
+  function parseListingText(t){
+    t=String(t||"").replace(/ /g," ").replace(/\r/g,"");
+    var r={title:"",desc:"",street:"",plz:"",ort:"",kanton:"",price:"",rooms:"",area:"",plot:"",year:"",renov:"",floor:"",type:"",features:[]};
+    if(!t.trim()) return r;
+    var m;
+    m=t.match(/(?:Verkaufspreis|Kaufpreis|Preis)[^\n\d]{0,25}?(?:CHF\s*)?([\d'’ ]{5,})/i) || t.match(/CHF\s*([\d]{1,3}(?:['’ ]\d{3})+)/);
+    if(m){ var p=impNum(m[1]); if(p>=30000) r.price=p; }
+    m=t.match(/(?:Anzahl\s+)?Zimmer\s*:?\s*\n?\s*(\d{1,2}(?:[.,]5)?)\b/i) || t.match(/\b(\d{1,2}(?:[.,]5)?)\s*(?:-?\s*Zimmer|Zi\.)/i);
+    if(m) r.rooms=String(m[1]).replace(",",".");
+    m=t.match(/(?:Wohnfläche|Nettowohnfläche|Wohnfl\.)\s*:?\s*\n?\s*(?:ca\.\s*)?(\d{2,4})\s*m/i) || t.match(/\b(\d{2,4})\s*m²/);
+    if(m) r.area=impNum(m[1]);
+    m=t.match(/(?:Grundstücksfläche|Grundstück|Landfläche|Parzellenfläche)\s*:?\s*\n?\s*(?:ca\.\s*)?([\d'’]{2,7})\s*m/i); if(m) r.plot=impNum(m[1]);
+    m=t.match(/Baujahr\s*:?\s*\n?\s*(1[89]\d\d|20\d\d)/i); if(m) r.year=m[1];
+    m=t.match(/(?:Renovationsjahr|Letzte Renovation|Renoviert(?: im Jahr)?)\s*:?\s*\n?\s*(1[89]\d\d|20\d\d)/i); if(m) r.renov=m[1];
+    m=t.match(/(?:Etage|Stockwerk)\s*:?\s*\n?\s*([^\n]{1,20})/i); if(m) r.floor=m[1].trim();
+    m=t.match(/([A-ZÄÖÜ][\wäöüéèß.\- ]{2,40}?(?:strasse|str\.|weg|gasse|platz|rain|ring|allee|halde|matt|acker|hof|feld|berg|quai)\s*\d{1,4}\s?[a-zA-Z]?)\s*,?\s*\n?\s*(\d{4})\s+([A-ZÄÖÜ][\wäöüéèß.\-]+(?: [A-ZÄÖÜ][\wäöüéèß.\-]+)?)/);
+    if(m){ r.street=m[1].trim(); r.plz=m[2]; r.ort=m[3].trim(); }
+    else { m=t.match(/\b([1-9]\d{3})\s+([A-ZÄÖÜ][a-zäöüéè]+(?:[ \-][A-ZÄÖÜ][a-zäöüéè]+)?)/); if(m){ r.plz=m[1]; r.ort=m[2]; } }
+    r.type=guessType(t.slice(0,4000));
+    m=t.match(/\n\s*(?:Beschreibung|Objektbeschreibung|Über diese Immobilie|Über das Objekt|Objektbeschrieb)\s*\n([\s\S]{80,8000}?)(?=\n\s*(?:Eigenschaften|Ausstattung|Merkmale|Hauptangaben|Lage|Umgebung|Kontakt|Anbieter|Dokumente|Distanzen|Inserat melden|Weitere Angaben)\s*\n|$)/i);
+    if(m) r.desc=m[1].replace(/\n{3,}/g,"\n\n").trim();
+    var lines=t.split("\n").map(function(s){return s.trim();}).filter(Boolean);
+    for(var i=0;i<Math.min(lines.length,80);i++){ var L=lines[i]; if(L.length>=15&&L.length<=110&&/(zimmer|wohnung|haus|attika|villa|maisonette|loft|liegenschaft|chalet)/i.test(L)&&!/CHF|m²|cookie/i.test(L)){ r.title=L; break; } }
+    m=t.match(/\n\s*(?:Ausstattung|Merkmale)\s*\n([\s\S]{5,1500}?)(?=\n\s*(?:Beschreibung|Lage|Umgebung|Kontakt|Anbieter|Dokumente|Distanzen|Hauptangaben|Eigenschaften)\s*\n|$)/i);
+    if(m){ r.features=m[1].split("\n").map(function(s){return s.replace(/^[•\-–*·✓✔]\s*/,"").trim();}).filter(function(s){return s.length>2&&s.length<50&&!/\d/.test(s)&&!KEY_LABELS.test(s)&&!/:\s*$/.test(s);}).slice(0,12); }
+    return r;
+  }
+
+  function splitParas(txt){
+    var paras=String(txt||"").split(/\n{2,}/).map(function(s){return s.replace(/\n/g," ").replace(/\s{2,}/g," ").trim();}).filter(Boolean);
+    var out=[];
+    paras.forEach(function(p){
+      if(p.length<=650){ out.push(p); return; }
+      var sents=p.match(/[^.!?]+[.!?]+(\s|$)|[^.!?]+$/g)||[p], cur="";
+      sents.forEach(function(s){ if((cur+s).length>450 && cur){ out.push(cur.trim()); cur=""; } cur+=s; });
+      if(cur.trim()) out.push(cur.trim());
+    });
+    return out.join("\n\n");
+  }
+
+  function applyImport(d){
+    d=d||{};
+    var p=parseListingText(d.textRaw||d.text||"");
+    function pick(a,b){ return (a!==undefined && a!==null && a!=="")?a:b; }
+    var o={ title:pick(d.title,p.title), desc:pick(d.desc,p.desc), street:pick(d.street,p.street), plz:pick(d.plz,p.plz), ort:pick(d.ort,p.ort),
+      kanton:pick(d.kanton,p.kanton), price:pick(impNum(d.price),p.price), rooms:pick(d.rooms,p.rooms), area:pick(impNum(d.area),p.area), plot:pick(impNum(d.plot),p.plot),
+      year:pick(d.year,p.year), renov:pick(d.renov,p.renov), floor:pick(d.floor,p.floor) };
+    var typ=normType(d.type)||p.type||guessType((o.title||"")+" "+(o.desc||"").slice(0,600));
+    var keep={logo:X.logo,logofile:X.logofile,logogr:X.logogr,logopos:X.logopos,logoxy:X.logoxy,logobg:X.logobg,titelgr:X.titelgr,bildh:X.bildh,abd:X.abd,em:X.em,zins:X.zins,unterhalt:X.unterhalt,amort:X.amort,tragbar:X.tragbar};
+    X=Object.assign(freshExpo(), keep);
+
+    var ort=String(o.ort||"").trim();
+    var t=String(o.title||"").replace(/\s+/g," ").trim();
+    var built=[(o.rooms?String(o.rooms).replace(/\.0$/,"")+"-Zimmer-":"")+(typ||"Immobilie"), ort?"in "+ort:""].filter(Boolean).join(" ");
+    X.titel=(t.length>=12 && t.length<=90 && !/^(kaufen|homegate|immoscout)/i.test(t)) ? t : built;
+    X.unter=(typ||"Immobilie")+" zum Verkauf";
+    X.adr=String(o.street||"").trim();
+    X.plzort=((o.plz||"")+" "+ort).trim();
+    var k=String(o.kanton||"").trim(); X.kanton=KANTONE[k.toUpperCase()]||k||(/^8[0-4]\d\d$/.test(o.plz)?"Zürich":"");
+    X.preis=o.price?String(Math.round(o.price)):"";
+    X.zimmer=o.rooms?String(o.rooms).replace(/\.0$/,""):"";
+    X.flaeche=o.area?String(Math.round(o.area)):"";
+    X.etage=o.floor?String(o.floor):"";
+    X.baujahr=o.year?String(o.year):"";
+
+    var bullets=[], rest=[];
+    String(o.desc||"").split("\n").forEach(function(l){
+      var m=l.match(/^\s*[•\-–*·✓✔]\s*(.+)/);
+      if(m && m[1].trim().length<=90) bullets.push(m[1].trim()); else rest.push(l);
+    });
+    X.beschrieb=splitParas(rest.join("\n").replace(/\n{3,}/g,"\n\n"));
+    var feats=[]; (d.features||[]).forEach(function(f){ if(FEAT_LABELS[f]) feats.push(FEAT_LABELS[f]); });
+    var merk=[], seenM={};
+    bullets.concat(feats, p.features||[]).forEach(function(m){
+      var key=String(m||"").toLowerCase(); if(!key || seenM[key]) return;
+      if(merk.some(function(x){ var y=x.toLowerCase(); return y.indexOf(key)>=0 || key.indexOf(y)>=0; })) return;
+      seenM[key]=1; merk.push(m);
+    });
+    X.merk=merk.slice(0,10);
+
+    X.eck=[];
+    if(typ) X.eck.push({k:"Objektart",v:typ});
+    if(X.zimmer) X.eck.push({k:"Zimmer",v:X.zimmer});
+    if(X.flaeche) X.eck.push({k:"Wohnfläche",v:X.flaeche+" m²"});
+    if(o.plot) X.eck.push({k:"Grundstücksfläche",v:Math.round(o.plot)+" m²"});
+    if(X.baujahr) X.eck.push({k:"Baujahr",v:X.baujahr});
+    if(o.renov) X.eck.push({k:"Letzte Renovation",v:String(o.renov)});
+    if(X.etage) X.eck.push({k:"Etage",v:X.etage});
+    if(X.plzort) X.eck.push({k:"Lage",v:X.plzort});
+    X.beschr="VERKAUF";
+
+    IMP.imgs=[]; IMP.host=d.host||"";
+    (d.imgs||[]).forEach(function(u,i){ var s=safeImg(d.imgData&&d.imgData[i])||safeImg(u); if(s && IMP.imgs.indexOf(s)<0) IMP.imgs.push(s); });
+    X.titelbild=IMP.imgs[0]||"";
+    X.fotos=IMP.imgs.slice(1,7);
+
+    $("x_lead").value="";
+    var tab=document.querySelector('#tabs button[data-v="expose"]'); if(tab && !tab.classList.contains("active")) tab.click();
+    syncExpoForm(); renderEck(); renderMerk(); renderThumbs("x_fotolist",X.fotos,"fdel"); renderThumbs("x_grundlist",X.grundrisse,"gdel"); saveDraft(); renderExpo(); renderImpPick();
+    var got=[X.preis?"Preis":"",X.zimmer?"Zimmer":"",X.flaeche?"Fläche":"",X.baujahr?"Baujahr":"",X.beschrieb?"Beschrieb":"",IMP.imgs.length?IMP.imgs.length+" Bilder":""].filter(Boolean);
+    var miss=[!X.preis?"Preis":"",!X.zimmer?"Zimmer":"",!X.flaeche?"Fläche":"",!X.beschrieb?"Beschrieb":"",!IMP.imgs.length?"Bilder":""].filter(Boolean);
+    $("x_impinfo").innerHTML='<b>Übernommen'+(IMP.host?' von '+esc(IMP.host.replace(/^www\./,"")):'')+':</b> '+(got.join(", ")||"nur wenig")+'.'+(miss.length?' <span style="color:var(--warn)">Bitte ergänzen: '+miss.join(", ")+'.</span>':'')+' Texte vor dem Versand kurz prüfen.';
+    setTimeout(function(){ if($("exp_doc")) fitExp(); },60);
+    window.scrollTo(0,0);
+  }
+
+  function renderImpPick(){
+    var box=$("x_imppick"); if(!box) return;
+    if(!IMP.imgs.length){ box.classList.add("hidden"); return; }
+    box.classList.remove("hidden");
+    $("x_impimgs").innerHTML=IMP.imgs.map(function(src,i){
+      var isT=X.titelbild===src, gi=X.fotos.indexOf(src);
+      return '<div class="impt'+(isT?' tit':'')+(gi>=0?' sel':'')+'" data-ii="'+i+'" style="background-image:url('+src+')">'+
+        (gi>=0?'<span class="n">'+(gi+1)+'</span>':'')+(isT?'<span class="n tn">Titel</span>':'')+
+        '<button type="button" class="star" data-is="'+i+'" title="Als Titelbild">★</button></div>';
+    }).join("");
+  }
+  $("x_impimgs").addEventListener("click", function(e){
+    var st=e.target.closest("[data-is]");
+    if(st){ var s=IMP.imgs[+st.getAttribute("data-is")]; X.titelbild=s; var j=X.fotos.indexOf(s); if(j>=0) X.fotos.splice(j,1); }
+    else {
+      var tl=e.target.closest("[data-ii]"); if(!tl) return;
+      var src=IMP.imgs[+tl.getAttribute("data-ii")]; if(src===X.titelbild) return;
+      var k=X.fotos.indexOf(src);
+      if(k>=0) X.fotos.splice(k,1); else { if(X.fotos.length>=6){ $("x_impinfo").textContent="Maximal 6 Galerie-Bilder. Zuerst eines abwählen."; return; } X.fotos.push(src); }
+    }
+    renderThumbs("x_fotolist",X.fotos,"fdel"); renderExpo(); renderImpPick();
+  });
+  $("x_bm").addEventListener("click", function(e){ e.preventDefault(); alert("Dieser Knopf funktioniert als Lesezeichen: Ziehe ihn mit der Maus in deine Lesezeichenleiste. Danach auf einem Homegate- oder ImmoScout24-Inserat anklicken."); });
+  $("x_impgo").addEventListener("click", function(){
+    var v=$("x_imptext").value.trim(); if(!v){ $("x_impinfo").textContent="Bitte zuerst den Inseratstext einfügen."; return; }
+    var d=null; if(v.charAt(0)==="{"){ try{ d=JSON.parse(v); }catch(x){} }
+    applyImport(d||{textRaw:v, text:v, imgs:[]});
+    $("x_imptext").value="";
+  });
+
   /* ---- Objekt-Website aus den Exposé-Daten erzeugen ---- */
   function slugify(s){
     return String(s||"").toLowerCase()
