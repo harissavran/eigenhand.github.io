@@ -17,7 +17,7 @@
 
   /* 1. Datenquellen sammeln */
   var cands = [];
-  ["__INITIAL_STATE__", "__NEXT_DATA__", "__NUXT__", "__APOLLO_STATE__", "__PRELOADED_STATE__"].forEach(function (k) {
+  ["__PINIA_INITIAL_STATE__", "__INITIAL_STATE__", "__NEXT_DATA__", "__NUXT__", "__APOLLO_STATE__", "__PRELOADED_STATE__"].forEach(function (k) {
     try { if (window[k] && typeof window[k] === "object") cands.push(window[k]); } catch (e) {}
   });
   Array.prototype.forEach.call(document.querySelectorAll("script"), function (s) {
@@ -75,7 +75,8 @@
     var pr = best.prices || {};
     out.price = num((pr.buy && (pr.buy.price || pr.buy.gross)) || pr.price || best.price || find(best, ["sellingPrice", "purchasePrice"]));
     var cat = best.categories || best.category || best.objectCategory || "";
-    out.type = clean(Array.isArray(cat) ? cat[0] : cat);
+    out.type = clean(Array.isArray(cat) ? cat.join(",") : cat);
+    out.floors = num(ch.numberOfFloors);
     var loc = best.localization || {};
     var lang = loc[loc.primary || "de"] || loc.de || loc[Object.keys(loc).filter(function (k) { return loc[k] && typeof loc[k] === "object"; })[0]] || {};
     var tx = lang.text || lang;
@@ -106,7 +107,8 @@
   if (meta("og:image")) out.imgs.push(meta("og:image"));
 
   /* 4. Bilder aus der Seite (grosse Fotos, höchste Auflösung aus srcset) */
-  Array.prototype.forEach.call(document.querySelectorAll("img, source"), function (el) {
+  var fromData = out.imgs.length >= 3;
+  if (!fromData) Array.prototype.forEach.call(document.querySelectorAll("img, source"), function (el) {
     var u = el.currentSrc || el.src || "";
     var ss = el.getAttribute("srcset") || el.getAttribute("data-srcset") || "";
     if (ss) { var parts = ss.split(",").map(function (p) { var q = p.trim().split(/\s+/); return { u: q[0], w: parseFloat(q[1]) || 0 }; }).sort(function (a, b) { return b.w - a.w; }); if (parts[0] && parts[0].u) u = parts[0].u; }
@@ -116,7 +118,7 @@
   var uniq = [], keys = [];
   out.imgs.forEach(function (u) {
     try { u = new URL(u, location.href).href; } catch (e) { return; }
-    var k = u.split("?")[0].replace(/\/(\d+x\d+|w_\d+|h_\d+)[^/]*\//g, "/");
+    var k = u.split("?")[0].split("/").pop();
     if (keys.indexOf(k) < 0) { keys.push(k); uniq.push(u); }
   });
   out.imgs = uniq.slice(0, 30);
